@@ -38,17 +38,17 @@ public class CreatePlayerController extends ForAllControllers {
 					&& !age.getText().isEmpty() && Integer.valueOf(age.getText()) >= 0) {
 				
 				// We create the player
-				Player joueur = new Player(userName.getText(), name.getText(), firstName.getText(),
+				Player player = new Player(userName.getText(), name.getText(), firstName.getText(),
 						Integer.valueOf(age.getText()));
 				
 				// We add the player to data and serialize it
-//				Main.getPlayersData().getValue().add(joueur);
-//				Serialization.serialiseJoueur(Main.getPlayersData().getValue());
+				Main.getPlayersData().getValue().add(player);
+				Serialization.serializePlayer(Main.getPlayersData().getValue());
 
 				successMsg.setVisible(true);
 
 				// We disable the button confirm
-				confirm.setDisable(false);
+				confirm.setDisable(true);
 
 				// We switch to player settings after 2.5 seconds
 				Thread thread = new Thread(() -> {

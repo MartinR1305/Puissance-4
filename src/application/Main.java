@@ -27,11 +27,14 @@ public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 		try {
+//			List<Player> deserializedPlayers = new ArrayList<Player>();
+//			Player p1 = new Player("Oui", "c'est", "un test", 13);
+//			deserializedPlayers.add(p1);
 
-//	        // Serialization 
-//	        List<Player> deserializedPlayers = Serialization.deserialiseJoueur();
-//	        Serialization.serialiseJoueur(deserializedPlayers);
-//	        ((SimpleObjectProperty<List<Player>>) playersData).setValue(deserializedPlayers);
+	        // Serialization 
+			List<Player> deserializedPlayers = Serialization.deserializePlayer();;
+	        Serialization.serializePlayer(deserializedPlayers);
+	        ((SimpleObjectProperty<List<Player>>) playersData).setValue(deserializedPlayers);
 
 			// Here we start the application
 			Parent root = FXMLLoader

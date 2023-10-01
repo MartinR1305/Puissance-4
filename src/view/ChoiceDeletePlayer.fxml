@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ChoiceDeletePlayerController">
+   <children>
+      <Label fx:id="questionDelete" layoutX="54.0" layoutY="116.0" text="Whice Player do you want to delete ?">
+         <font>
+            <Font size="30.0" />
+         </font>
+      </Label>
+      <Button fx:id="back" layoutX="538.0" layoutY="356.0" mnemonicParsing="false" onAction="#switchToPlayerSettings" text="Back">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Button>
+      <ComboBox fx:id="playersList" layoutX="75.0" layoutY="200.0" prefHeight="46.0" prefWidth="350.0" />
+      <Button fx:id="confirm" layoutX="425.0" layoutY="200.0" mnemonicParsing="false" onAction="#displayConfirmation" prefHeight="46.0" prefWidth="75.0" text="Confirm" />
+      <Label fx:id="questionToConfirm" layoutX="120.0" layoutY="276.0" text="Do you really want to delete this player ?" visible="false">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Button fx:id="no" disable="true" layoutX="190.0" layoutY="320.0" mnemonicParsing="false" onAction="#hideConfirmation" prefHeight="43.0" prefWidth="59.0" text="NO" textFill="RED" visible="false">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Button>
+      <Button fx:id="yes" disable="true" layoutX="365.0" layoutY="320.0" mnemonicParsing="false" onAction="#deletePlayer" text="YES" textFill="LIME" visible="false">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Button>
+      <Label fx:id="errorMsg" layoutX="250.0" layoutY="267.0" text="You must select a player" textFill="RED" visible="false" />
+      <Label fx:id="successMsg" layoutX="200.0" layoutY="354.0" text="The player has been correctly deleted" textFill="#00ff55" visible="false" />
+   </children>
+</AnchorPane>

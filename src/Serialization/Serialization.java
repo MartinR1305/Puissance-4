@@ -11,7 +11,7 @@ import model.Player;
 public class Serialization {
 
 	// Method that allows to save data from players
-	public static void serialiseJoueur(List<Player> listJoueur) {
+	public static void serializePlayer(List<Player> listJoueur) {
 
 		try {
 
@@ -29,7 +29,7 @@ public class Serialization {
 	}
 
 	// Method that allows to update data for players
-	public static List<Player> deserialiseJoueur() {
+	public static List<Player> deserializePlayer() {
 
 		try {
 
