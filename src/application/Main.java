@@ -15,6 +15,7 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 import model.Player;
+import model.Results;
 
 public class Main extends Application {
 
@@ -27,14 +28,47 @@ public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 		try {
-			List<Player> deserializedPlayers = new ArrayList<Player>();
-			Player p1 = new Player("Oui", "c'est", "un test", 13);
-			deserializedPlayers.add(p1);
+			
+//			List<Player> deserializedPlayers = new ArrayList<Player>();
+//			Player p1 = new Player("Default", "1", "Player", 0);
+//			deserializedPlayers.add(p1);
 
 	        // Serialization 
-//			List<Player> deserializedPlayers = Serialization.deserializePlayer();
+			List<Player> deserializedPlayers = Serialization.deserializePlayer();
 	        Serialization.serializePlayer(deserializedPlayers);
 	        ((SimpleObjectProperty<List<Player>>) playersData).setValue(deserializedPlayers);
+	        
+	        playersData.getValue().get(0).addMatch("IA", Results.VICTORY);
+	        playersData.getValue().get(0).addMatch("IA", Results.VICTORY);
+	        playersData.getValue().get(0).addMatch("IA", Results.VICTORY);
+	        playersData.getValue().get(0).addMatch("IA", Results.VICTORY);
+	        playersData.getValue().get(0).addMatch("IA", Results.VICTORY);
+	        playersData.getValue().get(0).addMatch("IA", Results.DEFEAT);
+			
+			playersData.getValue().get(1).addMatch("IA", Results.VICTORY);
+			playersData.getValue().get(1).addMatch("IA", Results.VICTORY);
+			playersData.getValue().get(1).addMatch("IA", Results.VICTORY);
+			playersData.getValue().get(1).addMatch("IA", Results.VICTORY);
+			playersData.getValue().get(1).addMatch("IA", Results.VICTORY);
+			playersData.getValue().get(1).addMatch("IA", Results.VICTORY);
+			playersData.getValue().get(1).addMatch("IA", Results.VICTORY);
+			playersData.getValue().get(1).addMatch("IA", Results.VICTORY);
+			playersData.getValue().get(1).addMatch("IA", Results.DEFEAT);
+			
+			playersData.getValue().get(2).addMatch("IA", Results.VICTORY);
+			playersData.getValue().get(2).addMatch("IA", Results.VICTORY);
+			playersData.getValue().get(2).addMatch("IA", Results.VICTORY);
+			playersData.getValue().get(2).addMatch("IA", Results.VICTORY);
+			playersData.getValue().get(2).addMatch("IA", Results.DEFEAT);
+			playersData.getValue().get(2).addMatch("IA", Results.DEFEAT);
+			playersData.getValue().get(2).addMatch("IA", Results.DEFEAT);
+			
+			playersData.getValue().get(3).addMatch("IA", Results.VICTORY);
+			playersData.getValue().get(3).addMatch("IA", Results.VICTORY);
+			playersData.getValue().get(3).addMatch("IA", Results.VICTORY);
+			playersData.getValue().get(3).addMatch("IA", Results.VICTORY);
+			playersData.getValue().get(3).addMatch("IA", Results.VICTORY);
+			playersData.getValue().get(3).addMatch("IA", Results.DEFEAT);
 
 			// Here we start the application
 			Parent root = FXMLLoader
@@ -57,5 +91,6 @@ public class Main extends Application {
 
 	public static void main(String[] args) {
 		launch(args);
+		
 	}
 }
