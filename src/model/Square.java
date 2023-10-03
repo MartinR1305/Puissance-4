@@ -3,6 +3,11 @@ package model;
 public class Square {
 	ValueSquare value;
 
+	// Constructor
+	public Square() {
+		this.value = ValueSquare.EMPTY;
+	}
+
 	// Getter
 	public ValueSquare getValue() {
 		return value;
