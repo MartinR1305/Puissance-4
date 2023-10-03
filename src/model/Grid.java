@@ -71,6 +71,7 @@ public class Grid {
 	    //We verify the rows
 	    
 	    //We verify the diagonals
+	    //b
 
 	    //There is no combinations
 	    return false;
