@@ -25,7 +25,7 @@ public class CreatePlayerController extends ForAllControllers {
 	private Button back, confirm;
 
 	@FXML
-	private TextField name, firstName, userName, age;
+	private TextField lastName, firstName, userName, age;
 
 	// Method that allows to create a player by filling in the fields
 	public void CreatePlayer() {
@@ -34,11 +34,11 @@ public class CreatePlayerController extends ForAllControllers {
 		if (isInteger(age.getText())) {
 			
 			// Here we check that all the fields are filled and that the age is positive
-			if (!name.getText().isEmpty() && !firstName.getText().isEmpty() && !userName.getText().isEmpty()
+			if (!lastName.getText().isEmpty() && !firstName.getText().isEmpty() && !userName.getText().isEmpty()
 					&& !age.getText().isEmpty() && Integer.valueOf(age.getText()) >= 0) {
 				
 				// We create the player
-				Player player = new Player(userName.getText(), name.getText(), firstName.getText(),
+				Player player = new Player(userName.getText(), lastName.getText(), firstName.getText(),
 						Integer.valueOf(age.getText()));
 				
 				// We add the player to data and serialize it

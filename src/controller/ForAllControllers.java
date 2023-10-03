@@ -70,7 +70,7 @@ public class ForAllControllers {
 				if (empty || joueur == null) {
 					setText(null);
 				} else {
-					setText(joueur.getFirstName() + " '" + joueur.getUserName() + "' " + joueur.getName());
+					setText(joueur.getFirstName() + " '" + joueur.getUserName() + "' " + joueur.getLastName());
 				}
 			}
 		});
@@ -84,7 +84,7 @@ public class ForAllControllers {
 				if (joueur == null) {
 					return null;
 				} else {
-					return joueur.getFirstName() + " '" + joueur.getUserName() + "' " + joueur.getName();
+					return joueur.getFirstName() + " '" + joueur.getUserName() + "' " + joueur.getLastName();
 				}
 			}
 

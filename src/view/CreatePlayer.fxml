@@ -6,7 +6,6 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.CreatePlayerController">
    <children>
       <Button fx:id="back" layoutX="538.0" layoutY="356.0" mnemonicParsing="false" onAction="#switchToPlayerSettings" text="Back">
@@ -20,7 +19,7 @@
          </font>
       </Label>
       <TextField fx:id="firstName" layoutX="216.0" layoutY="106.0" promptText="First Name" />
-      <TextField fx:id="name" layoutX="216.0" layoutY="148.0" promptText="Name" />
+      <TextField fx:id="lastName" layoutX="216.0" layoutY="148.0" promptText="Last Name" />
       <TextField fx:id="userName" layoutX="216.0" layoutY="187.0" promptText="User Name" />
       <TextField fx:id="age" layoutX="216.0" layoutY="226.0" promptText="Age" />
       <Button fx:id="confirm" layoutX="241.0" layoutY="303.0" mnemonicParsing="false" onAction="#CreatePlayer" text="Confirm">

@@ -8,22 +8,24 @@ import java.util.UUID;
 public class Player implements Serializable {
 	private UUID identifier;
 	private String userName;
-	private String name;
+	private String lastName;
 	private String firstName;
 	private int age;
 	private int nbVictory;
 	private int nbDefeat;
 	private int nbDraw;
+	private double winRate;
+	private int ptsRanked;
 	private List<List<String>> listMatchs;
 
 	// Constructor
-	public Player(String userName, String name, String firstName, int age) {
+	public Player(String userName, String lastName, String firstName, int age) {
 		identifier = UUID.randomUUID();
 		this.userName = userName;
-		this.name = name;
+		this.lastName = lastName;
 		this.firstName = firstName;
 
-		// Verification if the age is positive
+		// Checking if the age is positive
 		if (age < 0) {
 			throw new IllegalArgumentException("A person's age can't be negative");
 		}
@@ -32,6 +34,8 @@ public class Player implements Serializable {
 		nbVictory = 0;
 		nbDefeat = 0;
 		nbDraw = 0;
+		winRate = 0D;
+		ptsRanked = 0;
 		listMatchs = new ArrayList<>();
 	}
 
@@ -51,13 +55,13 @@ public class Player implements Serializable {
 	}
 
 	// Getter for the name
-	public String getName() {
-		return name;
+	public String getLastName() {
+		return lastName;
 	}
 
 	// Setter for the name
-	public void setNom(String name) {
-		this.name = name;
+	public void setLastNom(String lastName) {
+		this.lastName = lastName;
 	}
 
 	// Getter for the first name
@@ -88,6 +92,9 @@ public class Player implements Serializable {
 	// Method that allows to add one victory for the player
 	public void addVictory() {
 		this.nbVictory++;
+		
+		// We actualize the ranked's points
+		setPtsRanked(ptsRanked + 10);
 	}
 
 	// Getter for the number of defeats
@@ -98,6 +105,9 @@ public class Player implements Serializable {
 	// Method that allows to add one defeat for the player
 	public void addDefeat() {
 		this.nbDefeat++;
+		
+		// We actualize the ranked's points
+		setPtsRanked(ptsRanked - 10);
 	}
 
 	// Getter for the number of draws
@@ -108,6 +118,34 @@ public class Player implements Serializable {
 	// Method that allows to add one draw for the player
 	public void addDraw() {
 		this.nbDraw++;
+	}
+	
+	// Getter for the win rate
+	public double getWinRate() {
+		return winRate;
+	}
+	
+	// Setter for the win rate
+	public void setWinRate() {
+		this.winRate = ((double)this.nbVictory / (double)(this.nbDefeat + this.nbDraw + this.nbVictory ))*100 ;
+	}
+	
+	// Getter for the ranked's points
+	public int getPtsRanked() {
+		return ptsRanked;
+	}
+	
+	// Setter for the ranked's points
+	public void setPtsRanked(int ptsRanked) {
+		
+		// We check if the ptsRanked are not negative
+		if(ptsRanked >= 0) {
+			this.ptsRanked = ptsRanked;
+		}
+		
+		else {
+			this.ptsRanked = 0;
+		}
 	}
 
 	// Getter for the matchs's list
@@ -121,11 +159,11 @@ public class Player implements Serializable {
 	}
 
 	// Method that allows to add a match to a player with the result associate
-	public void addMatch(String nomJoueur, Results results) {
+	public void addMatch(String opponent, Results results) {
 
 		// Here we add the "challenged player + result" to the match's list of the player
 		List<String> joueur = new ArrayList<>();
-		joueur.add(nomJoueur);
+		joueur.add(opponent);
 		joueur.add(results.name());
 		listMatchs.add(joueur);
 
@@ -137,11 +175,13 @@ public class Player implements Serializable {
 		} else if (results.equals(Results.VICTORY)) {
 			this.addVictory();
 		}
+		
+		this.setWinRate();
 	}
 
 	@Override
 	public String toString() {
-		return "UserName = " + userName + ", Name = " + name + ", FirstName = " + firstName + ", Age = " + age
+		return "UserName = " + userName + ", LastName = " + lastName + ", FirstName = " + firstName + ", Age = " + age
 				+ ", Identifier = " + identifier + ", Number of victories = " + nbVictory + ", Number of defeats = "
 				+ nbDefeat + ", Number of draws = " + nbDraw + "% \nListe des Matchs = \n" + listMatchs;
 	}
