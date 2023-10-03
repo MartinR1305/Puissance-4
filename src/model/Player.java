@@ -25,7 +25,7 @@ public class Player implements Serializable {
 		this.lastName = lastName;
 		this.firstName = firstName;
 
-		// Verification if the age is positive
+		// Checking if the age is positive
 		if (age < 0) {
 			throw new IllegalArgumentException("A person's age can't be negative");
 		}
@@ -93,10 +93,6 @@ public class Player implements Serializable {
 	public void addVictory() {
 		this.nbVictory++;
 		
-		// We actualize the win rate 
-		int nbGames = nbVictory+nbDraw+nbDefeat;
-		setWinRate( nbGames / nbVictory);
-		
 		// We actualize the ranked's points
 		setPtsRanked(ptsRanked + 10);
 	}
@@ -110,10 +106,6 @@ public class Player implements Serializable {
 	public void addDefeat() {
 		this.nbDefeat++;
 		
-		// We actualize the win rate 
-		int nbGames = nbVictory+nbDraw+nbDefeat;
-		setWinRate( nbGames / nbVictory);
-		
 		// We actualize the ranked's points
 		setPtsRanked(ptsRanked - 10);
 	}
@@ -126,10 +118,6 @@ public class Player implements Serializable {
 	// Method that allows to add one draw for the player
 	public void addDraw() {
 		this.nbDraw++;
-		
-		// We actualize the win rate 
-		int nbGames = nbVictory+nbDraw+nbDefeat;
-		setWinRate( nbGames / nbVictory);
 	}
 	
 	// Getter for the win rate
@@ -138,8 +126,8 @@ public class Player implements Serializable {
 	}
 	
 	// Setter for the win rate
-	public void setWinRate(double winRate) {
-		this.winRate = winRate;
+	public void setWinRate() {
+		this.winRate = ((double)this.nbVictory / (double)(this.nbDefeat + this.nbDraw + this.nbVictory ))*100 ;
 	}
 	
 	// Getter for the ranked's points
@@ -171,11 +159,11 @@ public class Player implements Serializable {
 	}
 
 	// Method that allows to add a match to a player with the result associate
-	public void addMatch(String nomJoueur, Results results) {
+	public void addMatch(String opponent, Results results) {
 
 		// Here we add the "challenged player + result" to the match's list of the player
 		List<String> joueur = new ArrayList<>();
-		joueur.add(nomJoueur);
+		joueur.add(opponent);
 		joueur.add(results.name());
 		listMatchs.add(joueur);
 
@@ -187,6 +175,8 @@ public class Player implements Serializable {
 		} else if (results.equals(Results.VICTORY)) {
 			this.addVictory();
 		}
+		
+		this.setWinRate();
 	}
 
 	@Override
