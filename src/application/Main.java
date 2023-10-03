@@ -32,7 +32,7 @@ public class Main extends Application {
 //			deserializedPlayers.add(p1);
 
 	        // Serialization 
-			List<Player> deserializedPlayers = Serialization.deserializePlayer();;
+			List<Player> deserializedPlayers = Serialization.deserializePlayer();
 	        Serialization.serializePlayer(deserializedPlayers);
 	        ((SimpleObjectProperty<List<Player>>) playersData).setValue(deserializedPlayers);
 
