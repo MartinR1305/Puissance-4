@@ -14,6 +14,7 @@ public class Player implements Serializable {
 	private int nbVictory;
 	private int nbDefeat;
 	private int nbDraw;
+	private int ptsRank;
 	private List<List<String>> listMatchs;
 
 	// Constructor
