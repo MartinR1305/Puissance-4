@@ -11,9 +11,9 @@ public class Column {
 	 * Constructor
 	 * @param column
 	 */
-	public Column(List<Square> column) {
+	public Column() {
 		
-		column = new ArrayList<Square>(7);
+		column = new ArrayList<Square>(6);
 		
 	}
 	
