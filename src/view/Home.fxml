@@ -5,15 +5,14 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.HomeController">
    <children>
-      <Label fx:id="home" layoutX="162.0" text="HOME">
+      <Label fx:id="home" layoutX="162.0" layoutY="-12.0" text="HOME">
          <font>
             <Font size="96.0" />
          </font>
       </Label>
-      <Button fx:id="playSamePC" layoutX="196.0" layoutY="130.0" mnemonicParsing="false" text="Play on the same PC">
+      <Button fx:id="playSamePC" layoutX="196.0" layoutY="130.0" mnemonicParsing="false" onAction="#switchToChoicePlayersPvP" text="Play on the same PC">
          <font>
             <Font size="20.0" />
          </font>
