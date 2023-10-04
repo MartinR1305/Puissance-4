@@ -3,17 +3,25 @@ package model;
 public class Square {
 	ValueSquare value;
 
-	// Constructor
+	/**
+	 * Constructor
+	 */
 	public Square() {
 		this.value = ValueSquare.EMPTY;
 	}
 
-	// Getter
+	/**
+	 * Getter for the value
+	 * @return the value of the square
+	 */
 	public ValueSquare getValue() {
 		return value;
 	}
-
-	// Setter
+	
+	/**
+	 * Setter for the value
+	 * @param value, the new value for the square 
+	 */
 	public void setValue(ValueSquare value) {
 		this.value = value;
 	}

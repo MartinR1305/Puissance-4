@@ -27,6 +27,5 @@ public class PreHomeController extends ForAllControllers implements Initializabl
 		fadeTransition.setCycleCount(Animation.INDEFINITE);
 		fadeTransition.setAutoReverse(true);
 		fadeTransition.play();
-	
 	}
 }

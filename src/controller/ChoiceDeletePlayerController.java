@@ -31,7 +31,9 @@ public class ChoiceDeletePlayerController extends ForAllControllers implements I
 		setComboBoxWithPlayers(playersList);
 	}
 
-	// Method that allows to delete the player choose in the box
+	/**
+	 * Method that allows to delete the player choose in the box
+	 */
 	public void deletePlayer() {
 		Player playerToDelete = null;
 
@@ -57,8 +59,10 @@ public class ChoiceDeletePlayerController extends ForAllControllers implements I
 		playersList.setValue(null);
 	}
 
-	// Method that allows to display a message + 2 buttons for ask the user if he is sure to
-	// delete the player or not
+	/**
+	 * Method that allows to display a message + 2 buttons for ask the user if he is
+	 * sure to delete the player or not
+	 */
 	public void displayConfirmation() {
 
 		// We check if a player has been selected in the box
@@ -77,7 +81,9 @@ public class ChoiceDeletePlayerController extends ForAllControllers implements I
 		}
 	}
 
-	// Method that allows to hide the message and the buttons
+	/**
+	 * Method that allows to hide the message and the buttons
+	 */
 	public void hideConfirmation() {
 		questionToConfirm.setVisible(false);
 

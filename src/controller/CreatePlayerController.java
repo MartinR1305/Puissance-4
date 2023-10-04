@@ -27,7 +27,9 @@ public class CreatePlayerController extends ForAllControllers {
 	@FXML
 	private TextField lastName, firstName, userName, age;
 
-	// Method that allows to create a player by filling in the fields
+	/**
+	 * Method that allows to create a player by filling in the fields
+	 */
 	public void CreatePlayer() {
 		
 		// Here we check if the age is an integer

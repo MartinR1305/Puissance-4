@@ -27,8 +27,10 @@ public class ForAllControllers {
 	private Scene scene;
 	private Parent root;
 
-	// Method that allows to display a message with a thread and to hide if after 3
-	// seconds
+	/**
+	 * Method that allows to display a message with a thread and to hide if after 3 seconds
+	 * @param label, the label that we want to display
+	 */
 	public void displayMessage(Label label) {
 		// Create a new thread to manage the wait
 		Thread waitThread = new Thread(new Runnable() {
@@ -51,7 +53,10 @@ public class ForAllControllers {
 		waitThread.start();
 	}
 	
-	// Method that allows to set a combo box with the list of all the players
+	/**
+	 * Method that allows to set a combo box with the list of all the players
+	 * @param comboBoxJoueur, the box that we want to set with all the players
+	 */
 	public void setComboBoxWithPlayers(ComboBox<Player> comboBoxJoueur) {
 		List<Player> listJoueurs = Main.getPlayersData().getValue();
 		ObservableList<Player> joueursList = FXCollections.observableArrayList();
@@ -95,7 +100,11 @@ public class ForAllControllers {
 		});
 	}
 
-	// Controller that allows to switch the scene to the Home
+	/**
+	 * Controller that allows to switch the scene to the Home
+	 * @param event
+	 * @throws IOException
+	 */
 	public void switchToHome(ActionEvent event) throws IOException {
 		FXMLLoader loader = new FXMLLoader(
 				getClass().getResource(".." + File.separator + "view" + File.separator + "Home.fxml"));
@@ -106,7 +115,12 @@ public class ForAllControllers {
 		stage.show();
 	}
 
-	// Controller that allows to switch the scene to the Player Settings
+	/**
+	 * Controller that allows to switch the scene to the Player Settings
+	 * 
+	 * @param event
+	 * @throws IOException
+	 */
 	public void switchToPlayerSettings(ActionEvent event) throws IOException {
 		FXMLLoader loader = new FXMLLoader(
 				getClass().getResource(".." + File.separator + "view" + File.separator + "PlayerSettings.fxml"));
@@ -117,7 +131,11 @@ public class ForAllControllers {
 		stage.show();
 	}
 	
-	// Method that allows to know if a String can be a integer
+	/**
+	 * Method that allows to know if a String can be a integer
+	 * @param str, the string that we want to check if it's a integer or not
+	 * @return 1 if the string is a integer, 0 otherwise
+	 */
 	public boolean isInteger(String str) {
 		try {
 			Integer.parseInt(str);

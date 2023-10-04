@@ -13,19 +13,24 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
-public class PlayerSettingsController extends ForAllControllers{
-	
+public class PlayerSettingsController extends ForAllControllers {
+
 	@FXML
 	Label playerSettings;
-	
+
 	@FXML
 	Button createPlayer, viewPlayer, viewRanking, editPlayer, deletePlayer, back;
-	
+
 	private Stage stage;
 	private Scene scene;
 	private Parent root;
-	
-	// Controller that allows to switch the scene for create a player
+
+	/**
+	 * Controller that allows to switch the scene for create a player
+	 * 
+	 * @param event
+	 * @throws IOException
+	 */
 	public void switchToCreatePlayer(ActionEvent event) throws IOException {
 		FXMLLoader loader = new FXMLLoader(
 				getClass().getResource(".." + File.separator + "view" + File.separator + "CreatePlayer.fxml"));
@@ -35,8 +40,13 @@ public class PlayerSettingsController extends ForAllControllers{
 		stage.setScene(scene);
 		stage.show();
 	}
-	
-	// Controller that allows to switch the scene for view a player
+
+	/**
+	 * Controller that allows to switch the scene for view a player
+	 * 
+	 * @param event
+	 * @throws IOException
+	 */
 	public void switchToChoiceViewPlayer(ActionEvent event) throws IOException {
 		FXMLLoader loader = new FXMLLoader(
 				getClass().getResource(".." + File.separator + "view" + File.separator + "ChoiceViewPlayer.fxml"));
@@ -46,8 +56,13 @@ public class PlayerSettingsController extends ForAllControllers{
 		stage.setScene(scene);
 		stage.show();
 	}
-	
-	// Controller that allows to switch the scene for see the players ranking
+
+	/**
+	 * Controller that allows to switch the scene for see the players ranking
+	 * 
+	 * @param event
+	 * @throws IOException
+	 */
 	public void switchToViewRanking(ActionEvent event) throws IOException {
 		FXMLLoader loader = new FXMLLoader(
 				getClass().getResource(".." + File.separator + "view" + File.separator + "RankingPlayers.fxml"));
@@ -57,8 +72,13 @@ public class PlayerSettingsController extends ForAllControllers{
 		stage.setScene(scene);
 		stage.show();
 	}
-	
-	// Controller that allows to switch the scene for edit a player
+
+	/**
+	 * Controller that allows to switch the scene for edit a player
+	 * 
+	 * @param event
+	 * @throws IOException
+	 */
 	public void switchToChoiceEditPlayer(ActionEvent event) throws IOException {
 		FXMLLoader loader = new FXMLLoader(
 				getClass().getResource(".." + File.separator + "view" + File.separator + "ChoiceEditPlayer.fxml"));
@@ -68,8 +88,13 @@ public class PlayerSettingsController extends ForAllControllers{
 		stage.setScene(scene);
 		stage.show();
 	}
-	
-	// Controller that allows to switch the scene for delete a player
+
+	/**
+	 * Controller that allows to switch the scene for delete a player
+	 * 
+	 * @param event
+	 * @throws IOException
+	 */
 	public void switchToChoiceDeletePlayer(ActionEvent event) throws IOException {
 		FXMLLoader loader = new FXMLLoader(
 				getClass().getResource(".." + File.separator + "view" + File.separator + "ChoiceDeletePlayer.fxml"));

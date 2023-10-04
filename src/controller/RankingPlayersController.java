@@ -58,8 +58,13 @@ public class RankingPlayersController extends ForAllControllers implements Initi
 		listPlayers.sort();
 	}
 
-	// Method that allows to know the rank of the player who depends of his ranked's
-	// points
+	/**
+	 * Method that allows to know the rank of the player who depends of his ranked's
+	 * points
+	 * 
+	 * @param player, the player that we want to know the rank
+	 * @return the rank of the player
+	 */
 	public int getRank(Player player) {
 
 		int rank = 1;
@@ -75,5 +80,4 @@ public class RankingPlayersController extends ForAllControllers implements Initi
 
 		return rank;
 	}
-
 }

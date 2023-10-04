@@ -25,7 +25,9 @@ public class HomeController extends ForAllControllers{
 	private Scene scene;
 	private Parent root;
 
-	// Controller that allows to switch the scene to the player settings
+	/**
+	 * Controller that allows to switch the scene to the player settings
+	 */
 	public void switchToPlayerSettings(ActionEvent event) throws IOException {
 		FXMLLoader loader = new FXMLLoader(
 				getClass().getResource(".." + File.separator + "view" + File.separator + "PlayerSettings.fxml"));
