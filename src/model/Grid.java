@@ -156,18 +156,18 @@ public class Grid {
 	public boolean isDiagJ1win() {
 		
 		//Number of lines in the grid
-		int rowCount = 6; 
+		int lineCount = 6; 
 		
 		//Number of columns in the grid
 	    int colCount = 7; 
 
 	    //We check descending diagonals
-	    for (int row = 0; row < rowCount - 3; row++) {
+	    for (int line = 0; line < lineCount - 3; line++) {
 	        for (int col = 0; col < colCount - 3; col++) {
 	            boolean isWin = true;
 
 	            for (int i = 0; i < 4; i++) {
-	                Square square = grid.get(col + i).getColumn().get(row + i);
+	                Square square = grid.get(col + i).getColumn().get(line + i);
 
 	                if (square.getValue() != ValueSquare.P1) {
 	                    isWin = false;
@@ -184,12 +184,12 @@ public class Grid {
 	    }
 
 	    //We check ascending diagonals
-	    for (int row = 3; row < rowCount; row++) {
+	    for (int line = 3; line < lineCount; line++) {
 	        for (int col = 0; col < colCount - 3; col++) {
 	            boolean isWin = true;
 
 	            for (int i = 0; i < 4; i++) {
-	                Square square = grid.get(col + i).getColumn().get(row - i);
+	                Square square = grid.get(col + i).getColumn().get(line - i);
 
 	                if (square.getValue() != ValueSquare.P1) {
 	                    isWin = false;
@@ -216,18 +216,18 @@ public class Grid {
 	public boolean isDiagJ2win() {
 		
 		//Number of lines in the grid
-		int rowCount = 6; 
+		int lineCount = 6; 
 		
 		//Number of columns in the grid
 	    int colCount = 7; 
 
 	    //We check descending diagonals
-	    for (int row = 0; row < rowCount - 3; row++) {
+	    for (int line = 0; line < lineCount - 3; line++) {
 	        for (int col = 0; col < colCount - 3; col++) {
 	            boolean isWin = true;
 
 	            for (int i = 0; i < 4; i++) {
-	                Square square = grid.get(col + i).getColumn().get(row + i);
+	                Square square = grid.get(col + i).getColumn().get(line + i);
 
 	                if (square.getValue() != ValueSquare.P2) {
 	                    isWin = false;
@@ -244,12 +244,12 @@ public class Grid {
 	    }
 
 	    //We check ascending diagonals
-	    for (int row = 3; row < rowCount; row++) {
+	    for (int line = 3; line < lineCount; line++) {
 	        for (int col = 0; col < colCount - 3; col++) {
 	            boolean isWin = true;
 
 	            for (int i = 0; i < 4; i++) {
-	                Square square = grid.get(col + i).getColumn().get(row - i);
+	                Square square = grid.get(col + i).getColumn().get(line - i);
 
 	                if (square.getValue() != ValueSquare.P2) {
 	                    isWin = false;
