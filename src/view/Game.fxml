@@ -17,7 +17,7 @@
       <Line endX="-100.0" endY="274.5" layoutX="458.0" layoutY="104.0" startX="-100.0" startY="-53.0" />
       <Line endX="-100.0" endY="280.0" layoutX="518.0" layoutY="107.0" startX="-100.0" startY="-53.0" />
       <Line endX="-100.0" endY="282.0" layoutX="580.0" layoutY="107.0" startX="-100.0" startY="-53.0" />
-      <Button layoutX="554.0" layoutY="356.0" mnemonicParsing="false" text="Exit">
+      <Button fx:id="exit" layoutX="554.0" layoutY="356.0" mnemonicParsing="false" onAction="#displayConfirmation" text="Exit">
          <font>
             <Font size="14.0" />
          </font>
@@ -34,7 +34,7 @@
       <Circle fill="WHITE" layoutX="98.0" layoutY="200.0" radius="24.0" stroke="BLACK" strokeType="INSIDE" />
       <Circle fill="WHITE" layoutX="98.0" layoutY="259.0" radius="24.0" stroke="BLACK" strokeType="INSIDE" />
       <Circle fill="WHITE" layoutX="98.0" layoutY="307.0" radius="24.0" stroke="BLACK" strokeType="INSIDE" />
-      <Circle fill="WHITE" layoutX="98.0" layoutY="356.0" radius="24.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="c00" fill="WHITE" layoutX="98.0" layoutY="356.0" radius="24.0" stroke="BLACK" strokeType="INSIDE" />
       <Circle fill="WHITE" layoutX="164.0" layoutY="78.0" radius="24.0" stroke="BLACK" strokeType="INSIDE" />
       <Circle fill="WHITE" layoutX="164.0" layoutY="142.0" radius="24.0" stroke="BLACK" strokeType="INSIDE" />
       <Circle fill="WHITE" layoutX="164.0" layoutY="200.0" radius="24.0" stroke="BLACK" strokeType="INSIDE" />
@@ -71,14 +71,14 @@
       <Circle fill="WHITE" layoutX="456.0" layoutY="200.0" radius="24.0" stroke="BLACK" strokeType="INSIDE" />
       <Circle fill="WHITE" layoutX="456.0" layoutY="142.0" radius="24.0" stroke="BLACK" strokeType="INSIDE" />
       <Circle fill="WHITE" layoutX="456.0" layoutY="82.0" radius="24.0" stroke="BLACK" strokeType="INSIDE" />
-      <Label layoutX="16.0" layoutY="21.0" text="Player who must play " />
-      <Label layoutX="310.0" layoutY="6.0" prefHeight="48.0" prefWidth="214.0" text="Do you really want to exit the game ?" />
-      <Button layoutX="544.0" layoutY="15.0" mnemonicParsing="false" text="YES" textFill="#00ff3c">
+      <Label fx:id="playerPlaying" layoutX="16.0" layoutY="21.0" text="Player who must play " />
+      <Label fx:id="questionToExit" layoutX="310.0" layoutY="6.0" prefHeight="48.0" prefWidth="214.0" text="Do you really want to exit the game ?" visible="false" />
+      <Button fx:id="yes" disable="true" layoutX="544.0" layoutY="15.0" mnemonicParsing="false" onAction="#switchToHome" text="YES" textFill="#00ff3c" visible="false">
          <font>
             <Font size="14.0" />
          </font>
       </Button>
-      <Button layoutX="544.0" layoutY="51.0" mnemonicParsing="false" text="NO" textFill="RED">
+      <Button fx:id="no" disable="true" layoutX="544.0" layoutY="51.0" mnemonicParsing="false" onAction="#hideConfirmation" text="NO" textFill="RED" visible="false">
          <font>
             <Font size="14.0" />
          </font>
