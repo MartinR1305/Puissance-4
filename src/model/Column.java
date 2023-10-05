@@ -15,6 +15,11 @@ public class Column {
 		
 		column = new ArrayList<Square>(6);
 		
+		// We have to add empty squares in the column
+	    for (int i = 0; i < 6; i++) { 
+	        column.add(new Square());
+	    }
+		
 	}
 	
 	/**
@@ -30,13 +35,13 @@ public class Column {
 	 * @return int
 	 */
 	public int calculateFirstEmptySquare() {
-	    for (int i = 0; i < column.size(); i++) {
+		for (int i = column.size() - 1; i >= 0; i--) {
 	        Square square = column.get(i);
 	        if (square.getValue() == ValueSquare.EMPTY) {
-	            return i; 
+	            return i; // Renvoie l'indice de la première case vide en partant du bas
 	        }
 	    }
-	    return -1; 
+	    return -1;
 	}
 
 	/**
@@ -80,7 +85,7 @@ public class Column {
 	public  boolean isColumnFull() {
 		
 		for(Square square : column) {
-			if(square.getValue() != ValueSquare.P1 || square.getValue() != ValueSquare.P2) {
+			if(square.getValue() == ValueSquare.EMPTY) {
 				return false;
 			}
 		}
@@ -141,7 +146,7 @@ public class Column {
 	
 	@Override
 	public String toString() {
-		return "Column [column=" + column + "]";
+		return "Column [column =" + column + "]";
 	}
 	
 }
