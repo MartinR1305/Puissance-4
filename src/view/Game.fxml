@@ -7,7 +7,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.GameController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.GameController">
    <children>
       <Line endX="-100.0" endY="278.0" layoutX="167.0" layoutY="107.0" startX="-100.0" startY="-53.0" />
       <Line endX="-100.0" endY="271.5" layoutX="228.0" layoutY="107.0" startX="-100.0" startY="-53.0" />
@@ -83,12 +83,12 @@
             <Font size="14.0" />
          </font>
       </Button>
-      <Button layoutX="74.0" layoutY="47.0" mnemonicParsing="false" prefHeight="354.0" prefWidth="48.0" text="C0" />
-      <Button layoutX="140.0" layoutY="43.0" mnemonicParsing="false" prefHeight="354.0" prefWidth="48.0" text="C1" />
-      <Button layoutX="196.0" layoutY="48.0" mnemonicParsing="false" prefHeight="354.0" prefWidth="48.0" text="C2" />
-      <Button layoutX="251.0" layoutY="45.0" mnemonicParsing="false" prefHeight="354.0" prefWidth="48.0" text="C3" />
-      <Button layoutX="301.0" layoutY="38.0" mnemonicParsing="false" prefHeight="354.0" prefWidth="48.0" text="C4" />
-      <Button layoutX="370.0" layoutY="39.0" mnemonicParsing="false" prefHeight="354.0" prefWidth="48.0" text="C5" />
-      <Button layoutX="432.0" layoutY="47.0" mnemonicParsing="false" prefHeight="354.0" prefWidth="48.0" text="C6" />
+      <Button layoutX="74.0" layoutY="53.0" mnemonicParsing="false" onAction="#indexColumnSetWithButton" opacity="0.0" prefHeight="326.0" prefWidth="48.0" text="0" />
+      <Button layoutX="140.0" layoutY="52.0" mnemonicParsing="false" onAction="#indexColumnSetWithButton" opacity="0.0" prefHeight="326.0" prefWidth="48.0" text="1" />
+      <Button layoutX="196.0" layoutY="52.0" mnemonicParsing="false" onAction="#indexColumnSetWithButton" opacity="0.0" prefHeight="326.0" prefWidth="48.0" text="2" />
+      <Button layoutX="251.0" layoutY="53.0" mnemonicParsing="false" onAction="#indexColumnSetWithButton" opacity="0.0" prefHeight="326.0" prefWidth="48.0" text="3" />
+      <Button layoutX="310.0" layoutY="52.0" mnemonicParsing="false" onAction="#indexColumnSetWithButton" opacity="0.0" prefHeight="326.0" prefWidth="48.0" text="4" />
+      <Button layoutX="370.0" layoutY="53.0" mnemonicParsing="false" onAction="#indexColumnSetWithButton" opacity="0.0" prefHeight="326.0" prefWidth="48.0" text="5" />
+      <Button layoutX="432.0" layoutY="53.0" mnemonicParsing="false" onAction="#indexColumnSetWithButton" opacity="0.0" prefHeight="326.0" prefWidth="48.0" text="6" />
    </children>
 </AnchorPane>
