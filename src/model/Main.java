@@ -19,19 +19,19 @@ public class Main {
 //		column1.addCoin(ValueSquare.P1);
 //		column1.addCoin(ValueSquare.P1);
 		
-		column1.addCoin(ValueSquare.P1);
+		column1.addCoinColumn(ValueSquare.P1);
 		
-		column2.addCoin(ValueSquare.P2);
-		column2.addCoin(ValueSquare.P1);
+		column2.addCoinColumn(ValueSquare.P2);
+		column2.addCoinColumn(ValueSquare.P1);
 		
-		column3.addCoin(ValueSquare.P2);
-		column3.addCoin(ValueSquare.P2);
-		column3.addCoin(ValueSquare.P1);
+		column3.addCoinColumn(ValueSquare.P2);
+		column3.addCoinColumn(ValueSquare.P2);
+		column3.addCoinColumn(ValueSquare.P1);
 		
-		column4.addCoin(ValueSquare.P2);
-		column4.addCoin(ValueSquare.P2);
-		column4.addCoin(ValueSquare.P2);
-		column4.addCoin(ValueSquare.P1);
+		column4.addCoinColumn(ValueSquare.P2);
+		column4.addCoinColumn(ValueSquare.P2);
+		column4.addCoinColumn(ValueSquare.P2);
+		column4.addCoinColumn(ValueSquare.P1);
 		
 		
 		// Vérifiez si la colonne est vide
@@ -40,7 +40,7 @@ public class Main {
 
 	    // Vérifiez si la colonne est pleine (simulons que la colonne est pleine)
 	    for (int i = 0; i < 6; i++) {
-	    	column1.addCoin(square1.getValue());
+	    	column1.addCoinColumn(square1.getValue());
 	    }
 	    
 	    boolean isFull = column1.isColumnFull();

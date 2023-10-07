@@ -48,7 +48,7 @@ public class Column {
 	 * Method that add a coin in the first square that is not empty
 	 * @param coin
 	 */
-	public void addCoin(ValueSquare coin) {
+	public void addCoinColumn(ValueSquare coin) {
 	    for (int i = column.size() - 1; i >= 0; i--) {
 	        Square square = column.get(i);
 	        if (square.getValue() == ValueSquare.EMPTY) {

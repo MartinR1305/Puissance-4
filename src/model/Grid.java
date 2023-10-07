@@ -4,335 +4,345 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Grid {
-	
+
 	private List<Column> grid;
-	
+
 	/**
 	 * Constructor
+	 * 
 	 * @param grid
 	 */
 	public Grid() {
 		grid = new ArrayList<Column>(7);
-		
+
 		// We have to add columns in the grid
-	    for (int i = 0; i < 7; i++) { 
-	        grid.add(new Column());
-	    }
+		for (int i = 0; i < 7; i++) {
+			grid.add(new Column());
+		}
 	}
-	
+
 	/**
 	 * Getter for the grid list
+	 * 
 	 * @return
 	 */
 	public List<Column> getGrid() {
 		return grid;
 	}
-	
+
+	/**
+	 * Method that add a coin in the first square that is not empty in the column
+	 * 
+	 * @param indColumn, index of the column where we want to add the coin
+	 * @param coin,      coin that we want to add to the column
+	 */
+	public void addCoinGrid(int indColumn, ValueSquare coin) {
+		this.getGrid().get(indColumn).addCoinColumn(coin);
+	}
+
 	/**
 	 * Method returning if the grid is empty
+	 * 
 	 * @return boolean
 	 */
 	public boolean isGridEmpty() {
-		
+
 		for (Column column : grid) {
-			
-			//If the column is not empty, the grid neither
-	        if (!column.isColumnEmpty()) {
-	            return false; 
-	        }
-	    }
-	    return true; 
+
+			// If the column is not empty, the grid neither
+			if (!column.isColumnEmpty()) {
+				return false;
+			}
+		}
+		return true;
 	}
-	
+
 	/**
 	 * Method returning if the grid is full
+	 * 
 	 * @return boolean
 	 */
 	public boolean isGridFull() {
-		
+
 		for (Column column : grid) {
-			
-			//If the column is not full, the grid neither
-	        if (!column.isColumnFull()) {
-	            return false; 
-	        }
-	    }
-	    return true; 
+
+			// If the column is not full, the grid neither
+			if (!column.isColumnFull()) {
+				return false;
+			}
+		}
+		return true;
 	}
-	
+
 	/**
 	 * Method returning if the player 1 is winning the game in a line
+	 * 
 	 * @return boolean
 	 */
 	public boolean isLineJ1win() {
-		
+
 		for (int line = 0; line < 6; line++) {
-			
-			//We count the consecutive P1 coins 
-	        int consecutiveCount = 0; 
 
-	        for (Column column : grid) {
-	            if (column.getColumn().size() <= line) {
-	            	
-	            	//We reinitialize to the counter if there is no coins in the line
-	                consecutiveCount = 0;
-	                
-	                //We pass to the following column
-	                continue; 
-	            }
+			// We count the consecutive P1 coins
+			int consecutiveCount = 0;
 
-	            Square square = column.getColumn().get(line);
+			for (Column column : grid) {
+				if (column.getColumn().size() <= line) {
 
-	            
-	            //If the line's coin is P1, we increment the counter
-	            if (square.getValue() == ValueSquare.P1) {
-	                consecutiveCount++;
-	            } else {
-	            	
-	            	//We reinitialize the counter if there is no P1 coins
-	                consecutiveCount = 0;
-	            }
+					// We reinitialize to the counter if there is no coins in the line
+					consecutiveCount = 0;
 
-	            //If we have 4 consecutive  P1 coins, the player 1 wins
-	            if (consecutiveCount >= 4) {
-	                return true;
-	            }
-	        }
-	    }
+					// We pass to the following column
+					continue;
+				}
 
-	    //The player 1 doesn't win the game
-	    return false;
+				Square square = column.getColumn().get(line);
+
+				// If the line's coin is P1, we increment the counter
+				if (square.getValue() == ValueSquare.P1) {
+					consecutiveCount++;
+				} else {
+
+					// We reinitialize the counter if there is no P1 coins
+					consecutiveCount = 0;
+				}
+
+				// If we have 4 consecutive P1 coins, the player 1 wins
+				if (consecutiveCount >= 4) {
+					return true;
+				}
+			}
+		}
+
+		// The player 1 doesn't win the game
+		return false;
 	}
 
-	
 	/**
 	 * Method returning if the player 2 is winning the game in a line
+	 * 
 	 * @return boolean
 	 */
 	public boolean isLineJ2win() {
-		
+
 		for (int line = 0; line < 6; line++) {
-			
-			//We count the consecutive P2 coins 
-	        int consecutiveCount = 0; 
 
-	        for (Column column : grid) {
-	            if (column.getColumn().size() <= line) {
-	            	
-	            	//We reinitialize to the counter if there is no coins in the line
-	                consecutiveCount = 0;
-	                
-	                //We pass to the following column
-	                continue; 
-	            }
+			// We count the consecutive P2 coins
+			int consecutiveCount = 0;
 
-	            Square square = column.getColumn().get(line);
+			for (Column column : grid) {
+				if (column.getColumn().size() <= line) {
 
-	            
-	            //If the line's coin is P2, we increment the counter
-	            if (square.getValue() == ValueSquare.P2) {
-	                consecutiveCount++;
-	            } else {
-	            	
-	            	//We reinitialize the counter if there is no P2 coins
-	                consecutiveCount = 0;
-	            }
+					// We reinitialize to the counter if there is no coins in the line
+					consecutiveCount = 0;
 
-	            //If we have 4 consecutive  P2 coins, the player 2 wins
-	            if (consecutiveCount >= 4) {
-	                return true;
-	            }
-	        }
-	    }
+					// We pass to the following column
+					continue;
+				}
 
-	    //The player 2 doesn't win the game
-	    return false;
+				Square square = column.getColumn().get(line);
+
+				// If the line's coin is P2, we increment the counter
+				if (square.getValue() == ValueSquare.P2) {
+					consecutiveCount++;
+				} else {
+
+					// We reinitialize the counter if there is no P2 coins
+					consecutiveCount = 0;
+				}
+
+				// If we have 4 consecutive P2 coins, the player 2 wins
+				if (consecutiveCount >= 4) {
+					return true;
+				}
+			}
+		}
+
+		// The player 2 doesn't win the game
+		return false;
 	}
-	
+
 	/**
 	 * Method returning if the player 1 is winning the game in a diagonal
+	 * 
 	 * @return boolean
 	 */
 	public boolean isDiagJ1win() {
-		
-		//Number of lines in the grid
-		int lineCount = 6; 
-		
-		//Number of columns in the grid
-	    int colCount = 7; 
 
-	    //We check descending diagonals
-	    for (int line = 0; line < lineCount - 3; line++) {
-	        for (int col = 0; col < colCount - 3; col++) {
-	            boolean isWin = true;
+		// Number of lines in the grid
+		int lineCount = 6;
 
-	            for (int i = 0; i < 4; i++) {
-	                Square square = grid.get(col + i).getColumn().get(line + i);
+		// Number of columns in the grid
+		int colCount = 7;
 
-	                if (square.getValue() != ValueSquare.P1) {
-	                    isWin = false;
-	                    break;
-	                }
-	            }
+		// We check descending diagonals
+		for (int line = 0; line < lineCount - 3; line++) {
+			for (int col = 0; col < colCount - 3; col++) {
+				boolean isWin = true;
 
-	            if (isWin) {
-	            	
-	            	//The player 1 wins on a descending diagonal
-	                return true; 
-	            }
-	        }
-	    }
+				for (int i = 0; i < 4; i++) {
+					Square square = grid.get(col + i).getColumn().get(line + i);
 
-	    //We check ascending diagonals
-	    for (int line = 3; line < lineCount; line++) {
-	        for (int col = 0; col < colCount - 3; col++) {
-	            boolean isWin = true;
+					if (square.getValue() != ValueSquare.P1) {
+						isWin = false;
+						break;
+					}
+				}
 
-	            for (int i = 0; i < 4; i++) {
-	                Square square = grid.get(col + i).getColumn().get(line - i);
+				if (isWin) {
 
-	                if (square.getValue() != ValueSquare.P1) {
-	                    isWin = false;
-	                    break;
-	                }
-	            }
+					// The player 1 wins on a descending diagonal
+					return true;
+				}
+			}
+		}
 
-	            if (isWin) {
-	            	
-	            	//The player 1 wins on an ascending diagonal
-	                return true; 
-	            }
-	        }
-	    }
+		// We check ascending diagonals
+		for (int line = 3; line < lineCount; line++) {
+			for (int col = 0; col < colCount - 3; col++) {
+				boolean isWin = true;
 
-	    //The player 1 doesn't win on a diagonal
-	    return false;
+				for (int i = 0; i < 4; i++) {
+					Square square = grid.get(col + i).getColumn().get(line - i);
+
+					if (square.getValue() != ValueSquare.P1) {
+						isWin = false;
+						break;
+					}
+				}
+
+				if (isWin) {
+
+					// The player 1 wins on an ascending diagonal
+					return true;
+				}
+			}
+		}
+
+		// The player 1 doesn't win on a diagonal
+		return false;
 	}
-	
+
 	/**
 	 * Method returning if the player 2 is winning the game in a diagonal
+	 * 
 	 * @return boolean
 	 */
 	public boolean isDiagJ2win() {
-		
-		//Number of lines in the grid
-		int lineCount = 6; 
-		
-		//Number of columns in the grid
-	    int colCount = 7; 
 
-	    //We check descending diagonals
-	    for (int line = 0; line < lineCount - 3; line++) {
-	        for (int col = 0; col < colCount - 3; col++) {
-	            boolean isWin = true;
+		// Number of lines in the grid
+		int lineCount = 6;
 
-	            for (int i = 0; i < 4; i++) {
-	                Square square = grid.get(col + i).getColumn().get(line + i);
+		// Number of columns in the grid
+		int colCount = 7;
 
-	                if (square.getValue() != ValueSquare.P2) {
-	                    isWin = false;
-	                    break;
-	                }
-	            }
+		// We check descending diagonals
+		for (int line = 0; line < lineCount - 3; line++) {
+			for (int col = 0; col < colCount - 3; col++) {
+				boolean isWin = true;
 
-	            if (isWin) {
-	            	
-	            	//The player 2 wins on a descending diagonal
-	                return true; 
-	            }
-	        }
-	    }
+				for (int i = 0; i < 4; i++) {
+					Square square = grid.get(col + i).getColumn().get(line + i);
 
-	    //We check ascending diagonals
-	    for (int line = 3; line < lineCount; line++) {
-	        for (int col = 0; col < colCount - 3; col++) {
-	            boolean isWin = true;
+					if (square.getValue() != ValueSquare.P2) {
+						isWin = false;
+						break;
+					}
+				}
 
-	            for (int i = 0; i < 4; i++) {
-	                Square square = grid.get(col + i).getColumn().get(line - i);
+				if (isWin) {
 
-	                if (square.getValue() != ValueSquare.P2) {
-	                    isWin = false;
-	                    break;
-	                }
-	            }
+					// The player 2 wins on a descending diagonal
+					return true;
+				}
+			}
+		}
 
-	            if (isWin) {
-	            	
-	            	//The player 2 wins on an ascending diagonal
-	                return true; 
-	            }
-	        }
-	    }
+		// We check ascending diagonals
+		for (int line = 3; line < lineCount; line++) {
+			for (int col = 0; col < colCount - 3; col++) {
+				boolean isWin = true;
 
-	    //The player 2 doesn't win on a diagonal
-	    return false;
+				for (int i = 0; i < 4; i++) {
+					Square square = grid.get(col + i).getColumn().get(line - i);
+
+					if (square.getValue() != ValueSquare.P2) {
+						isWin = false;
+						break;
+					}
+				}
+
+				if (isWin) {
+
+					// The player 2 wins on an ascending diagonal
+					return true;
+				}
+			}
+		}
+
+		// The player 2 doesn't win on a diagonal
+		return false;
 	}
-	
+
 	/**
 	 * Method returning if the player 1 wins the game
+	 * 
 	 * @return boolean
 	 */
 	public boolean isJ1win() {
-		
-		//First we verify the columns
-	    for (Column column : grid) {
-	        if (column.isColumnWinJ1()) {
-	            return true;
-	        }
-	    }
 
-	    //We verify the rows
-	    if(isLineJ1win()) {
-	    	return true;
-	    }
-	    
-	    //We verify the diagonals
-	    if(isDiagJ1win()) {
-	    	return true;
-	    }
+		// First we verify the columns
+		for (Column column : grid) {
+			if (column.isColumnWinJ1()) {
+				return true;
+			}
+		}
 
-	    //There is no combinations
-	    return false;
+		// We verify the rows
+		if (isLineJ1win()) {
+			return true;
+		}
+
+		// We verify the diagonals
+		if (isDiagJ1win()) {
+			return true;
+		}
+
+		// There is no combinations
+		return false;
 	}
-	
-	
+
 	/**
 	 * Method returning if the player 2 wins the game
+	 * 
 	 * @return boolean
 	 */
 	public boolean isJ2win() {
-		
-		//First we verify the columns
-	    for (Column column : grid) {
-	        if (column.isColumnWinJ2()) {
-	            return true;
-	        }
-	    }
 
-	    //We verify the rows
-	    if(isLineJ2win()) {
-	    	return true;
-	    }
-	    
-	    //We verify the diagonals
-	    if(isDiagJ2win()) {
-	    	return true;
-	    }
+		// First we verify the columns
+		for (Column column : grid) {
+			if (column.isColumnWinJ2()) {
+				return true;
+			}
+		}
 
-	    //There is no combinations
-	    return false;
+		// We verify the rows
+		if (isLineJ2win()) {
+			return true;
+		}
+
+		// We verify the diagonals
+		if (isDiagJ2win()) {
+			return true;
+		}
+
+		// There is no combinations
+		return false;
 	}
 
 	@Override
 	public String toString() {
 		return "Grid [grid=" + grid + "]";
 	}
-	
-	
-	
-	
-	
-	
 
 }
