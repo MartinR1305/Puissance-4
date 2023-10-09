@@ -53,15 +53,6 @@ public class Column {
 	 * @param coin
 	 */
 	public void addCoinColumn(ValueSquare coin) {
-//	    for (int i = column.size() - 1; i >= 0; i--) {
-//	        Square square = column.get(i);
-//	        if (square.getValue() == ValueSquare.EMPTY) {
-//	        	
-//	        	//We place the coin in the empty square
-//	            square.setValue(coin);
-//	            return; 
-//	        }
-//	    }
 		if (!this.isColumnFull() && !coin.equals(ValueSquare.EMPTY)) {
 			this.getColumn().get(calculateFirstEmptySquare()).setValue(coin);
 		}
