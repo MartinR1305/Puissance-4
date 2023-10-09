@@ -49,7 +49,7 @@ public class PlayerSettingsController extends ForAllControllers {
 	 */
 	public void switchToChoiceViewPlayer(ActionEvent event) throws IOException {
 		FXMLLoader loader = new FXMLLoader(
-				getClass().getResource(".." + File.separator + "view" + File.separator + "ChoiceViewPlayer.fxml"));
+				getClass().getResource(".." + File.separator + "view" + File.separator + "ChoicePlayerView.fxml"));
 		root = loader.load();
 		stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		scene = new Scene(root);
