@@ -41,7 +41,7 @@ public class ChoicePlayersPvPController extends ForAllControllers implements Ini
     
     
     /**
-     * Method that allows to switch to a local game PvP
+     * Method that allows to switch to a game
      * @param event
      * @throws IOException
      */
@@ -59,7 +59,7 @@ public class ChoicePlayersPvPController extends ForAllControllers implements Ini
                     getClass().getResource(".." + File.separator + "view" + File.separator + "Game.fxml"));
             root = loader.load();
             GameController gameController = loader.getController();
-            gameController.startGame(listPlayer1.getValue(), listPlayer2.getValue());
+            gameController.startGamePvPLocal(listPlayer1.getValue(), listPlayer2.getValue());
             stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             scene = new Scene(root);
             stage.setScene(scene);

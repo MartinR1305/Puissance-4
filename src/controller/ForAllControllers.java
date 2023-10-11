@@ -7,6 +7,7 @@ import java.util.List;
 import javax.swing.SwingUtilities;
 
 import application.Main;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -28,7 +29,9 @@ public class ForAllControllers {
 	private Parent root;
 
 	/**
-	 * Method that allows to display a message with a thread and to hide if after 3 seconds
+	 * Method that allows to display a message with a thread and to hide if after 3
+	 * seconds
+	 * 
 	 * @param label, the label that we want to display
 	 */
 	public void displayMessage(Label label) {
@@ -52,9 +55,10 @@ public class ForAllControllers {
 		label.setVisible(true);
 		waitThread.start();
 	}
-	
+
 	/**
 	 * Method that allows to set a combo box with the list of all the players
+	 * 
 	 * @param comboBoxJoueur, the box that we want to set with all the players
 	 */
 	public void setComboBoxWithPlayers(ComboBox<Player> comboBoxJoueur) {
@@ -101,7 +105,8 @@ public class ForAllControllers {
 	}
 
 	/**
-	 * Controller that allows to switch the scene to the Home
+	 * Method that allows to switch the scene to the Home
+	 * 
 	 * @param event
 	 * @throws IOException
 	 */
@@ -116,7 +121,7 @@ public class ForAllControllers {
 	}
 
 	/**
-	 * Controller that allows to switch the scene to the Player Settings
+	 * Method that allows to switch the scene to the Player Settings
 	 * 
 	 * @param event
 	 * @throws IOException
@@ -130,9 +135,40 @@ public class ForAllControllers {
 		stage.setScene(scene);
 		stage.show();
 	}
-	
+
+	/**
+	 * Method that allows to switch the scene to nameFile after 2.5s
+	 * 
+	 * @param nameFile, file where we want to go
+	 * @param labelOnPage, label on the page we currently are
+	 */
+	public void switchToFileWithDelay(String nameFile, Label labelOnPage) {
+		Thread thread = new Thread(() -> {
+			try {
+				Thread.sleep(2500);
+				Platform.runLater(() -> {
+					try {
+						FXMLLoader loader = new FXMLLoader(
+								getClass().getResource(".." + File.separator + "view" + File.separator + nameFile));
+						Parent root = loader.load();
+						Stage stage = (Stage) labelOnPage.getScene().getWindow();
+						Scene scene = new Scene(root);
+						stage.setScene(scene);
+						stage.show();
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+				});
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		});
+		thread.start();
+	}
+
 	/**
 	 * Method that allows to know if a String can be a integer
+	 * 
 	 * @param str, the string that we want to check if it's a integer or not
 	 * @return 1 if the string is a integer, 0 otherwise
 	 */
