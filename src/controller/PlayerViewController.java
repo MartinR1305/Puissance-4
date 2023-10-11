@@ -9,12 +9,18 @@ public class PlayerViewController extends ForAllControllers {
 
 	@FXML
 	Label firstName;
+	Label lastName;
+	Label userName;
+	Label age;
 	
 	@FXML
 	Button back;
 	
 	public void viewPlayer(Player p) {
 		firstName.setText(p.getFirstName());
+		lastName.setText(p.getLastName());
+		userName.setText(p.getUserName());
+		age.setText(Integer.toString(p.getAge()));
 	}
 
 }
