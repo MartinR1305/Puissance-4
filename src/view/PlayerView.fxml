@@ -7,8 +7,8 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.PlayerViewController">
    <children>
-      <Label fx:id="firstName" layoutX="279.0" layoutY="101.0" text="Label" />
-      <Button fx:id="back" layoutX="539.0" layoutY="356.0" mnemonicParsing="false" onAction="#switchToPlayerSettings" text="Back">
+      <Label fx:id="firstName" layoutX="279.0" layoutY="95.0" text="Label" />
+      <Button fx:id="back" layoutX="539.0" layoutY="356.0" mnemonicParsing="false" onAction="#switchToChoiceViewPlayer" text="Back">
          <font>
             <Font size="14.0" />
          </font>
