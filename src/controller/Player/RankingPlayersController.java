@@ -1,11 +1,10 @@
-package controller;
+package controller.Player;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
 import application.Main;
-import javafx.beans.property.SimpleDoubleProperty;
-import javafx.beans.property.SimpleIntegerProperty;
+import controller.ForAllControllers;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -14,8 +13,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import model.Player;
-import model.Square;
-import model.ValueSquare;
 
 public class RankingPlayersController extends ForAllControllers implements Initializable {
 

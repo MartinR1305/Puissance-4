@@ -1,4 +1,4 @@
-package controller;
+package controller.Player;
 
 import java.net.URL;
 import java.util.List;
@@ -6,6 +6,7 @@ import java.util.ResourceBundle;
 
 import Serialization.Serialization;
 import application.Main;
+import controller.ForAllControllers;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;

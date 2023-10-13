@@ -1,10 +1,11 @@
-package controller;
+package controller.Player;
 
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import controller.ForAllControllers;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -39,7 +40,7 @@ public class ChoicePlayerViewController extends ForAllControllers implements Ini
 	
 	public void switchToViewPlayer(ActionEvent event) throws IOException {
 		 FXMLLoader loader = new FXMLLoader(
-                 getClass().getResource(".." + File.separator + "view" + File.separator + "PlayerView.fxml"));
+                 getClass().getResource(".." + File.separator + ".." + File.separator + "view" + File.separator + "PlayerView.fxml"));
          root = loader.load();
          PlayerViewController playerViewController = loader.getController();
          playerViewController.viewPlayer(listPlayer.getValue());

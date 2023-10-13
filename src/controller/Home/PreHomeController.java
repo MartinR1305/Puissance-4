@@ -1,8 +1,9 @@
-package controller;
+package controller.Home;
 
 
 import java.util.ResourceBundle;
 
+import controller.ForAllControllers;
 import javafx.animation.Animation;
 import javafx.animation.FadeTransition;
 import javafx.fxml.FXML;

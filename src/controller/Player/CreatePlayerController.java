@@ -1,7 +1,8 @@
-package controller;
+package controller.Player;
 
 import Serialization.Serialization;
 import application.Main;
+import controller.ForAllControllers;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;

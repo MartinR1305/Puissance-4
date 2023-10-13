@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.PreHomeController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Home.PreHomeController">
    <children>
       <Button fx:id="buttonClickToPlay" layoutY="200.0" mnemonicParsing="false" onAction="#switchToHome" opacity="0.0" prefHeight="104.0" prefWidth="600.0" text="Button" />
       <Label fx:id="puiss4" layoutX="128.0" layoutY="71.0" prefHeight="90.0" prefWidth="342.0" text="Puissance 4">

@@ -1,8 +1,9 @@
-package controller;
+package controller.Player;
 
 import java.io.File;
 import java.io.IOException;
 
+import controller.ForAllControllers;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -33,7 +34,7 @@ public class PlayerSettingsController extends ForAllControllers {
 	 */
 	public void switchToCreatePlayer(ActionEvent event) throws IOException {
 		FXMLLoader loader = new FXMLLoader(
-				getClass().getResource(".." + File.separator + "view" + File.separator + "CreatePlayer.fxml"));
+				getClass().getResource(".." + File.separator + ".." + File.separator + "view" + File.separator + "CreatePlayer.fxml"));
 		root = loader.load();
 		stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		scene = new Scene(root);
@@ -49,7 +50,7 @@ public class PlayerSettingsController extends ForAllControllers {
 	 */
 	public void switchToChoiceViewPlayer(ActionEvent event) throws IOException {
 		FXMLLoader loader = new FXMLLoader(
-				getClass().getResource(".." + File.separator + "view" + File.separator + "ChoicePlayerView.fxml"));
+				getClass().getResource(".." + File.separator + ".." + File.separator + "view" + File.separator + "ChoicePlayerView.fxml"));
 		root = loader.load();
 		stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		scene = new Scene(root);
@@ -65,7 +66,7 @@ public class PlayerSettingsController extends ForAllControllers {
 	 */
 	public void switchToViewRanking(ActionEvent event) throws IOException {
 		FXMLLoader loader = new FXMLLoader(
-				getClass().getResource(".." + File.separator + "view" + File.separator + "RankingPlayers.fxml"));
+				getClass().getResource(".." + File.separator + ".." + File.separator + "view" + File.separator + "RankingPlayers.fxml"));
 		root = loader.load();
 		stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		scene = new Scene(root);
@@ -81,7 +82,7 @@ public class PlayerSettingsController extends ForAllControllers {
 	 */
 	public void switchToChoiceEditPlayer(ActionEvent event) throws IOException {
 		FXMLLoader loader = new FXMLLoader(
-				getClass().getResource(".." + File.separator + "view" + File.separator + "ChoiceEditPlayer.fxml"));
+				getClass().getResource(".." + File.separator + ".." + File.separator + "view" + File.separator + "ChoiceEditPlayer.fxml"));
 		root = loader.load();
 		stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		scene = new Scene(root);
@@ -97,7 +98,7 @@ public class PlayerSettingsController extends ForAllControllers {
 	 */
 	public void switchToChoiceDeletePlayer(ActionEvent event) throws IOException {
 		FXMLLoader loader = new FXMLLoader(
-				getClass().getResource(".." + File.separator + "view" + File.separator + "ChoiceDeletePlayer.fxml"));
+				getClass().getResource(".." + File.separator + ".." + File.separator + "view" + File.separator + "ChoiceDeletePlayer.fxml"));
 		root = loader.load();
 		stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		scene = new Scene(root);

@@ -112,7 +112,8 @@ public class ForAllControllers {
 	 */
 	public void switchToHome(ActionEvent event) throws IOException {
 		FXMLLoader loader = new FXMLLoader(
-				getClass().getResource(".." + File.separator + "view" + File.separator + "Home.fxml"));
+				getClass().getResource(".." + File.separator + ".." + File.separator + "view" + File.separator + "Home.fxml"));
+		
 		root = loader.load();
 		stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		scene = new Scene(root);
@@ -128,7 +129,7 @@ public class ForAllControllers {
 	 */
 	public void switchToPlayerSettings(ActionEvent event) throws IOException {
 		FXMLLoader loader = new FXMLLoader(
-				getClass().getResource(".." + File.separator + "view" + File.separator + "PlayerSettings.fxml"));
+				getClass().getResource(".." + File.separator + ".." + File.separator + "view" + File.separator + "PlayerSettings.fxml"));
 		root = loader.load();
 		stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		scene = new Scene(root);
@@ -149,7 +150,7 @@ public class ForAllControllers {
 				Platform.runLater(() -> {
 					try {
 						FXMLLoader loader = new FXMLLoader(
-								getClass().getResource(".." + File.separator + "view" + File.separator + nameFile));
+								getClass().getResource(".." + File.separator + ".." + File.separator + "view" + File.separator + nameFile));
 						Parent root = loader.load();
 						Stage stage = (Stage) labelOnPage.getScene().getWindow();
 						Scene scene = new Scene(root);

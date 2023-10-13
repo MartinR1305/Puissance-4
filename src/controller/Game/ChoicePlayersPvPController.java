@@ -1,10 +1,11 @@
-package controller;
+package controller.Game;
 
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import controller.ForAllControllers;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -56,10 +57,10 @@ public class ChoicePlayersPvPController extends ForAllControllers implements Ini
         
         else {
             FXMLLoader loader = new FXMLLoader(
-                    getClass().getResource(".." + File.separator + "view" + File.separator + "Game.fxml"));
+                    getClass().getResource(".." + File.separator + ".." + File.separator + "view" + File.separator + "GamePvPLocal.fxml"));
             root = loader.load();
-            GameController gameController = loader.getController();
-            gameController.startGamePvPLocal(listPlayer1.getValue(), listPlayer2.getValue());
+            GamePvPLocalController gamePvPLocalController = loader.getController();
+            gamePvPLocalController.startGamePvPLocal(listPlayer1.getValue(), listPlayer2.getValue());
             stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             scene = new Scene(root);
             stage.setScene(scene);
