@@ -21,8 +21,7 @@ public class GamePvPLocalController extends GameController{
 	 * @param p2, second player of the game
 	 */
 	public void startGamePvPLocal(Player p1, Player p2) {
-		
-		typeGame = "PvP Local";
+	
 		player1 = p1;
 		player2 = p2;
 		grid = new Grid();
@@ -60,9 +59,8 @@ public class GamePvPLocalController extends GameController{
 		// Update the columnAddCoin variable according to the button text
 		columnAddCoin = Integer.parseInt(buttonText);
 
-		if(typeGame == "PvP Local") {
-			addCoinGamePvPLocal();
-		}
+		addCoinGamePvPLocal();
+
 
 	}
 	
@@ -153,6 +151,4 @@ public class GamePvPLocalController extends GameController{
 		// After 2.5s we back to choice of players
 		switchToFileWithDelay("ChoicePlayersPvP.fxml", gameFinish);
 	}
-
-
 }

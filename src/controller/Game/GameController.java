@@ -1,11 +1,6 @@
 package controller.Game;
 
-import java.util.Random;
-
-import Serialization.Serialization;
-import application.Main;
 import controller.ForAllControllers;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -13,14 +8,12 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import model.Grid;
 import model.Player;
-import model.Results;
 import model.ValueSquare;
 
 public class GameController extends ForAllControllers{
 
 	protected Player player1, player2;
 	protected Grid grid;
-	protected String typeGame;
 	protected int turnPlayer;
 	protected int columnAddCoin;
 

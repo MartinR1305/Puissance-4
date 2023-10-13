@@ -40,4 +40,19 @@ public class HomeController extends ForAllControllers{
         stage.setScene(scene);
         stage.show();
     }
+    
+	/**
+     * Controller that allows to switch the scene to the choice of player for a local PvA game
+     * @param event
+     * @throws IOException
+     */
+    public void switchToChoicePlayersPvA(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(
+                getClass().getResource(".." + File.separator + ".." + File.separator + "view" + File.separator + "ChoicePlayerPvA.fxml"));
+        root = loader.load();
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
 }

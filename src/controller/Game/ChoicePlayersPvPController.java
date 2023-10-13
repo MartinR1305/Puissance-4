@@ -42,7 +42,7 @@ public class ChoicePlayersPvPController extends ForAllControllers implements Ini
     
     
     /**
-     * Method that allows to switch to a game
+     * Method that allows to switch to a PvP local game
      * @param event
      * @throws IOException
      */
