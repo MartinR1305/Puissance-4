@@ -2,6 +2,8 @@ package controller.Game;
 
 import java.util.Random;
 
+import Serialization.Serialization;
+import application.Main;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -9,6 +11,7 @@ import javafx.scene.shape.Circle;
 import model.Algorithm;
 import model.Grid;
 import model.Player;
+import model.Results;
 import model.ValueSquare;
 
 public class GamePvALocalController extends GameController {
@@ -36,7 +39,7 @@ public class GamePvALocalController extends GameController {
 		turnPlayer = random.nextInt(2) + 1;
 
 		if (turnPlayer == 1) {
-			playerPlaying.setText("C'est à " + player1.getUserName() + " de jouer !");
+			playerPlaying.setText("Its Your Turn !");
 		}
 
 		else {
@@ -84,68 +87,94 @@ public class GamePvALocalController extends GameController {
 
 			// We continue the game
 			else {
+				disableAllButtons();
 				playerPlaying.setText("L'algorithm thinks about a move !");
-				turnPlayer++;
+				
+				// Algorithm turn
+				grid.addCoinGrid(algo.testAlgo(grid), ValueSquare.P2);
+				setColorsGrid(grid);
+
+				if (grid.isGridFull()) {
+					drawGamePvALocal();
+				}
+
+				else if (grid.isJ2win()) {
+					looseGamePvALocal(player1);
+				}
+
+				// We continue the game
+				else {
+					playerPlaying.setText("Its Your Turn !");
+					ableAllButtons();
+				}
 			}
 		}
-		
-		// Algorithm turn
-		if (!grid.getGrid().get(algo.testAlgo(grid)).isColumnFull()) {
-			
-			grid.addCoinGrid(algo.testAlgo(grid), ValueSquare.P2);
-			setColorsGrid(grid);
-
-			if (grid.isGridFull()) {
-				drawGamePvALocal();
-			}
-
-			else if (grid.isJ2win()) {
-				//looseGamePvALocal(player1);
-			}
-
-			// We continue the game
-			else {
-				playerPlaying.setText("C'est à " + player1.getUserName() + " de jouer !");
-				turnPlayer--;
-			}
-		}
-
 	}
 
 	/**
-	 * Method that display a message and set data for a draw
+	 * Method that display a message, set data for a draw and then back to the
+	 * previous scene
 	 */
 	public void drawGamePvALocal() {
+		disableAllButtons();
 
-//		// Display message
-//		gameFinish.setText("Game is over ! Nobody won ... It is a draw !");
-//		gameFinish.setVisible(true);
-//		
-//		// Add the draw on players's data
-//		player1.addMatch(player2.getUserName(), Results.DRAW);
-//		player2.addMatch(player1.getUserName(), Results.DRAW);
-//		
-//		// We serialize
-//		Serialization.serializePlayer(Main.getPlayersData().getValue());
-//		
-//		// After 2.5s we back to choice of players
-//		switchToFileWithDelay("ChoicePlayersPvP.fxml", gameFinish);
+		// Display message
+		gameFinish.setText("Game is over ! Nobody won ... It is a draw !");
+		gameFinish.setVisible(true);
+
+		// Add the draw on players's data
+		player1.addMatch(player2.getUserName(), Results.DRAW);
+
+		// We serialize
+		Serialization.serializePlayer(Main.getPlayersData().getValue());
+
+		// After 2.5s we back to choice of players
+		switchToFileWithDelay("ChoicePlayerPvA.fxml", gameFinish);
 	}
 
+	/**
+	 * Method that display a message, set data for a victory and then back to the
+	 * previous scene
+	 * 
+	 * @param playerWin, player who won the game
+	 */
 	public void winGamePvALocal(Player playerWin) {
+		disableAllButtons();
 
-//		// Display message
-//		gameFinish.setText("Game is over .. " + playerWin.getUserName() + " won the game !");
-//		gameFinish.setVisible(true);
-//		
-//		// Add the draw on players's data
-//		playerWin.addMatch(playerLoose.getUserName(), Results.VICTORY);
-//		playerLoose.addMatch(playerWin.getUserName(), Results.DEFEAT);
-//		
-//		// We serialize
-//		Serialization.serializePlayer(Main.getPlayersData().getValue());
-//		
-//		// After 2.5s we back to choice of players
-//		switchToFileWithDelay("ChoicePlayersPvP.fxml", gameFinish);
+		// Display message
+		gameFinish.setText("Game is over .. You won the game !");
+		gameFinish.setVisible(true);
+
+		// Add the draw on players's data
+		playerWin.addMatch("Algorithm", Results.VICTORY);
+
+		// We serialize
+		Serialization.serializePlayer(Main.getPlayersData().getValue());
+
+		// After 2.5s we back to choice of players
+		switchToFileWithDelay("ChoicePlayerPvA.fxml", gameFinish);
+	}
+
+	/**
+	 * Method that display a message, set data for a defeat and then back to the
+	 * previous scene
+	 * 
+	 * @param playerLoose, player who the lost the game
+	 */
+	public void looseGamePvALocal(Player playerLoose) {
+		disableAllButtons();
+
+		// Display message
+		gameFinish.setText("Game is over .. You lost the game !");
+		gameFinish.setVisible(true);
+
+		// Add the draw on players's data
+		playerLoose.addMatch("Algorithm", Results.DEFEAT);
+
+		// We serialize
+		Serialization.serializePlayer(Main.getPlayersData().getValue());
+
+		// After 2.5s we back to choice of players
+		switchToFileWithDelay("ChoicePlayerPvA.fxml", gameFinish);
 	}
 }

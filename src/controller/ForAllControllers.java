@@ -138,7 +138,7 @@ public class ForAllControllers {
 	}
 
 	/**
-	 * Method that allows to switch the scene to nameFile after 2.5s
+	 * Method that allows to switch the scene to nameFile after 5s
 	 * 
 	 * @param nameFile, file where we want to go
 	 * @param labelOnPage, label on the page we currently are
@@ -146,7 +146,7 @@ public class ForAllControllers {
 	public void switchToFileWithDelay(String nameFile, Label labelOnPage) {
 		Thread thread = new Thread(() -> {
 			try {
-				Thread.sleep(2500);
+				Thread.sleep(5000);
 				Platform.runLater(() -> {
 					try {
 						FXMLLoader loader = new FXMLLoader(

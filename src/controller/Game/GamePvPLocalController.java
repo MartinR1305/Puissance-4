@@ -36,11 +36,11 @@ public class GamePvPLocalController extends GameController{
 		turnPlayer = random.nextInt(2) + 1;
 
 		if (turnPlayer == 1) {
-			playerPlaying.setText("C'est à " + player1.getUserName() + " de jouer !");
+			playerPlaying.setText("It's" + player1.getUserName() + "'s Turn");
 		}
 
 		else {
-			playerPlaying.setText("C'est à " + player2.getUserName() + " de jouer !");
+			playerPlaying.setText("It's" + player2.getUserName() + "'s Turn");
 		}
 
 		setColorsGrid(grid);
@@ -85,7 +85,7 @@ public class GamePvPLocalController extends GameController{
 
 				// We continue the game
 				else {
-					playerPlaying.setText("C'est à " + player2.getUserName() + " de jouer !");
+					playerPlaying.setText("It's" + player2.getUserName() + "'s Turn");
 					turnPlayer++;
 				}
 			}
@@ -107,7 +107,7 @@ public class GamePvPLocalController extends GameController{
 
 				// We continue the game
 				else {
-					playerPlaying.setText("C'est à " + player1.getUserName() + " de jouer !");
+					playerPlaying.setText("It's" + player1.getUserName() + "'s Turn");
 					turnPlayer--;
 				}
 			}
@@ -116,9 +116,10 @@ public class GamePvPLocalController extends GameController{
 	
 	
 	/**
-	 * Method that display a message and set data for a draw
+	 * Method that display a message, set data for a draw and then back to the previous scene
 	 */
 	public void drawGamePvPLocal() {
+		disableAllButtons();
 		
 		// Display message
 		gameFinish.setText("Game is over ! Nobody won ... It is a draw !");
@@ -131,11 +132,17 @@ public class GamePvPLocalController extends GameController{
 		// We serialize
 		Serialization.serializePlayer(Main.getPlayersData().getValue());
 		
-		// After 2.5s we back to choice of players
+		// After 5s we back to choice of players
 		switchToFileWithDelay("ChoicePlayersPvP.fxml", gameFinish);
 	}
 	
+	/**
+	 * Method that display a message, set data for a victory and then back to the previous scene
+	 * @param playerWin, player who won the game
+	 * @param playerLoose, player who lost the game
+	 */
 	public void winGamePvPLocal(Player playerWin, Player playerLoose) {
+		disableAllButtons();
 		
 		// Display message
 		gameFinish.setText("Game is over .. " + playerWin.getUserName() + " won the game !");
@@ -148,7 +155,7 @@ public class GamePvPLocalController extends GameController{
 		// We serialize
 		Serialization.serializePlayer(Main.getPlayersData().getValue());
 		
-		// After 2.5s we back to choice of players
+		// After 5s we back to choice of players
 		switchToFileWithDelay("ChoicePlayersPvP.fxml", gameFinish);
 	}
 }
