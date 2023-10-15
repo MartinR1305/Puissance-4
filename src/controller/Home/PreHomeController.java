@@ -10,6 +10,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.paint.Color;
 import javafx.util.Duration;
 
 public class PreHomeController extends ForAllControllers implements Initializable{
@@ -17,10 +18,15 @@ public class PreHomeController extends ForAllControllers implements Initializabl
 	private Button buttonClickToPlay;
 
 	@FXML
-	private Label puiss4, labelClickToPlay, saadMartin;
+	private Label connect, four, labelClickToPlay, saadMartin;
 
 	@Override
 	public void initialize(java.net.URL arg0, ResourceBundle arg1) {
+	
+        connect.setEffect(setDropShadow(10, 10, Color.BLACK));
+        four.setEffect(setDropShadow(10, 10, Color.BLACK));
+        labelClickToPlay.setEffect(setDropShadow(3, 3, Color.BLACK));
+        saadMartin.setEffect(setDropShadow(3, 3, Color.BLACK));
 		
 		FadeTransition fadeTransition = new FadeTransition(Duration.seconds(1), labelClickToPlay);
 		fadeTransition.setFromValue(1.0);

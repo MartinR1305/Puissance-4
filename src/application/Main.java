@@ -1,7 +1,6 @@
 package application;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.List;
 
 import Serialization.Serialization;
@@ -15,7 +14,6 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 import model.Player;
-import model.Results;
 
 public class Main extends Application {
 
@@ -43,6 +41,7 @@ public class Main extends Application {
 					.load(getClass().getResource(".." + File.separator + "view" + File.separator + "PreHome.fxml"));
 			Scene scene1 = new Scene(root);
 			primaryStage.setScene(scene1);
+			scene1.getStylesheets().add(getClass().getResource(".." + File.separator + "css" + File.separator + "styles.css").toExternalForm());
 
 			// Here we download the background music and play it
 			Media media = new Media(new File("src/sounds/PreHome.mp3").toURI().toString());

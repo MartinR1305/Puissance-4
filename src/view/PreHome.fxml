@@ -3,20 +3,30 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Home.PreHomeController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Home.PreHomeController">
    <children>
-      <Button fx:id="buttonClickToPlay" layoutY="200.0" mnemonicParsing="false" onAction="#switchToHome" opacity="0.0" prefHeight="104.0" prefWidth="600.0" text="Button" />
-      <Label fx:id="puiss4" layoutX="128.0" layoutY="71.0" prefHeight="90.0" prefWidth="342.0" text="Puissance 4">
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#9edcff" height="407.0" layoutX="-4.0" layoutY="-2.0" stroke="BLACK" strokeType="INSIDE" width="608.0" />
+      <Button fx:id="buttonClickToPlay" layoutX="139.0" layoutY="236.0" mnemonicParsing="false" onAction="#switchToHome" opacity="0.0" prefHeight="57.0" prefWidth="322.0" text="Button" />
+      <Label fx:id="connect" layoutX="14.0" layoutY="124.0" prefHeight="141.0" prefWidth="485.0" text="Connect" textFill="RED">
          <font>
-            <Font size="61.0" />
+            <Font name="Verdana Bold" size="96.0" />
          </font>
       </Label>
-      <Label fx:id="saadMartin" layoutX="237.0" layoutY="368.0" text="Crée par Saad et Martin" />
-      <Label fx:id="labelClickToPlay" disable="true" layoutX="31.0" layoutY="213.0" prefHeight="90.0" prefWidth="537.0" text="Cliquez pour JOUER">
+      <Label fx:id="saadMartin" layoutX="221.0" layoutY="371.0" text="Created by Saad et Martin">
          <font>
-            <Font size="61.0" />
+            <Font name="Verdana Italic" size="12.0" />
+         </font></Label>
+      <Label fx:id="labelClickToPlay" disable="true" layoutX="202.0" layoutY="233.0" prefHeight="63.0" prefWidth="196.0" text="Click To Play">
+         <font>
+            <Font name="Verdana" size="30.0" />
+         </font>
+      </Label>
+      <Label fx:id="four" layoutX="458.0" layoutY="53.0" prefHeight="90.0" prefWidth="39.0" text="4" textFill="#e5ff00">
+         <font>
+            <Font name="Verdana Bold" size="180.0" />
          </font>
       </Label>
    </children>

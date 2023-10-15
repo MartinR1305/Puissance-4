@@ -18,6 +18,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
+import javafx.scene.effect.DropShadow;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.util.StringConverter;
 import model.Player;
@@ -27,6 +29,22 @@ public class ForAllControllers {
 	private Stage stage;
 	private Scene scene;
 	private Parent root;
+	
+	/**
+	 * 	 * Method that allows to set a dropShadow for labels
+
+	 * @param width
+	 * @param height
+	 * @param color
+	 * @return
+	 */
+	public DropShadow setDropShadow(double width, double height, Color color) {
+        DropShadow dropShadow = new DropShadow();
+        dropShadow.setColor(color);
+        dropShadow.setWidth(width);
+        dropShadow.setHeight(height);
+        return dropShadow;
+	}
 
 	/**
 	 * Method that allows to display a message with a thread and to hide if after 3
