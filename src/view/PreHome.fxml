@@ -2,32 +2,34 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Home.PreHomeController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Home.PreHomeController">
    <children>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#9edcff" height="407.0" layoutX="-4.0" layoutY="-2.0" stroke="BLACK" strokeType="INSIDE" width="608.0" />
-      <Button fx:id="buttonClickToPlay" layoutX="139.0" layoutY="236.0" mnemonicParsing="false" onAction="#switchToHome" opacity="0.0" prefHeight="57.0" prefWidth="322.0" text="Button" />
-      <Label fx:id="connect" layoutX="14.0" layoutY="124.0" prefHeight="141.0" prefWidth="485.0" text="Connect" textFill="RED">
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#2979c9" height="407.0" layoutX="-4.0" layoutY="-2.0" stroke="BLACK" strokeType="INSIDE" width="608.0" />
+      <Button fx:id="buttonClickToPlay" layoutX="145.0" layoutY="243.0" mnemonicParsing="false" onAction="#switchToHome" opacity="0.0" prefHeight="58.0" prefWidth="310.0" text="Button" />
+      <Label fx:id="connect" layoutX="46.0" layoutY="131.0" prefHeight="141.0" prefWidth="485.0" text="Connect" textFill="RED">
          <font>
-            <Font name="Verdana Bold" size="96.0" />
+            <Font name="Segoe UI Bold" size="96.0" />
          </font>
       </Label>
-      <Label fx:id="saadMartin" layoutX="221.0" layoutY="371.0" text="Created by Saad et Martin">
+      <Label fx:id="saadMartin" layoutX="206.0" layoutY="378.0" text="Created by Saad et Martin | 2023-24">
          <font>
-            <Font name="Verdana Italic" size="12.0" />
+            <Font name="Segoe UI Italic" size="12.0" />
          </font></Label>
-      <Label fx:id="labelClickToPlay" disable="true" layoutX="202.0" layoutY="233.0" prefHeight="63.0" prefWidth="196.0" text="Click To Play">
+      <Label fx:id="labelClickToPlay" disable="true" layoutX="215.0" layoutY="241.0" prefHeight="63.0" prefWidth="169.0" text="Click To Play" textFill="WHITE">
          <font>
-            <Font name="Verdana" size="30.0" />
+            <Font name="Segoe UI" size="30.0" />
          </font>
       </Label>
-      <Label fx:id="four" layoutX="458.0" layoutY="53.0" prefHeight="90.0" prefWidth="39.0" text="4" textFill="#e5ff00">
+      <Label fx:id="four" layoutX="439.0" layoutY="70.0" prefHeight="90.0" prefWidth="39.0" text="4" textFill="#e5ff00">
          <font>
-            <Font name="Verdana Bold" size="180.0" />
+            <Font name="Segoe UI Bold" size="180.0" />
          </font>
       </Label>
+      <ImageView fx:id="imagePolytech" fitHeight="58.0" fitWidth="60.0" layoutX="526.0" layoutY="349.0" pickOnBounds="true" preserveRatio="true" />
    </children>
 </AnchorPane>

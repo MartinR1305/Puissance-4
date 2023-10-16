@@ -17,46 +17,46 @@ import model.Player;
 
 public class Main extends Application {
 
-	private static ObservableValue<List<Player>> playersData = new SimpleObjectProperty<List<Player>>();
+    private static ObservableValue<List<Player>> playersData = new SimpleObjectProperty<List<Player>>();
 
-	public static ObservableValue<List<Player>> getPlayersData() {
-		return playersData;
-	}
+    public static ObservableValue<List<Player>> getPlayersData() {
+        return playersData;
+    }
 
-	@Override
-	public void start(Stage primaryStage) {
-		try {
-			
-//			List<Player> deserializedPlayers = new ArrayList<Player>();
-//			Player p1 = new Player("Default", "1", "Player", 0);
-//			deserializedPlayers.add(p1);
+    @Override
+    public void start(Stage primaryStage) {
+        try {
+            
+//            List<Player> deserializedPlayers = new ArrayList<Player>();
+//            Player p1 = new Player("Default", "1", "Player", 0);
+//            deserializedPlayers.add(p1);
 
-	        // Serialization 
-			List<Player> deserializedPlayers = Serialization.deserializePlayer();
-	        Serialization.serializePlayer(deserializedPlayers);
-	        ((SimpleObjectProperty<List<Player>>) playersData).setValue(deserializedPlayers);
+            // Serialization 
+            List<Player> deserializedPlayers = Serialization.deserializePlayer();
+            Serialization.serializePlayer(deserializedPlayers);
+            ((SimpleObjectProperty<List<Player>>) playersData).setValue(deserializedPlayers);
+            
+            // Here we start the application
+            Parent root = FXMLLoader
+                    .load(getClass().getResource(".." + File.separator + "view" + File.separator + "PreHome.fxml"));
+            Scene scene1 = new Scene(root);
+            primaryStage.setScene(scene1);
+            //scene1.getStylesheets().add(getClass().getResource(".." + File.separator + "css" + File.separator + "styles.css").toExternalForm());
 
-			// Here we start the application
-			Parent root = FXMLLoader
-					.load(getClass().getResource(".." + File.separator + "view" + File.separator + "PreHome.fxml"));
-			Scene scene1 = new Scene(root);
-			primaryStage.setScene(scene1);
-			scene1.getStylesheets().add(getClass().getResource(".." + File.separator + "css" + File.separator + "styles.css").toExternalForm());
+            // Here we download the background music and play it
+            Media media = new Media(new File("src/ressources/sounds/PreHome.mp3").toURI().toString());
+            MediaPlayer mediaPlayer = new MediaPlayer(media);
+            mediaPlayer.setVolume(0.1);
+            mediaPlayer.play();
 
-			// Here we download the background music and play it
-			Media media = new Media(new File("src/sounds/PreHome.mp3").toURI().toString());
-			MediaPlayer mediaPlayer = new MediaPlayer(media);
-			mediaPlayer.setVolume(0.1);
-			mediaPlayer.play();
+            primaryStage.show();
 
-			primaryStage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-	public static void main(String[] args) {
-		launch(args);
-	}
+    public static void main(String[] args) {
+        launch(args);
+    }
 }
