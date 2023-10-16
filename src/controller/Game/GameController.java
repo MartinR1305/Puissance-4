@@ -57,7 +57,7 @@ public class GameController extends ForAllControllers {
 		}
 
 		else {
-			circle.setFill(Color.WHITE);
+			circle.setFill(Color.web("#2979c9"));
 		}
 	}
 

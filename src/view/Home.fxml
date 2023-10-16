@@ -5,29 +5,29 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Home.HomeController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" stylesheets="@../../ressources/css/styles.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Home.HomeController">
    <children>
-      <Label fx:id="home" layoutX="162.0" layoutY="-12.0" text="HOME">
+      <Label fx:id="home" layoutX="251.0" layoutY="69.0" text="HOME">
          <font>
             <Font size="96.0" />
          </font>
       </Label>
-      <Button fx:id="playSamePC" layoutX="196.0" layoutY="130.0" mnemonicParsing="false" onAction="#switchToChoicePlayersPvP" text="Play on the same PC">
+      <Button fx:id="playSamePC" layoutX="300.0" layoutY="234.0" mnemonicParsing="false" onAction="#switchToChoicePlayersPvP" text="Play on the same PC">
          <font>
             <Font size="20.0" />
          </font>
       </Button>
-      <Button fx:id="playSameNetwork" layoutX="184.0" layoutY="185.0" mnemonicParsing="false" text="Play on the same network">
+      <Button fx:id="playSameNetwork" layoutX="276.0" layoutY="278.0" mnemonicParsing="false" text="Play on the same network">
          <font>
             <Font size="20.0" />
          </font>
       </Button>
-      <Button fx:id="playVsIA" layoutX="226.0" layoutY="238.0" mnemonicParsing="false" onAction="#switchToChoicePlayersPvA" text="Play versus IA">
+      <Button fx:id="playVsIA" layoutX="330.0" layoutY="322.0" mnemonicParsing="false" onAction="#switchToChoicePlayersPvA" text="Play versus IA">
          <font>
             <Font size="20.0" />
          </font>
       </Button>
-      <Button fx:id="playerSettings" layoutX="217.0" layoutY="291.0" mnemonicParsing="false" onAction="#switchToPlayerSettings" text="Player Settings">
+      <Button fx:id="playerSettings" layoutX="326.0" layoutY="366.0" mnemonicParsing="false" onAction="#switchToPlayerSettings" text="Player Settings">
          <font>
             <Font size="20.0" />
          </font>

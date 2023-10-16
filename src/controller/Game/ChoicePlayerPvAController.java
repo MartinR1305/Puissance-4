@@ -60,6 +60,7 @@ public class ChoicePlayerPvAController extends ForAllControllers implements Init
 			scene = new Scene(root);
 			stage.setScene(scene);
 			stage.show();
+			setCenterStage(stage);
 		}
 	}
 }

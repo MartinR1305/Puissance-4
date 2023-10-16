@@ -51,6 +51,6 @@ public class PlayerViewController extends ForAllControllers {
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
+        setCenterStage(stage);
 	}
-
 }

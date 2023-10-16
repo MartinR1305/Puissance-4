@@ -48,5 +48,6 @@ public class ChoicePlayerViewController extends ForAllControllers implements Ini
          scene = new Scene(root);
          stage.setScene(scene);
          stage.show();
+         setCenterStage(stage);
 	}
 }

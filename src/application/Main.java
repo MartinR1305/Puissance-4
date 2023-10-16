@@ -8,10 +8,12 @@ import javafx.application.Application;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 import model.Player;
 
@@ -41,7 +43,7 @@ public class Main extends Application {
                     .load(getClass().getResource(".." + File.separator + "view" + File.separator + "PreHome.fxml"));
             Scene scene1 = new Scene(root);
             primaryStage.setScene(scene1);
-            //scene1.getStylesheets().add(getClass().getResource(".." + File.separator + "css" + File.separator + "styles.css").toExternalForm());
+            primaryStage.centerOnScreen();
 
             // Here we download the background music and play it
             Media media = new Media(new File("src/ressources/sounds/PreHome.mp3").toURI().toString());
@@ -50,7 +52,12 @@ public class Main extends Application {
             mediaPlayer.play();
 
             primaryStage.show();
-
+            
+            // Set on center the stage
+            Rectangle2D screenBounds = Screen.getPrimary().getVisualBounds();
+            primaryStage.setX((screenBounds.getWidth() - primaryStage.getWidth()) / 2);
+            primaryStage.setY((screenBounds.getHeight() - primaryStage.getHeight()) / 2);
+            
         } catch (Exception e) {
             e.printStackTrace();
         }

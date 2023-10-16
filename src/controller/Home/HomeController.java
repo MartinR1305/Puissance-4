@@ -39,6 +39,7 @@ public class HomeController extends ForAllControllers{
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
+        setCenterStage(stage);
     }
     
 	/**
@@ -54,5 +55,6 @@ public class HomeController extends ForAllControllers{
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
+        setCenterStage(stage);
     }
 }
