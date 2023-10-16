@@ -340,6 +340,466 @@ public class Grid {
 		return false;
 	}
 
+	/**
+	 * Method that allows to get the 4 winning squares
+	 * 
+	 * @param grid
+	 * @param player
+	 * @return
+	 */
+	public List<List<Integer>> getWinningSquares(int nbPlayer) {
+
+		List<List<Integer>> winningSquares = new ArrayList<List<Integer>>(4);
+
+		List<Integer> liste1 = new ArrayList<>();
+		winningSquares.add(liste1);
+
+		List<Integer> liste2 = new ArrayList<>();
+		winningSquares.add(liste2);
+
+		List<Integer> liste3 = new ArrayList<>();
+		winningSquares.add(liste3);
+
+		List<Integer> liste4 = new ArrayList<>();
+		winningSquares.add(liste4);
+
+		if (nbPlayer == 1) {
+			if (this.isJ1win()) {
+
+				// We search for a diagonal of coin
+				if (this.isDiagJ1win()) {
+
+					// Up Diagonal
+					for (int indexColumn = 0; indexColumn < 4; indexColumn++) {
+						for (int indexLine = 0; indexLine < 3; indexLine++) {
+							if (this.getGrid().get(indexColumn).getColumn().get(indexLine).getValue()
+									.equals(ValueSquare.P1)) {
+
+								// We add the couple (column; line) to the list
+								winningSquares.get(0).add(indexColumn);
+								winningSquares.get(0).add(indexLine);
+
+								if (this.getGrid().get(indexColumn + 1).getColumn().get(indexLine + 1).getValue()
+										.equals(ValueSquare.P1)) {
+
+									// We add the couple (column; line) to the list
+									winningSquares.get(1).add(indexColumn + 1);
+									winningSquares.get(1).add(indexLine + 1);
+
+									if (this.getGrid().get(indexColumn + 2).getColumn().get(indexLine + 2).getValue()
+											.equals(ValueSquare.P1)) {
+
+										// We add the couple (column; line) to the list
+										winningSquares.get(2).add(indexColumn + 2);
+										winningSquares.get(2).add(indexLine + 2);
+
+										if (this.getGrid().get(indexColumn + 3).getColumn().get(indexLine + 3)
+												.getValue().equals(ValueSquare.P1)) {
+
+											// We add the couple (column; line) to the list
+											winningSquares.get(3).add(indexColumn + 3);
+											winningSquares.get(3).add(indexLine + 3);
+
+											return winningSquares;
+										}
+										// We clean the list
+										for (List<Integer> liste : winningSquares) {
+											liste.clear();
+										}
+
+									}
+									// We clean the list
+									for (List<Integer> liste : winningSquares) {
+										liste.clear();
+									}
+								}
+								// We clean the list
+								for (List<Integer> liste : winningSquares) {
+									liste.clear();
+								}
+							}
+						}
+					}
+
+					// Down Diagonal
+					for (int indexColumn = 0; indexColumn < 4; indexColumn++) {
+						for (int indexLine = 5; indexLine > 1; indexLine--) {
+							if (this.getGrid().get(indexColumn).getColumn().get(indexLine).getValue()
+									.equals(ValueSquare.P1)) {
+
+								// We add the couple (column; line) to the list
+								winningSquares.get(0).add(indexColumn);
+								winningSquares.get(0).add(indexLine);
+
+								if (this.getGrid().get(indexColumn + 1).getColumn().get(indexLine - 1).getValue()
+										.equals(ValueSquare.P1)) {
+
+									// We add the couple (column; line) to the list
+									winningSquares.get(1).add(indexColumn + 1);
+									winningSquares.get(1).add(indexLine - 1);
+
+									if (this.getGrid().get(indexColumn + 2).getColumn().get(indexLine - 2).getValue()
+											.equals(ValueSquare.P1)) {
+
+										// We add the couple (column; line) to the list
+										winningSquares.get(2).add(indexColumn + 2);
+										winningSquares.get(2).add(indexLine - 2);
+
+										if (this.getGrid().get(indexColumn + 3).getColumn().get(indexLine - 3)
+												.getValue().equals(ValueSquare.P1)) {
+
+											// We add the couple (column; line) to the list
+											winningSquares.get(3).add(indexColumn + 3);
+											winningSquares.get(3).add(indexLine - 3);
+
+											return winningSquares;
+										}
+										// We clean the list
+										for (List<Integer> liste : winningSquares) {
+											liste.clear();
+										}
+									}
+									// We clean the list
+									for (List<Integer> liste : winningSquares) {
+										liste.clear();
+									}
+								}
+								// We clean the list
+								for (List<Integer> liste : winningSquares) {
+									liste.clear();
+								}
+							}
+						}
+					}
+				}
+
+				// We search for a line of coin
+				else if (this.isLineJ1win()) {
+
+					for (int indexColumn = 0; indexColumn < 7; indexColumn++) {
+						for (int indexLine = 0; indexLine < 6; indexLine++) {
+							if (this.getGrid().get(indexColumn).getColumn().get(indexLine).getValue()
+									.equals(ValueSquare.P1)) {
+
+								// We add the couple (column; line) to the list
+								winningSquares.get(0).add(indexColumn);
+								winningSquares.get(0).add(indexLine);
+
+								if (this.getGrid().get(indexColumn + 1).getColumn().get(indexLine).getValue()
+										.equals(ValueSquare.P1)) {
+
+									// We add the couple (column; line) to the list
+									winningSquares.get(1).add(indexColumn + 1);
+									winningSquares.get(1).add(indexLine);
+
+									if (this.getGrid().get(indexColumn + 2).getColumn().get(indexLine).getValue()
+											.equals(ValueSquare.P1)) {
+
+										// We add the couple (column; line) to the list
+										winningSquares.get(2).add(indexColumn + 2);
+										winningSquares.get(2).add(indexLine);
+
+										if (this.getGrid().get(indexColumn + 3).getColumn().get(indexLine).getValue()
+												.equals(ValueSquare.P1)) {
+
+											// We add the couple (column; line) to the list
+											winningSquares.get(3).add(indexColumn + 3);
+											winningSquares.get(3).add(indexLine);
+
+											return winningSquares;
+										}
+										// We clean the list
+										for (List<Integer> liste : winningSquares) {
+											liste.clear();
+										}
+									}
+									// We clean the list
+									for (List<Integer> liste : winningSquares) {
+										liste.clear();
+									}
+								}
+								// We clean the list
+								for (List<Integer> liste : winningSquares) {
+									liste.clear();
+								}
+							}
+						}
+					}
+				}
+
+				// We search for a column of coin
+				else {
+
+					int indexColumn = 0;
+					for (Column column : this.getGrid()) {
+						for (int indexLine = 0; indexLine < 3; indexLine++) {
+							if (column.getColumn().get(indexLine).getValue().equals(ValueSquare.P1)) {
+
+								// We add the couple (column; line) to the list
+								winningSquares.get(0).add(indexColumn);
+								winningSquares.get(0).add(indexLine);
+
+								if (column.getColumn().get(indexLine + 1).getValue().equals(ValueSquare.P1)) {
+
+									// We add the couple (column; line) to the list
+									winningSquares.get(1).add(indexColumn);
+									winningSquares.get(1).add(indexLine + 1);
+
+									if (column.getColumn().get(indexLine + 2).getValue().equals(ValueSquare.P1)) {
+
+										// We add the couple (column; line) to the list
+										winningSquares.get(2).add(indexColumn);
+										winningSquares.get(2).add(indexLine + 2);
+
+										if (column.getColumn().get(indexLine + 3).getValue().equals(ValueSquare.P1)) {
+
+											// We add the couple (column; line) to the list
+											winningSquares.get(3).add(indexColumn);
+											winningSquares.get(3).add(indexLine + 3);
+
+											return winningSquares;
+										}
+										// We clean the list
+										for (List<Integer> liste : winningSquares) {
+											liste.clear();
+										}
+									}
+									// We clean the list
+									for (List<Integer> liste : winningSquares) {
+										liste.clear();
+									}
+								}
+								// We clean the list
+								for (List<Integer> liste : winningSquares) {
+									liste.clear();
+								}
+							}
+						}
+						indexColumn++;
+					}
+				}
+			}
+		}
+
+		else if (nbPlayer == 2) {
+			if (this.isJ2win()) {
+
+				// We search for a diagonal of coin
+				if (this.isDiagJ2win()) {
+
+					// Up Diagonal
+					for (int indexColumn = 0; indexColumn < 4; indexColumn++) {
+						for (int indexLine = 0; indexLine < 3; indexLine++) {
+							if (this.getGrid().get(indexColumn).getColumn().get(indexLine).getValue()
+									.equals(ValueSquare.P2)) {
+
+								// We add the couple (column; line) to the list
+								winningSquares.get(0).add(indexColumn);
+								winningSquares.get(0).add(indexLine);
+
+								if (this.getGrid().get(indexColumn + 1).getColumn().get(indexLine + 1).getValue()
+										.equals(ValueSquare.P2)) {
+
+									// We add the couple (column; line) to the list
+									winningSquares.get(1).add(indexColumn + 1);
+									winningSquares.get(1).add(indexLine + 1);
+
+									if (this.getGrid().get(indexColumn + 2).getColumn().get(indexLine + 2).getValue()
+											.equals(ValueSquare.P2)) {
+
+										// We add the couple (column; line) to the list
+										winningSquares.get(2).add(indexColumn + 2);
+										winningSquares.get(2).add(indexLine + 2);
+
+										if (this.getGrid().get(indexColumn + 3).getColumn().get(indexLine + 3)
+												.getValue().equals(ValueSquare.P2)) {
+
+											// We add the couple (column; line) to the list
+											winningSquares.get(3).add(indexColumn + 3);
+											winningSquares.get(3).add(indexLine + 3);
+
+											return winningSquares;
+										}
+										// We clean the list
+										for (List<Integer> liste : winningSquares) {
+											liste.clear();
+										}
+									}
+									// We clean the list
+									for (List<Integer> liste : winningSquares) {
+										liste.clear();
+									}
+								}
+								// We clean the list
+								for (List<Integer> liste : winningSquares) {
+									liste.clear();
+								}
+							}
+						}
+					}
+					
+					// Down Diagonal
+					for (int indexColumn = 0; indexColumn < 4; indexColumn++) {
+						for (int indexLine = 5; indexLine > 1; indexLine--) {
+							if (this.getGrid().get(indexColumn).getColumn().get(indexLine).getValue()
+									.equals(ValueSquare.P2)) {
+
+								// We add the couple (column; line) to the list
+								winningSquares.get(0).add(indexColumn);
+								winningSquares.get(0).add(indexLine);
+
+								if (this.getGrid().get(indexColumn + 1).getColumn().get(indexLine - 1).getValue()
+										.equals(ValueSquare.P2)) {
+
+									// We add the couple (column; line) to the list
+									winningSquares.get(1).add(indexColumn + 1);
+									winningSquares.get(1).add(indexLine - 1);
+
+									if (this.getGrid().get(indexColumn + 2).getColumn().get(indexLine - 2).getValue()
+											.equals(ValueSquare.P2)) {
+
+										// We add the couple (column; line) to the list
+										winningSquares.get(2).add(indexColumn + 2);
+										winningSquares.get(2).add(indexLine - 2);
+
+										if (this.getGrid().get(indexColumn + 3).getColumn().get(indexLine - 3)
+												.getValue().equals(ValueSquare.P2)) {
+
+											// We add the couple (column; line) to the list
+											winningSquares.get(3).add(indexColumn + 3);
+											winningSquares.get(3).add(indexLine - 3);
+
+											return winningSquares;
+										}
+										// We clean the list
+										for (List<Integer> liste : winningSquares) {
+											liste.clear();
+										}
+									}
+									// We clean the list
+									for (List<Integer> liste : winningSquares) {
+										liste.clear();
+									}
+								}
+								// We clean the list
+								for (List<Integer> liste : winningSquares) {
+									liste.clear();
+								}
+							}
+						}
+					}
+				}
+
+				// We search for a line of coin
+				else if (this.isLineJ2win()) {
+
+					for (int indexColumn = 0; indexColumn < 7; indexColumn++) {
+						for (int indexLine = 0; indexLine < 6; indexLine++) {
+							if (this.getGrid().get(indexColumn).getColumn().get(indexLine).getValue()
+									.equals(ValueSquare.P2)) {
+
+								// We add the couple (column; line) to the list
+								winningSquares.get(0).add(indexColumn);
+								winningSquares.get(0).add(indexLine);
+
+								if (this.getGrid().get(indexColumn + 1).getColumn().get(indexLine).getValue()
+										.equals(ValueSquare.P2)) {
+
+									// We add the couple (column; line) to the list
+									winningSquares.get(1).add(indexColumn + 1);
+									winningSquares.get(1).add(indexLine);
+
+									if (this.getGrid().get(indexColumn + 2).getColumn().get(indexLine).getValue()
+											.equals(ValueSquare.P2)) {
+
+										// We add the couple (column; line) to the list
+										winningSquares.get(2).add(indexColumn + 2);
+										winningSquares.get(2).add(indexLine);
+
+										if (this.getGrid().get(indexColumn + 3).getColumn().get(indexLine).getValue()
+												.equals(ValueSquare.P2)) {
+
+											// We add the couple (column; line) to the list
+											winningSquares.get(3).add(indexColumn + 3);
+											winningSquares.get(3).add(indexLine);
+
+											return winningSquares;
+										}
+										// We clean the list
+										for (List<Integer> liste : winningSquares) {
+											liste.clear();
+										}
+									}
+									// We clean the list
+									for (List<Integer> liste : winningSquares) {
+										liste.clear();
+									}
+								}
+								// We clean the list
+								for (List<Integer> liste : winningSquares) {
+									liste.clear();
+								}
+							}
+						}
+					}
+				}
+
+				// We search for a column of coin
+				else {
+
+					int indexColumn = 0;
+					for (Column column : this.getGrid()) {
+						for (int indexLine = 0; indexLine < 3; indexLine++) {
+							if (column.getColumn().get(indexLine).getValue().equals(ValueSquare.P2)) {
+
+								// We add the couple (column; line) to the list
+								winningSquares.get(0).add(indexColumn);
+								winningSquares.get(0).add(indexLine);
+
+								if (column.getColumn().get(indexLine + 1).getValue().equals(ValueSquare.P2)) {
+
+									// We add the couple (column; line) to the list
+									winningSquares.get(1).add(indexColumn);
+									winningSquares.get(1).add(indexLine + 1);
+
+									if (column.getColumn().get(indexLine + 2).getValue().equals(ValueSquare.P2)) {
+
+										// We add the couple (column; line) to the list
+										winningSquares.get(2).add(indexColumn);
+										winningSquares.get(2).add(indexLine + 2);
+
+										if (column.getColumn().get(indexLine + 3).getValue().equals(ValueSquare.P2)) {
+
+											// We add the couple (column; line) to the list
+											winningSquares.get(3).add(indexColumn);
+											winningSquares.get(3).add(indexLine + 3);
+
+											return winningSquares;
+										}
+										// We clean the list
+										for (List<Integer> liste : winningSquares) {
+											liste.clear();
+										}
+									}
+									// We clean the list
+									for (List<Integer> liste : winningSquares) {
+										liste.clear();
+									}
+								}
+								// We clean the list
+								for (List<Integer> liste : winningSquares) {
+									liste.clear();
+								}
+							}
+						}
+						indexColumn++;
+					}
+				}
+			}
+		}
+		return null;
+	}
+
 	@Override
 	public String toString() {
 		return "Grid [grid=" + grid + "]";

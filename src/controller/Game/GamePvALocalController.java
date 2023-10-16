@@ -82,6 +82,7 @@ public class GamePvALocalController extends GameController {
 			}
 
 			else if (grid.isJ1win()) {
+				setColorsWinningCircles(grid,1);
 				winGamePvALocal(player1);
 			}
 
@@ -99,6 +100,7 @@ public class GamePvALocalController extends GameController {
 				}
 
 				else if (grid.isJ2win()) {
+					setColorsWinningCircles(grid,2);
 					looseGamePvALocal(player1);
 				}
 

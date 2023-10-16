@@ -1,5 +1,8 @@
 package controller.Game;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import controller.ForAllControllers;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -10,7 +13,7 @@ import model.Grid;
 import model.Player;
 import model.ValueSquare;
 
-public class GameController extends ForAllControllers{
+public class GameController extends ForAllControllers {
 
 	protected Player player1, player2;
 	protected Grid grid;
@@ -29,9 +32,11 @@ public class GameController extends ForAllControllers{
 
 	@FXML
 	Button yes, no, exit, C0, C1, C2, C3, C4, C5, C6;
-	
-	
-	// --------------------------------------------------------------------------------------------- METHODS FOR ALL GAMES ------------------------------------------------------------------------------------------------ //
+
+	// ---------------------------------------------------------------------------------------------
+	// METHODS FOR ALL GAMES
+	// ------------------------------------------------------------------------------------------------
+	// //
 
 	/**
 	 * Method that allows to set the colors for a case
@@ -69,7 +74,21 @@ public class GameController extends ForAllControllers{
 			}
 		}
 	}
-	
+
+	/**
+	 * Method that allows to change the color for the 4 winning squares
+	 * 
+	 * @param nbPlayer
+	 */
+	public void setColorsWinningCircles(Grid grid, int nbPlayer) {
+		List<List<Integer>> winningSquares = new ArrayList<List<Integer>>(4);
+		winningSquares = grid.getWinningSquares(nbPlayer);
+		for(int numSquare = 0 ; numSquare < 4 ; numSquare++){
+			
+			matrixCircles[winningSquares.get(numSquare).get(0)][winningSquares.get(numSquare).get(1)].setFill(Color.GREEN);
+		}
+	}
+
 	/**
 	 * Method that allows to disable all buttons of the game
 	 */
@@ -82,7 +101,7 @@ public class GameController extends ForAllControllers{
 		C5.setDisable(true);
 		C6.setDisable(true);
 	}
-	
+
 	/**
 	 * Method that allows to set able all buttons of the game
 	 */
@@ -95,9 +114,11 @@ public class GameController extends ForAllControllers{
 		C5.setDisable(false);
 		C6.setDisable(false);
 	}
-	
-	
-	// ---------------------------------------------------------------------------- DISPLAY MESSAGE CONFIRMATION ----------------------------------------------------------------------------------------------------------- //
+
+	// ----------------------------------------------------------------------------
+	// DISPLAY MESSAGE CONFIRMATION
+	// -----------------------------------------------------------------------------------------------------------
+	// //
 
 	/**
 	 * Method that allows to display a message + 2 buttons for ask the user if he is

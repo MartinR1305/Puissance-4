@@ -60,8 +60,6 @@ public class GamePvPLocalController extends GameController{
 		columnAddCoin = Integer.parseInt(buttonText);
 
 		addCoinGamePvPLocal();
-
-
 	}
 	
 	/**
@@ -80,6 +78,7 @@ public class GamePvPLocalController extends GameController{
 				}
 
 				else if (grid.isJ1win()) {
+					setColorsWinningCircles(grid,1);
 					winGamePvPLocal(player1, player2);
 				}
 
@@ -102,6 +101,7 @@ public class GamePvPLocalController extends GameController{
 				}
 
 				else if (grid.isJ2win()) {
+					setColorsWinningCircles(grid,2);
 					winGamePvPLocal(player2, player1);
 				}
 
