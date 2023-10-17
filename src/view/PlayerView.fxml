@@ -5,10 +5,10 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" stylesheets="@../../ressources/css/styles.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Player.PlayerViewController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" stylesheets="@../../ressources/css/styles.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Player.PlayerViewController">
    <children>
       <Label fx:id="firstName" layoutX="279.0" layoutY="95.0" text="Label" />
-      <Button fx:id="back" layoutX="539.0" layoutY="356.0" mnemonicParsing="false" onAction="#switchToChoiceViewPlayer" text="Back">
+      <Button fx:id="back" layoutX="738.0" layoutY="456.0" mnemonicParsing="false" onAction="#switchToChoiceViewPlayer" text="Back">
          <font>
             <Font size="14.0" />
          </font>

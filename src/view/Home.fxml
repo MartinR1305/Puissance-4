@@ -5,14 +5,14 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" stylesheets="@../../ressources/css/styles.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Home.HomeController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" stylesheets="@../../ressources/css/styles.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Home.HomeController">
    <children>
-      <Label fx:id="home" layoutX="251.0" layoutY="69.0" text="HOME">
+      <Label fx:id="home" layoutX="251.0" layoutY="69.0" text="HOME" textFill="WHITE">
          <font>
             <Font size="96.0" />
          </font>
       </Label>
-      <Button fx:id="playSamePC" layoutX="300.0" layoutY="234.0" mnemonicParsing="false" onAction="#switchToChoicePlayersPvP" text="Play on the same PC">
+      <Button fx:id="playSamePC" layoutX="296.0" layoutY="228.0" mnemonicParsing="false" onAction="#switchToChoicePlayersPvP" text="Play on the same PC">
          <font>
             <Font size="20.0" />
          </font>
@@ -22,12 +22,12 @@
             <Font size="20.0" />
          </font>
       </Button>
-      <Button fx:id="playVsIA" layoutX="330.0" layoutY="322.0" mnemonicParsing="false" onAction="#switchToChoicePlayersPvA" text="Play versus IA">
+      <Button fx:id="playVsIA" layoutX="330.0" layoutY="328.0" mnemonicParsing="false" onAction="#switchToChoicePlayersPvA" text="Play versus IA">
          <font>
             <Font size="20.0" />
          </font>
       </Button>
-      <Button fx:id="playerSettings" layoutX="326.0" layoutY="366.0" mnemonicParsing="false" onAction="#switchToPlayerSettings" text="Player Settings">
+      <Button fx:id="playerSettings" layoutX="325.0" layoutY="377.0" mnemonicParsing="false" onAction="#switchToPlayerSettings" text="Player Settings">
          <font>
             <Font size="20.0" />
          </font>
