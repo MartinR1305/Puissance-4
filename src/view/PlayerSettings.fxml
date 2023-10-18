@@ -37,7 +37,7 @@
             <Font size="14.0" />
          </font>
       </Button>
-      <Button fx:id="editPlayer" layoutX="332.0" layoutY="198.0" mnemonicParsing="false" text="Edit a Player">
+      <Button fx:id="editPlayer" layoutX="332.0" layoutY="198.0" mnemonicParsing="false" onAction="#switchToChoiceEditPlayer" text="Edit a Player">
          <font>
             <Font size="20.0" />
          </font>
