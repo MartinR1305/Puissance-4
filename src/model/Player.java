@@ -86,7 +86,7 @@ public class Player implements Serializable {
 	 * 
 	 * @param lastName, the new last name of the player
 	 */
-	public void setLastNom(String lastName) {
+	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
 

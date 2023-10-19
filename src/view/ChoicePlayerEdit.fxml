@@ -6,7 +6,6 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" stylesheets="@../../ressources/css/styles.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Player.ChoicePlayerEditController">
    <children>
       <Label layoutX="268.0" layoutY="201.0" prefHeight="56.0" prefWidth="198.0" text="Choose the player ">
@@ -14,7 +13,7 @@
             <Font size="24.0" />
          </font>
       </Label>
-      <Button fx:id="back" layoutX="748.0" layoutY="466.0" mnemonicParsing="false" onAction="#switchToPlayerSettings" text="Back">
+      <Button fx:id="back" layoutX="731.0" layoutY="456.0" mnemonicParsing="false" onAction="#switchToPlayerSettings" text="Back">
          <font>
             <Font size="14.0" />
          </font>

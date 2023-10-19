@@ -77,22 +77,7 @@ public class PlayerSettingsController extends ForAllControllers {
 		setCenterStage(stage);
 	}
 
-	/**
-	 * Controller that allows to switch the scene for edit a player
-	 * 
-	 * @param event
-	 * @throws IOException
-	 */
-	public void switchToChoiceEditPlayer(ActionEvent event) throws IOException {
-		FXMLLoader loader = new FXMLLoader(
-				getClass().getResource(".." + File.separator + ".." + File.separator + "view" + File.separator + "ChoicePlayerEdit.fxml"));
-		root = loader.load();
-		stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-		scene = new Scene(root);
-		stage.setScene(scene);
-		stage.show();
-		setCenterStage(stage);
-	}
+
 
 	/**
 	 * Controller that allows to switch the scene for delete a player

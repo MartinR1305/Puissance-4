@@ -7,14 +7,51 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" stylesheets="@../../ressources/css/styles.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Player.PlayerViewController">
    <children>
-      <Label fx:id="firstName" layoutX="279.0" layoutY="95.0" text="Label" />
+      <Label fx:id="firstName" layoutX="175.0" layoutY="90.0" text="Label" textFill="WHITE">
+         <font>
+            <Font size="18.0" />
+         </font></Label>
       <Button fx:id="back" layoutX="738.0" layoutY="456.0" mnemonicParsing="false" onAction="#switchToChoiceViewPlayer" text="Back">
          <font>
             <Font size="14.0" />
          </font>
       </Button>
-      <Label fx:id="lastName" layoutX="279.0" layoutY="135.0" text="Label" />
-      <Label fx:id="userName" layoutX="279.0" layoutY="172.0" text="Label" />
-      <Label fx:id="age" layoutX="279.0" layoutY="210.0" text="Label" />
+      <Label fx:id="lastName" layoutX="175.0" layoutY="130.0" text="Label" textFill="WHITE">
+         <font>
+            <Font size="18.0" />
+         </font></Label>
+      <Label fx:id="userName" layoutX="175.0" layoutY="167.0" text="Label" textFill="WHITE">
+         <font>
+            <Font size="18.0" />
+         </font></Label>
+      <Label fx:id="age" layoutX="120.0" layoutY="205.0" text="Label" textFill="WHITE">
+         <font>
+            <Font size="18.0" />
+         </font></Label>
+      <Label layoutX="62.0" layoutY="90.0" text="First Name : " textFill="YELLOW">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="62.0" layoutY="130.0" text="Last Name : " textFill="YELLOW">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="331.0" layoutY="32.0" text="Player Profile">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Label>
+      <Label layoutX="62.0" layoutY="167.0" text="Username : " textFill="YELLOW">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="63.0" layoutY="205.0" text="Age : " textFill="YELLOW">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

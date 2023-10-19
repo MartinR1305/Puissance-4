@@ -77,6 +77,22 @@ public class ForAllControllers {
 	}
 
 	/**
+	 * Controller that allows to switch the scene for edit a player
+	 * 
+	 * @param event
+	 * @throws IOException
+	 */
+	public void switchToChoiceEditPlayer(ActionEvent event) throws IOException {
+		FXMLLoader loader = new FXMLLoader(
+				getClass().getResource(".." + File.separator + ".." + File.separator + "view" + File.separator + "ChoicePlayerEdit.fxml"));
+		root = loader.load();
+		stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+		scene = new Scene(root);
+		stage.setScene(scene);
+		stage.show();
+		setCenterStage(stage);
+	}
+	/**
 	 * Method that allows to set a combo box with the list of all the players
 	 * 
 	 * @param comboBoxJoueur, the box that we want to set with all the players
