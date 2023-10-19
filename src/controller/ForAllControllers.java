@@ -19,8 +19,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
-import javafx.scene.effect.DropShadow;
-import javafx.scene.paint.Color;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.util.StringConverter;
@@ -32,22 +30,6 @@ public class ForAllControllers {
 	private Scene scene;
 	private Parent root;
 	
-	/**
-	 * 	 * Method that allows to set a dropShadow for labels
-
-	 * @param width
-	 * @param height
-	 * @param color
-	 * @return
-	 */
-	public DropShadow setDropShadow(double width, double height, Color color) {
-        DropShadow dropShadow = new DropShadow();
-        dropShadow.setColor(color);
-        dropShadow.setWidth(width);
-        dropShadow.setHeight(height);
-        return dropShadow;
-	}
-
 	/**
 	 * Method that allows to display a message with a thread and to hide if after 3
 	 * seconds
@@ -115,7 +97,7 @@ public class ForAllControllers {
 				if (empty || joueur == null) {
 					setText(null);
 				} else {
-					setText(joueur.getFirstName() + " '" + joueur.getUserName() + "' " + joueur.getLastName());
+					setText(joueur.getFirstName() + " '" + joueur.getUserName().toUpperCase() + "' " + joueur.getLastName());
 				}
 			}
 		});
@@ -129,7 +111,7 @@ public class ForAllControllers {
 				if (joueur == null) {
 					return null;
 				} else {
-					return joueur.getFirstName() + " '" + joueur.getUserName() + "' " + joueur.getLastName();
+					return joueur.getFirstName() + " '" + joueur.getUserName().toUpperCase() + "' " + joueur.getLastName();
 				}
 			}
 

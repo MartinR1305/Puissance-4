@@ -12,7 +12,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.paint.Color;
 import javafx.util.Duration;
 
 public class PreHomeController extends ForAllControllers implements Initializable{
@@ -27,11 +26,6 @@ public class PreHomeController extends ForAllControllers implements Initializabl
 
     @Override
     public void initialize(java.net.URL arg0, ResourceBundle arg1) {
-    
-        // We set the labels
-        connect.setEffect(setDropShadow(5, 5, Color.BLACK));
-        four.setEffect(setDropShadow(5, 5, Color.BLACK));
-        labelClickToPlay.setEffect(setDropShadow(2, 2, Color.BLACK));
         
         // We set the image
         Image image = new Image("ressources/images/Logo_Polytech.svg.png");

@@ -3,3 +3,72 @@
     -fx-border-color: black;
     -fx-border-width: 1.0px;
 }
+
+/* ---------------------------------------------------------------- BUTTON ----------------------------------------------------------------- */
+.button {
+    -fx-background-color: white; 
+    -fx-text-fill: black; 
+    -fx-background-radius: 5.0px;
+    
+}
+
+.button:hover {
+   		-fx-background-color: #2979c9;
+   		-fx-text-fill: white;
+}
+
+/* ---------------------------------------------------------------- LABEL ----------------------------------------------------------------- */
+
+.label {
+	    -fx-font-family: Verdana;
+	    -fx-effect: dropshadow(gaussian, black, 8.0, 0.0, 0.0, 1.0); 
+}
+
+#errorMsg2, #errorMsg {
+		-fx-effect: dropshadow(gaussian, black, 1.0, 0.0, 0.0, 1.0); 
+}
+
+/* Black text does not need blur */
+#saadMartin {
+    	 -fx-effect: dropshadow(gaussian, black, 0.0, 0.0, 0.0, 0.0); 
+}
+
+/* ---------------------------------------------------------------- COMBOBOX ----------------------------------------------------------------- */
+
+.combo-box {
+    -fx-font-family: Verdana; /* Police de caractères */
+    -fx-font-size: 14px; /* Taille de police */
+    -fx-background-color: white; /* Couleur de fond */
+    -fx-text-fill: black; /* Couleur du texte */
+    -fx-background-insets: 0; /* Supprimer la marge autour du bouton */
+    -fx-padding: 5 5 5 5; /* Espacement interne */
+	-fx-background-radius: 15 15 15 15;
+	}
+
+.combo-box .arrow-button {
+    -fx-background-color: white; /* Couleur de fond du bouton déroulant */
+    -fx-padding: 0; /* Supprimer l'espacement interne du bouton déroulant */
+}
+
+.combo-box .list-cell {
+    -fx-font-family: Verdana; /* Police de caractères pour les éléments de la liste déroulante */
+    -fx-font-size: 14px; /* Taille de police pour les éléments de la liste déroulante */
+    -fx-padding: 5 5 5 5; /* Espacement interne pour les éléments de la liste déroulante */
+    -fx-alignment: center;
+    -fx-background-radius: 15 15 15 15;
+}
+
+.combo-box .list-view {
+    -fx-background-color: white; /* Couleur de fond de la liste déroulante */
+    -fx-background-radius: 15 15 15 15;
+}
+
+.combo-box .list-view .list-cell:odd {
+    -fx-background-color: #2979c9; /* Couleur de fond des éléments de la liste déroulante en alternance */
+    -fx-text-fill: white;
+}
+
+.combo-box .list-view .list-cell:hover {
+    -fx-background-color: #3498db; /* Couleur de fond au survol des éléments de la liste déroulante */
+    -fx-text-fill: white; /* Couleur du texte au survol */
+}

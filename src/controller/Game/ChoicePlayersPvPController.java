@@ -26,7 +26,7 @@ public class ChoicePlayersPvPController extends ForAllControllers implements Ini
     private Parent root;
     
     @FXML
-    Label player1, player2, errorMsg, errorMsg2;
+    Label player1, player2, errorMsg, errorMsg2, versus;
     
     @FXML
     Button back, play;
