@@ -42,7 +42,7 @@
             <Font size="14.0" />
          </font>
       </Button>
-      <Label fx:id="errorMsg" layoutX="314.0" layoutY="319.0" text="You must fill in all fields correctly" textFill="RED" visible="false" />
-      <Label fx:id="successMsg" layoutX="326.0" layoutY="319.0" text="The player has been edited" textFill="#06dd06" visible="false" />
+      <Label fx:id="errorMsg" layoutX="314.0" layoutY="319.0" text="You must fill in all fields correctly" textAlignment="CENTER" textFill="RED" visible="false" />
+      <Label fx:id="successMsg" layoutX="326.0" layoutY="319.0" text="The player has been edited" textAlignment="CENTER" textFill="#06dd06" visible="false" />
    </children>
 </AnchorPane>

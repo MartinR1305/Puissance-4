@@ -1,5 +1,7 @@
 package controller.Player;
 
+import Serialization.Serialization;
+import application.Main;
 import controller.ForAllControllers;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -43,8 +45,16 @@ public class PlayerEditController extends ForAllControllers{
     	playerToEdit = player;
     	
     	firstName.setText(playerToEdit.getFirstName());
+    	lastName.setText(playerToEdit.getLastName());
+    	userName.setText(playerToEdit.getUserName());   
+    	age.setText(Integer.toString(playerToEdit.getAge()));
+    	
+    	
     }
     
+    /**
+     * Method that edit the player by clicking on confirm button
+     */
     public void confirm() {
         
     	// Get the updated information from the text fields
@@ -60,16 +70,19 @@ public class PlayerEditController extends ForAllControllers{
             if (newAge < 0) {
                 // Age should not be negative
                 errorMsg.setText("Age cannot be negative");
+                displayMessage(errorMsg);
                 return;
             }
         } catch (NumberFormatException e) {
             // Age should be a valid integer
             errorMsg.setText("Invalid age format");
+            displayMessage(errorMsg);
             return;
         }
         
-     // Check if any of the fields are empty
+        // Check if any of the fields are empty
         if (newFirstName.isEmpty() || newLastName.isEmpty() || newUserName.isEmpty() || ageText.isEmpty()) {
+        	errorMsg.setText("errorMsg.setText(\"Invalid age format");
             displayMessage(errorMsg);
         }else {
         	
@@ -78,7 +91,10 @@ public class PlayerEditController extends ForAllControllers{
             playerToEdit.setLastName(newLastName);
             playerToEdit.setUserName(newUserName);
             playerToEdit.setAge(newAge);
-            System.out.println("ici");
+            
+            displayMessage(successMsg);
+            
+            Serialization.serializePlayer(Main.getPlayersData().getValue());
         }
     }
 
