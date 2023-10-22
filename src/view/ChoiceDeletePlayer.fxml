@@ -6,36 +6,45 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" stylesheets="@../../ressources/css/styles.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Player.ChoiceDeletePlayerController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" stylesheets="@../../ressources/css/styles.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Player.ChoiceDeletePlayerController">
    <children>
-      <Label fx:id="questionDelete" layoutX="154.0" layoutY="122.0" text="Whice Player do you want to delete ?">
+      <Label fx:id="questionDelete" layoutX="87.0" layoutY="154.0" text="Whice Player do you want to delete ?" textFill="YELLOW">
          <font>
-            <Font size="30.0" />
+            <Font name="Verdana Bold" size="30.0" />
          </font>
       </Label>
-      <Button fx:id="back" layoutX="738.0" layoutY="456.0" mnemonicParsing="false" onAction="#switchToPlayerSettings" text="Back">
+      <Button fx:id="back" layoutX="718.0" layoutY="451.0" mnemonicParsing="false" onAction="#switchToPlayerSettings" text="Back">
          <font>
-            <Font size="14.0" />
+            <Font name="Verdana" size="18.0" />
          </font>
       </Button>
-      <ComboBox fx:id="playersList" layoutX="175.0" layoutY="206.0" prefHeight="46.0" prefWidth="350.0" />
-      <Button fx:id="confirm" layoutX="525.0" layoutY="206.0" mnemonicParsing="false" onAction="#displayConfirmation" prefHeight="46.0" prefWidth="75.0" text="Confirm" />
-      <Label fx:id="questionToConfirm" layoutX="220.0" layoutY="282.0" text="Do you really want to delete this player ?" visible="false">
+      <ComboBox fx:id="playersList" layoutX="148.0" layoutY="206.0" prefHeight="46.0" prefWidth="350.0" />
+      <Button fx:id="confirm" layoutX="545.0" layoutY="206.0" mnemonicParsing="false" onAction="#displayConfirmation" prefHeight="46.0" prefWidth="107.0" text="Confirm">
          <font>
-            <Font size="20.0" />
+            <Font name="Verdana" size="20.0" />
+         </font></Button>
+      <Label fx:id="questionToConfirm" layoutX="169.0" layoutY="348.0" text="Do you really want to delete this player ?" textFill="RED" visible="false">
+         <font>
+            <Font name="Verdana Bold Italic" size="20.0" />
          </font>
       </Label>
-      <Button fx:id="no" disable="true" layoutX="290.0" layoutY="326.0" mnemonicParsing="false" onAction="#hideConfirmation" prefHeight="43.0" prefWidth="59.0" text="NO" textFill="RED" visible="false">
+      <Button fx:id="no" disable="true" layoutX="300.0" layoutY="391.0" mnemonicParsing="false" onAction="#hideConfirmation" prefHeight="43.0" prefWidth="76.0" text="NO" textFill="RED" visible="false">
          <font>
-            <Font size="20.0" />
+            <Font name="Verdana Bold" size="20.0" />
          </font>
       </Button>
-      <Button fx:id="yes" disable="true" layoutX="465.0" layoutY="326.0" mnemonicParsing="false" onAction="#deletePlayer" text="YES" textFill="LIME" visible="false">
+      <Button fx:id="yes" disable="true" layoutX="420.0" layoutY="391.0" mnemonicParsing="false" onAction="#deletePlayer" prefHeight="43.0" prefWidth="76.0" text="YES" textFill="LIME" visible="false">
          <font>
-            <Font size="20.0" />
+            <Font name="Verdana Bold" size="20.0" />
          </font>
       </Button>
-      <Label fx:id="errorMsg" layoutX="350.0" layoutY="273.0" text="You must select a player" textFill="RED" visible="false" />
-      <Label fx:id="successMsg" layoutX="300.0" layoutY="360.0" text="The player has been correctly deleted" textFill="#00ff55" visible="false" />
+      <Label fx:id="errorMsg" layoutX="181.0" layoutY="270.0" text="You must select a player" textFill="RED" visible="false">
+         <font>
+            <Font name="Verdana Bold Italic" size="20.0" />
+         </font></Label>
+      <Label fx:id="successMsg" layoutX="181.0" layoutY="456.0" text="The player has been correctly deleted" textFill="#00ff55" visible="false">
+         <font>
+            <Font name="Verdana Bold" size="20.0" />
+         </font></Label>
    </children>
 </AnchorPane>

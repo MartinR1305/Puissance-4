@@ -17,7 +17,7 @@ public class PlayerEditController extends ForAllControllers{
     private Button back;
 
     @FXML
-    private Button Confirm;
+    private Button confirm;
 
     @FXML
     private TextField firstName;
@@ -69,20 +69,20 @@ public class PlayerEditController extends ForAllControllers{
         	newAge = Integer.parseInt(ageText);
             if (newAge < 0) {
                 // Age should not be negative
-                errorMsg.setText("Age cannot be negative");
+                //errorMsg.setText("Age cannot be negative");
                 displayMessage(errorMsg);
                 return;
             }
         } catch (NumberFormatException e) {
             // Age should be a valid integer
-            errorMsg.setText("Invalid age format");
+            //errorMsg.setText("Invalid age format");
             displayMessage(errorMsg);
             return;
         }
         
         // Check if any of the fields are empty
         if (newFirstName.isEmpty() || newLastName.isEmpty() || newUserName.isEmpty() || ageText.isEmpty()) {
-        	errorMsg.setText("errorMsg.setText(\"Invalid age format");
+        	//errorMsg.setText("errorMsg.setText(\"Invalid age format");
             displayMessage(errorMsg);
         }else {
         	
@@ -95,6 +95,10 @@ public class PlayerEditController extends ForAllControllers{
             displayMessage(successMsg);
             
             Serialization.serializePlayer(Main.getPlayersData().getValue());
+            
+            confirm.setVisible(false);
+            confirm.setDisable(true);
+            switchToFileWithDelay("PlayerSettings.fxml", successMsg);
         }
     }
 

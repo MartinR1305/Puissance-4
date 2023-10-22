@@ -15,42 +15,51 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.stage.Stage;
 import model.Player;
 
-public class ChoicePlayerEditController extends ForAllControllers implements Initializable{
-	
+public class ChoicePlayerEditController extends ForAllControllers implements Initializable {
+
 	private Stage stage;
-    private Scene scene;
-    private Parent root;
-    
-    @FXML
-    private Button back;
+	private Scene scene;
+	private Parent root;
 
-    @FXML
-    private Button confirm;
+	@FXML
+	private Button back;
 
-    @FXML
-    private ComboBox<Player> listPlayer;
+	@FXML
+	private Button confirm;
+	
+	@FXML
+	Label errorMsg, question;
 
-    @FXML
-    void switchToEditPlayer(ActionEvent event) throws IOException {
-    	 FXMLLoader loader = new FXMLLoader(
-                 getClass().getResource(".." + File.separator + ".." + File.separator + "view" + File.separator + "PlayerEdit.fxml"));
-         root = loader.load();
-         PlayerEditController playerEditController = loader.getController();
-         playerEditController.editPlayer(listPlayer.getValue());
-         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-         scene = new Scene(root);
-         stage.setScene(scene);
-         stage.show();
-         setCenterStage(stage);
-    }
+	@FXML
+	private ComboBox<Player> listPlayer;
+
+	@FXML
+	void switchToEditPlayer(ActionEvent event) throws IOException {
+		if (listPlayer.getValue() == null) {
+			displayMessage(errorMsg);
+		} else {
+			FXMLLoader loader = new FXMLLoader(
+					getClass().getResource(".." + File.separator + ".." + File.separator + "view" + File.separator
+							+ "PlayerEdit.fxml"));
+			root = loader.load();
+			PlayerEditController playerEditController = loader.getController();
+			playerEditController.editPlayer(listPlayer.getValue());
+			stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+			scene = new Scene(root);
+			stage.setScene(scene);
+			stage.show();
+			setCenterStage(stage);
+		}
+	}
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		setComboBoxWithPlayers(listPlayer);
-		
+
 	}
 
 }

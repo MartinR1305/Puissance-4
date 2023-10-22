@@ -17,6 +17,14 @@
    		-fx-text-fill: white;
 }
 
+#yes {
+	    -fx-text-fill: #00ff55; 
+}
+
+#no {
+	    -fx-text-fill: red; 
+}
+
 /* ---------------------------------------------------------------- LABEL ----------------------------------------------------------------- */
 
 .label {
@@ -71,4 +79,25 @@
 .combo-box .list-view .list-cell:hover {
     -fx-background-color: #3498db; /* Couleur de fond au survol des éléments de la liste déroulante */
     -fx-text-fill: white; /* Couleur du texte au survol */
+}
+
+/* ---------------------------------------------------------------- TEXTFIELD ----------------------------------------------------------------- */
+
+/* Style de base pour les TextField */
+.text-field {
+	-fx-font-size: 20px;
+    -fx-background-color: white; /* Couleur de fond */
+    -fx-border-color: black; /* Couleur de bordure */
+    -fx-font-family: Verdana; /* Police de caractères */
+    -fx-padding: 5 5 5 5; /* Espacement interne */
+    -fx-background-radius: 10 10 10 10; /* Coins arrondis */
+    -fx-border-radius: 10 10 10 10;
+}
+
+/* Style pour les TextField au survol */
+.text-field:hover {
+	-fx-background-radius: 10 10 10 10; /* Coins arrondis */
+	-fx-border-radius: 10 10 10 10;
+    -fx-border-color: white; /* Couleur de bordure au survol */
+    -fx-font-style: italic;
 }

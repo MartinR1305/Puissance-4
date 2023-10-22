@@ -26,13 +26,16 @@ public class ChoicePlayerPvAController extends ForAllControllers implements Init
 	private Parent root;
 
 	@FXML
-	Label playerChoice, errorMsg;
+	Label playerChoice, errorMsg, labelAlgoLvl;
 
 	@FXML
 	Button back, play;
 
 	@FXML
 	ComboBox<Player> listPlayer;
+	
+	@FXML
+	ComboBox<Integer> algoLvl;
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {

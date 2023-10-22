@@ -5,41 +5,41 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" stylesheets="@../../ressources/css/styles.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Player.PlayerSettingsController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" stylesheets="@../../ressources/css/styles.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Player.PlayerSettingsController">
    <children>
-      <Label fx:id="playerSettings" layoutX="330.0" layoutY="33.0" text="Players Settings">
+      <Label fx:id="playerSettings" layoutX="235.0" layoutY="37.0" text="Players Settings" textFill="WHITE">
          <font>
-            <Font size="20.0" />
+            <Font name="Verdana Bold" size="36.0" />
          </font>
       </Label>
-      <Button fx:id="createPlayer" layoutX="320.0" layoutY="148.0" mnemonicParsing="false" onAction="#switchToCreatePlayer" text="Create a Player">
+      <Button fx:id="createPlayer" layoutX="347.0" layoutY="149.0" mnemonicParsing="false" onAction="#switchToCreatePlayer" text="CREATE">
          <font>
-            <Font size="20.0" />
+            <Font name="Verdana" size="20.0" />
          </font>
       </Button>
-      <Button fx:id="deletePlayer" layoutX="320.0" layoutY="250.0" mnemonicParsing="false" onAction="#switchToChoiceDeletePlayer" text="Delete a Player">
+      <Button fx:id="deletePlayer" layoutX="348.0" layoutY="250.0" mnemonicParsing="false" onAction="#switchToChoiceDeletePlayer" text="DELETE">
          <font>
-            <Font size="20.0" />
+            <Font name="Verdana" size="20.0" />
          </font>
       </Button>
-      <Button fx:id="viewRanking" layoutX="297.0" layoutY="412.0" mnemonicParsing="false" onAction="#switchToViewRanking" text="View Player Ranking">
+      <Button fx:id="viewRanking" layoutX="272.0" layoutY="417.0" mnemonicParsing="false" onAction="#switchToViewRanking" text="VIEW LOCAL RANKING">
          <font>
-            <Font size="20.0" />
+            <Font name="Verdana" size="20.0" />
          </font>
       </Button>
-      <Button fx:id="viewPlayer" layoutX="328.0" layoutY="358.0" mnemonicParsing="false" onAction="#switchToChoiceViewPlayer" text="View a Player">
+      <Button fx:id="viewPlayer" layoutX="360.0" layoutY="301.0" mnemonicParsing="false" onAction="#switchToChoiceViewPlayer" text="VIEW">
          <font>
-            <Font size="20.0" />
+            <Font name="Verdana" size="20.0" />
          </font>
       </Button>
-      <Button fx:id="back" layoutX="738.0" layoutY="456.0" mnemonicParsing="false" onAction="#switchToHome" text="Back">
+      <Button fx:id="back" layoutX="712.0" layoutY="451.0" mnemonicParsing="false" onAction="#switchToHome" text="BACK">
          <font>
-            <Font size="14.0" />
+            <Font name="Verdana" size="18.0" />
          </font>
       </Button>
-      <Button fx:id="editPlayer" layoutX="332.0" layoutY="198.0" mnemonicParsing="false" onAction="#switchToChoiceEditPlayer" text="Edit a Player">
+      <Button fx:id="editPlayer" layoutX="362.0" layoutY="198.0" mnemonicParsing="false" onAction="#switchToChoiceEditPlayer" text="EDIT">
          <font>
-            <Font size="20.0" />
+            <Font name="Verdana" size="20.0" />
          </font>
       </Button>
    </children>
