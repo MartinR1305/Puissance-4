@@ -12,22 +12,22 @@
             <Font name="Verdana Bold" size="36.0" />
          </font>
       </Label>
-      <Button fx:id="createPlayer" layoutX="347.0" layoutY="149.0" mnemonicParsing="false" onAction="#switchToCreatePlayer" text="CREATE">
+      <Button fx:id="createPlayer" layoutX="354.0" layoutY="149.0" mnemonicParsing="false" onAction="#switchToCreatePlayer" text="Create">
          <font>
             <Font name="Verdana" size="20.0" />
          </font>
       </Button>
-      <Button fx:id="deletePlayer" layoutX="348.0" layoutY="250.0" mnemonicParsing="false" onAction="#switchToChoiceDeletePlayer" text="DELETE">
+      <Button fx:id="deletePlayer" layoutX="355.0" layoutY="250.0" mnemonicParsing="false" onAction="#switchToChoiceDeletePlayer" text="Delete">
          <font>
             <Font name="Verdana" size="20.0" />
          </font>
       </Button>
-      <Button fx:id="viewRanking" layoutX="272.0" layoutY="417.0" mnemonicParsing="false" onAction="#switchToViewRanking" text="VIEW LOCAL RANKING">
+      <Button fx:id="viewRanking" layoutX="291.0" layoutY="412.0" mnemonicParsing="false" onAction="#switchToViewRanking" text="View Local Ranking">
          <font>
             <Font name="Verdana" size="20.0" />
          </font>
       </Button>
-      <Button fx:id="viewPlayer" layoutX="360.0" layoutY="301.0" mnemonicParsing="false" onAction="#switchToChoiceViewPlayer" text="VIEW">
+      <Button fx:id="viewPlayer" layoutX="363.0" layoutY="300.0" mnemonicParsing="false" onAction="#switchToChoiceViewPlayer" text="View">
          <font>
             <Font name="Verdana" size="20.0" />
          </font>
@@ -37,7 +37,7 @@
             <Font name="Verdana" size="18.0" />
          </font>
       </Button>
-      <Button fx:id="editPlayer" layoutX="362.0" layoutY="198.0" mnemonicParsing="false" onAction="#switchToChoiceEditPlayer" text="EDIT">
+      <Button fx:id="editPlayer" layoutX="368.0" layoutY="198.0" mnemonicParsing="false" onAction="#switchToChoiceEditPlayer" text="Edit">
          <font>
             <Font name="Verdana" size="20.0" />
          </font>

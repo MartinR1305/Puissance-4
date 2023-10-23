@@ -9,6 +9,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
+import javafx.scene.shape.Rectangle;
 import model.Grid;
 import model.Player;
 import model.ValueSquare;
@@ -32,6 +33,9 @@ public class GameController extends ForAllControllers {
 
 	@FXML
 	Button yes, no, exit, C0, C1, C2, C3, C4, C5, C6;
+	
+	@FXML 
+	Rectangle rectangleExit;
 
 	// ---------------------------------------------------------------------------------------------
 	// METHODS FOR ALL GAMES
@@ -132,6 +136,8 @@ public class GameController extends ForAllControllers {
 
 		no.setVisible(true);
 		no.setDisable(false);
+		
+		rectangleExit.setVisible(true);
 	}
 
 	/**
@@ -145,5 +151,7 @@ public class GameController extends ForAllControllers {
 
 		no.setVisible(false);
 		no.setDisable(true);
+		
+		rectangleExit.setVisible(false);
 	}
 }

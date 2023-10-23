@@ -1,56 +1,84 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.chart.PieChart?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" stylesheets="@../../ressources/css/styles.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Player.PlayerViewController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" stylesheets="@../../ressources/css/styles.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Player.PlayerViewController">
    <children>
-      <Label fx:id="firstName" layoutX="175.0" layoutY="90.0" text="Label" textFill="WHITE">
+      <Label fx:id="firstName" layoutX="192.0" layoutY="90.0" text="Label" textFill="WHITE">
          <font>
-            <Font size="18.0" />
+            <Font name="Verdana" size="18.0" />
          </font></Label>
-      <Button fx:id="back" layoutX="738.0" layoutY="456.0" mnemonicParsing="false" onAction="#switchToChoiceViewPlayer" text="Back">
+      <Button fx:id="back" layoutX="720.0" layoutY="452.0" mnemonicParsing="false" onAction="#switchToChoiceViewPlayer" text="Back">
          <font>
-            <Font size="14.0" />
+            <Font name="Verdana" size="18.0" />
          </font>
       </Button>
-      <Label fx:id="lastName" layoutX="175.0" layoutY="130.0" text="Label" textFill="WHITE">
+      <Label fx:id="lastName" layoutX="192.0" layoutY="130.0" text="Label" textFill="WHITE">
          <font>
-            <Font size="18.0" />
+            <Font name="Verdana" size="18.0" />
          </font></Label>
-      <Label fx:id="userName" layoutX="175.0" layoutY="167.0" text="Label" textFill="WHITE">
+      <Label fx:id="userName" layoutX="184.0" layoutY="167.0" text="Label" textFill="WHITE">
          <font>
-            <Font size="18.0" />
+            <Font name="Verdana" size="18.0" />
          </font></Label>
-      <Label fx:id="age" layoutX="120.0" layoutY="205.0" text="Label" textFill="WHITE">
+      <Label fx:id="age" layoutX="126.0" layoutY="205.0" text="Label" textFill="WHITE">
          <font>
-            <Font size="18.0" />
+            <Font name="Verdana" size="18.0" />
          </font></Label>
       <Label layoutX="62.0" layoutY="90.0" text="First Name : " textFill="YELLOW">
          <font>
-            <Font name="System Bold" size="18.0" />
+            <Font name="Verdana Bold" size="18.0" />
          </font>
       </Label>
       <Label layoutX="62.0" layoutY="130.0" text="Last Name : " textFill="YELLOW">
          <font>
-            <Font name="System Bold" size="18.0" />
+            <Font name="Verdana Bold" size="18.0" />
          </font>
       </Label>
-      <Label layoutX="331.0" layoutY="32.0" text="Player Profile">
+      <Label layoutX="331.0" layoutY="32.0" text="Player Profile" textFill="WHITE">
          <font>
             <Font name="System Bold" size="24.0" />
          </font>
       </Label>
       <Label layoutX="62.0" layoutY="167.0" text="Username : " textFill="YELLOW">
          <font>
-            <Font name="System Bold" size="18.0" />
+            <Font name="Verdana Bold" size="18.0" />
          </font>
       </Label>
       <Label layoutX="63.0" layoutY="205.0" text="Age : " textFill="YELLOW">
          <font>
-            <Font name="System Bold" size="18.0" />
+            <Font name="Verdana Bold" size="18.0" />
+         </font>
+      </Label>
+      <ScrollPane layoutX="418.0" layoutY="78.0" prefHeight="374.0" prefWidth="370.0">
+         <content>
+            <TableView fx:id="listMatch" prefHeight="372.0" prefWidth="369.0">
+              <columns>
+                <TableColumn fx:id="results" prefWidth="75.0" text="Results" />
+                <TableColumn fx:id="opponent" prefWidth="75.0" text="Opponent" />
+              </columns>
+               <columnResizePolicy>
+                  <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+               </columnResizePolicy>
+            </TableView>
+         </content>
+      </ScrollPane>
+      <PieChart fx:id="pieData" layoutX="11.0" layoutY="265.0" prefHeight="226.0" prefWidth="392.0" />
+      <Label layoutX="62.0" layoutY="239.0" text="Win Rate : " textFill="YELLOW">
+         <font>
+            <Font name="Verdana Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label fx:id="winRate" layoutX="183.0" layoutY="239.0" text="Label" textFill="WHITE">
+         <font>
+            <Font name="Verdana" size="18.0" />
          </font>
       </Label>
    </children>

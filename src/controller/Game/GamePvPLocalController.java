@@ -36,11 +36,11 @@ public class GamePvPLocalController extends GameController{
 		turnPlayer = random.nextInt(2) + 1;
 
 		if (turnPlayer == 1) {
-			playerPlaying.setText("It's" + player1.getUserName() + "'s Turn");
+			playerPlaying.setText("It's " + player1.getUserName() + " 's Turn");
 		}
 
 		else {
-			playerPlaying.setText("It's" + player2.getUserName() + "'s Turn");
+			playerPlaying.setText("It's " + player2.getUserName() + " 's Turn");
 		}
 
 		setColorsGrid(grid);
@@ -84,7 +84,7 @@ public class GamePvPLocalController extends GameController{
 
 				// We continue the game
 				else {
-					playerPlaying.setText("It's" + player2.getUserName() + "'s Turn");
+					playerPlaying.setText("It's " + player2.getUserName() + " 's Turn");
 					turnPlayer++;
 				}
 			}
@@ -107,7 +107,7 @@ public class GamePvPLocalController extends GameController{
 
 				// We continue the game
 				else {
-					playerPlaying.setText("It's" + player1.getUserName() + "'s Turn");
+					playerPlaying.setText("It's " + player1.getUserName() + " 's Turn");
 					turnPlayer--;
 				}
 			}
@@ -131,9 +131,6 @@ public class GamePvPLocalController extends GameController{
 		
 		// We serialize
 		Serialization.serializePlayer(Main.getPlayersData().getValue());
-		
-		// After 5s we back to choice of players
-		switchToFileWithDelay("ChoicePlayersPvP.fxml", gameFinish);
 	}
 	
 	/**
@@ -154,8 +151,5 @@ public class GamePvPLocalController extends GameController{
 		
 		// We serialize
 		Serialization.serializePlayer(Main.getPlayersData().getValue());
-		
-		// After 5s we back to choice of players
-		switchToFileWithDelay("ChoicePlayersPvP.fxml", gameFinish);
 	}
 }
