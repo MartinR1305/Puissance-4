@@ -59,6 +59,23 @@ public class ForAllControllers {
 	}
 
 	/**
+	 * Controller that allows to switch the scene for view a player
+	 * 
+	 * @param event
+	 * @throws IOException
+	 */
+	public void switchToChoiceViewPlayer(ActionEvent event) throws IOException {
+		FXMLLoader loader = new FXMLLoader(
+				getClass().getResource(".." + File.separator + ".." + File.separator + "view" + File.separator + "ChoicePlayerView.fxml"));
+		root = loader.load();
+		stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+		scene = new Scene(root);
+		stage.setScene(scene);
+		stage.show();
+		setCenterStage(stage);
+	}
+
+	/**
 	 * Controller that allows to switch the scene for edit a player
 	 * 
 	 * @param event

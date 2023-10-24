@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import controller.ForAllControllers;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
@@ -15,7 +16,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import model.Player;
 
-public class PlayerViewController extends PlayerSettingsController {
+public class PlayerViewController extends ForAllControllers {
     
     @FXML
     PieChart pieData;

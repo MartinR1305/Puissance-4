@@ -124,6 +124,7 @@ public class GamePvPLocalController extends GameController{
 		// Display message
 		gameFinish.setText("Game is over ! Nobody won ... It is a draw !");
 		gameFinish.setVisible(true);
+		playerPlaying.setVisible(false);
 		
 		// Add the draw on players's data
 		player1.addMatch(player2.getUserName(), Results.DRAW);
@@ -144,6 +145,7 @@ public class GamePvPLocalController extends GameController{
 		// Display message
 		gameFinish.setText("Game is over .. " + playerWin.getUserName() + " won the game !");
 		gameFinish.setVisible(true);
+		playerPlaying.setVisible(false);
 		
 		// Add the draw on players's data
 		playerWin.addMatch(playerLoose.getUserName(), Results.VICTORY);

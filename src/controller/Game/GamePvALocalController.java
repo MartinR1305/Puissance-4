@@ -123,15 +123,13 @@ public class GamePvALocalController extends GameController {
 		// Display message
 		gameFinish.setText("Game is over ! Nobody won ... It is a draw !");
 		gameFinish.setVisible(true);
+		playerPlaying.setVisible(false);
 
 		// Add the draw on players's data
 		player1.addMatch(player2.getUserName(), Results.DRAW);
 
 		// We serialize
 		Serialization.serializePlayer(Main.getPlayersData().getValue());
-
-		// After 2.5s we back to choice of players
-		switchToFileWithDelay("ChoicePlayerPvA.fxml", gameFinish);
 	}
 
 	/**
@@ -146,15 +144,13 @@ public class GamePvALocalController extends GameController {
 		// Display message
 		gameFinish.setText("Game is over .. You won the game !");
 		gameFinish.setVisible(true);
-
+		playerPlaying.setVisible(false);
+		
 		// Add the draw on players's data
 		playerWin.addMatch("Algorithm", Results.VICTORY);
 
 		// We serialize
 		Serialization.serializePlayer(Main.getPlayersData().getValue());
-
-		// After 2.5s we back to choice of players
-		switchToFileWithDelay("ChoicePlayerPvA.fxml", gameFinish);
 	}
 
 	/**
@@ -169,14 +165,12 @@ public class GamePvALocalController extends GameController {
 		// Display message
 		gameFinish.setText("Game is over .. You lost the game !");
 		gameFinish.setVisible(true);
+		playerPlaying.setVisible(false);
 
 		// Add the draw on players's data
 		playerLoose.addMatch("Algorithm", Results.DEFEAT);
 
 		// We serialize
 		Serialization.serializePlayer(Main.getPlayersData().getValue());
-
-		// After 2.5s we back to choice of players
-		switchToFileWithDelay("ChoicePlayerPvA.fxml", gameFinish);
 	}
 }
