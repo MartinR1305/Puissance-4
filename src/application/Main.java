@@ -30,7 +30,7 @@ public class Main extends Application {
         try {
             
 //            List<Player> deserializedPlayers = new ArrayList<Player>();
-//            Player p1 = new Player("Default", "1", "Player", 0);
+//            Player p1 = new Player("Default", "1", "Player", 10);
 //            deserializedPlayers.add(p1);
 
             // Serialization 
