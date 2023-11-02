@@ -243,8 +243,8 @@ public class ClientTCP implements AutoCloseable {
 			
 			// Message that says two players are connected to the server
 			if (finalMessage.equals("2 Players Connected")) {
-				System.out.println("Two players are connected to the server ! ");
 				is2ndClientConnected = true;
+				clientController.actualize2PlayersBoolean(is2ndClientConnected);
 			}
 
 		} catch (IOException IOE) {
