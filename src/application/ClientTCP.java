@@ -39,7 +39,7 @@ public class ClientTCP implements AutoCloseable {
 	 * @param clientController
 	 * @throws IOException
 	 */
-	public ClientTCP(String IP, int port, ChoicePlayerPvPController connectController) throws IOException {
+	public ClientTCP(String IP, int port, ChoicePlayerPvPController connectController, GameControllerPvPOnlineController gameController) throws IOException {
 		this.isConnectedToServer = false;
 		this.is2ndClientConnected = false;
 		this.isClientOpened = true;
@@ -50,6 +50,7 @@ public class ClientTCP implements AutoCloseable {
 		this.port = port;
 		this.IP = IP;
 		this.connectController = connectController;
+		this.gameController = gameController;
 	}
 
 	/**
@@ -221,6 +222,7 @@ public class ClientTCP implements AutoCloseable {
 
 				// Update status in FXML page
 				connectController.actualizeState("Disconnected");
+				gameController.actualize2PlayersBoolean(false);
 
 				// Closure of socket / in / out
 				disconnect();

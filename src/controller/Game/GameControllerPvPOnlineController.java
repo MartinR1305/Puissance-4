@@ -33,6 +33,9 @@ public class GameControllerPvPOnlineController extends GameController implements
 		// We actualize the client attribute with the one of the main
 		setClientTCP(Main.getClientTCP());
 		
+		areTwoPlayersConnected = true;
+		
+		this.backToHome();
 	}
 	
 	/**
@@ -49,13 +52,16 @@ public class GameControllerPvPOnlineController extends GameController implements
 	 * 
 	 * @param state
 	 */
-	public void actualize2PlayersBoolean(Boolean areTwoPlayersConnected) {
-		if (areTwoPlayersConnected.equals(true)) {
-			this.areTwoPlayersConnected = true;
+	public void actualize2PlayersBoolean(Boolean is2ndClientConnected) {
+		if (is2ndClientConnected.equals(true)) {
+			areTwoPlayersConnected = true;
 		}
 
-		else if (areTwoPlayersConnected.equals(false)) {
-			this.areTwoPlayersConnected = false;
+		else if (is2ndClientConnected.equals(false)) {
+			areTwoPlayersConnected = false;
+			
+			// We disconnect the application from the server via give him a null socket
+			clientTCP.changeIP_Port("", "0");
 		}
 	}
 	
@@ -70,7 +76,6 @@ public class GameControllerPvPOnlineController extends GameController implements
 					Thread.sleep(500);
 					Platform.runLater(() -> {
 						if (!areTwoPlayersConnected) {
-
 							FXMLLoader loader = new FXMLLoader(getClass().getResource(".." + File.separator + ".."
 									+ File.separator + "view" + File.separator + "Home.fxml"));
 							try {
