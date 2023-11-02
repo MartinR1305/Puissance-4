@@ -6,6 +6,6 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Game.GameControllerPvPOnlineController">
    <children>
-      <Label layoutX="386.0" layoutY="242.0" text="GAME" />
+      <Label fx:id="test" layoutX="386.0" layoutY="242.0" text="GAME" />
    </children>
 </AnchorPane>
