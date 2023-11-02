@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" stylesheets="@../../ressources/css/styles.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Home.HomeController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" stylesheets="@../../ressources/css/styles.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Home.HomeController">
    <children>
       <Label fx:id="home" layoutX="245.0" layoutY="73.0" text="HOME" textFill="WHITE">
          <font>
@@ -17,7 +17,7 @@
             <Font name="Verdana" size="20.0" />
          </font>
       </Button>
-      <Button fx:id="playSameNetwork" layoutX="564.0" layoutY="270.0" mnemonicParsing="false" text="Online Game">
+      <Button fx:id="playSameNetwork" layoutX="564.0" layoutY="270.0" mnemonicParsing="false" onAction="#switchToChoicePvPorAvA" text="Online Game">
          <font>
             <Font name="Verdana" size="20.0" />
          </font>
