@@ -11,6 +11,7 @@ import java.util.regex.Pattern;
 import javax.swing.SwingUtilities;
 
 import controller.Game.ChoicePlayerPvPController;
+import controller.Game.GameControllerPvPOnlineController;
 
 public class ClientTCP implements AutoCloseable {
 
@@ -18,7 +19,8 @@ public class ClientTCP implements AutoCloseable {
 	private PrintWriter writer;
 	private BufferedReader reader;
 
-	private ChoicePlayerPvPController clientController;
+	private ChoicePlayerPvPController connectController;
+	private GameControllerPvPOnlineController gameController;
 
 	private boolean isConnectedToServer;
 	private boolean is2ndClientConnected;
@@ -37,7 +39,7 @@ public class ClientTCP implements AutoCloseable {
 	 * @param clientController
 	 * @throws IOException
 	 */
-	public ClientTCP(String IP, int port, ChoicePlayerPvPController clientController) throws IOException {
+	public ClientTCP(String IP, int port, ChoicePlayerPvPController connectController) throws IOException {
 		this.isConnectedToServer = false;
 		this.is2ndClientConnected = false;
 		this.isClientOpened = true;
@@ -47,7 +49,7 @@ public class ClientTCP implements AutoCloseable {
 
 		this.port = port;
 		this.IP = IP;
-		this.clientController = clientController;
+		this.connectController = connectController;
 	}
 
 	/**
@@ -111,7 +113,7 @@ public class ClientTCP implements AutoCloseable {
 				// Actualization of data
 				isConnectedToServer = true;
 				System.out.println("Connected to the server !");
-				clientController.actualizeState("Connected");
+				connectController.actualizeState("Connected");
 				
 				// Creation of writer and reader
 				this.writer = new PrintWriter(this.clientSocket.getOutputStream(), true);
@@ -191,7 +193,7 @@ public class ClientTCP implements AutoCloseable {
 
 				System.out.println("Socket Closed");
 				this.clientSocket.close();
-				clientController.actualizeState("Disconnected");
+				connectController.actualizeState("Disconnected");
 			}
 
 			// If the server is close before the Scoring Machine
@@ -218,7 +220,7 @@ public class ClientTCP implements AutoCloseable {
 				System.out.println("Connection to the server lost !");
 
 				// Update status in FXML page
-				clientController.actualizeState("Disconnected");
+				connectController.actualizeState("Disconnected");
 
 				// Closure of socket / in / out
 				disconnect();
@@ -244,7 +246,13 @@ public class ClientTCP implements AutoCloseable {
 			// Message that says two players are connected to the server
 			if (finalMessage.equals("2 Players Connected")) {
 				is2ndClientConnected = true;
-				clientController.actualize2PlayersBoolean(is2ndClientConnected);
+				connectController.actualize2PlayersBoolean(is2ndClientConnected);
+			}
+			
+			// Message that says two players are connected to the server
+			if (finalMessage.equals("Other Player Left")) {
+				is2ndClientConnected = false;
+				gameController.actualize2PlayersBoolean(is2ndClientConnected);
 			}
 
 		} catch (IOException IOE) {
@@ -275,7 +283,7 @@ public class ClientTCP implements AutoCloseable {
 		}
 
 		// Update status in FXML page -> potential new server
-		clientController.actualizeState("Disconnected");
+		connectController.actualizeState("Disconnected");
 
 		// Reconnect with new informations
 		reconnect();

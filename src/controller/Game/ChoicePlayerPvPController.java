@@ -110,12 +110,12 @@ public class ChoicePlayerPvPController extends HomeController implements Initial
 	 * 
 	 * @param state
 	 */
-	public void actualize2PlayersBoolean(Boolean isTwoClientsConnected) {
-		if (isTwoClientsConnected.equals(true)) {
+	public void actualize2PlayersBoolean(Boolean areTwoClientsConnected) {
+		if (areTwoClientsConnected.equals(true)) {
 			areTwoPlayersConnected = true;
 		}
 
-		else if (isTwoClientsConnected.equals(false)) {
+		else if (areTwoClientsConnected.equals(false)) {
 			areTwoPlayersConnected = false;
 		}
 	}
@@ -162,7 +162,7 @@ public class ChoicePlayerPvPController extends HomeController implements Initial
 	 * server
 	 */
 	public void switchToGame() {
-		Thread stateUpdateThread = new Thread(() -> {
+		Thread thread = new Thread(() -> {
 			while (!areTwoPlayersConnected) {
 				try {
 					Thread.sleep(500);
@@ -174,7 +174,6 @@ public class ChoicePlayerPvPController extends HomeController implements Initial
 							try {
 								root = loader.load();
 							} catch (IOException e) {
-								// TODO Auto-generated catch block
 								e.printStackTrace();
 							}
 							stage = (Stage) (back.getScene().getWindow());
@@ -194,7 +193,7 @@ public class ChoicePlayerPvPController extends HomeController implements Initial
 				}
 			}
 		});
-		stateUpdateThread.setDaemon(true);
-		stateUpdateThread.start();
+		thread.setDaemon(true);
+		thread.start();
 	}
 }
