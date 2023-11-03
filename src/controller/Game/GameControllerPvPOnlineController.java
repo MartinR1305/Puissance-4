@@ -33,7 +33,7 @@ public class GameControllerPvPOnlineController extends GameController implements
 	private ClientTCP clientTCP;
 	private static boolean areTwoPlayersConnected, isConnected, isPlaying;
 
-	private ValueSquare numPlayer;
+	private static ValueSquare numPlayer;
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
@@ -88,7 +88,11 @@ public class GameControllerPvPOnlineController extends GameController implements
 	public void addCoinGamePvPLocal() {
 
 		if (!grid.getGrid().get(columnAddCoin).isColumnFull()) {
+			System.out.println(numPlayer);
 			grid.addCoinGrid(columnAddCoin, numPlayer);
+			
+			// Send the column played to the server
+			clientTCP.getWriter().println(columnAddCoin);
 
 			setColorsGrid(grid);
 
@@ -187,21 +191,6 @@ public class GameControllerPvPOnlineController extends GameController implements
 
 			// We disconnect the application from the server via give him a null socket
 			clientTCP.changeIP_Port("", "0");
-		}
-	}
-
-	/**
-	 * Method that allows to actualize the boolean for know if the player's turn
-	 * 
-	 * @param state
-	 */
-	public void actualizePlayerPlaying(Boolean isPlayerPlaying) {
-		if (isPlayerPlaying.equals(true)) {
-			isPlaying = true;
-		}
-
-		else if (isPlayerPlaying.equals(false)) {
-			isPlaying = false;
 		}
 	}
 
