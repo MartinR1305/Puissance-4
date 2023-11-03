@@ -88,7 +88,6 @@ public class GameControllerPvPOnlineController extends GameController implements
 	public void addCoinGamePvPLocal() {
 
 		if (!grid.getGrid().get(columnAddCoin).isColumnFull()) {
-			System.out.println(numPlayer);
 			grid.addCoinGrid(columnAddCoin, numPlayer);
 			
 			// Send the column played to the server
@@ -121,6 +120,21 @@ public class GameControllerPvPOnlineController extends GameController implements
 			
 			isPlaying = false;
 		}
+	}
+	
+	public void otherPlayerPlayed(String nbColumn) {
+		
+		if (numPlayer.equals(ValueSquare.P1)) {
+			grid.addCoinGrid(columnAddCoin, ValueSquare.P2);
+		}
+		
+		else if (numPlayer.equals(ValueSquare.P2)){
+			grid.addCoinGrid(columnAddCoin, ValueSquare.P1);
+		}
+		
+		setColorsGrid(grid);
+		
+		isPlaying = true;
 	}
 
 	/**

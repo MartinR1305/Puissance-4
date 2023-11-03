@@ -271,6 +271,11 @@ public class ClientTCP implements AutoCloseable {
 				gameController.actualizePlayerStarting(isPlayerStarts);
 			}
 			
+			// Message that says the other player had play
+			if (finalMessage.matches("\\d+")) {
+				gameController.otherPlayerPlayed(finalMessage);
+			}
+			
 
 		} catch (IOException IOE) {
 			IOE.printStackTrace();
