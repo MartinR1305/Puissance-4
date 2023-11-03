@@ -259,10 +259,10 @@ public class ClientTCP implements AutoCloseable {
 				gameController.actualize2PlayersBoolean(is2ndClientConnected);
 			}
 			
-			// Message that says two players are connected to the server
+			// Message that says the player will start the game
 			if (finalMessage.equals("You Start")) {
 				isPlayerPlaying = true;
-//				gameController.actualize2PlayersBoolean(is2ndClientConnected);
+				gameController.actualizePlayerPlaying(isPlayerPlaying);
 				System.out.println("I'm starting the game boyyyyy");
 			}
 			

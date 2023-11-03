@@ -32,8 +32,7 @@ public class GameControllerPvPOnlineController extends GameController implements
 	private Parent root;
 	
 	private ClientTCP clientTCP;
-	private static boolean areTwoPlayersConnected;
-	private static boolean isConnected;
+	private static boolean areTwoPlayersConnected, isConnected, isPlaying;
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
@@ -42,8 +41,10 @@ public class GameControllerPvPOnlineController extends GameController implements
 		
 		areTwoPlayersConnected = true;
 		isConnected = true;
+		isPlaying = false;
 		
 		this.backToHome();
+		this.updateIsPlaying();
 	}
 	
 	/**
@@ -202,6 +203,48 @@ public class GameControllerPvPOnlineController extends GameController implements
 	}
 	
 	/**
+	 * Method that allows to actualize the boolean for know if the player's turn
+	 * 
+	 * @param state
+	 */
+	public void actualizePlayerPlaying(Boolean isPlayerPlaying) {
+		if (isPlayerPlaying.equals(true)) {
+			isPlaying = true;
+		}
+
+		else if (isPlayerPlaying.equals(false)) {
+			isPlaying = false;
+		}
+	}
+	
+	/**
+	 * Method that allows to updatethe boolean for know if the player's turn
+	 * server
+	 */
+	public void updateIsPlaying() {
+		Thread thread = new Thread(() -> {
+			while (isConnected) {
+				try {
+					Thread.sleep(500);
+					Platform.runLater(() -> {
+						if (isPlaying) {
+							System.out.println("My Turn");
+							ableAllButtons();
+						} else if (!isPlaying) {
+							System.out.println("Opponent Turn");
+							disableAllButtons();
+						}
+					});
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+			}
+		});
+		thread.setDaemon(true);
+		thread.start();
+	}
+	
+	/**
 	 * Method that allows to switch to the game is two players are connected to the
 	 * server
 	 */
@@ -225,6 +268,8 @@ public class GameControllerPvPOnlineController extends GameController implements
 							stage.show();
 							setCenterStage(stage);
 
+							
+							isConnected = false;
 						}
 					});
 				} catch (InterruptedException e) {
