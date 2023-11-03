@@ -127,11 +127,11 @@ public class GameControllerPvPOnlineController extends GameController implements
 		System.out.println(grid);
 		
 		if (numPlayer.equals(ValueSquare.P1)) {
-			grid.addCoinGrid(columnAddCoin, ValueSquare.P2);
+			grid.addCoinGrid(Integer.valueOf(nbColumn), ValueSquare.P2);
 		}
 		
 		else if (numPlayer.equals(ValueSquare.P2)){
-			grid.addCoinGrid(columnAddCoin, ValueSquare.P1);
+			grid.addCoinGrid(Integer.valueOf(nbColumn), ValueSquare.P1);
 		}
 		
 		setColorsGrid(grid);
