@@ -41,7 +41,6 @@ public class GameControllerPvPOnlineController extends GameController implements
 		
 		areTwoPlayersConnected = true;
 		isConnected = true;
-		isPlaying = false;
 		
 		this.backToHome();
 		this.updateIsPlaying();

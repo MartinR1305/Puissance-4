@@ -266,6 +266,13 @@ public class ClientTCP implements AutoCloseable {
 				System.out.println("I'm starting the game boyyyyy");
 			}
 			
+			// Message that says the player will not start the game
+			if (finalMessage.equals("Opponent Will Start")) {
+				isPlayerPlaying = false;
+				gameController.actualizePlayerPlaying(isPlayerPlaying);
+				System.out.println("Opponent will start the game :(");
+			}
+			
 
 		} catch (IOException IOE) {
 			IOE.printStackTrace();
