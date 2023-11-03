@@ -26,6 +26,7 @@ public class ClientTCP implements AutoCloseable {
 	private boolean is2ndClientConnected;
 	private boolean isClientOpened;
 	private boolean isReconnectedToServerInProgress;
+	private boolean isPlayerPlaying;
 
 	private int port;
 	private String IP;
@@ -44,6 +45,7 @@ public class ClientTCP implements AutoCloseable {
 		this.is2ndClientConnected = false;
 		this.isClientOpened = true;
 		this.isReconnectedToServerInProgress = false;
+		this.isPlayerPlaying = false;
 
 		this.numClient = -1;
 
@@ -256,6 +258,14 @@ public class ClientTCP implements AutoCloseable {
 				is2ndClientConnected = false;
 				gameController.actualize2PlayersBoolean(is2ndClientConnected);
 			}
+			
+			// Message that says two players are connected to the server
+			if (finalMessage.equals("You Start")) {
+				isPlayerPlaying = true;
+//				gameController.actualize2PlayersBoolean(is2ndClientConnected);
+				System.out.println("I'm starting the game boyyyyy");
+			}
+			
 
 		} catch (IOException IOE) {
 			IOE.printStackTrace();
