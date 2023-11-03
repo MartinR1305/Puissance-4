@@ -111,6 +111,7 @@ public class GameControllerPvPOnlineController extends GameController implements
 				else if (grid.isJ2win()) {
 //					setColorsWinningCircles(grid, 1);
 //					winGamePvPLocal(player1, player2);
+					
 				}
 			}
 			
