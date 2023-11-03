@@ -3,7 +3,6 @@ package controller.Game;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
-import java.util.Random;
 import java.util.ResourceBundle;
 
 import Serialization.Serialization;
@@ -33,6 +32,8 @@ public class GameControllerPvPOnlineController extends GameController implements
 	
 	private ClientTCP clientTCP;
 	private static boolean areTwoPlayersConnected, isConnected, isPlaying;
+	
+	private ValueSquare numPlayer;
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
@@ -52,7 +53,6 @@ public class GameControllerPvPOnlineController extends GameController implements
 	 * @param p2, second player of the game
 	 */
 	public void startGamePvPOnline(Player p) {
-	
 		player1 = p;
 		player2 = null;
 		grid = new Grid();
@@ -217,7 +217,24 @@ public class GameControllerPvPOnlineController extends GameController implements
 	}
 	
 	/**
-	 * Method that allows to updatethe boolean for know if the player's turn
+	 * Method that allows to actualize the boolean for know if the player starts and assign the number of player
+	 * 
+	 * @param state
+	 */
+	public void actualizePlayerStarting(Boolean isPlayerPlaying) {
+		if (isPlayerPlaying.equals(true)) {
+			isPlaying = true;
+			numPlayer = ValueSquare.P1;
+		}
+
+		else if (isPlayerPlaying.equals(false)) {
+			isPlaying = false;
+			numPlayer = ValueSquare.P2;
+		}
+	}
+	
+	/**
+	 * Method that allows to update the boolean for know if the player's turn
 	 * server
 	 */
 	public void updateIsPlaying() {
@@ -227,10 +244,10 @@ public class GameControllerPvPOnlineController extends GameController implements
 					Thread.sleep(500);
 					Platform.runLater(() -> {
 						if (isPlaying) {
-							System.out.println("My Turn");
+							playerPlaying.setText("Your Turn !");
 							ableAllButtons();
 						} else if (!isPlaying) {
-							System.out.println("Opponent Turn");
+							playerPlaying.setText("Opponent Turn !");
 							disableAllButtons();
 						}
 					});
