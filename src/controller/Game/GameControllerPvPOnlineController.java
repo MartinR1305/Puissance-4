@@ -123,8 +123,6 @@ public class GameControllerPvPOnlineController extends GameController implements
 	}
 	
 	public void otherPlayerPlayed(String nbColumn) {
-
-		System.out.println(grid);
 		
 		if (numPlayer.equals(ValueSquare.P1)) {
 			grid.addCoinGrid(Integer.valueOf(nbColumn), ValueSquare.P2);
