@@ -24,6 +24,7 @@ public class GamePvPLocalController extends GameController{
 	
 		player1 = p1;
 		player2 = p2;
+		
 		grid = new Grid();
 		
 		// We put all circles in the matrix
@@ -119,7 +120,7 @@ public class GamePvPLocalController extends GameController{
 	 * Method that display a message, set data for a draw and then back to the previous scene
 	 */
 	public void drawGamePvPLocal() {
-		disableAllButtons();
+		super.disableAllButtons();
 		
 		// Display message
 		gameFinish.setText("Game is over ! Nobody won ... It is a draw !");
@@ -140,7 +141,7 @@ public class GamePvPLocalController extends GameController{
 	 * @param playerLoose, player who lost the game
 	 */
 	public void winGamePvPLocal(Player playerWin, Player playerLoose) {
-		disableAllButtons();
+		super.disableAllButtons();
 		
 		// Display message
 		gameFinish.setText("Game is over .. " + playerWin.getUserName() + " won the game !");

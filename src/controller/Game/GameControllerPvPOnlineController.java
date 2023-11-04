@@ -180,7 +180,7 @@ public class GameControllerPvPOnlineController extends GameController implements
 	 * @param playerLoose, player who lost the game
 	 */
 	public void winGamePvPOnline() {
-		disableAllButtons();
+		super.disableAllButtons();
 
 		// Display message
 		gameFinish.setText("You won the game !");
@@ -198,7 +198,7 @@ public class GameControllerPvPOnlineController extends GameController implements
 	 * Method that display a message, set data for a draw
 	 */
 	public void drawGamePvPOnline() {
-		disableAllButtons();
+		super.disableAllButtons();
 
 		// Display message
 		gameFinish.setText("Game is over ! Nobody won ... It is a draw !");
@@ -219,7 +219,7 @@ public class GameControllerPvPOnlineController extends GameController implements
 	 * @param playerLoose, player who lost the game
 	 */
 	public void defeatGamePvPOnline() {
-		disableAllButtons();
+		super.disableAllButtons();
 
 		// Display message
 		gameFinish.setText("You lost the game !");
@@ -306,7 +306,7 @@ public class GameControllerPvPOnlineController extends GameController implements
 	}
 
 	/**
-	 * Method that allows to switch to the game is two players are connected to the
+	 * Method that allows to switch to the game if two players are connected to the
 	 * server
 	 */
 	public void backToHome() {
