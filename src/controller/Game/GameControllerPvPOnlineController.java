@@ -198,7 +198,7 @@ public class GameControllerPvPOnlineController extends GameController implements
 	 * Method that display a message, set data for a draw
 	 */
 	public void drawGamePvPOnline() {
-		super.disableAllButtons();
+		//super.disableAllButtons();
 
 		// Display message
 		gameFinish.setText("Game is over ! Nobody won ... It is a draw !");
@@ -214,12 +214,9 @@ public class GameControllerPvPOnlineController extends GameController implements
 
 	/**
 	 * Method that display a message, set data for a defeat
-	 * 
-	 * @param playerWin,   player who won the game
-	 * @param playerLoose, player who lost the game
 	 */
 	public void defeatGamePvPOnline() {
-		super.disableAllButtons();
+		//super.disableAllButtons();
 
 		// Display message
 		gameFinish.setText("You lost the game !");

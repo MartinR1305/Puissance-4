@@ -32,7 +32,7 @@ public class GameController extends ForAllControllers {
 	protected Label playerPlaying, questionToExit, gameFinish;
 
 	@FXML
-	protected Button yes, no, exit, C0, C1, C2, C3, C4, C5, C6;
+	Button yes, no, exit, C0, C1, C2, C3, C4, C5, C6;
 	
 	@FXML 
 	protected Rectangle rectangleExit;
@@ -97,26 +97,26 @@ public class GameController extends ForAllControllers {
 	 * Method that allows to disable all buttons of the game
 	 */
 	public void disableAllButtons() {
-		C0.setDisable(true);
-		C1.setDisable(true);
-		C2.setDisable(true);
-		C3.setDisable(true);
-		C4.setDisable(true);
-		C5.setDisable(true);
-		C6.setDisable(true);
+		this.C0.setDisable(true);
+		this.C1.setDisable(true);
+		this.C2.setDisable(true);
+		this.C3.setDisable(true);
+		this.C4.setDisable(true);
+		this.C5.setDisable(true);
+		this.C6.setDisable(true);
 	}
 
 	/**
 	 * Method that allows to set able all buttons of the game
 	 */
 	public void ableAllButtons() {
-		C0.setDisable(false);
-		C1.setDisable(false);
-		C2.setDisable(false);
-		C3.setDisable(false);
-		C4.setDisable(false);
-		C5.setDisable(false);
-		C6.setDisable(false);
+		this.C0.setDisable(false);
+		this.C1.setDisable(false);
+		this.C2.setDisable(false);
+		this.C3.setDisable(false);
+		this.C4.setDisable(false);
+		this.C5.setDisable(false);
+		this.C6.setDisable(false);
 	}
 
 	// ----------------------------------------------------------------------------
