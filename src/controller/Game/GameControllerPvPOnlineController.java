@@ -31,7 +31,7 @@ public class GameControllerPvPOnlineController extends GameController implements
 	private Parent root;
 
 	private ClientTCP clientTCP;
-	private static boolean areTwoPlayersConnected, isConnected, isPlaying;
+	private static boolean areTwoPlayersConnected, isConnected, isPlaying, isGameFinished;
 
 	private static ValueSquare numPlayer;
 
@@ -42,6 +42,7 @@ public class GameControllerPvPOnlineController extends GameController implements
 
 		areTwoPlayersConnected = true;
 		isConnected = true;
+		isGameFinished = false;
 
 		this.backToHome();
 		this.updateIsPlaying();
@@ -83,13 +84,13 @@ public class GameControllerPvPOnlineController extends GameController implements
 	}
 
 	/**
-	 * Method that allows to add a coin in the game the player
+	 * Method that allows to add a coin in the game for the player
 	 */
 	public void addCoinGamePvPLocal() {
 
 		if (!grid.getGrid().get(columnAddCoin).isColumnFull()) {
 			grid.addCoinGrid(columnAddCoin, numPlayer);
-			
+
 			// Send the column played to the server
 			clientTCP.getWriter().println(columnAddCoin);
 
@@ -97,51 +98,106 @@ public class GameControllerPvPOnlineController extends GameController implements
 
 			if (numPlayer.equals(ValueSquare.P1)) {
 				if (grid.isGridFull()) {
-//					drawGamePvPLocal();
+					drawGamePvPOnline();
+					isGameFinished = true;
 				}
 
 				else if (grid.isJ1win()) {
-//					setColorsWinningCircles(grid, 1);
-//					winGamePvPLocal(player1, player2);
+					setColorsWinningCircles(grid, 1);
+					winGamePvPOnline();
+					isGameFinished = true;
 				}
 			}
-			
+
 			else if (numPlayer.equals(ValueSquare.P2)) {
 				if (grid.isGridFull()) {
-//					drawGamePvPLocal();
+					drawGamePvPOnline();
+					isGameFinished = true;
 				}
 
 				else if (grid.isJ2win()) {
-//					setColorsWinningCircles(grid, 1);
-//					winGamePvPLocal(player1, player2);
-					
+					setColorsWinningCircles(grid, 2);
+					winGamePvPOnline();
+					isGameFinished = true;
 				}
 			}
-			
 			isPlaying = false;
 		}
 	}
-	
+
+	/**
+	 * Method that allows to add a coin in the game for other player
+	 * 
+	 * @param nbColumn
+	 */
 	public void otherPlayerPlayed(String nbColumn) {
-		
+
 		if (numPlayer.equals(ValueSquare.P1)) {
 			grid.addCoinGrid(Integer.valueOf(nbColumn), ValueSquare.P2);
 		}
-		
-		else if (numPlayer.equals(ValueSquare.P2)){
+
+		else if (numPlayer.equals(ValueSquare.P2)) {
 			grid.addCoinGrid(Integer.valueOf(nbColumn), ValueSquare.P1);
 		}
-		
+
 		setColorsGrid(grid);
+
+		if (numPlayer.equals(ValueSquare.P1)) {
+			if (grid.isGridFull()) {
+				drawGamePvPOnline();
+				isGameFinished = true;
+			}
+
+			else if (grid.isJ2win()) {
+				setColorsWinningCircles(grid, 2);
+				defeatGamePvPOnline();
+				isGameFinished = true;
+			}
+		}
+
+		else if (numPlayer.equals(ValueSquare.P2)) {
+			if (grid.isGridFull()) {
+				drawGamePvPOnline();
+				isGameFinished = true;
+			}
+
+			else if (grid.isJ1win()) {
+				setColorsWinningCircles(grid, 1);
+				defeatGamePvPOnline();
+				isGameFinished = true;
+			}
+		}
 		
-		isPlaying = true;
+		if (!isGameFinished) {
+			isPlaying = true;
+		}
 	}
 
 	/**
-	 * Method that display a message, set data for a draw and then back to the
-	 * previous scene
+	 * Method that display a message, set data for a victory
+	 * 
+	 * @param playerWin,   player who won the game
+	 * @param playerLoose, player who lost the game
 	 */
-	public void drawGamePvPLocal() {
+	public void winGamePvPOnline() {
+		disableAllButtons();
+
+		// Display message
+		gameFinish.setText("You won the game !");
+		gameFinish.setVisible(true);
+		playerPlaying.setVisible(false);
+
+		// Add the draw on players's data
+		player1.addMatch("Player Online", Results.VICTORY);
+
+		// We serialize
+		Serialization.serializePlayer(Main.getPlayersData().getValue());
+	}
+
+	/**
+	 * Method that display a message, set data for a draw
+	 */
+	public void drawGamePvPOnline() {
 		disableAllButtons();
 
 		// Display message
@@ -150,31 +206,28 @@ public class GameControllerPvPOnlineController extends GameController implements
 		playerPlaying.setVisible(false);
 
 		// Add the draw on players's data
-		player1.addMatch(player2.getUserName(), Results.DRAW);
-		player2.addMatch(player1.getUserName(), Results.DRAW);
+		player1.addMatch("Player Online", Results.DRAW);
 
 		// We serialize
 		Serialization.serializePlayer(Main.getPlayersData().getValue());
 	}
 
 	/**
-	 * Method that display a message, set data for a victory and then back to the
-	 * previous scene
+	 * Method that display a message, set data for a defeat
 	 * 
 	 * @param playerWin,   player who won the game
 	 * @param playerLoose, player who lost the game
 	 */
-	public void winGamePvPLocal(Player playerWin, Player playerLoose) {
+	public void defeatGamePvPOnline() {
 		disableAllButtons();
 
 		// Display message
-		gameFinish.setText("Game is over .. " + playerWin.getUserName() + " won the game !");
+		gameFinish.setText("You lost the game !");
 		gameFinish.setVisible(true);
 		playerPlaying.setVisible(false);
 
 		// Add the draw on players's data
-		playerWin.addMatch(playerLoose.getUserName(), Results.VICTORY);
-		playerLoose.addMatch(playerWin.getUserName(), Results.DEFEAT);
+		player1.addMatch("Player Online", Results.DEFEAT);
 
 		// We serialize
 		Serialization.serializePlayer(Main.getPlayersData().getValue());
