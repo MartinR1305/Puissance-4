@@ -200,16 +200,16 @@ public class GameControllerPvPOnlineController extends GameController implements
 	public void drawGamePvPOnline() {
 		//super.disableAllButtons();
 
-		// Display message
-		gameFinish.setText("Game is over ! Nobody won ... It is a draw !");
-		gameFinish.setVisible(true);
-		playerPlaying.setVisible(false);
-
-		// Add the draw on players's data
-		player1.addMatch("Player Online", Results.DRAW);
-
-		// We serialize
-		Serialization.serializePlayer(Main.getPlayersData().getValue());
+//		// Display message
+//		gameFinish.setText("Game is over ! Nobody won ... It is a draw !");
+//		gameFinish.setVisible(true);
+//		playerPlaying.setVisible(false);
+//
+//		// Add the draw on players's data
+//		player1.addMatch("Player Online", Results.DRAW);
+//
+//		// We serialize
+//		Serialization.serializePlayer(Main.getPlayersData().getValue());
 	}
 
 	/**
@@ -218,16 +218,16 @@ public class GameControllerPvPOnlineController extends GameController implements
 	public void defeatGamePvPOnline() {
 		//super.disableAllButtons();
 
-		// Display message
-		gameFinish.setText("You lost the game !");
-		gameFinish.setVisible(true);
-		playerPlaying.setVisible(false);
-
-		// Add the draw on players's data
-		player1.addMatch("Player Online", Results.DEFEAT);
-
-		// We serialize
-		Serialization.serializePlayer(Main.getPlayersData().getValue());
+//		// Display message
+//		gameFinish.setText("You lost the game !");
+//		gameFinish.setVisible(true);
+//		playerPlaying.setVisible(false);
+//
+//		// Add the draw on players's data
+//		player1.addMatch("Player Online", Results.DEFEAT);
+//
+//		// We serialize
+//		Serialization.serializePlayer(Main.getPlayersData().getValue());
 	}
 
 	/**
