@@ -32,7 +32,7 @@ public class GameController extends ForAllControllers {
 	protected Label playerPlaying, questionToExit, gameFinish;
 
 	@FXML
-	Button yes, no, exit, C0, C1, C2, C3, C4, C5, C6;
+	protected Button yes, no, exit, C0, C1, C2, C3, C4, C5, C6;
 	
 	@FXML 
 	protected Rectangle rectangleExit;

@@ -198,36 +198,36 @@ public class GameControllerPvPOnlineController extends GameController implements
 	 * Method that display a message, set data for a draw
 	 */
 	public void drawGamePvPOnline() {
-		//super.disableAllButtons();
+		super.disableAllButtons();
 
-//		// Display message
-//		gameFinish.setText("Game is over ! Nobody won ... It is a draw !");
-//		gameFinish.setVisible(true);
-//		playerPlaying.setVisible(false);
-//
-//		// Add the draw on players's data
-//		player1.addMatch("Player Online", Results.DRAW);
-//
-//		// We serialize
-//		Serialization.serializePlayer(Main.getPlayersData().getValue());
+		// Display message
+		gameFinish.setText("Game is over ! Nobody won ... It is a draw !");
+		gameFinish.setVisible(true);
+		playerPlaying.setVisible(false);
+
+		// Add the draw on players's data
+		player1.addMatch("Player Online", Results.DRAW);
+
+		// We serialize
+		Serialization.serializePlayer(Main.getPlayersData().getValue());
 	}
 
 	/**
 	 * Method that display a message, set data for a defeat
 	 */
 	public void defeatGamePvPOnline() {
-		//super.disableAllButtons();
+		super.disableAllButtons();
 
-//		// Display message
-//		gameFinish.setText("You lost the game !");
-//		gameFinish.setVisible(true);
-//		playerPlaying.setVisible(false);
-//
-//		// Add the draw on players's data
-//		player1.addMatch("Player Online", Results.DEFEAT);
-//
-//		// We serialize
-//		Serialization.serializePlayer(Main.getPlayersData().getValue());
+		// Display message
+		gameFinish.setText("You lost the game !");
+		gameFinish.setVisible(true);
+		playerPlaying.setVisible(false);
+
+		// Add the draw on players's data
+		player1.addMatch("Player Online", Results.DEFEAT);
+
+		// We serialize
+		Serialization.serializePlayer(Main.getPlayersData().getValue());
 	}
 
 	/**
@@ -352,6 +352,7 @@ public class GameControllerPvPOnlineController extends GameController implements
 	 */
 	public void switchToHomeWithDecoServer(ActionEvent event) throws IOException {
 		isConnected = false;
+		areTwoPlayersConnected = false;
 		clientTCP.changeIP_Port("", "0");
 
 		FXMLLoader loader = new FXMLLoader(getClass()
