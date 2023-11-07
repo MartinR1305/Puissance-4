@@ -347,6 +347,7 @@ public class GameControllerPvPOnlineController extends GameController implements
 						else if (!isDraw) {
 							
 							if (isWonTheGame && isGameFinished) {
+								System.out.println("V");
 								gameFinish.setText("You won the game !");
 								gameFinish.setVisible(true);
 								playerPlaying.setVisible(false);
@@ -354,6 +355,7 @@ public class GameControllerPvPOnlineController extends GameController implements
 							} 
 							
 							else if(!isWonTheGame && isGameFinished) {
+								System.out.println("D");
 								gameFinish.setText("You lost the game !"); 
 								gameFinish.setVisible(true);
 								playerPlaying.setVisible(false);
