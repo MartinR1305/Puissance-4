@@ -103,26 +103,26 @@ public class GameControllerPvPOnlineController extends GameController implements
 			if (numPlayer.equals(ValueSquare.P1)) {
 				if (grid.isGridFull()) {
 					isGameFinished = true;
-					drawGamePvPOnline(this.gameFinish);
+					drawGamePvPOnline(Main.getClientTCP().getGameController().getGameFinish(), playerPlaying);
 				}
 
 				else if (grid.isJ1win()) {
 					setColorsWinningCircles(grid, 1);
 					isGameFinished = true;
-					winGamePvPOnline(this.gameFinish);
+					winGamePvPOnline(Main.getClientTCP().getGameController().getGameFinish(), playerPlaying);
 				}
 			}
 
 			else if (numPlayer.equals(ValueSquare.P2)) {
 				if (grid.isGridFull()) {
 					isGameFinished = true;
-					drawGamePvPOnline(this.gameFinish);
+					drawGamePvPOnline(Main.getClientTCP().getGameController().getGameFinish(), playerPlaying);
 				}
 
 				else if (grid.isJ2win()) {
 					setColorsWinningCircles(grid, 2);
 					isGameFinished = true;
-					winGamePvPOnline(this.gameFinish);
+					winGamePvPOnline(Main.getClientTCP().getGameController().getGameFinish(), playerPlaying);
 				}
 			}
 			isPlaying = false;
@@ -162,26 +162,26 @@ public class GameControllerPvPOnlineController extends GameController implements
 		if (numPlayer.equals(ValueSquare.P1)) {
 			if (grid.isGridFull()) {
 				isGameFinished = true;
-				drawGamePvPOnline(gameFinish);
+				drawGamePvPOnline(Main.getClientTCP().getGameController().getGameFinish(), playerPlaying);
 			}
 
 			else if (grid.isJ2win()) {
 				setColorsWinningCircles(grid, 2);
 				isGameFinished = true;
-				defeatGamePvPOnline(gameFinish);
+				defeatGamePvPOnline(Main.getClientTCP().getGameController().getGameFinish(), playerPlaying);
 			}
 		}
 
 		else if (numPlayer.equals(ValueSquare.P2)) {
 			if (grid.isGridFull()) {
 				isGameFinished = true;
-				drawGamePvPOnline(gameFinish);
+				drawGamePvPOnline(Main.getClientTCP().getGameController().getGameFinish(), playerPlaying);
 			}
 
 			else if (grid.isJ1win()) {
 				setColorsWinningCircles(grid, 1);
 				isGameFinished = true;
-				defeatGamePvPOnline(gameFinish);
+				defeatGamePvPOnline(Main.getClientTCP().getGameController().getGameFinish(), playerPlaying);
 			}
 		}
 		
@@ -196,7 +196,7 @@ public class GameControllerPvPOnlineController extends GameController implements
 	 * @param playerWin,   player who won the game
 	 * @param playerLoose, player who lost the game
 	 */
-	public void winGamePvPOnline(Label gameFinish) {
+	public void winGamePvPOnline(Label gameFinish, Label playerPlaying) {
 		super.disableAllButtons();
 
 		// Display message
@@ -214,7 +214,7 @@ public class GameControllerPvPOnlineController extends GameController implements
 	/**
 	 * Method that display a message, set data for a draw
 	 */
-	public void drawGamePvPOnline(Label gameFinish) {
+	public void drawGamePvPOnline(Label gameFinish, Label playerPlaying) {
 		super.disableAllButtons();
 
 		// Display message
@@ -232,7 +232,7 @@ public class GameControllerPvPOnlineController extends GameController implements
 	/**
 	 * Method that display a message, set data for a defeat
 	 */
-	public void defeatGamePvPOnline(Label gameFinish) {
+	public void defeatGamePvPOnline(Label gameFinish, Label playerPlaying) {
 		super.disableAllButtons();
 
 		// Display message

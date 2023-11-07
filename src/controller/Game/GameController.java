@@ -67,6 +67,10 @@ public class GameController extends ForAllControllers {
 		}
 	}
 
+	public Label getPlayerPlaying() {
+		return playerPlaying;
+	}
+
 	public Label getGameFinish() {
 		return gameFinish;
 	}
