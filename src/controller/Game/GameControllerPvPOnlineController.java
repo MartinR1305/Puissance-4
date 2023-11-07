@@ -32,7 +32,7 @@ public class GameControllerPvPOnlineController extends GameController implements
 	private Parent root;
 
 	private ClientTCP clientTCP;
-	private static boolean areTwoPlayersConnected, isConnected, isPlaying, isGameFinished;
+	private static boolean areTwoPlayersConnected, isGameFinished, isConnected, isPlaying;
 
 	private static ValueSquare numPlayer;
 
@@ -162,26 +162,26 @@ public class GameControllerPvPOnlineController extends GameController implements
 		if (numPlayer.equals(ValueSquare.P1)) {
 			if (grid.isGridFull()) {
 				isGameFinished = true;
-				drawGamePvPOnline(this.gameFinish);
+				drawGamePvPOnline(gameFinish);
 			}
 
 			else if (grid.isJ2win()) {
 				setColorsWinningCircles(grid, 2);
 				isGameFinished = true;
-				defeatGamePvPOnline(this.gameFinish);
+				defeatGamePvPOnline(gameFinish);
 			}
 		}
 
 		else if (numPlayer.equals(ValueSquare.P2)) {
 			if (grid.isGridFull()) {
 				isGameFinished = true;
-				drawGamePvPOnline(this.gameFinish);
+				drawGamePvPOnline(gameFinish);
 			}
 
 			else if (grid.isJ1win()) {
 				setColorsWinningCircles(grid, 1);
 				isGameFinished = true;
-				defeatGamePvPOnline(this.gameFinish);
+				defeatGamePvPOnline(gameFinish);
 			}
 		}
 		
