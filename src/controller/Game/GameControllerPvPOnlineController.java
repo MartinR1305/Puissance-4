@@ -333,7 +333,8 @@ public class GameControllerPvPOnlineController extends GameController implements
 	 */
 	public void updateFinishLabel(Label playerPlaying, Label gameFinish) {
 		Thread thread = new Thread(() -> {
-			while (!isConnected) {
+			while (isConnected) {
+				System.out.println("1");
 				try {
 					Thread.sleep(500);
 					Platform.runLater(() -> {
@@ -345,6 +346,7 @@ public class GameControllerPvPOnlineController extends GameController implements
 						} 
 						
 						else if (!isDraw) {
+							System.out.println("2");
 							
 							if (isWonTheGame && isGameFinished) {
 								System.out.println("V");
