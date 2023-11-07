@@ -2,6 +2,7 @@ package application;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import Serialization.Serialization;
@@ -61,7 +62,9 @@ public class Main extends Application {
 
 //            List<Player> deserializedPlayers = new ArrayList<Player>();
 //            Player p1 = new Player("Default", "1", "Player", 10);
+//            Player p2 = new Player("Default", "2", "Player", 20);
 //            deserializedPlayers.add(p1);
+//            deserializedPlayers.add(p2);
 
 			// Serialization
 			List<Player> deserializedPlayers = Serialization.deserializePlayer();
