@@ -18,8 +18,7 @@ public class GameController extends ForAllControllers {
 
 	protected static Player player1, player2;
 	protected static Grid grid;
-	protected int turnPlayer;
-	protected int columnAddCoin;
+	protected int turnPlayer, columnAddCoin;
 
 	@FXML
 	protected static Circle[][] matrixCircles;
@@ -36,13 +35,6 @@ public class GameController extends ForAllControllers {
 	
 	@FXML 
 	protected Rectangle rectangleExit;
-
-	// ---------------------------------------------------------------------------------------------
-	// METHODS FOR ALL GAMES
-	// ------------------------------------------------------------------------------------------------
-	// //
-	
-	
 
 	/**
 	 * Method that allows to set the colors for a case
@@ -65,14 +57,6 @@ public class GameController extends ForAllControllers {
 		else {
 			circle.setFill(Color.web("#2979c9"));
 		}
-	}
-
-	public Label getPlayerPlaying() {
-		return playerPlaying;
-	}
-
-	public Label getGameFinish() {
-		return gameFinish;
 	}
 
 	/**
@@ -131,7 +115,7 @@ public class GameController extends ForAllControllers {
 
 	// ----------------------------------------------------------------------------
 	// DISPLAY MESSAGE CONFIRMATION
-	// -----------------------------------------------------------------------------------------------------------
+	// ----------------------------------------------------------------------------
 	// //
 
 	/**

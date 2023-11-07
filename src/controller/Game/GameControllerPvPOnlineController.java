@@ -32,8 +32,7 @@ public class GameControllerPvPOnlineController extends GameController implements
 	private Parent root;
 
 	private ClientTCP clientTCP;
-	private static boolean areTwoPlayersConnected, isGameFinished, isConnected, isPlaying;
-	private static boolean isWonTheGame, isDraw;
+	private static boolean areTwoPlayersConnected, isConnected, isPlaying, isGameFinished, isWonTheGame, isDraw;
 
 	private static ValueSquare numPlayer;
 
@@ -43,11 +42,14 @@ public class GameControllerPvPOnlineController extends GameController implements
 		// We actualize the client attribute with the one of the main
 		setClientTCP(Main.getClientTCP());
 
+		// Initialization of attributes
 		areTwoPlayersConnected = true;
 		isConnected = true;
 		isGameFinished = false;
 		isWonTheGame = false;
+		isDraw = false;
 
+		// Starting of thread methods
 		this.backToHome();
 		this.updateFinishLabel(playerPlaying, gameFinish);
 		this.updateIsPlaying(playerPlaying);
@@ -60,6 +62,7 @@ public class GameControllerPvPOnlineController extends GameController implements
 	 * @param p2, second player of the game
 	 */
 	public void startGamePvPOnline(Player p) {
+		// We set some attributes
 		player1 = p;
 		player2 = null;
 		grid = new Grid();
@@ -70,6 +73,15 @@ public class GameControllerPvPOnlineController extends GameController implements
 				{ c50, c51, c52, c53, c54, c55 }, { c60, c61, c62, c63, c64, c65 } };
 
 		setColorsGrid(grid);
+	}
+	
+	/**
+	 * Setter of clientTCP -> use for associating application and ClientTCP
+	 * 
+	 * @param clientTCP
+	 */
+	public void setClientTCP(ClientTCP clientTCP) {
+		this.clientTCP = clientTCP;
 	}
 
 	/**
@@ -85,15 +97,19 @@ public class GameControllerPvPOnlineController extends GameController implements
 		// Update the columnAddCoin variable according to the button text
 		columnAddCoin = Integer.parseInt(buttonText);
 
-		addCoinGamePvPLocal();
+		// We add the coin in question
+		addCoinGamePvPOnline();
 	}
 
 	/**
 	 * Method that allows to add a coin in the game for the player
 	 */
-	public void addCoinGamePvPLocal() {
+	public void addCoinGamePvPOnline() {
 
+		// We check if the column clicked is not full
 		if (!grid.getGrid().get(columnAddCoin).isColumnFull()) {
+
+			// We add the coin
 			grid.addCoinGrid(columnAddCoin, numPlayer);
 
 			// Send the column played to the server
@@ -101,14 +117,20 @@ public class GameControllerPvPOnlineController extends GameController implements
 
 			setColorsGrid(grid);
 
+			// If the player is P1
 			if (numPlayer.equals(ValueSquare.P1)) {
+
+				// We check if the grid is full
 				if (grid.isGridFull()) {
+					// We configure the controller for a tie game
 					isGameFinished = true;
 					isDraw = true;
 					drawGamePvPOnline();
 				}
 
+				// If the player won the game
 				else if (grid.isJ1win()) {
+					// We configure the controller for a winning game
 					setColorsWinningCircles(grid, 1);
 					isGameFinished = true;
 					isWonTheGame = true;
@@ -116,20 +138,27 @@ public class GameControllerPvPOnlineController extends GameController implements
 				}
 			}
 
+			// If the player is P2
 			else if (numPlayer.equals(ValueSquare.P2)) {
+
+				// We check if the grid is full
 				if (grid.isGridFull()) {
+					// We configure the controller for a tie game
 					isGameFinished = true;
 					isDraw = true;
 					drawGamePvPOnline();
 				}
 
+				// If the player won the game
 				else if (grid.isJ2win()) {
+					// We configure the controller for a winning game
 					setColorsWinningCircles(grid, 2);
 					isGameFinished = true;
 					isWonTheGame = true;
 					winGamePvPOnline();
 				}
 			}
+			// We give the turn to the other player
 			isPlaying = false;
 		}
 	}
@@ -141,6 +170,7 @@ public class GameControllerPvPOnlineController extends GameController implements
 	 */
 	public void otherPlayerPlayed(String nbColumn) {
 
+		// Allocation of attributes
 		C0 = new Button();
 		C1 = new Button();
 		C2 = new Button();
@@ -148,30 +178,29 @@ public class GameControllerPvPOnlineController extends GameController implements
 		C4 = new Button();
 		C5 = new Button();
 		C6 = new Button();
-
 		gameFinish = new Label();
 		playerPlaying = new Label();
 
+		// We configure the updating of the label turn player
 		Main.getClientTCP().getGameController().updateIsPlaying(playerPlaying);
 
+		// If the other player is P1
 		if (numPlayer.equals(ValueSquare.P1)) {
+
+			// We add the coin
 			grid.addCoinGrid(Integer.valueOf(nbColumn), ValueSquare.P2);
-		}
 
-		else if (numPlayer.equals(ValueSquare.P2)) {
-			grid.addCoinGrid(Integer.valueOf(nbColumn), ValueSquare.P1);
-		}
-
-		setColorsGrid(grid);
-
-		if (numPlayer.equals(ValueSquare.P1)) {
+			// We check if the grid is full
 			if (grid.isGridFull()) {
+				// We configure the controller for a tie game
 				isGameFinished = true;
 				isDraw = true;
 				drawGamePvPOnline();
 			}
 
+			// We check if the other player won the game
 			else if (grid.isJ2win()) {
+				// We configure the controller for a defeat game
 				setColorsWinningCircles(grid, 2);
 				isGameFinished = true;
 				isWonTheGame = false;
@@ -179,14 +208,23 @@ public class GameControllerPvPOnlineController extends GameController implements
 			}
 		}
 
+		// If the other player is P2
 		else if (numPlayer.equals(ValueSquare.P2)) {
+
+			// We add the coin
+			grid.addCoinGrid(Integer.valueOf(nbColumn), ValueSquare.P1);
+
+			// We check if the grid is full
 			if (grid.isGridFull()) {
+				// We configure the controller for a tie game
 				isGameFinished = true;
 				isDraw = true;
 				drawGamePvPOnline();
 			}
 
+			// We check if the other player won the game
 			else if (grid.isJ1win()) {
+				// We configure the controller for a defeat game
 				setColorsWinningCircles(grid, 1);
 				isGameFinished = true;
 				isWonTheGame = false;
@@ -194,7 +232,10 @@ public class GameControllerPvPOnlineController extends GameController implements
 			}
 		}
 
+		setColorsGrid(grid);
+
 		if (!isGameFinished) {
+			// We give the turn to the player
 			isPlaying = true;
 		}
 	}
@@ -207,11 +248,6 @@ public class GameControllerPvPOnlineController extends GameController implements
 	 */
 	public void winGamePvPOnline() {
 		super.disableAllButtons();
-
-		// Display message
-//		gameFinish.setText("You won the game !");
-//		gameFinish.setVisible(true);
-//		playerPlaying.setVisible(false);
 
 		// Add the draw on players's data
 		player1.addMatch("Player Online", Results.VICTORY);
@@ -226,11 +262,6 @@ public class GameControllerPvPOnlineController extends GameController implements
 	public void drawGamePvPOnline() {
 		super.disableAllButtons();
 
-		// Display message
-//		gameFinish.setText("Game is over ! Nobody won ... It is a draw !");
-//		gameFinish.setVisible(true);
-//		playerPlaying.setVisible(false);
-
 		// Add the draw on players's data
 		player1.addMatch("Player Online", Results.DRAW);
 
@@ -244,11 +275,6 @@ public class GameControllerPvPOnlineController extends GameController implements
 	public void defeatGamePvPOnline() {
 		super.disableAllButtons();
 
-		// Display message
-//		gameFinish.setText("You lost the game !"); 
-//		gameFinish.setVisible(true);
-//		playerPlaying.setVisible(false);
-
 		// Add the draw on players's data
 		player1.addMatch("Player Online", Results.DEFEAT);
 
@@ -256,14 +282,7 @@ public class GameControllerPvPOnlineController extends GameController implements
 		Serialization.serializePlayer(Main.getPlayersData().getValue());
 	}
 
-	/**
-	 * Setter of clientTCP -> use for associating application and ClientTCP
-	 * 
-	 * @param clientTCP
-	 */
-	public void setClientTCP(ClientTCP clientTCP) {
-		this.clientTCP = clientTCP;
-	}
+
 
 	/**
 	 * Method that allows to actualize the boolean for know if two players are
@@ -291,11 +310,13 @@ public class GameControllerPvPOnlineController extends GameController implements
 	 * @param state
 	 */
 	public void actualizePlayerStarting(Boolean isPlayerPlaying) {
+
+		// The player will start the game
 		if (isPlayerPlaying.equals(true)) {
 			isPlaying = true;
 			numPlayer = ValueSquare.P1;
 		}
-
+		// The player won't start the game
 		else if (isPlayerPlaying.equals(false)) {
 			isPlaying = false;
 			numPlayer = ValueSquare.P2;
@@ -303,19 +324,32 @@ public class GameControllerPvPOnlineController extends GameController implements
 	}
 
 	/**
-	 * Method that allows to update the boolean for know if the player's turn server
+	 * Method that allows to update the label for know if the player's turn
 	 */
 	public void updateIsPlaying(Label playerPlaying) {
 		Thread thread = new Thread(() -> {
+
+			// We do the thread until the game is finished
 			while (!isGameFinished) {
 				try {
 					Thread.sleep(500);
 					Platform.runLater(() -> {
+
+						// We check if it's the player's turn
 						if (isPlaying) {
+							// We configure the text of the turn
 							playerPlaying.setText("Your Turn !");
+
+							// We able all buttons in order that the player can play
 							ableAllButtons();
-						} else if (!isPlaying) {
+						}
+
+						// If it's not the player's turn
+						else if (!isPlaying) {
+							// We configure the text of the turn
 							playerPlaying.setText("Opponent Turn !");
+
+							// We able all buttons in order that the player can not play
 							disableAllButtons();
 						}
 					});
@@ -329,36 +363,41 @@ public class GameControllerPvPOnlineController extends GameController implements
 	}
 
 	/**
-	 * Method that allows to update the boolean for know if the player's turn server
+	 * Method that allows to update the labels at the end of the game
 	 */
 	public void updateFinishLabel(Label playerPlaying, Label gameFinish) {
 		Thread thread = new Thread(() -> {
+
+			// We do the thread until the player is connected
 			while (isConnected) {
-				System.out.println("1");
 				try {
 					Thread.sleep(500);
 					Platform.runLater(() -> {
-						
+
+						// If the game is the a draw
 						if (isDraw) {
+							// We configure the labels for a draw game
 							gameFinish.setText("Game is over ! Nobody won ... It is a draw !");
 							gameFinish.setVisible(true);
 							playerPlaying.setVisible(false);
-						} 
-						
+						}
+
+						// If it's not ( Defeat or Victory or game not finished yet )
 						else if (!isDraw) {
-							System.out.println("2");
-							
+
+							// If it's a winning game
 							if (isWonTheGame && isGameFinished) {
-								System.out.println("V");
+								// We configure the labels for a winning game
 								gameFinish.setText("You won the game !");
 								gameFinish.setVisible(true);
 								playerPlaying.setVisible(false);
-								
-							} 
-							
-							else if(!isWonTheGame && isGameFinished) {
-								System.out.println("D");
-								gameFinish.setText("You lost the game !"); 
+
+							}
+
+							// If it's a defeat game
+							else if (!isWonTheGame && isGameFinished) {
+								// We configure the labels for a defeat game
+								gameFinish.setText("You lost the game !");
 								gameFinish.setVisible(true);
 								playerPlaying.setVisible(false);
 							}
@@ -379,11 +418,17 @@ public class GameControllerPvPOnlineController extends GameController implements
 	 */
 	public void backToHome() {
 		Thread thread = new Thread(() -> {
+
+			// We do the thread until the two players are connected
 			while (areTwoPlayersConnected) {
 				try {
 					Thread.sleep(500);
 					Platform.runLater(() -> {
+
+						// If the other left the game
 						if (!areTwoPlayersConnected && isConnected) {
+
+							// We return the player to home
 							FXMLLoader loader = new FXMLLoader(getClass().getResource(".." + File.separator + ".."
 									+ File.separator + "view" + File.separator + "Home.fxml"));
 							try {
@@ -397,6 +442,7 @@ public class GameControllerPvPOnlineController extends GameController implements
 							stage.show();
 							setCenterStage(stage);
 
+							// The player is therefore disconnected
 							isConnected = false;
 						}
 					});
@@ -409,11 +455,6 @@ public class GameControllerPvPOnlineController extends GameController implements
 		thread.start();
 	}
 
-	// -------------------------------------------------------------------- EXIT
-	// WITH DISCONEXION
-	// ----------------------------------------------------------------------------------------------------------------
-	// //
-
 	/**
 	 * Method that allows to switch the scene to the Home with the disconnection
 	 * between the player and the server
@@ -422,8 +463,11 @@ public class GameControllerPvPOnlineController extends GameController implements
 	 * @throws IOException
 	 */
 	public void switchToHomeWithDecoServer(ActionEvent event) throws IOException {
+		// We actualize the boolean
 		isConnected = false;
 		areTwoPlayersConnected = false;
+		
+		// We disconnect the client from the server
 		clientTCP.changeIP_Port("", "0");
 
 		FXMLLoader loader = new FXMLLoader(getClass()
@@ -436,5 +480,4 @@ public class GameControllerPvPOnlineController extends GameController implements
 		stage.show();
 		setCenterStage(stage);
 	}
-
 }
