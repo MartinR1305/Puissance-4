@@ -55,6 +55,10 @@ public class ClientTCP implements AutoCloseable {
 		this.gameController = gameController;
 	}
 
+	public GameControllerPvPOnlineController getGameController() {
+		return gameController;
+	}
+
 	/**
 	 * Getter for the client's number
 	 * 

@@ -59,7 +59,7 @@
       <Circle fx:id="c63" fill="WHITE" layoutX="631.0" layoutY="220.0" radius="30.0" stroke="BLACK" strokeType="INSIDE" AnchorPane.leftAnchor="601.0" AnchorPane.topAnchor="190.0" />
       <Circle fx:id="c64" fill="WHITE" layoutX="631.0" layoutY="150.0" radius="30.0" stroke="BLACK" strokeType="INSIDE" AnchorPane.rightAnchor="139.0" AnchorPane.topAnchor="120.0" />
       <Circle fx:id="c65" fill="WHITE" layoutX="618.0" layoutY="80.0" radius="30.0" stroke="BLACK" strokeType="INSIDE" AnchorPane.rightAnchor="139.0" AnchorPane.topAnchor="50.0" />
-      <Label fx:id="playerPlaying" layoutY="-1.0" prefHeight="30.0" prefWidth="800.0" text="Player who must play " textFill="WHITE">
+      <Label fx:id="playerPlaying" layoutY="-1.0" prefHeight="30.0" prefWidth="800.0" textFill="WHITE">
          <font>
             <Font name="Verdana" size="24.0" />
          </font></Label>

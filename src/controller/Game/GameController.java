@@ -16,7 +16,7 @@ import model.ValueSquare;
 
 public class GameController extends ForAllControllers {
 
-	protected Player player1, player2;
+	protected static Player player1, player2;
 	protected static Grid grid;
 	protected int turnPlayer;
 	protected int columnAddCoin;
@@ -41,6 +41,8 @@ public class GameController extends ForAllControllers {
 	// METHODS FOR ALL GAMES
 	// ------------------------------------------------------------------------------------------------
 	// //
+	
+	
 
 	/**
 	 * Method that allows to set the colors for a case
@@ -63,6 +65,10 @@ public class GameController extends ForAllControllers {
 		else {
 			circle.setFill(Color.web("#2979c9"));
 		}
+	}
+
+	public Label getGameFinish() {
+		return gameFinish;
 	}
 
 	/**

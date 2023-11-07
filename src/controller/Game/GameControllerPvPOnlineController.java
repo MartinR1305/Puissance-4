@@ -17,6 +17,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 import model.Grid;
@@ -37,15 +38,17 @@ public class GameControllerPvPOnlineController extends GameController implements
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
+		
 		// We actualize the client attribute with the one of the main
 		setClientTCP(Main.getClientTCP());
-
+		
 		areTwoPlayersConnected = true;
 		isConnected = true;
 		isGameFinished = false;
+		
 
 		this.backToHome();
-		this.updateIsPlaying();
+		this.updateIsPlaying(playerPlaying);
 	}
 
 	/**
@@ -58,6 +61,7 @@ public class GameControllerPvPOnlineController extends GameController implements
 		player1 = p;
 		player2 = null;
 		grid = new Grid();
+
 
 		// We put all circles in the matrix
 		matrixCircles = new Circle[][] { { c00, c01, c02, c03, c04, c05 }, { c10, c11, c12, c13, c14, c15 },
@@ -98,27 +102,27 @@ public class GameControllerPvPOnlineController extends GameController implements
 
 			if (numPlayer.equals(ValueSquare.P1)) {
 				if (grid.isGridFull()) {
-					drawGamePvPOnline();
 					isGameFinished = true;
+					drawGamePvPOnline(this.gameFinish);
 				}
 
 				else if (grid.isJ1win()) {
 					setColorsWinningCircles(grid, 1);
-					winGamePvPOnline();
 					isGameFinished = true;
+					winGamePvPOnline(this.gameFinish);
 				}
 			}
 
 			else if (numPlayer.equals(ValueSquare.P2)) {
 				if (grid.isGridFull()) {
-					drawGamePvPOnline();
 					isGameFinished = true;
+					drawGamePvPOnline(this.gameFinish);
 				}
 
 				else if (grid.isJ2win()) {
 					setColorsWinningCircles(grid, 2);
-					winGamePvPOnline();
 					isGameFinished = true;
+					winGamePvPOnline(this.gameFinish);
 				}
 			}
 			isPlaying = false;
@@ -131,6 +135,19 @@ public class GameControllerPvPOnlineController extends GameController implements
 	 * @param nbColumn
 	 */
 	public void otherPlayerPlayed(String nbColumn) {
+		
+		C0 = new Button();
+		C1 = new Button();
+		C2 = new Button();
+		C3 = new Button();
+		C4 = new Button();
+		C5 = new Button();
+		C6 = new Button();
+		
+		gameFinish = new Label();
+		playerPlaying = new Label();
+		
+		Main.getClientTCP().getGameController().updateIsPlaying(playerPlaying);
 
 		if (numPlayer.equals(ValueSquare.P1)) {
 			grid.addCoinGrid(Integer.valueOf(nbColumn), ValueSquare.P2);
@@ -144,27 +161,27 @@ public class GameControllerPvPOnlineController extends GameController implements
 
 		if (numPlayer.equals(ValueSquare.P1)) {
 			if (grid.isGridFull()) {
-				drawGamePvPOnline();
 				isGameFinished = true;
+				drawGamePvPOnline(this.gameFinish);
 			}
 
 			else if (grid.isJ2win()) {
 				setColorsWinningCircles(grid, 2);
-				defeatGamePvPOnline();
 				isGameFinished = true;
+				defeatGamePvPOnline(this.gameFinish);
 			}
 		}
 
 		else if (numPlayer.equals(ValueSquare.P2)) {
 			if (grid.isGridFull()) {
-				drawGamePvPOnline();
 				isGameFinished = true;
+				drawGamePvPOnline(this.gameFinish);
 			}
 
 			else if (grid.isJ1win()) {
 				setColorsWinningCircles(grid, 1);
-				defeatGamePvPOnline();
 				isGameFinished = true;
+				defeatGamePvPOnline(this.gameFinish);
 			}
 		}
 		
@@ -179,7 +196,7 @@ public class GameControllerPvPOnlineController extends GameController implements
 	 * @param playerWin,   player who won the game
 	 * @param playerLoose, player who lost the game
 	 */
-	public void winGamePvPOnline() {
+	public void winGamePvPOnline(Label gameFinish) {
 		super.disableAllButtons();
 
 		// Display message
@@ -197,7 +214,7 @@ public class GameControllerPvPOnlineController extends GameController implements
 	/**
 	 * Method that display a message, set data for a draw
 	 */
-	public void drawGamePvPOnline() {
+	public void drawGamePvPOnline(Label gameFinish) {
 		super.disableAllButtons();
 
 		// Display message
@@ -215,11 +232,11 @@ public class GameControllerPvPOnlineController extends GameController implements
 	/**
 	 * Method that display a message, set data for a defeat
 	 */
-	public void defeatGamePvPOnline() {
+	public void defeatGamePvPOnline(Label gameFinish) {
 		super.disableAllButtons();
 
 		// Display message
-		gameFinish.setText("You lost the game !");
+		gameFinish.setText("You lost the game !"); 
 		gameFinish.setVisible(true);
 		playerPlaying.setVisible(false);
 
@@ -279,9 +296,9 @@ public class GameControllerPvPOnlineController extends GameController implements
 	/**
 	 * Method that allows to update the boolean for know if the player's turn server
 	 */
-	public void updateIsPlaying() {
+	public void updateIsPlaying(Label playerPlaying) {
 		Thread thread = new Thread(() -> {
-			while (isConnected) {
+			while (!isGameFinished) {
 				try {
 					Thread.sleep(500);
 					Platform.runLater(() -> {
