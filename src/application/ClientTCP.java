@@ -10,8 +10,8 @@ import java.util.regex.Pattern;
 
 import javax.swing.SwingUtilities;
 
-import controller.Game.ChoicePlayerPvPController;
-import controller.Game.GameControllerPvPOnlineController;
+import controller.Game.ChoiceOnlineGameController;
+import controller.Game.GameOnlineController;
 
 public class ClientTCP implements AutoCloseable {
 
@@ -19,8 +19,8 @@ public class ClientTCP implements AutoCloseable {
 	private PrintWriter writer;
 	private BufferedReader reader;
 
-	private ChoicePlayerPvPController connectController;
-	private GameControllerPvPOnlineController gameController;
+	private ChoiceOnlineGameController connectController;
+	private GameOnlineController gameController;
 
 	private boolean isConnectedToServer;
 	private boolean is2ndClientConnected;
@@ -40,7 +40,7 @@ public class ClientTCP implements AutoCloseable {
 	 * @param clientController
 	 * @throws IOException
 	 */
-	public ClientTCP(String IP, int port, ChoicePlayerPvPController connectController, GameControllerPvPOnlineController gameController) throws IOException {
+	public ClientTCP(String IP, int port, ChoiceOnlineGameController connectController, GameOnlineController gameController) throws IOException {
 		this.isConnectedToServer = false;
 		this.is2ndClientConnected = false;
 		this.isClientOpened = true;
@@ -55,7 +55,7 @@ public class ClientTCP implements AutoCloseable {
 		this.gameController = gameController;
 	}
 
-	public GameControllerPvPOnlineController getGameController() {
+	public GameOnlineController getGameController() {
 		return gameController;
 	}
 

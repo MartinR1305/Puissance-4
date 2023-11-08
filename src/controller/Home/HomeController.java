@@ -63,9 +63,9 @@ public class HomeController extends ForAllControllers{
      * @param event
      * @throws IOException
      */
-    public void switchToChoicePvPorAvA(ActionEvent event) throws IOException {
+    public void switchToChoiceOnline(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(
-                getClass().getResource(".." + File.separator + ".." + File.separator + "view" + File.separator + "ChoicePvPorAvA.fxml"));
+                getClass().getResource(".." + File.separator + ".." + File.separator + "view" + File.separator + "ChoiceOnlineGame.fxml"));
         root = loader.load();
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);

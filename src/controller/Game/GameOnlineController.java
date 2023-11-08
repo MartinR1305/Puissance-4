@@ -25,7 +25,7 @@ import model.Player;
 import model.Results;
 import model.ValueSquare;
 
-public class GameControllerPvPOnlineController extends GameController implements Initializable {
+public class GameOnlineController extends GameController implements Initializable {
 
 	private Stage stage;
 	private Scene scene;

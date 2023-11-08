@@ -6,8 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import Serialization.Serialization;
-import controller.Game.ChoicePlayerPvPController;
-import controller.Game.GameControllerPvPOnlineController;
+import controller.Game.ChoiceOnlineGameController;
+import controller.Game.GameOnlineController;
 import javafx.application.Application;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.value.ObservableValue;
@@ -21,8 +21,8 @@ import model.Player;
 
 public class Main extends Application {
 
-	private ChoicePlayerPvPController clientController;
-	private GameControllerPvPOnlineController gameController;
+	private ChoiceOnlineGameController clientController;
+	private GameOnlineController gameController;
 	private static ClientTCP clientTCP;
 	private static ObservableValue<List<Player>> playersData = new SimpleObjectProperty<List<Player>>();
 
@@ -34,8 +34,8 @@ public class Main extends Application {
 	 */
 	public Main() throws IOException {
 		// We create the client that we will use in the application
-		clientController = new ChoicePlayerPvPController();
-		gameController = new GameControllerPvPOnlineController();
+		clientController = new ChoiceOnlineGameController();
+		gameController = new GameOnlineController();
 		
 		clientTCP = new ClientTCP("", 0, clientController, gameController);
 		

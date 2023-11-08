@@ -17,11 +17,12 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import model.Player;
 
-public class ChoicePlayerPvPController extends HomeController implements Initializable {
+public class ChoiceOnlineGameController extends HomeController implements Initializable {
 
 	private Stage stage;
 	private Scene scene;
@@ -31,16 +32,22 @@ public class ChoicePlayerPvPController extends HomeController implements Initial
 	private static boolean isConnected, areTwoPlayersConnected;
 
 	@FXML
-	private Label IP, port, choosePlayer, isConnectedToServer, msgError, msgError2;
+	private Label IP, port, choosePlayer, isConnectedToServer, msgError, msgError2, playerChoice, algorithmChoice, chooseAlgoLvl;
 
 	@FXML
-	private Button back, connectTotTheServer;
+	private Button back, connectToTheServer, disconnectFromServer;
 
 	@FXML
 	private TextField ipValue, portValue;
 
 	@FXML
 	private ComboBox<Player> listPlayer;
+	
+	@FXML
+	private ComboBox<String> algoLvl;
+	
+	@FXML
+	private RadioButton playerRB, algoRB;
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
@@ -50,12 +57,22 @@ public class ChoicePlayerPvPController extends HomeController implements Initial
 		// We initialize data on the FXML file
 		setComboBoxWithPlayers(listPlayer);
 		isConnectedToServer.setText("Disconnected");
+		playerRB.setSelected(true);
 
 		// We start the updating of the state
 		this.updateState();
 
 		// We look if we can start a game
 		this.switchToGame();
+	}
+	
+	/**
+	 * Setter of clientTCP -> use for associating application and ClientTCP
+	 * 
+	 * @param clientTCP
+	 */
+	public void setClientTCP(ClientTCP clientTCP) {
+		this.clientTCP = clientTCP;
 	}
 
 	/**
@@ -77,14 +94,62 @@ public class ChoicePlayerPvPController extends HomeController implements Initial
 			}
 		}
 	}
-
-	/**
-	 * Setter of clientTCP -> use for associating application and ClientTCP
-	 * 
-	 * @param clientTCP
-	 */
-	public void setClientTCP(ClientTCP clientTCP) {
-		this.clientTCP = clientTCP;
+	
+	public void disconnectFromServer() {
+		clientTCP.changeIP_Port("", "0");
+	}
+	
+	public void changeToPlayerChoice() {
+		if(playerRB.isSelected() && algoRB.isSelected()) {
+			// We select the algorithm choice and not select the player choice
+			playerRB.setSelected(true);
+			algoRB.setSelected(false);
+			
+			// We display player's choice
+			choosePlayer.setVisible(true);
+			choosePlayer.setDisable(false);
+			listPlayer.setVisible(true);
+			listPlayer.setDisable(false);
+			
+			// We hide algorithm's choice
+			chooseAlgoLvl.setVisible(false);
+			chooseAlgoLvl.setDisable(true);
+			algoLvl.setVisible(false);
+			algoLvl.setDisable(true);
+			
+			// We change the color of the label
+			playerChoice.setStyle("-fx-text-fill: #ffff00;");
+			algorithmChoice.setStyle("-fx-text-fill: white;");
+		}
+		
+		playerRB.setSelected(true);
+	}
+	
+	public void changeToAlgoChoice() {
+		
+		if(playerRB.isSelected() && algoRB.isSelected()) {
+			// We select the algorithm choice and not select the player choice
+			playerRB.setSelected(false);
+			algoRB.setSelected(true);
+			
+			// We display algorithm's choice
+			chooseAlgoLvl.setVisible(true);
+			chooseAlgoLvl.setDisable(false);
+			algoLvl.setVisible(true);
+			algoLvl.setDisable(false);
+			
+			// We hide player's choice
+			choosePlayer.setVisible(false);
+			choosePlayer.setDisable(true);
+			listPlayer.setVisible(false);
+			listPlayer.setDisable(true);
+			
+			// We change the color of the label
+			algorithmChoice.setStyle("-fx-text-fill: #ffff00;");
+			playerChoice.setStyle("-fx-text-fill: white;");
+		}
+		
+		algoRB.setSelected(true);
 	}
 
 	/**
@@ -131,20 +196,26 @@ public class ChoicePlayerPvPController extends HomeController implements Initial
 					Platform.runLater(() -> {
 						if (isConnected) {
 							isConnectedToServer.setText("Connected");
+							isConnectedToServer.setStyle("-fx-text-fill: #00ff2e;");
 
 							// We disable the button back and connect
 							back.setDisable(true);
 							back.setVisible(false);
-							connectTotTheServer.setDisable(true);
-							connectTotTheServer.setVisible(false);
+							connectToTheServer.setDisable(true);
+							connectToTheServer.setVisible(false);
+							disconnectFromServer.setDisable(false);
+							disconnectFromServer.setVisible(true);
 						} else {
 							isConnectedToServer.setText("Disconnected");
+							isConnectedToServer.setStyle("-fx-text-fill: red;");
 
 							// We activate the button back and connect
 							back.setDisable(false);
 							back.setVisible(true);
-							connectTotTheServer.setDisable(false);
-							connectTotTheServer.setVisible(true);
+							connectToTheServer.setDisable(false);
+							connectToTheServer.setVisible(true);
+							disconnectFromServer.setDisable(true);
+							disconnectFromServer.setVisible(false);
 						}
 					});
 				} catch (InterruptedException e) {
@@ -172,9 +243,9 @@ public class ChoicePlayerPvPController extends HomeController implements Initial
 									+ File.separator + "view" + File.separator + "GameControllerPvPOnline.fxml"));
 							try {
 								root = loader.load();
-								GameControllerPvPOnlineController gameControllerPvPOnlineController = loader.getController();
-					            gameControllerPvPOnlineController.startGamePvPOnline(listPlayer.getValue());
-							} catch (IOException e) { 
+								GameOnlineController gameControllerPvPOnlineController = loader.getController();
+								gameControllerPvPOnlineController.startGamePvPOnline(listPlayer.getValue());
+							} catch (IOException e) {
 								e.printStackTrace();
 							}
 							stage = (Stage) (back.getScene().getWindow());
@@ -182,11 +253,6 @@ public class ChoicePlayerPvPController extends HomeController implements Initial
 							stage.setScene(scene);
 							stage.show();
 							setCenterStage(stage);
-
-						} else {
-							if (isConnected) {
-								System.out.println("Waiting for the second player ... ");
-							}
 						}
 					});
 				} catch (InterruptedException e) {
