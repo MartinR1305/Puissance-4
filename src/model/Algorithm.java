@@ -16,6 +16,7 @@ public class Algorithm {
 
 	public int testAlgo(Grid grid) {
 		
+		
 		Random random = new Random();
 		return random.nextInt(6) + 1;
 	}

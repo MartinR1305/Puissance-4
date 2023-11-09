@@ -39,10 +39,11 @@ public class GamePvALocalController extends GameController {
 		turnPlayer = random.nextInt(2) + 1;
 
 		if (turnPlayer == 1) {
-			playerPlaying.setText("Its Your Turn !");
+			playerPlaying.setText("It's Your Turn !");
 		}
 
 		else {
+	
 			grid.addCoinGrid(algo.testAlgo(grid), ValueSquare.P2);
 		}
 
@@ -61,6 +62,7 @@ public class GamePvALocalController extends GameController {
 
 		// Update the columnAddCoin variable according to the button text
 		columnAddCoin = Integer.parseInt(buttonText);
+		
 
 		addCoinGamePvALocal();
 
@@ -76,36 +78,34 @@ public class GamePvALocalController extends GameController {
 
 			grid.addCoinGrid(columnAddCoin, ValueSquare.P1);
 			setColorsGrid(grid);
+			
 
 			if (grid.isGridFull()) {
 				drawGamePvALocal();
-			}
-
-			else if (grid.isJ1win()) {
+				
+			} else if (grid.isJ1win()) {
 				setColorsWinningCircles(grid,1);
 				winGamePvALocal(player1);
-			}
-
-			// We continue the game
-			else {
+				
+				
+			} else {  // We continue the game	
 				disableAllButtons();
-				playerPlaying.setText("L'algorithm thinks about a move !");
+				playerPlaying.setText("The AI is thinking about a move !");
 				
 				// Algorithm turn
+				
 				grid.addCoinGrid(algo.testAlgo(grid), ValueSquare.P2);
 				setColorsGrid(grid);
 
 				if (grid.isGridFull()) {
 					drawGamePvALocal();
-				}
-
-				else if (grid.isJ2win()) {
+					
+				} else if (grid.isJ2win()) {
 					setColorsWinningCircles(grid,2);
 					looseGamePvALocal(player1);
-				}
-
-				// We continue the game
-				else {
+					
+					
+				} else { // We continue the game	
 					playerPlaying.setText("Its Your Turn !");
 					ableAllButtons();
 				}
