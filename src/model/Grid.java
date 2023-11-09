@@ -20,6 +20,19 @@ public class Grid {
 			grid.add(new Column());
 		}
 	}
+	
+	
+	/**
+     * Constructor that creates a new Grid by copying another Grid
+     * @param grid to be copied
+     */
+    public Grid(Grid grid) {
+        this.grid = new ArrayList<>();
+        for (Column column : grid.getGrid()) {
+            Column newColumn = new Column(column);
+            this.grid.add(newColumn);
+        }
+    }
 
 	/**
 	 * Getter for the grid list
