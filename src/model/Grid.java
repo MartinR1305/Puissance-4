@@ -814,23 +814,23 @@ public class Grid {
 	}
 	
 	
-	public int evaluateGrid(Grid grid) {
+	public int evaluateGrid(ValueSquare playerToEvaluate) {
 		int points = 0;
 
 		//We explore the grid
 		for (int indexLine = 0; indexLine < 6; indexLine++) {
 			for (int indexColumn = 0; indexColumn < 7; indexColumn++) {
 				// Collect different sequences for each position
-				List<Square> lineList = collectLineSequence(grid, indexColumn, indexLine);
-				List<Square> columnList = collectColumnSequence(grid, indexColumn, indexLine);
-				List<Square> diagonalAscList = collectAscendingDiagonalSequence(grid, indexColumn, indexLine);
-				List<Square> diagonalDesList = collectDescendingDiagonalSequence(grid, indexColumn, indexLine);
+				List<Square> lineList = collectLineSequence(indexColumn, indexLine);
+				List<Square> columnList = collectColumnSequence(indexColumn, indexLine);
+				List<Square> diagonalAscList = collectAscendingDiagonalSequence(indexColumn, indexLine);
+				List<Square> diagonalDesList = collectDescendingDiagonalSequence(indexColumn, indexLine);
 
 				//We evaluate the collected sequences and accumulate the points
-				points += evaluateSequence(lineList);
-				points += evaluateSequence(columnList);
-				points += evaluateSequence(diagonalAscList);
-				points += evaluateSequence(diagonalDesList);
+				points += evaluateSequence(lineList, playerToEvaluate);
+				points += evaluateSequence(columnList, playerToEvaluate);
+				points += evaluateSequence(diagonalAscList, playerToEvaluate);
+				points += evaluateSequence(diagonalDesList, playerToEvaluate);
 			}
 		}
 
@@ -838,33 +838,33 @@ public class Grid {
 	}
 
 	//Method to collect a line sequence
-	private List<Square> collectLineSequence(Grid grid, int startColumn, int startLine) {
+	private List<Square> collectLineSequence(int startColumn, int startLine) {
 		List<Square> lineSequence = new ArrayList<>();
 		if(startColumn < 4) {
 			for (int i = 0; i < 4 ; i++) {
-				lineSequence.add(grid.getGrid().get(startColumn + i).getColumn().get(startLine));
+				lineSequence.add(this.getGrid().get(startColumn + i).getColumn().get(startLine));
 			}
 		}
 		return lineSequence;
 	}
 
 	//Method to collect a column sequence
-	private List<Square> collectColumnSequence(Grid grid, int startColumn, int startLine) {
+	private List<Square> collectColumnSequence(int startColumn, int startLine) {
 		List<Square> columnSequence = new ArrayList<>();
 		if(startLine < 3) {
 			for (int i = 0; i < 4 ; i++) {
-				columnSequence.add(grid.getGrid().get(startColumn).getColumn().get(startLine + i));
+				columnSequence.add(this.getGrid().get(startColumn).getColumn().get(startLine + i));
 			}
 		}
 		return columnSequence;
 	}
 
 //	//Method to collect an ascending diagonal sequence
-	private List<Square> collectAscendingDiagonalSequence(Grid grid, int startColumn, int startLine) {
+	private List<Square> collectAscendingDiagonalSequence(int startColumn, int startLine) {
 		List<Square> ascendingDiagonalSequence = new ArrayList<>();
 		if (startColumn < 4 && startLine < 3) {
 			for (int i = 0; i < 4 ; i++) {
-				Square square = grid.getGrid().get(startColumn + i).getColumn().get(startLine + i);
+				Square square = this.getGrid().get(startColumn + i).getColumn().get(startLine + i);
 				ascendingDiagonalSequence.add(square);
 			}
 		}
@@ -872,11 +872,11 @@ public class Grid {
 	}
 
 //	//Method to collect a descending diagonal sequence
-	private List<Square> collectDescendingDiagonalSequence(Grid grid, int startColumn, int startLine) {
+	private List<Square> collectDescendingDiagonalSequence(int startColumn, int startLine) {
 		List<Square> descendingDiagonalSequence = new ArrayList<>();
 		if (startColumn < 4 && startLine > 2) {
 			for (int i = 0; i < 4 ; i++) {
-				Square square = grid.getGrid().get(startColumn + i).getColumn().get(startLine - i);
+				Square square = this.getGrid().get(startColumn + i).getColumn().get(startLine - i);
 				descendingDiagonalSequence.add(square);
 			}
 		}
@@ -886,15 +886,23 @@ public class Grid {
 
 
 	//Method to evaluate a sequence and return the points
-	private int evaluateSequence(List<Square> sequence) {
+	private int evaluateSequence(List<Square> sequence, ValueSquare playerToEvaluate) {
 	    int countP1 = 0;
 	    int countP2 = 0;
 	    int points = 0;
 	    
+	    ValueSquare otherPlayer = null;
+	    
+	    if(playerToEvaluate == ValueSquare.P2) {
+	    	otherPlayer = ValueSquare.P1 ;
+	    } else {
+	    	otherPlayer = ValueSquare.P2 ;
+	    }
+	    
 	    for (Square square : sequence) {
-	        if (square.getValue().equals(ValueSquare.P1)) {
+	        if (square.getValue().equals(playerToEvaluate)) {
 	            countP1++;
-	        } else if (square.getValue().equals(ValueSquare.P2)) {
+	        } else if (square.getValue().equals(otherPlayer)) {
 	            countP2++;
 	        }
 	    }
@@ -903,13 +911,13 @@ public class Grid {
 	        points += 0 ;
 	    } else {
 	    	if (countP1 == 1) {
-				points += 1;
+				points += 0;
 			} else if (countP1 == 2) {
 				points += 2;
 			} else if (countP1 == 3) {
 				points += 3;
 			} else if (countP1 == 4) {
-				points += 4;
+				points += 10000;
 			}
 	    }
 	    
@@ -919,7 +927,25 @@ public class Grid {
 
 	@Override
 	public String toString() {
-		return "Grid [grid=" + grid + "]";
+	    StringBuilder result = new StringBuilder();
+
+	    // Iterate through each row
+	    for (int row = 5; row > -1; row--) {
+	        // Iterate through each column
+	        for (int col = 0; col < 7; col++) {
+	            // Get the value of the square in the current column and row
+	            ValueSquare squareValue = grid.get(col).getColumn().size() > row ?
+	                    grid.get(col).getColumn().get(row).getValue() : null;
+
+	            // Append the square's value to the result
+	            result.append(squareValue != null ? squareValue.toString() : " ").append(" ");
+	        }
+	        // Move to the next line after each row
+	        result.append("\n");
+	    }
+
+	    return result.toString();
 	}
+
 
 }

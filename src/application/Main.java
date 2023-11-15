@@ -2,7 +2,6 @@ package application;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import Serialization.Serialization;
@@ -17,7 +16,9 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
+import model.Grid;
 import model.Player;
+import model.ValueSquare;
 
 public class Main extends Application {
 
@@ -51,6 +52,10 @@ public class Main extends Application {
 				IOError.printStackTrace();
 			}
 		}).start();
+		
+		
+		Grid gridTest = new Grid();
+		gridTest.addCoinGrid(0, ValueSquare.P1);
 	}
 
 	/**

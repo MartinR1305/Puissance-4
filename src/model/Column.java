@@ -22,24 +22,23 @@ public class Column {
 		}
 
 	}
-	
+
 	/**
 	 * Constructor that creates a new column by copying an existing column.
 	 *
 	 * @param originalColumn The column to be copied
 	 */
 	public Column(Column column) {
-	    this.column = new ArrayList<>();
+		this.column = new ArrayList<>();
 
-	    // Iterating through the original column to create a copy
-	    for (Square square : column.getColumn()) {
-	    	
-	        // Creating a new Square with the value of the square from the original column
-	        Square newSquare = new Square(square.getValue());
-	        this.column.add(newSquare);
-	    }
+		// Iterating through the original column to create a copy
+		for (Square square : column.getColumn()) {
+
+			// Creating a new Square with the value of the square from the original column
+			Square newSquare = new Square(square.getValue());
+			this.column.add(newSquare);
+		}
 	}
-
 
 	/**
 	 * Getter for column
@@ -162,7 +161,14 @@ public class Column {
 
 	@Override
 	public String toString() {
-		return "Column [column =" + column + "]";
+		StringBuilder result = new StringBuilder();
+
+		for (int i =  0; i < column.size(); i++) {
+			Square square = column.get(i);
+			result.append("[").append(square.getValue().toString()).append("] \n");
+		}
+
+		return result.toString();
 	}
 
 }

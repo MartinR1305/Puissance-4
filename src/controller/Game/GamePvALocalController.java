@@ -44,7 +44,7 @@ public class GamePvALocalController extends GameController {
 
 		else {
 	
-			grid.addCoinGrid(algo.testAlgo(grid), ValueSquare.P2);
+			grid.addCoinGrid(algo.algoMinMax(grid, ValueSquare.P2), ValueSquare.P2);
 		}
 
 		setColorsGrid(grid);
@@ -93,8 +93,7 @@ public class GamePvALocalController extends GameController {
 				playerPlaying.setText("The AI is thinking about a move !");
 				
 				// Algorithm turn
-				
-				grid.addCoinGrid(algo.testAlgo(grid), ValueSquare.P2);
+				grid.addCoinGrid(algo.algoMinMax(grid, ValueSquare.P2), ValueSquare.P2);
 				setColorsGrid(grid);
 
 				if (grid.isGridFull()) {
