@@ -16,7 +16,7 @@ import model.ValueSquare;
 
 public class GamePvALocalController extends GameController {
 
-	Algorithm algo = new Algorithm(1);
+	Algorithm algo = new Algorithm(2);
 
 	/**
 	 * Method that allows to start a PvA Local game
@@ -43,8 +43,9 @@ public class GamePvALocalController extends GameController {
 		}
 
 		else {
-	
+			System.out.println("là");
 			grid.addCoinGrid(algo.algoMinMax(grid, ValueSquare.P2), ValueSquare.P2);
+			playerPlaying.setText("It's Your Turn !");
 		}
 
 		setColorsGrid(grid);
