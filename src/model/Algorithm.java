@@ -125,7 +125,7 @@ public class Algorithm {
 	private int minimax(Grid grid, int profondeur, boolean estJoueurMax) {
 
 		// Condition d'arrêt
-		if ((profondeur == level)) {
+		if (profondeur == level) {
 			return grid.evaluateGrid(playerMax) - grid.evaluateGrid(playerMin);
 		}
 
@@ -147,7 +147,7 @@ public class Algorithm {
 				}
 				
 				else {
-					return grid.evaluateGrid(playerMax) - grid.evaluateGrid(playerMin);
+					listTemp.set(indexColumn, grid.evaluateGrid(playerMax) - grid.evaluateGrid(playerMin));
 				}
 			}
 
@@ -156,7 +156,10 @@ public class Algorithm {
 				return findIndMax(listTemp, grid);
 			}
 			
-			return findMax(listTemp);
+			else {
+				return findMax(listTemp);
+			}
+			
 		}
 
 		else {
@@ -175,7 +178,7 @@ public class Algorithm {
 				}
 				
 				else {
-					return grid.evaluateGrid(playerMax) - grid.evaluateGrid(playerMin);
+					listTemp.set(indexColumn, grid.evaluateGrid(playerMax) - grid.evaluateGrid(playerMin));
 				}
 			}
 			return findMin(listTemp);
