@@ -16,7 +16,7 @@ import model.ValueSquare;
 
 public class GamePvALocalController extends GameController {
 
-	Algorithm algo = new Algorithm(2);
+	Algorithm algo = new Algorithm(6);
 
 	/**
 	 * Method that allows to start a PvA Local game
@@ -43,8 +43,19 @@ public class GamePvALocalController extends GameController {
 		}
 
 		else {
-			System.out.println("là");
+			long tempsDebut = System.currentTimeMillis();
+			
+			System.out.println(algo.algoMinMax(grid, ValueSquare.P2));
 			grid.addCoinGrid(algo.algoMinMax(grid, ValueSquare.P2), ValueSquare.P2);
+			
+			long tempsFin = System.currentTimeMillis();
+			long dureeTotaleMillis = tempsFin - tempsDebut;
+	        double dureeSecondes = dureeTotaleMillis / 1000.0;
+	        long minutes = (long) dureeSecondes / 60;
+	        double secondes = dureeSecondes % 60;
+
+	        System.out.printf("L'algorithme a pris %d min %.3f sec pour décider du meilleur.%n", minutes, secondes);
+			
 			playerPlaying.setText("It's Your Turn !");
 		}
 
@@ -94,7 +105,19 @@ public class GamePvALocalController extends GameController {
 				playerPlaying.setText("The AI is thinking about a move !");
 				
 				// Algorithm turn
+				long tempsDebut = System.currentTimeMillis();
+				
+				System.out.println(algo.algoMinMax(grid, ValueSquare.P2));
 				grid.addCoinGrid(algo.algoMinMax(grid, ValueSquare.P2), ValueSquare.P2);
+				
+				long tempsFin = System.currentTimeMillis();
+				long dureeTotaleMillis = tempsFin - tempsDebut;
+		        double dureeSecondes = dureeTotaleMillis / 1000.0;
+		        long minutes = (long) dureeSecondes / 60;
+		        double secondes = dureeSecondes % 60;
+
+		        System.out.printf("L'algorithme a pris %d min %.3f sec pour décider du meilleur.%n", minutes, secondes);
+				
 				setColorsGrid(grid);
 
 				if (grid.isGridFull()) {

@@ -20,19 +20,19 @@ public class Grid {
 			grid.add(new Column());
 		}
 	}
-	
-	
+
 	/**
-     * Constructor that creates a new Grid by copying another Grid
-     * @param grid to be copied
-     */
-    public Grid(Grid grid) {
-        this.grid = new ArrayList<>();
-        for (Column column : grid.getGrid()) {
-            Column newColumn = new Column(column);
-            this.grid.add(newColumn);
-        }
-    }
+	 * Constructor that creates a new Grid by copying another Grid
+	 * 
+	 * @param grid to be copied
+	 */
+	public Grid(Grid grid) {
+		this.grid = new ArrayList<>();
+		for (Column column : grid.getGrid()) {
+			Column newColumn = new Column(column);
+			this.grid.add(newColumn);
+		}
+	}
 
 	/**
 	 * Getter for the grid list
@@ -650,7 +650,7 @@ public class Grid {
 							}
 						}
 					}
-					
+
 					// Down Diagonal
 					for (int indexColumn = 0; indexColumn < 4; indexColumn++) {
 						for (int indexLine = 5; indexLine > 1; indexLine--) {
@@ -812,12 +812,11 @@ public class Grid {
 		}
 		return null;
 	}
-	
-	
+
 	public int evaluateGrid(ValueSquare playerToEvaluate) {
 		int points = 0;
 
-		//We explore the grid
+		// We explore the grid
 		for (int indexLine = 0; indexLine < 6; indexLine++) {
 			for (int indexColumn = 0; indexColumn < 7; indexColumn++) {
 				// Collect different sequences for each position
@@ -826,7 +825,7 @@ public class Grid {
 				List<Square> diagonalAscList = collectAscendingDiagonalSequence(indexColumn, indexLine);
 				List<Square> diagonalDesList = collectDescendingDiagonalSequence(indexColumn, indexLine);
 
-				//We evaluate the collected sequences and accumulate the points
+				// We evaluate the collected sequences and accumulate the points
 				points += evaluateSequence(lineList, playerToEvaluate);
 				points += evaluateSequence(columnList, playerToEvaluate);
 				points += evaluateSequence(diagonalAscList, playerToEvaluate);
@@ -837,22 +836,22 @@ public class Grid {
 		return points;
 	}
 
-	//Method to collect a line sequence
+	// Method to collect a line sequence
 	private List<Square> collectLineSequence(int startColumn, int startLine) {
 		List<Square> lineSequence = new ArrayList<>();
-		if(startColumn < 4) {
-			for (int i = 0; i < 4 ; i++) {
+		if (startColumn < 4) {
+			for (int i = 0; i < 4; i++) {
 				lineSequence.add(this.getGrid().get(startColumn + i).getColumn().get(startLine));
 			}
 		}
 		return lineSequence;
 	}
 
-	//Method to collect a column sequence
+	// Method to collect a column sequence
 	private List<Square> collectColumnSequence(int startColumn, int startLine) {
 		List<Square> columnSequence = new ArrayList<>();
-		if(startLine < 3) {
-			for (int i = 0; i < 4 ; i++) {
+		if (startLine < 3) {
+			for (int i = 0; i < 4; i++) {
 				columnSequence.add(this.getGrid().get(startColumn).getColumn().get(startLine + i));
 			}
 		}
@@ -863,7 +862,7 @@ public class Grid {
 	private List<Square> collectAscendingDiagonalSequence(int startColumn, int startLine) {
 		List<Square> ascendingDiagonalSequence = new ArrayList<>();
 		if (startColumn < 4 && startLine < 3) {
-			for (int i = 0; i < 4 ; i++) {
+			for (int i = 0; i < 4; i++) {
 				Square square = this.getGrid().get(startColumn + i).getColumn().get(startLine + i);
 				ascendingDiagonalSequence.add(square);
 			}
@@ -875,7 +874,7 @@ public class Grid {
 	private List<Square> collectDescendingDiagonalSequence(int startColumn, int startLine) {
 		List<Square> descendingDiagonalSequence = new ArrayList<>();
 		if (startColumn < 4 && startLine > 2) {
-			for (int i = 0; i < 4 ; i++) {
+			for (int i = 0; i < 4; i++) {
 				Square square = this.getGrid().get(startColumn + i).getColumn().get(startLine - i);
 				descendingDiagonalSequence.add(square);
 			}
@@ -883,69 +882,64 @@ public class Grid {
 		return descendingDiagonalSequence;
 	}
 
-
-
-	//Method to evaluate a sequence and return the points
+	// Method to evaluate a sequence and return the points
 	private int evaluateSequence(List<Square> sequence, ValueSquare playerToEvaluate) {
-	    int countP1 = 0;
-	    int countP2 = 0;
-	    int points = 0;
-	    
-	    ValueSquare otherPlayer = null;
-	    
-	    if(playerToEvaluate == ValueSquare.P2) {
-	    	otherPlayer = ValueSquare.P1 ;
-	    } else {
-	    	otherPlayer = ValueSquare.P2 ;
-	    }
-	    
-	    for (Square square : sequence) {
-	        if (square.getValue().equals(playerToEvaluate)) {
-	            countP1++;
-	        } else if (square.getValue().equals(otherPlayer)) {
-	            countP2++;
-	        }
-	    }
+		int countP1 = 0;
+		int countP2 = 0;
+		int points = 0;
 
-	    if (countP2 > 0) {
-	        points += 0 ;
-	    } else {
-	    	if (countP1 == 1) {
-				points += 0;
-			} else if (countP1 == 2) {
+		ValueSquare otherPlayer = null;
+
+		if (playerToEvaluate == ValueSquare.P2) {
+			otherPlayer = ValueSquare.P1;
+		} else {
+			otherPlayer = ValueSquare.P2;
+		}
+
+		for (Square square : sequence) {
+			if (square.getValue().equals(playerToEvaluate)) {
+				countP1++;
+			} else if (square.getValue().equals(otherPlayer)) {
+				countP2++;
+			}
+		}
+
+		if (countP2 > 0) {
+			points += 0;
+		} else {
+			if (countP1 == 2) {
 				points += 2;
 			} else if (countP1 == 3) {
 				points += 3;
 			} else if (countP1 == 4) {
 				points += 10000;
 			}
-	    }
-	    
-	    return points;
-	}
+		}
 
+		return points;
+	}
 
 	@Override
 	public String toString() {
-	    StringBuilder result = new StringBuilder();
+		StringBuilder result = new StringBuilder();
 
-	    // Iterate through each row
-	    for (int row = 5; row > -1; row--) {
-	        // Iterate through each column
-	        for (int col = 0; col < 7; col++) {
-	            // Get the value of the square in the current column and row
-	            ValueSquare squareValue = grid.get(col).getColumn().size() > row ?
-	                    grid.get(col).getColumn().get(row).getValue() : null;
+		// Iterate through each row
+		for (int row = 5; row > -1; row--) {
+			// Iterate through each column
+			for (int col = 0; col < 7; col++) {
+				// Get the value of the square in the current column and row
+				ValueSquare squareValue = grid.get(col).getColumn().size() > row
+						? grid.get(col).getColumn().get(row).getValue()
+						: null;
 
-	            // Append the square's value to the result
-	            result.append(squareValue != null ? squareValue.toString() : " ").append(" ");
-	        }
-	        // Move to the next line after each row
-	        result.append("\n");
-	    }
+				// Append the square's value to the result
+				result.append(squareValue != null ? squareValue.toString() : " ").append(" ");
+			}
+			// Move to the next line after each row
+			result.append("\n");
+		}
 
-	    return result.toString();
+		return result.toString();
 	}
-
 
 }
