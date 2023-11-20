@@ -7,249 +7,256 @@ import java.util.Random;
 
 public class Algorithm {
 
+	// ------------- A FAIRE ------------- //
+	// - Gérer le cas où il y a deux max ou deux min
+	// - Ajouter des threads pour réduire le temps de calcul
+	// - Calculer la limite
+	// - Mettre 1s de délai + gérer affichage du tour
+
 	private int level;
 	private ValueSquare playerMin;
 	private ValueSquare playerMax;
 
-	public Algorithm(int level) {
+	/**
+	 * Constructor
+	 * 
+	 * @param level
+	 * @param playerMin
+	 * @param playerMax
+	 */
+	public Algorithm(int level, ValueSquare playerMin, ValueSquare playerMax) {
 		this.level = level;
+		this.playerMax = playerMax;
+		this.playerMin = playerMin;
 	}
 
+	/**
+	 * Setter for the level
+	 * 
+	 * @param level
+	 */
 	public void setLvl(int level) {
 		this.level = level;
 	}
 
-	public int testAlgo(Grid grid) {
-
-		Random random = new Random();
-		return random.nextInt(6) + 1;
+	/**
+	 * Getter for the level
+	 * 
+	 * @return
+	 */
+	public int getLvl() {
+		return this.level;
 	}
 
-	public int makeMinimax(Grid grid, int level) {
+	/**
+	 * Method that allows to apply the MinMax algorithm for a grid
+	 * 
+	 * @param grid
+	 * @return
+	 */
+	public int algoMinMax(Grid grid) {
 
-		int gridScore = 0;
+		// We check if the other wins with a next move
+		for (int indexColumn = 0; indexColumn < 7; indexColumn++) {
 
-		for (int indexLevel = 1; indexLevel <= level; indexLevel++) {
-			for (int indexColumn = 0; indexColumn < 7; indexColumn++) {
+			Grid gridTestWin = new Grid(grid);
+			gridTestWin.addCoinGrid(indexColumn, playerMax);
 
-				if (!grid.getGrid().get(indexColumn).isColumnFull()) { // If the grid is not full
-
-					// We create a grid
-					Grid newGrid = new Grid(grid);
-
-					// We add the coin in the column
-					newGrid.addCoinGrid(indexColumn, ValueSquare.P2);
-
-					// We evaluate the grid with the new coin
-					// gridScore = newGrid.evaluateGrid();
-
-				}
-
-			}
-		}
-		return -1;
-	}
-
-	// Méthode publique appelée pour lancer l'algorithme Minimax
-	public int algoMinMax(Grid grid, ValueSquare playerMax) {
-
-		this.playerMax = playerMax;
-
-		// We assign the good token to the other player
-		if (playerMax == ValueSquare.P1) {
-			playerMin = ValueSquare.P2;
-		} else {
-			playerMin = ValueSquare.P1;
-		}
-
-		// Cas où playerMax = P1
-		if (playerMax == ValueSquare.P1) {
-
-			// On vérifie si P1 gagne avec 1 coup d'avance
-			for (int indexColumn = 0; indexColumn < 7; indexColumn++) {
-
-				Grid gridTestWin = new Grid(grid);
-				gridTestWin.addCoinGrid(indexColumn, playerMax);
-
-				if (gridTestWin.isJ1win()) {
-					return indexColumn;
-				}
-			}
-		}
-		// Cas où playerMax = P2
-		else {
-			// On vérifie si P2 gagne avec 1 coup d'avance
-			for (int indexColumn = 0; indexColumn < 7; indexColumn++) {
-
-				Grid gridTestWin = new Grid(grid);
-				gridTestWin.addCoinGrid(indexColumn, playerMax);
-
-				if (gridTestWin.isJ2win()) {
-					return indexColumn;
-				}
+			if (gridTestWin.isJ1win()) {
+				return indexColumn;
 			}
 		}
 
-		// Cas où playerMin = P1
-		if (playerMin == ValueSquare.P1) {
-			// On vérifie si P1 gagne avec 1 coup d'avance
-			for (int indexColumn = 0; indexColumn < 7; indexColumn++) {
-
-				Grid gridTestLoose = new Grid(grid);
-				gridTestLoose.addCoinGrid(indexColumn, playerMin);
-
-				if (gridTestLoose.isJ1win()) {
-					return indexColumn;
-				}
-			}
-		}
-
-		// Cas où playerMin = P1
-		else {
-			// On vérifie si P2 gagne avec 1 coup d'avance
-			for (int indexColumn = 0; indexColumn < 7; indexColumn++) {
-
-				Grid gridTestLoose = new Grid(grid);
-				gridTestLoose.addCoinGrid(indexColumn, playerMin);
-
-				if (gridTestLoose.isJ2win()) {
-					return indexColumn;
-				}
-			}
-		}
-		// Appel de la méthode Minimax avec les paramètres appropriés
+		// We call the recursive method
 		return minimax(grid, 0, true);
 	}
 
-	// Méthode Minimax récursive
-	private int minimax(Grid grid, int profondeur, boolean estJoueurMax) {
-
-		// Condition d'arrêt
-		if (profondeur == level) {
+	/**
+	 * Recursive method for the MinMax algorithm for a grid
+	 * 
+	 * @param grid
+	 * @param profondeur
+	 * @param estJoueurMax
+	 * @return
+	 */
+	private int minimax(Grid grid, int currentDepth, boolean isPlayerMax) {
+		
+		// Stop condition : if we have reached the level we wanted
+		if (currentDepth == level) {
 			return grid.evaluateGrid(playerMax) - grid.evaluateGrid(playerMin);
 		}
 
-		// Si c'est le tour du joueur maximisant, maximiser la valeur
-		if (estJoueurMax) {
+		// We will take the maximum of the 7 values
+		if (isPlayerMax) {
+
+			// Initialization of the list
 			List<Integer> listTemp = new ArrayList<>(Collections.nCopies(7, 0));
+
 			for (int indexColumn = 0; indexColumn < 7; indexColumn++) {
 
-				// If the grid is not full
+				// We check if the grid is not full
 				if (!grid.getGrid().get(indexColumn).isColumnFull()) {
 
-					
-					// We create a grid
-					Grid newGrid = new Grid(grid);
+					// We check if the is not winning for a player
+					if (!grid.isJ1win() && !grid.isJ2win()) {
+						// We create a grid
+						Grid newGrid = new Grid(grid);
 
-					// We add the coin in the column
-					newGrid.addCoinGrid(indexColumn, playerMax);
-					listTemp.set(indexColumn, minimax(newGrid, profondeur + 1, false));
+						// We add the coin in the column
+						newGrid.addCoinGrid(indexColumn, playerMax);
+
+						// We add the good value by calling the the recursive method
+						listTemp.set(indexColumn, minimax(newGrid, currentDepth + 1, false));
+					}
+
+					// If it is
+					else {
+						listTemp.set(indexColumn, grid.evaluateGrid(playerMax) - grid.evaluateGrid(playerMin));
+					}
 				}
-				
+
+				// If the column is full we stop here ( we don't need to call the recursive
+				// method )
 				else {
 					listTemp.set(indexColumn, grid.evaluateGrid(playerMax) - grid.evaluateGrid(playerMin));
 				}
 			}
 
-			if (profondeur == 0) {
+			// For the root we want the index and not the value of the maximum
+			if (currentDepth == 0) {
 				System.out.println("\n" + listTemp + "\n");
 				return findIndMax(listTemp, grid);
 			}
-			
+
+			// For leafs and nodes we want the maximum value
 			else {
 				return findMax(listTemp);
 			}
-			
 		}
 
+		// We will take the minimum of the 7 values
 		else {
+
+			// Initialization of the list
 			List<Integer> listTemp = new ArrayList<>(Collections.nCopies(7, 0));
+
 			for (int indexColumn = 0; indexColumn < 7; indexColumn++) {
 
-				// If the grid is not full
+				// We check if the grid is not full
 				if (!grid.getGrid().get(indexColumn).isColumnFull()) {
 
-					// We create a grid
-					Grid newGrid = new Grid(grid);
+					// We check if the is not winning for a player
+					if (!grid.isJ1win() && !grid.isJ2win()) {
 
-					// We add the coin in the column
-					newGrid.addCoinGrid(indexColumn, playerMin);
-					listTemp.set(indexColumn, minimax(newGrid, profondeur + 1, true));
+						// We create a grid
+						Grid newGrid = new Grid(grid);
+
+						// We add the coin in the column
+						newGrid.addCoinGrid(indexColumn, playerMin);
+
+						// We add the good value by calling the the recursive method
+						listTemp.set(indexColumn, minimax(newGrid, currentDepth + 1, true));
+
+					}
+					
+					// If it is
+					else  {
+						listTemp.set(indexColumn, grid.evaluateGrid(playerMax) - grid.evaluateGrid(playerMin));
+					}
 				}
-				
+
+				// If the column is full we stop here ( we don't need to call the recursive
+				// method )
 				else {
 					listTemp.set(indexColumn, grid.evaluateGrid(playerMax) - grid.evaluateGrid(playerMin));
 				}
 			}
+
+			// For leafs and nodes we want the maximum value ( There will be no root for
+			// playerMin )
 			return findMin(listTemp);
 		}
 	}
 
-	// VERIFIER QUE LA COLONNE EST PAS PLEINE
-
-	// Fonction pour trouver le maximum d'une ArrayList d'entiers
+	/**
+	 * Method that allows to obtain the max of a list
+	 * 
+	 * @param list
+	 * @return
+	 */
 	public int findMax(List<Integer> list) {
+
+		// We check that the list is not null or empty
 		if (list == null || list.isEmpty()) {
-			// Gérer le cas d'une liste vide
-			throw new IllegalArgumentException("La liste est vide ou nulle.");
+			throw new IllegalArgumentException("The list is empty or null.");
 		}
 
-		// Initialiser la variable de maximum avec la première valeur de la liste
 		int max = list.get(0);
 
-		// Parcourir la liste pour trouver le maximum
 		for (int i = 1; i < list.size(); i++) {
+
 			if (list.get(i) > max) {
 				max = list.get(i);
 			}
 		}
-
 		return max;
 	}
 
-	// Fonction pour trouver le maximum d'une ArrayList d'entiers
+	/**
+	 * Method that allows to obtain the min of a list
+	 * 
+	 * @param list
+	 * @return
+	 */
 	public int findMin(List<Integer> list) {
+
+		// We check that the list is not null or empty
 		if (list == null || list.isEmpty()) {
-			// Gérer le cas d'une liste vide
-			throw new IllegalArgumentException("La liste est vide ou nulle.");
+			throw new IllegalArgumentException("The list is empty or null.");
 		}
 
-		// Initialiser la variable de maximum avec la première valeur de la liste
 		int min = list.get(0);
 
-		// Parcourir la liste pour trouver le maximum
 		for (int i = 1; i < list.size(); i++) {
+
 			if (list.get(i) < min) {
 				min = list.get(i);
 			}
 		}
-
 		return min;
 	}
 
-	// Fonction pour trouver le maximum d'une ArrayList d'entiers
+	/**
+	 * Method that allows to obtain the index of the maximum value
+	 * 
+	 * @param list
+	 * @param grid
+	 * @return
+	 */
 	public int findIndMax(List<Integer> list, Grid grid) {
+
+		// We check that the list is not null or empty
 		if (list == null || list.isEmpty()) {
-			// Gérer le cas d'une liste vide
-			throw new IllegalArgumentException("La liste est vide ou nulle.");
+			throw new IllegalArgumentException("The list is empty or null.");
 		}
 
-		// Initialiser la variable de maximum avec la première valeur de la liste
 		int max = list.get(0);
 		int indice = 0;
 
-		// Parcourir la liste pour trouver le maximum
 		for (int i = 1; i < list.size(); i++) {
+
 			if (list.get(i) > max) {
 				max = list.get(i);
 				indice = i;
 			}
 		}
 
+		// We check that the column where we can not to add the coin is not full
 		if (!grid.getGrid().get(indice).isColumnFull()) {
 			return indice;
 		}
-		
+
+		// If it's full
 		else {
 			List<Integer> newList = new ArrayList<>();
 			newList = list;
