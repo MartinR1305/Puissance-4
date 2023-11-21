@@ -16,17 +16,18 @@ import model.ValueSquare;
 
 public class GamePvALocalController extends GameController {
 
-	Algorithm algo = new Algorithm(9,ValueSquare.P1,ValueSquare.P2);
+	Algorithm algo;
 
 	/**
 	 * Method that allows to start a PvA Local game
 	 * 
 	 * @param p1, player of the game
 	 */
-	public void startGamePvALocal(Player p) {
+	public void startGamePvALocal(Player p, int level) {
 
 		player1 = p;
 		player2 = null;
+		algo = new Algorithm(level,ValueSquare.P1,ValueSquare.P2);
 		grid = new Grid();
 
 		// We put all circles in the matrix

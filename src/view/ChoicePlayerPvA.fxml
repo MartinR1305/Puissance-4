@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" stylesheets="@../../ressources/css/styles.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Game.ChoicePlayerPvAController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" stylesheets="@../../ressources/css/styles.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Game.ChoicePlayerPvAController">
    <children>
       <Button fx:id="back" layoutX="712.0" layoutY="451.0" mnemonicParsing="false" onAction="#switchToHome" text="BACK">
          <font>
@@ -33,6 +33,6 @@
             <Font name="Verdana Bold" size="32.0" />
          </font>
       </Label>
-      <ComboBox layoutX="351.0" layoutY="252.0" prefHeight="67.0" prefWidth="99.0" />
+      <ComboBox fx:id="listLevel" layoutX="351.0" layoutY="252.0" prefHeight="67.0" prefWidth="99.0" />
    </children>
 </AnchorPane>

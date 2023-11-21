@@ -91,63 +91,6 @@ public class ForAllControllers {
 		stage.show();
 		setCenterStage(stage);
 	}
-	/**
-	 * Method that allows to set a combo box with the list of all the players
-	 * 
-	 * @param comboBoxJoueur, the box that we want to set with all the players
-	 */
-	public void setComboBoxWithPlayers(ComboBox<Player> comboBoxJoueur) {
-		List<Player> listJoueurs = Main.getPlayersData().getValue();
-		ObservableList<Player> joueursList = FXCollections.observableArrayList();
-
-		// Here we add all the player
-		for (Player joueur : listJoueurs) {
-			joueursList.add(joueur);
-		}
-
-		// Set the drop-down menu
-		comboBoxJoueur.setCellFactory(param -> new ListCell<Player>() {
-			@Override
-			protected void updateItem(Player joueur, boolean empty) {
-				super.updateItem(joueur, empty);
-
-				if (empty || joueur == null) {
-					setText(null);
-				} else {
-					setText(joueur.getFirstName() + " '" + joueur.getUserName().toUpperCase() + "' " + joueur.getLastName());
-				}
-			}
-		});
-
-		comboBoxJoueur.setItems(joueursList);
-
-		// We set display of player names once selected
-		comboBoxJoueur.setConverter(new StringConverter<Player>() {
-			@Override
-			public String toString(Player joueur) {
-				if (joueur == null) {
-					return null;
-				} else {
-					return joueur.getFirstName() + " '" + joueur.getUserName().toUpperCase() + "' " + joueur.getLastName();
-				}
-			}
-
-			@Override
-			public Player fromString(String string) {
-				return null;
-			}
-		});
-	}
-	
-	/**
-	 * Method that allows to set the stage on the center of the screen
-	 * @param stage
-	 */
-	public void setCenterStage(Stage stage) {
-        Rectangle2D screenBounds = Screen.getPrimary().getVisualBounds();
-        stage.setX((screenBounds.getWidth() - stage.getWidth()) / 2);
-        stage.setY((screenBounds.getHeight() - stage.getHeight()) / 2);
-	}
 
 	/**
 	 * Method that allows to switch the scene to the Home
@@ -229,4 +172,108 @@ public class ForAllControllers {
 			return false;
 		}
 	}
+	
+	/**
+	 * Method that allows to set the stage on the center of the screen
+	 * @param stage
+	 */
+	public void setCenterStage(Stage stage) {
+        Rectangle2D screenBounds = Screen.getPrimary().getVisualBounds();
+        stage.setX((screenBounds.getWidth() - stage.getWidth()) / 2);
+        stage.setY((screenBounds.getHeight() - stage.getHeight()) / 2);
+	}
+	
+	/**
+	 * Method that allows to set a combo box with the list of all the players
+	 * 
+	 * @param comboBoxJoueur, the box that we want to set with all the players
+	 */
+	public void setComboBoxWithPlayers(ComboBox<Player> comboBoxJoueur) {
+		List<Player> listJoueurs = Main.getPlayersData().getValue();
+		ObservableList<Player> joueursList = FXCollections.observableArrayList();
+
+		// Here we add all the player
+		for (Player joueur : listJoueurs) {
+			joueursList.add(joueur);
+		}
+
+		// Set the drop-down menu
+		comboBoxJoueur.setCellFactory(param -> new ListCell<Player>() {
+			@Override
+			protected void updateItem(Player joueur, boolean empty) {
+				super.updateItem(joueur, empty);
+
+				if (empty || joueur == null) {
+					setText(null);
+				} else {
+					setText(joueur.getFirstName() + " '" + joueur.getUserName().toUpperCase() + "' " + joueur.getLastName());
+				}
+			}
+		});
+
+		comboBoxJoueur.setItems(joueursList);
+
+		// We set display of player names once selected
+		comboBoxJoueur.setConverter(new StringConverter<Player>() {
+			@Override
+			public String toString(Player joueur) {
+				if (joueur == null) {
+					return null;
+				} else {
+					return joueur.getFirstName() + " '" + joueur.getUserName().toUpperCase() + "' " + joueur.getLastName();
+				}
+			}
+
+			@Override
+			public Player fromString(String string) {
+				return null;
+			}
+		});
+	}
+	
+	/**
+	 * Method that allows to set a combo box with the list of levels
+	 * 
+	 * @param comboBoxLevel
+	 */
+	public void setComboBoxWithLevels(ComboBox<Integer> comboBoxLevel) {
+        ObservableList<Integer> levelList = FXCollections.observableArrayList();
+
+        for (int i = 2; i < 12; i++) {
+        	levelList.add(i);
+        }
+
+        // Set the drop-down menu
+        comboBoxLevel.setCellFactory(param -> new ListCell<Integer>() {
+            @Override
+            protected void updateItem(Integer level, boolean empty) {
+                super.updateItem(level, empty);
+
+                if (empty || level == null) {
+                    setText(null);
+                } else {
+                    setText(level.toString());
+                }
+            }
+        });
+
+        comboBoxLevel.setItems(levelList);
+
+        // We set display of level once selected
+        comboBoxLevel.setConverter(new StringConverter<Integer>() {
+            @Override
+            public String toString(Integer level) {
+                if (level == null) {
+                    return null;
+                } else {
+                    return level.toString();
+                }
+            }
+
+            @Override
+            public Integer fromString(String string) {
+                return null;
+            }
+        });
+    }
 }
