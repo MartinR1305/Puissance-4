@@ -79,7 +79,7 @@ public class Algorithm {
 	 * @return
 	 */
 	private int minimax(Grid grid, int currentDepth, boolean isPlayerMax) {
-		
+
 		// Stop condition : if we have reached the level we wanted
 		if (currentDepth == level) {
 			return grid.evaluateGrid(playerMax) - grid.evaluateGrid(playerMin);
@@ -88,48 +88,119 @@ public class Algorithm {
 		// We will take the maximum of the 7 values
 		if (isPlayerMax) {
 
-			// Initialization of the list
-			List<Integer> listTemp = new ArrayList<>(Collections.nCopies(7, 0));
+			// Mise en place de threads
+			if (currentDepth == 0) {
+				
+				List<Thread> listThreads = new ArrayList<>();
 
-			for (int indexColumn = 0; indexColumn < 7; indexColumn++) {
+				// Initialization of the list
+				List<Integer> listTemp = new ArrayList<>(Collections.nCopies(7, 0));
 
-				// We check if the grid is not full
-				if (!grid.getGrid().get(indexColumn).isColumnFull()) {
+				for (int indexColumn = 0; indexColumn < 7; indexColumn++) {
+					
+					int indexThread = indexColumn;
+					
+					Thread thread = new Thread(new Runnable() {
+						public void run() {
+							// We check if the grid is not full
+							if (!grid.getGrid().get(indexThread).isColumnFull()) {
 
-					// We check if the is not winning for a player
-					if (!grid.isJ1win() && !grid.isJ2win()) {
-						// We create a grid
-						Grid newGrid = new Grid(grid);
+								// We check if the is not winning for a player
+								if (!grid.isJ1win() && !grid.isJ2win()) {
+									// We create a grid
+									Grid newGrid = new Grid(grid);
 
-						// We add the coin in the column
-						newGrid.addCoinGrid(indexColumn, playerMax);
+									// We add the coin in the column
+									newGrid.addCoinGrid(indexThread, playerMax);
 
-						// We add the good value by calling the the recursive method
-						listTemp.set(indexColumn, minimax(newGrid, currentDepth + 1, false));
+									// We add the good value by calling the the recursive method
+									listTemp.set(indexThread, minimax(newGrid, currentDepth + 1, false));
+								}
+
+								// If it is
+								else {
+									listTemp.set(indexThread,
+											grid.evaluateGrid(playerMax) - grid.evaluateGrid(playerMin));
+								}
+							}
+
+							// If the column is full we stop here ( we don't need to call the recursive
+							// method )
+							else {
+								listTemp.set(indexThread, grid.evaluateGrid(playerMax) - grid.evaluateGrid(playerMin));
+							}
+							//System.out.println("Le thread " + indexThread + " a terminé sa tâche.");
+						}
+					});
+					listThreads.add(thread);
+					thread.start();
+				}
+
+		        // Attendez que tous les threads se terminent
+		        for (Thread thread : listThreads) {
+		            try {
+		                thread.join();
+		            } catch (InterruptedException e) {
+		                e.printStackTrace();
+		            }
+		        }
+				
+				// For the root we want the index and not the value of the maximum
+				if (currentDepth == 0) {
+					System.out.println("\n" + listTemp + "\n");
+					return findIndMax(listTemp, grid);
+				}
+
+				// For leafs and nodes we want the maximum value
+				else {
+					return findMax(listTemp);
+				}
+			}
+
+			else {
+				// Initialization of the list
+				List<Integer> listTemp = new ArrayList<>(Collections.nCopies(7, 0));
+
+				for (int indexColumn = 0; indexColumn < 7; indexColumn++) {
+
+					// We check if the grid is not full
+					if (!grid.getGrid().get(indexColumn).isColumnFull()) {
+
+						// We check if the is not winning for a player
+						if (!grid.isJ1win() && !grid.isJ2win()) {
+							// We create a grid
+							Grid newGrid = new Grid(grid);
+
+							// We add the coin in the column
+							newGrid.addCoinGrid(indexColumn, playerMax);
+
+							// We add the good value by calling the the recursive method
+							listTemp.set(indexColumn, minimax(newGrid, currentDepth + 1, false));
+						}
+
+						// If it is
+						else {
+							listTemp.set(indexColumn, grid.evaluateGrid(playerMax) - grid.evaluateGrid(playerMin));
+						}
 					}
 
-					// If it is
+					// If the column is full we stop here ( we don't need to call the recursive
+					// method )
 					else {
 						listTemp.set(indexColumn, grid.evaluateGrid(playerMax) - grid.evaluateGrid(playerMin));
 					}
 				}
 
-				// If the column is full we stop here ( we don't need to call the recursive
-				// method )
-				else {
-					listTemp.set(indexColumn, grid.evaluateGrid(playerMax) - grid.evaluateGrid(playerMin));
+				// For the root we want the index and not the value of the maximum
+				if (currentDepth == 0) {
+					System.out.println("\n" + listTemp + "\n");
+					return findIndMax(listTemp, grid);
 				}
-			}
 
-			// For the root we want the index and not the value of the maximum
-			if (currentDepth == 0) {
-				System.out.println("\n" + listTemp + "\n");
-				return findIndMax(listTemp, grid);
-			}
-
-			// For leafs and nodes we want the maximum value
-			else {
-				return findMax(listTemp);
+				// For leafs and nodes we want the maximum value
+				else {
+					return findMax(listTemp);
+				}
 			}
 		}
 
@@ -157,9 +228,9 @@ public class Algorithm {
 						listTemp.set(indexColumn, minimax(newGrid, currentDepth + 1, true));
 
 					}
-					
+
 					// If it is
-					else  {
+					else {
 						listTemp.set(indexColumn, grid.evaluateGrid(playerMax) - grid.evaluateGrid(playerMin));
 					}
 				}
@@ -171,7 +242,7 @@ public class Algorithm {
 				}
 			}
 
-			// For leafs and nodes we want the maximum value ( There will be no root for
+			// For leafs and nodes we want the minimum value ( There will be no root for
 			// playerMin )
 			return findMin(listTemp);
 		}
