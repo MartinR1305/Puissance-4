@@ -15,7 +15,7 @@ public class Algorithm {
 	private int level;
 	private ValueSquare playerMin;
 	private ValueSquare playerMax;
-	private static int threadFinish;
+	private int threadFinish;
 
 	/**
 	 * Constructor
@@ -55,6 +55,7 @@ public class Algorithm {
 	 * @return
 	 */
 	public int algoMinMax(Grid grid) {
+		threadFinish = 0;
 
 		// We check if the other wins with a next move
 		for (int indexColumn = 0; indexColumn < 7; indexColumn++) {
@@ -105,11 +106,10 @@ public class Algorithm {
 							long debut = System.nanoTime();
 							repetCodes(grid, listTemp, indexThread, currentDepth, isPlayerMax, playerMax);
 							long fin = System.nanoTime();
-							
-							
-					        long tempsExecution = fin - debut;
-					        double tempsExecutionEnMillisecondes = (double) tempsExecution / 1_000_000;
-					        System.out.println("Thread Max : a mit " + tempsExecutionEnMillisecondes);
+
+							long tempsExecution = fin - debut;
+							double tempsExecutionEnMillisecondes = (double) tempsExecution / 1_000_000;
+							System.out.println("Thread Max : a mit " + tempsExecutionEnMillisecondes);
 						}
 					});
 					listThreadsMax.add(thread);
@@ -125,17 +125,10 @@ public class Algorithm {
 						e.printStackTrace();
 					}
 				}
-
-				if (currentDepth == 0) {
-					System.out.println("\n" + listTemp + "\n");
-					System.out.println(threadFinish + " utilisés.");
-					return findIndMax(listTemp, grid);
-				}
-				
-				else {
-					return findMax(listTemp);
-				}
-
+				// For the root we want the index and not the value of the maximum
+				System.out.println("\n" + listTemp + "\n");
+				System.out.println(threadFinish + " threads utilisés.");
+				return findIndMax(listTemp, grid);
 			}
 
 			else {
@@ -143,20 +136,9 @@ public class Algorithm {
 				List<Integer> listTemp = new ArrayList<>(Collections.nCopies(7, 0));
 
 				for (int indexColumn = 0; indexColumn < 7; indexColumn++) {
-
 					repetCodes(grid, listTemp, indexColumn, currentDepth, isPlayerMax, playerMax);
 				}
-
-				// For the root we want the index and not the value of the maximum
-				if (currentDepth == 0) {
-					System.out.println("\n" + listTemp + "\n");
-					return findIndMax(listTemp, grid);
-				}
-
-				// For leafs and nodes we want the maximum value
-				else {
-					return findMax(listTemp);
-				}
+				return findMax(listTemp);
 			}
 		}
 
@@ -177,10 +159,10 @@ public class Algorithm {
 							long debut = System.nanoTime();
 							repetCodes(grid, listTemp, indexThread, currentDepth, isPlayerMax, playerMin);
 							long fin = System.nanoTime();
-							
-					        long tempsExecution = fin - debut;
-					        double tempsExecutionEnMillisecondes = (double) tempsExecution / 1_000_000;
-					        System.out.println("Thread Min : a mit " + tempsExecutionEnMillisecondes);
+
+							long tempsExecution = fin - debut;
+							double tempsExecutionEnMillisecondes = (double) tempsExecution / 1_000_000;
+							System.out.println("Thread Min : a mit " + tempsExecutionEnMillisecondes);
 						}
 					});
 					listThreadsMin.add(thread);
@@ -196,10 +178,10 @@ public class Algorithm {
 						e.printStackTrace();
 					}
 				}
-				
+
 				return findMin(listTemp);
 			}
-			
+
 			// Initialization of the list
 			List<Integer> listTemp = new ArrayList<>(Collections.nCopies(7, 0));
 
@@ -275,28 +257,69 @@ public class Algorithm {
 			throw new IllegalArgumentException("The list is empty or null.");
 		}
 
-		int max = list.get(0);
+		List<Integer> tempList = new ArrayList<>();
+		tempList = list;
+
+		// we eliminate all full columns
+		for (int indexColumn = 0; indexColumn < tempList.size(); indexColumn++) {
+			if (grid.getGrid().get(indexColumn).isColumnFull()) {
+				tempList.set(indexColumn, -1000000000);
+			}
+		}
+		
+		// Declaration and Initialization
+		List<Integer> listIndiceMax = new ArrayList<>();
+		boolean isSeveralMax = false;
+		int max = tempList.get(0);
 		int indice = 0;
+		listIndiceMax.add(0);
 
-		for (int i = 1; i < list.size(); i++) {
+		for (int indexColumn = 1; indexColumn < tempList.size(); indexColumn++) {
+			
+			// If the value is higher than to the max
+			if (tempList.get(indexColumn) > max) {
+				// We actualize the max and the index
+				max = tempList.get(indexColumn);
+				indice = indexColumn;
 
-			if (list.get(i) > max) {
-				max = list.get(i);
-				indice = i;
+				// Then we actualize the list and the boolean
+				isSeveralMax = false;
+				listIndiceMax.clear();
+				listIndiceMax.add(indexColumn);
+			}
+
+			// If the value is higher than to the max
+			else if (tempList.get(indexColumn) == max) {
+				// We actualize the list and the boolean
+				isSeveralMax = true;
+				listIndiceMax.add(indexColumn);
 			}
 		}
 
-		// We check that the column where we can not to add the coin is not full
-		if (!grid.getGrid().get(indice).isColumnFull()) {
-			return indice;
+		// If there are several max in the list
+		if (isSeveralMax) {
+
+			// We return the nearest column from the middle with a left priority
+			if (listIndiceMax.contains(3)) {
+				return 3;
+			} else if (listIndiceMax.contains(2)) {
+				return 2;
+			} else if (listIndiceMax.contains(4)) {
+				return 4;
+			} else if (listIndiceMax.contains(1)) {
+				return 1;
+			} else if (listIndiceMax.contains(5)) {
+				return 5;
+			} else if (listIndiceMax.contains(0)) {
+				return 0;
+			} else {
+				return 6;
+			}
 		}
 
-		// If it's full
+		// If there are not
 		else {
-			List<Integer> newList = new ArrayList<>();
-			newList = list;
-			newList.set(indice, -1000000000);
-			return findIndMax(newList, grid);
+			return indice;
 		}
 	}
 
