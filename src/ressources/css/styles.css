@@ -104,14 +104,6 @@
     -fx-border-radius: 10 10 10 10;
 }
 
-/* Style pour les TextField au survol */
-.text-field:hover {
-	-fx-background-radius: 10 10 10 10; /* Coins arrondis */
-	-fx-border-radius: 10 10 10 10;
-    -fx-border-color: white; /* Couleur de bordure au survol */
-    -fx-font-style: italic;
-}
-
 /* ---------------------------------------------------------------- TABLEVIEW ----------------------------------------------------------------- */
 
 .table-cell {
