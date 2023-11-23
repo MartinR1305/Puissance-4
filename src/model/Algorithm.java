@@ -121,7 +121,7 @@ public class Algorithm {
 				}
 				// For the root we want the index and not the value of the maximum
 				System.out.println("\n" + listTemp + "\n");
-				System.out.println(threadFinish + " threads utilisés.");
+//				System.out.println(threadFinish + " threads utilisés.");
 				return findIndMax(listTemp, grid);
 			}
 
@@ -138,39 +138,6 @@ public class Algorithm {
 
 		// We will take the minimum of the 7 values
 		else {
-			if (currentDepth == 74) {
-				List<Thread> listThreadsMin = new ArrayList<>();
-
-				// Initialization of the list
-				List<Integer> listTemp = new ArrayList<>(Collections.nCopies(7, 0));
-
-				for (int indexColumn = 0; indexColumn < 7; indexColumn++) {
-
-					int indexThread = indexColumn;
-								        
-					Thread thread = new Thread(new Runnable() {
-						
-						public void run() {
-							repetCodes(grid, listTemp, indexThread, currentDepth, isPlayerMax, playerMin);
-						}
-					});
-					listThreadsMin.add(thread);
-					thread.start();
-					threadFinish++;
-				}
-
-				// Attendez que tous les threads se terminent
-				for (Thread thread : listThreadsMin) {
-					try {
-						thread.join();
-					} catch (InterruptedException e) {
-						e.printStackTrace();
-					}
-				}
-
-				return findMin(listTemp);
-			}
-
 			// Initialization of the list
 			List<Integer> listTemp = new ArrayList<>(Collections.nCopies(7, 0));
 
@@ -255,7 +222,7 @@ public class Algorithm {
 				tempList.set(indexColumn, -1000000000);
 			}
 		}
-		
+
 		// Declaration and Initialization
 		List<Integer> listIndiceMax = new ArrayList<>();
 		boolean isSeveralMax = false;
@@ -264,7 +231,7 @@ public class Algorithm {
 		listIndiceMax.add(0);
 
 		for (int indexColumn = 1; indexColumn < tempList.size(); indexColumn++) {
-			
+
 			// If the value is higher than to the max
 			if (tempList.get(indexColumn) > max) {
 				// We actualize the max and the index
