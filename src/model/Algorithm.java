@@ -103,13 +103,7 @@ public class Algorithm {
 
 					Thread thread = new Thread(new Runnable() {
 						public void run() {
-							long debut = System.nanoTime();
 							repetCodes(grid, listTemp, indexThread, currentDepth, isPlayerMax, playerMax);
-							long fin = System.nanoTime();
-
-							long tempsExecution = fin - debut;
-							double tempsExecutionEnMillisecondes = (double) tempsExecution / 1_000_000;
-							System.out.println("Thread Max : a mit " + tempsExecutionEnMillisecondes);
 						}
 					});
 					listThreadsMax.add(thread);
@@ -153,16 +147,11 @@ public class Algorithm {
 				for (int indexColumn = 0; indexColumn < 7; indexColumn++) {
 
 					int indexThread = indexColumn;
-
+								        
 					Thread thread = new Thread(new Runnable() {
+						
 						public void run() {
-							long debut = System.nanoTime();
 							repetCodes(grid, listTemp, indexThread, currentDepth, isPlayerMax, playerMin);
-							long fin = System.nanoTime();
-
-							long tempsExecution = fin - debut;
-							double tempsExecutionEnMillisecondes = (double) tempsExecution / 1_000_000;
-							System.out.println("Thread Min : a mit " + tempsExecutionEnMillisecondes);
 						}
 					});
 					listThreadsMin.add(thread);
@@ -290,7 +279,7 @@ public class Algorithm {
 
 			// If the value is higher than to the max
 			else if (tempList.get(indexColumn) == max) {
-				// We actualize the list and the boolean
+				// Then we actualize the list and the boolean
 				isSeveralMax = true;
 				listIndiceMax.add(indexColumn);
 			}

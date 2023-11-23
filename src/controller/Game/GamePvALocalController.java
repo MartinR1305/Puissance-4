@@ -74,7 +74,6 @@ public class GamePvALocalController extends GameController {
 
 		// Update the columnAddCoin variable according to the button text
 		columnAddCoin = Integer.parseInt(buttonText);
-		
 
 		addCoinGamePvALocal();
 
