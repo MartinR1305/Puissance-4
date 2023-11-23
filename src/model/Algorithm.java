@@ -89,7 +89,7 @@ public class Algorithm {
 		// We will take the maximum of the 7 values
 		if (isPlayerMax) {
 
-			if (currentDepth == 1) {
+			if (currentDepth == 0) {
 
 				List<Thread> listThreadsMax = new ArrayList<>();
 
@@ -162,7 +162,7 @@ public class Algorithm {
 
 		// We will take the minimum of the 7 values
 		else {
-			if (currentDepth == 12) {
+			if (currentDepth == 74) {
 				List<Thread> listThreadsMin = new ArrayList<>();
 
 				// Initialization of the list
