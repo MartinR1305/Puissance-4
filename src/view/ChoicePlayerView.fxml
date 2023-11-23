@@ -6,9 +6,9 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" stylesheets="@../../ressources/css/styles.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Player.ChoicePlayerViewController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" stylesheets="@../../ressources/css/styles.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Player.ChoicePlayerViewController">
    <children>
-      <Label layoutX="149.0" layoutY="194.0" prefHeight="56.0" prefWidth="503.0" text="Choose the player you want to view " textFill="WHITE">
+      <Label fx:id="choose" layoutX="149.0" layoutY="194.0" prefHeight="56.0" prefWidth="503.0" text="Choose the player you want to view " textFill="WHITE">
          <font>
             <Font name="Verdana Bold" size="24.0" />
          </font>
@@ -23,5 +23,10 @@
          <font>
             <Font name="Verdana" size="20.0" />
          </font></Button>
+      <Label fx:id="errorMsg" layoutX="254.0" layoutY="319.0" text="You must select a player !" textFill="RED" visible="false">
+         <font>
+            <Font name="Verdana Bold" size="20.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>
