@@ -59,14 +59,14 @@
       <Circle fx:id="c63" fill="WHITE" layoutX="631.0" layoutY="220.0" radius="30.0" stroke="BLACK" strokeType="INSIDE" AnchorPane.leftAnchor="601.0" AnchorPane.topAnchor="190.0" />
       <Circle fx:id="c64" fill="WHITE" layoutX="631.0" layoutY="150.0" radius="30.0" stroke="BLACK" strokeType="INSIDE" AnchorPane.rightAnchor="139.0" AnchorPane.topAnchor="120.0" />
       <Circle fx:id="c65" fill="WHITE" layoutX="618.0" layoutY="80.0" radius="30.0" stroke="BLACK" strokeType="INSIDE" AnchorPane.rightAnchor="139.0" AnchorPane.topAnchor="50.0" />
-      <Label fx:id="playerPlaying" layoutY="-1.0" prefHeight="30.0" prefWidth="800.0" textFill="WHITE">
+      <Label fx:id="playerPlaying" layoutY="-1.0" prefHeight="30.0" prefWidth="800.0" text="Player who must play " textFill="WHITE">
          <font>
             <Font name="Verdana" size="24.0" />
          </font></Label>
       <Button fx:id="C0" layoutX="116.0" layoutY="39.0" mnemonicParsing="false" onAction="#indexColumnSetWithButton" opacity="0.0" prefHeight="436.0" prefWidth="89.0" text="0" />
       <Button fx:id="C2" layoutX="288.0" layoutY="38.0" mnemonicParsing="false" onAction="#indexColumnSetWithButton" opacity="0.0" prefHeight="436.0" prefWidth="72.0" text="2" />
       <Button fx:id="C4" layoutX="442.0" layoutY="38.0" mnemonicParsing="false" onAction="#indexColumnSetWithButton" opacity="0.0" prefHeight="436.0" prefWidth="72.0" text="4" />
-      <Rectangle fx:id="rectangleExit" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="70.0" layoutX="264.0" layoutY="228.0" stroke="BLACK" strokeType="INSIDE" visible="false" width="264.0" />
+      <Rectangle fx:id="rectangleExit" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="73.0" layoutX="312.0" layoutY="228.0" stroke="BLACK" strokeType="INSIDE" visible="false" width="170.0" />
       <Button fx:id="C5" layoutX="519.0" layoutY="38.0" mnemonicParsing="false" onAction="#indexColumnSetWithButton" opacity="0.0" prefHeight="436.0" prefWidth="72.0" text="5" />
       <Button fx:id="C6" layoutX="596.0" layoutY="38.0" mnemonicParsing="false" onAction="#indexColumnSetWithButton" opacity="0.0" prefHeight="436.0" prefWidth="83.0" text="6" />
       <Button fx:id="C1" layoutX="209.0" layoutY="38.0" mnemonicParsing="false" onAction="#indexColumnSetWithButton" opacity="0.0" prefHeight="436.0" prefWidth="72.0" text="1" />
@@ -76,16 +76,16 @@
          </font></Label>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#236197" height="35.0" layoutX="116.0" layoutY="469.0" stroke="BLACK" strokeType="INSIDE" width="563.0" />
       <Button fx:id="C3" layoutX="365.0" layoutY="38.0" mnemonicParsing="false" onAction="#indexColumnSetWithButton" opacity="0.0" prefHeight="436.0" prefWidth="72.0" text="3" />
-      <Label fx:id="questionToExit" layoutX="268.0" layoutY="220.0" prefHeight="48.0" prefWidth="264.0" text="Do you really want to exit the game ?" visible="false">
+      <Label fx:id="questionToExit" layoutX="345.0" layoutY="220.0" prefHeight="48.0" prefWidth="112.0" text="Exit the game ?" visible="false">
          <font>
             <Font name="Verdana Bold" size="12.0" />
          </font></Label>
-      <Button fx:id="yes" disable="true" layoutX="410.0" layoutY="260.0" mnemonicParsing="false" onAction="#switchToHomeWithDecoServer" text="YES" textFill="#00ff3c" visible="false">
+      <Button fx:id="yes" disable="true" layoutX="416.0" layoutY="260.0" mnemonicParsing="false" onAction="#switchToHome" prefHeight="30.0" prefWidth="52.0" text="YES" textFill="#00ff3c" visible="false">
          <font>
             <Font size="14.0" />
          </font>
       </Button>
-      <Button fx:id="no" disable="true" layoutX="350.0" layoutY="260.0" mnemonicParsing="false" onAction="#hideConfirmation" text="NO" textFill="RED" visible="false">
+      <Button fx:id="no" disable="true" layoutX="325.0" layoutY="260.0" mnemonicParsing="false" onAction="#hideConfirmation" prefHeight="30.0" prefWidth="52.0" text="NO" textFill="RED" visible="false">
          <font>
             <Font size="14.0" />
          </font>

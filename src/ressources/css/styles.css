@@ -20,11 +20,31 @@
 }
 
 #yes {
-	    -fx-text-fill: #00ff55; 
+	    -fx-text-fill: #00ff55;
+	    -fx-background-color: white;
+	    -fx-border-color: black;
+	    -fx-font-weight: bold;
+}
+
+#yes.button:hover {
+   		-fx-background-color: #00ff55;
+   		-fx-text-fill: white;
+   		-fx-border-color: black;
+   		-fx-font-weight: bold;
 }
 
 #no {
-	    -fx-text-fill: red; 
+	    -fx-text-fill: red;
+	    -fx-background-color: white;
+	    -fx-border-color: black;
+	    -fx-font-weight: bold;
+}
+
+#no.button:hover {
+   		-fx-background-color: red;
+   		-fx-text-fill: white;
+   		-fx-border-color: black;
+   		-fx-font-weight: bold;
 }
 
 /* ---------------------------------------------------------------- LABEL ----------------------------------------------------------------- */
@@ -39,7 +59,7 @@
 }
 
 /* Black text does not need blur */
-#saadMartin {
+#saadMartin, #questionToExit{
     	 -fx-effect: dropshadow(gaussian, black, 0.0, 0.0, 0.0, 0.0); 
 }
 
