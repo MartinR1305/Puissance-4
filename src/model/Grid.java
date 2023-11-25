@@ -813,10 +813,10 @@ public class Grid {
 		return null;
 	}
 
-	public int evaluateGrid(ValueSquare playerToEvaluate) {
+	public int evaluateGrid(ValueSquare playerToEvaluate, int alpha2, int alpha3, int alpha4) {
 		int points = 0;
 
-		// We explore the grid
+		// We explore the grid for line / column / diagonal of 4
 		for (int indexLine = 0; indexLine < 6; indexLine++) {
 			for (int indexColumn = 0; indexColumn < 7; indexColumn++) {
 				// Collect different sequences for each position
@@ -826,10 +826,10 @@ public class Grid {
 				List<Square> diagonalDesList = collectDescendingDiagonalSequence(indexColumn, indexLine);
 
 				// We evaluate the collected sequences and accumulate the points
-				points += evaluateSequence(lineList, playerToEvaluate);
-				points += evaluateSequence(columnList, playerToEvaluate);
-				points += evaluateSequence(diagonalAscList, playerToEvaluate);
-				points += evaluateSequence(diagonalDesList, playerToEvaluate);
+				points += evaluateSequence(lineList, playerToEvaluate, alpha2, alpha3, alpha4);
+				points += evaluateSequence(columnList, playerToEvaluate, alpha2, alpha3, alpha4);
+				points += evaluateSequence(diagonalAscList, playerToEvaluate, alpha2, alpha3, alpha4);
+				points += evaluateSequence(diagonalDesList, playerToEvaluate, alpha2, alpha3, alpha4);
 			}
 		}
 
@@ -883,7 +883,8 @@ public class Grid {
 	}
 
 	// Method to evaluate a sequence and return the points
-	private int evaluateSequence(List<Square> sequence, ValueSquare playerToEvaluate) {
+	private int evaluateSequence(List<Square> sequence, ValueSquare playerToEvaluate, int alpha2, int alpha3, int alpha4) {
+//		long tempsDebut = System.currentTimeMillis();
 		int countP1 = 0;
 		int countP2 = 0;
 		int points = 0;
@@ -908,13 +909,24 @@ public class Grid {
 			points += 0;
 		} else {
 			if (countP1 == 2) {
-				points += 2;
+				// α2
+				points += alpha2;
 			} else if (countP1 == 3) {
-				points += 3;
+				// α3
+				points += alpha3;
 			} else if (countP1 == 4) {
-				points += 10000;
+				// α4
+				points += alpha4;
 			}
 		}
+
+//		long tempsFin = System.currentTimeMillis();
+//		long dureeTotaleMillis = tempsFin - tempsDebut;
+//        double dureeSecondes = dureeTotaleMillis / 1000.0;
+//        long minutes = (long) dureeSecondes / 60;
+//        double secondes = dureeSecondes % 60;
+//
+//        System.out.printf("Algorithme took %d min %.3f sec to evaluate the grid.%n", minutes, secondes);
 
 		return points;
 	}

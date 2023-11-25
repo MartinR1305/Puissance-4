@@ -84,7 +84,7 @@ public class Algorithm {
 
 		// Stop condition : if we have reached the level we wanted
 		if (currentDepth == level) {
-			return grid.evaluateGrid(playerMax) - grid.evaluateGrid(playerMin);
+			return grid.evaluateGrid(playerMax,2,3,10000) - grid.evaluateGrid(playerMin,2,3,10000);
 		}
 
 		// We will take the maximum of the 7 values
@@ -303,14 +303,14 @@ public class Algorithm {
 
 			// If it is
 			else {
-				listTemp.set(index, grid.evaluateGrid(playerMax) - grid.evaluateGrid(playerMin));
+				listTemp.set(index, grid.evaluateGrid(playerMax,2,3,10000) - grid.evaluateGrid(playerMin,2,3,10000));
 			}
 		}
 
 		// If the column is full we stop here ( we don't need to call the recursive
 		// method )
 		else {
-			listTemp.set(index, grid.evaluateGrid(playerMax) - grid.evaluateGrid(playerMin));
+			listTemp.set(index, grid.evaluateGrid(playerMax,2,3,10000) - grid.evaluateGrid(playerMin,2,3,10000));
 		}
 	}
 }
