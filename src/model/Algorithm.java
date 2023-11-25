@@ -69,7 +69,7 @@ public class Algorithm {
 		}
 
 		// We call the recursive method
-		return minimax(grid, 0, true);
+		return recursiveMinMax(grid, 0, true);
 	}
 
 	/**
@@ -80,7 +80,7 @@ public class Algorithm {
 	 * @param estJoueurMax
 	 * @return
 	 */
-	private int minimax(Grid grid, int currentDepth, boolean isPlayerMax) {
+	private int recursiveMinMax(Grid grid, int currentDepth, boolean isPlayerMax) {
 
 		// Stop condition : if we have reached the level we wanted
 		if (currentDepth == level) {
@@ -90,8 +90,8 @@ public class Algorithm {
 		// We will take the maximum of the 7 values
 		if (isPlayerMax) {
 
+			// We will create threads only for the root
 			if (currentDepth == 0) {
-
 				List<Thread> listThreadsMax = new ArrayList<>();
 
 				// Initialization of the list
@@ -101,9 +101,10 @@ public class Algorithm {
 
 					int indexThread = indexColumn;
 
+					// We calculate the value of each node with a thread
 					Thread thread = new Thread(new Runnable() {
 						public void run() {
-							repetCodes(grid, listTemp, indexThread, currentDepth, isPlayerMax, playerMax);
+							calculateValueNode(grid, listTemp, indexThread, currentDepth, isPlayerMax, playerMax);
 						}
 					});
 					listThreadsMax.add(thread);
@@ -111,7 +112,7 @@ public class Algorithm {
 					threadFinish++;
 				}
 
-				// Attendez que tous les threads se terminent
+				// We wait that all threads end
 				for (Thread thread : listThreadsMax) {
 					try {
 						thread.join();
@@ -129,9 +130,12 @@ public class Algorithm {
 				// Initialization of the list
 				List<Integer> listTemp = new ArrayList<>(Collections.nCopies(7, 0));
 
+				// We calculate the value of each node
 				for (int indexColumn = 0; indexColumn < 7; indexColumn++) {
-					repetCodes(grid, listTemp, indexColumn, currentDepth, isPlayerMax, playerMax);
+					calculateValueNode(grid, listTemp, indexColumn, currentDepth, isPlayerMax, playerMax);
 				}
+
+				// For leafs and nodes we want the maximum value
 				return findMax(listTemp);
 			}
 		}
@@ -141,8 +145,9 @@ public class Algorithm {
 			// Initialization of the list
 			List<Integer> listTemp = new ArrayList<>(Collections.nCopies(7, 0));
 
+			// We calculate the value of each node
 			for (int indexColumn = 0; indexColumn < 7; indexColumn++) {
-				repetCodes(grid, listTemp, indexColumn, currentDepth, isPlayerMax, playerMin);
+				calculateValueNode(grid, listTemp, indexColumn, currentDepth, isPlayerMax, playerMin);
 			}
 
 			// For leafs and nodes we want the minimum value ( There will be no root for
@@ -279,7 +284,7 @@ public class Algorithm {
 		}
 	}
 
-	public void repetCodes(Grid grid, List<Integer> listTemp, int index, int currentDepth, boolean isPlayerMax,
+	public void calculateValueNode(Grid grid, List<Integer> listTemp, int index, int currentDepth, boolean isPlayerMax,
 			ValueSquare player) {
 		// We check if the grid is not full
 		if (!grid.getGrid().get(index).isColumnFull()) {
@@ -293,7 +298,7 @@ public class Algorithm {
 				newGrid.addCoinGrid(index, player);
 
 				// We add the good value by calling the the recursive method
-				listTemp.set(index, minimax(newGrid, currentDepth + 1, !isPlayerMax));
+				listTemp.set(index, recursiveMinMax(newGrid, currentDepth + 1, !isPlayerMax));
 			}
 
 			// If it is
