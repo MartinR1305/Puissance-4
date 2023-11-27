@@ -6,15 +6,13 @@ import java.util.List;
 
 public class Algorithm {
 
-	// ------------- A FAIRE ------------- //
-	// - Gérer le cas où il y a deux max ou deux min
-	// - Ajouter des threads pour réduire le temps de calcul
-	// - Calculer la limite
-	// - Mettre 1s de délai + gérer affichage du tour
-
 	private int level;
 	private ValueSquare playerMin;
 	private ValueSquare playerMax;
+	int alpha1;
+	int alpha2;
+	int alpha3;
+	
 	private int threadFinish;
 
 	/**
@@ -24,10 +22,13 @@ public class Algorithm {
 	 * @param playerMin
 	 * @param playerMax
 	 */
-	public Algorithm(int level, ValueSquare playerMin, ValueSquare playerMax) {
+	public Algorithm(int level, ValueSquare playerMin, ValueSquare playerMax, int alpha1, int alpha2, int alpha3) {
 		this.level = level;
 		this.playerMax = playerMax;
 		this.playerMin = playerMin;
+		this.alpha1 = alpha1;
+		this.alpha2 = alpha2;
+		this.alpha3 = alpha3;
 	}
 
 	/**
@@ -84,7 +85,7 @@ public class Algorithm {
 
 		// Stop condition : if we have reached the level we wanted
 		if (currentDepth == level) {
-			return grid.evaluateGrid(playerMax,2,3,10000) - grid.evaluateGrid(playerMin,2,3,10000);
+			return grid.evaluateGrid(playerMax,alpha1,alpha2,alpha3) - grid.evaluateGrid(playerMin,alpha1,alpha2,alpha3);
 		}
 
 		// We will take the maximum of the 7 values
@@ -303,14 +304,14 @@ public class Algorithm {
 
 			// If it is
 			else {
-				listTemp.set(index, grid.evaluateGrid(playerMax,2,3,10000) - grid.evaluateGrid(playerMin,2,3,10000));
+				listTemp.set(index, grid.evaluateGrid(playerMax,alpha1,alpha2,alpha3) - grid.evaluateGrid(playerMin,alpha1,alpha2,alpha3));
 			}
 		}
 
 		// If the column is full we stop here ( we don't need to call the recursive
 		// method )
 		else {
-			listTemp.set(index, grid.evaluateGrid(playerMax,2,3,10000) - grid.evaluateGrid(playerMin,2,3,10000));
+			listTemp.set(index, grid.evaluateGrid(playerMax,alpha1,alpha2,alpha3) - grid.evaluateGrid(playerMin,alpha1,alpha2,alpha3));
 		}
 	}
 }

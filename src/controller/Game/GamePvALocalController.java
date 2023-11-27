@@ -27,7 +27,7 @@ public class GamePvALocalController extends GameController {
 
 		player1 = p;
 		player2 = null;
-		algo = new Algorithm(level,ValueSquare.P1,ValueSquare.P2);
+		algo = new Algorithm(level,ValueSquare.P1,ValueSquare.P2, 2,3,10000);
 		grid = new Grid();
 
 		// We put all circles in the matrix

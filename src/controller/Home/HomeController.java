@@ -20,7 +20,7 @@ public class HomeController extends ForAllControllers{
 	Label home;
 
 	@FXML
-	Button playSamePC, playSameNetwork, playVsIA, playerSettings;
+	Button playSamePC, playSameNetwork, playVsIA, playerSettings, testAlgos;
 
 	private Stage stage;
 	private Scene scene;
@@ -66,6 +66,22 @@ public class HomeController extends ForAllControllers{
     public void switchToChoiceOnline(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(
                 getClass().getResource(".." + File.separator + ".." + File.separator + "view" + File.separator + "ChoiceOnlineGame.fxml"));
+        root = loader.load();
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+        setCenterStage(stage);
+    }
+    
+	/**
+     * Controller that allows to switch the scene to the tests for algorithms vs algorithms
+     * @param event
+     * @throws IOException
+     */
+    public void switchToTestAlgos(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(
+                getClass().getResource(".." + File.separator + ".." + File.separator + "view" + File.separator + "testAlgovsAlgo.fxml"));
         root = loader.load();
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
