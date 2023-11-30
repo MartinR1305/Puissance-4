@@ -4,17 +4,24 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Test.TestAlgovsAlgoController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" stylesheets="@../../ressources/css/styles.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Test.TestAlgovsAlgoController">
    <children>
       <TextField fx:id="valueA1A2" layoutX="132.0" layoutY="134.0" />
       <TextField fx:id="valueA1A3" layoutX="132.0" layoutY="173.0" />
       <TextField fx:id="valueA1A4" layoutX="132.0" layoutY="212.0" />
-      <TextField fx:id="valueA2A2" layoutX="524.0" layoutY="134.0" />
+      <TextField fx:id="valueA2A2" layoutX="523.0" layoutY="134.0" />
       <TextField fx:id="valueA2A3" layoutX="524.0" layoutY="173.0" />
       <TextField fx:id="valueA2A4" layoutX="523.0" layoutY="212.0" />
-      <Label fx:id="algo1" layoutX="189.0" layoutY="99.0" text="Algo 1" />
-      <Label fx:id="algo2" layoutX="581.0" layoutY="99.0" text="Algo 2" />
+      <Label fx:id="algo1" layoutX="172.0" layoutY="64.0" text="Algo 1" textFill="RED" AnchorPane.leftAnchor="150.0">
+         <font>
+            <Font name="Verdana Bold" size="20.0" />
+         </font></Label>
+      <Label fx:id="algo2" layoutX="574.0" layoutY="64.0" text="Algo 2" textFill="#fffb00" AnchorPane.rightAnchor="150.0">
+         <font>
+            <Font name="Verdana Bold" size="20.0" />
+         </font></Label>
       <Label fx:id="algo1alpha3" layoutX="64.0" layoutY="177.0" text="α3" />
       <Label fx:id="algo1alpha4" layoutX="64.0" layoutY="216.0" text="α4" />
       <Label fx:id="algo1alpha2" layoutX="64.0" layoutY="138.0" text="α2" />
@@ -32,5 +39,9 @@
       <Label fx:id="nbDraws" layoutX="411.0" layoutY="412.0" prefHeight="18.0" prefWidth="106.0" text="Nb D" />
       <Button fx:id="back" layoutX="748.0" layoutY="460.0" mnemonicParsing="false" onAction="#switchToHome" text="Back" />
       <Label fx:id="msgError" layoutX="302.0" layoutY="36.0" text="You must fill in correctly the fields" textFill="RED" visible="false" />
+      <Label fx:id="labelLvLA1" layoutX="57.0" layoutY="108.0" text="Level" />
+      <Label fx:id="labelLvLA2" layoutX="471.0" layoutY="108.0" text="Level" />
+      <TextField fx:id="valueLvLA1" layoutX="133.0" layoutY="104.0" />
+      <TextField fx:id="valueLvLA2" layoutX="524.0" layoutY="104.0" />
    </children>
 </AnchorPane>
