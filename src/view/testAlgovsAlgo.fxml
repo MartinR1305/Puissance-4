@@ -6,42 +6,96 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" stylesheets="@../../ressources/css/styles.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Test.TestAlgovsAlgoController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" stylesheets="@../../ressources/css/styles.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Test.TestAlgovsAlgoController">
    <children>
-      <TextField fx:id="valueA1A2" layoutX="132.0" layoutY="134.0" />
-      <TextField fx:id="valueA1A3" layoutX="132.0" layoutY="173.0" />
-      <TextField fx:id="valueA1A4" layoutX="132.0" layoutY="212.0" />
-      <TextField fx:id="valueA2A2" layoutX="523.0" layoutY="134.0" />
-      <TextField fx:id="valueA2A3" layoutX="524.0" layoutY="173.0" />
-      <TextField fx:id="valueA2A4" layoutX="523.0" layoutY="212.0" />
-      <Label fx:id="algo1" layoutX="172.0" layoutY="64.0" text="Algo 1" textFill="RED" AnchorPane.leftAnchor="150.0">
+      <TextField fx:id="valueA1A2" layoutX="150.0" layoutY="173.0" prefHeight="25.0" prefWidth="93.0" AnchorPane.topAnchor="167.0" />
+      <TextField fx:id="valueA1A3" layoutX="150.0" layoutY="221.0" prefHeight="25.0" prefWidth="93.0" AnchorPane.topAnchor="215.0" />
+      <TextField fx:id="valueA1A4" layoutX="150.0" layoutY="266.0" prefHeight="25.0" prefWidth="93.0" AnchorPane.topAnchor="260.0" />
+      <TextField fx:id="valueA2A2" layoutX="578.0" layoutY="167.0" prefHeight="25.0" prefWidth="93.0" />
+      <TextField fx:id="valueA2A3" layoutX="578.0" layoutY="215.0" prefHeight="25.0" prefWidth="93.0" />
+      <TextField fx:id="valueA2A4" layoutX="578.0" layoutY="260.0" prefHeight="25.0" prefWidth="93.0" />
+      <Label fx:id="algo1" layoutX="161.0" layoutY="64.0" text="Algo 1" textFill="RED" AnchorPane.leftAnchor="161.0">
          <font>
             <Font name="Verdana Bold" size="20.0" />
          </font></Label>
-      <Label fx:id="algo2" layoutX="574.0" layoutY="64.0" text="Algo 2" textFill="#fffb00" AnchorPane.rightAnchor="150.0">
+      <Label fx:id="algo2" layoutX="589.0" layoutY="64.0" text="Algo 2" textFill="#fffb00" AnchorPane.rightAnchor="139.0">
          <font>
             <Font name="Verdana Bold" size="20.0" />
          </font></Label>
-      <Label fx:id="algo1alpha3" layoutX="64.0" layoutY="177.0" text="α3" />
-      <Label fx:id="algo1alpha4" layoutX="64.0" layoutY="216.0" text="α4" />
-      <Label fx:id="algo1alpha2" layoutX="64.0" layoutY="138.0" text="α2" />
-      <Label fx:id="algo2alpha2" layoutX="478.0" layoutY="138.0" text="α2" />
-      <Label fx:id="algo2alpha3" layoutX="478.0" layoutY="177.0" text="α3" />
-      <Label fx:id="algo2alpha4" layoutX="478.0" layoutY="216.0" text="α4" />
-      <Button fx:id="play" layoutX="373.0" layoutY="329.0" mnemonicParsing="false" onAction="#playAvsA" text="Play" />
-      <Label fx:id="victoriesA1" layoutX="147.0" layoutY="412.0" prefHeight="18.0" prefWidth="52.0" text="Victories :" />
-      <Label fx:id="victoriesA2" layoutX="546.0" layoutY="413.0" text="Victories :" />
-      <TextField fx:id="valueNbGame" layoutX="318.0" layoutY="288.0" />
-      <Label fx:id="nbGame" layoutX="344.0" layoutY="270.0" text="Number of game :" />
-      <Label fx:id="draws" layoutX="354.0" layoutY="413.0" text="Draws :" />
-      <Label fx:id="nbVictoriesA1" layoutX="207.0" layoutY="412.0" prefHeight="18.0" prefWidth="87.0" text="Nb V" />
-      <Label fx:id="nbVictoriesA2" layoutX="610.0" layoutY="412.0" prefHeight="18.0" prefWidth="106.0" text="Nb V" />
-      <Label fx:id="nbDraws" layoutX="411.0" layoutY="412.0" prefHeight="18.0" prefWidth="106.0" text="Nb D" />
-      <Button fx:id="back" layoutX="748.0" layoutY="460.0" mnemonicParsing="false" onAction="#switchToHome" text="Back" />
-      <Label fx:id="msgError" layoutX="302.0" layoutY="36.0" text="You must fill in correctly the fields" textFill="RED" visible="false" />
-      <Label fx:id="labelLvLA1" layoutX="57.0" layoutY="108.0" text="Level" />
-      <Label fx:id="labelLvLA2" layoutX="471.0" layoutY="108.0" text="Level" />
-      <TextField fx:id="valueLvLA1" layoutX="133.0" layoutY="104.0" />
-      <TextField fx:id="valueLvLA2" layoutX="524.0" layoutY="104.0" />
+      <Label fx:id="algo1alpha3" layoutX="119.0" layoutY="225.0" text="α3 :" textFill="WHITE" AnchorPane.rightAnchor="660.0">
+         <font>
+            <Font name="Verdana" size="14.0" />
+         </font></Label>
+      <Label fx:id="algo1alpha4" layoutX="118.0" layoutY="270.0" text="α4 :" textFill="WHITE" AnchorPane.rightAnchor="660.0">
+         <font>
+            <Font name="Verdana" size="14.0" />
+         </font></Label>
+      <Label fx:id="algo1alpha2" layoutX="108.0" layoutY="177.0" text="α2 :" textFill="WHITE" AnchorPane.rightAnchor="660.0">
+         <font>
+            <Font name="Verdana" size="14.0" />
+         </font></Label>
+      <Label fx:id="algo2alpha2" layoutX="541.0" layoutY="177.0" text="α2 :" textFill="WHITE" AnchorPane.rightAnchor="230.0">
+         <font>
+            <Font name="Verdana" size="14.0" />
+         </font></Label>
+      <Label fx:id="algo2alpha3" layoutX="541.0" layoutY="225.0" text="α3 :" textFill="WHITE">
+         <font>
+            <Font name="Verdana" size="14.0" />
+         </font></Label>
+      <Label fx:id="algo2alpha4" layoutX="541.0" layoutY="270.0" text="α4 :" textFill="WHITE">
+         <font>
+            <Font name="Verdana" size="14.0" />
+         </font></Label>
+      <Button fx:id="play" layoutX="366.0" layoutY="327.0" mnemonicParsing="false" onAction="#playAvsA" text="Play">
+         <font>
+            <Font name="Verdana" size="20.0" />
+         </font></Button>
+      <Label fx:id="victoriesA1" layoutX="126.0" layoutY="412.0" prefHeight="18.0" prefWidth="72.0" text="Victories :" textFill="WHITE">
+         <font>
+            <Font name="Verdana" size="14.0" />
+         </font></Label>
+      <Label fx:id="victoriesA2" layoutX="534.0" layoutY="413.0" text="Victories :" textFill="WHITE">
+         <font>
+            <Font name="Verdana" size="14.0" />
+         </font></Label>
+      <TextField fx:id="valueNbGame" layoutX="364.0" layoutY="260.0" prefHeight="25.0" prefWidth="72.0" />
+      <Label fx:id="nbGame" layoutX="337.0" layoutY="231.0" text="Number of Games" textFill="WHITE">
+         <font>
+            <Font name="Verdana" size="14.0" />
+         </font></Label>
+      <Label fx:id="draws" layoutX="343.0" layoutY="413.0" text="Draws :" textFill="WHITE">
+         <font>
+            <Font name="Verdana" size="14.0" />
+         </font></Label>
+      <Label fx:id="nbVictoriesA1" layoutX="202.0" layoutY="413.0" prefHeight="18.0" prefWidth="87.0" text="Nb V" textFill="WHITE">
+         <font>
+            <Font name="Verdana" size="14.0" />
+         </font></Label>
+      <Label fx:id="nbVictoriesA2" layoutX="614.0" layoutY="413.0" prefHeight="18.0" prefWidth="106.0" text="Nb V" textFill="WHITE">
+         <font>
+            <Font name="Verdana" size="14.0" />
+         </font></Label>
+      <Label fx:id="nbDraws" layoutX="404.0" layoutY="413.0" prefHeight="18.0" prefWidth="106.0" text="Nb D" textFill="WHITE">
+         <font>
+            <Font name="Verdana" size="14.0" />
+         </font></Label>
+      <Button fx:id="back" layoutX="734.0" layoutY="458.0" mnemonicParsing="false" onAction="#switchToHome" text="Back">
+         <font>
+            <Font name="Verdana" size="14.0" />
+         </font></Button>
+      <Label fx:id="msgError" layoutX="245.0" layoutY="377.0" text="You must fill in correctly the fields" textFill="RED" visible="false">
+         <font>
+            <Font name="Verdana Italic" size="18.0" />
+         </font></Label>
+      <Label fx:id="labelLvLA1" layoutX="89.0" layoutY="130.0" text="Level :" textFill="WHITE" AnchorPane.rightAnchor="660.0">
+         <font>
+            <Font name="Verdana" size="14.0" />
+         </font></Label>
+      <Label fx:id="labelLvLA2" layoutX="522.0" layoutY="130.0" text="Level :" textFill="WHITE" AnchorPane.rightAnchor="230.0">
+         <font>
+            <Font name="Verdana" size="14.0" />
+         </font></Label>
+      <TextField fx:id="valueLvLA1" layoutX="150.0" layoutY="126.0" prefHeight="25.0" prefWidth="93.0" AnchorPane.topAnchor="120.0" />
+      <TextField fx:id="valueLvLA2" layoutX="578.0" layoutY="120.0" prefHeight="25.0" prefWidth="93.0" />
    </children>
 </AnchorPane>
