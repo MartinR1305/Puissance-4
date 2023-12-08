@@ -58,8 +58,10 @@ public class ChoicePlayerPvAController extends ForAllControllers implements Init
 			FXMLLoader loader = new FXMLLoader(getClass().getResource(
 					".." + File.separator + ".." + File.separator + "view" + File.separator + "GamePvALocal.fxml"));
 			root = loader.load();
+			
 			GamePvALocalController gamePvALocalController = loader.getController();
 			gamePvALocalController.startGamePvALocal(listPlayer.getValue(), listLevel.getValue());
+			
 			stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 			scene = new Scene(root);
 			stage.setScene(scene);

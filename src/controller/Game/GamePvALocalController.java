@@ -4,6 +4,7 @@ import java.util.Random;
 
 import Serialization.Serialization;
 import application.Main;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -44,19 +45,25 @@ public class GamePvALocalController extends GameController {
 		}
 
 		else {
-			long tempsDebut = System.currentTimeMillis();
-			
-			grid.addCoinGrid(algo.algoMinMax(grid), ValueSquare.P2);
-			
-			long tempsFin = System.currentTimeMillis();
-			long dureeTotaleMillis = tempsFin - tempsDebut;
-	        double dureeSecondes = dureeTotaleMillis / 1000.0;
-	        long minutes = (long) dureeSecondes / 60;
-	        double secondes = dureeSecondes % 60;
+			playerPlaying.setText("The AI is thinking about a move !");
+			Platform.runLater(()-> {
+				long tempsDebut = System.currentTimeMillis();
+				
+				grid.addCoinGrid(algo.algoMinMax(grid), ValueSquare.P2);
+				
+				long tempsFin = System.currentTimeMillis();
+				long dureeTotaleMillis = tempsFin - tempsDebut;
+		        double dureeSecondes = dureeTotaleMillis / 1000.0;
+		        long minutes = (long) dureeSecondes / 60;
+		        double secondes = dureeSecondes % 60;
 
-	        System.out.printf("Algorithme took %d min %.3f sec to find the best move.%n", minutes, secondes);
-			
-			playerPlaying.setText("It's Your Turn !");
+		        System.out.printf("Algorithme took %d min %.3f sec to find the best move.%n", minutes, secondes);
+				
+				playerPlaying.setText("It's Your Turn !");
+				
+				setColorsGrid(grid);
+			});
+
 		}
 
 		setColorsGrid(grid);
@@ -90,7 +97,6 @@ public class GamePvALocalController extends GameController {
 			grid.addCoinGrid(columnAddCoin, ValueSquare.P1);
 			setColorsGrid(grid);
 			
-
 			if (grid.isGridFull()) {
 				drawGamePvALocal();
 				
@@ -99,41 +105,53 @@ public class GamePvALocalController extends GameController {
 				winGamePvALocal(player1);
 				
 				
-			} else {  // We continue the game	
-				disableAllButtons();
-				playerPlaying.setText("The AI is thinking about a move !");
+			} else {  
+				new Thread(()-> algoTurn()).start();
 				
-				// Algorithm turn
-				long tempsDebut = System.currentTimeMillis();
-				
-				grid.addCoinGrid(algo.algoMinMax(grid), ValueSquare.P2);
-				
-				long tempsFin = System.currentTimeMillis();
-				long dureeTotaleMillis = tempsFin - tempsDebut;
-		        double dureeSecondes = dureeTotaleMillis / 1000.0;
-		        long minutes = (long) dureeSecondes / 60;
-		        double secondes = dureeSecondes % 60;
-
-		        System.out.printf("Algorithme took %d min %.3f sec to find the best move.%n", minutes, secondes);
-				
-				setColorsGrid(grid);
-
-				if (grid.isGridFull()) {
-					drawGamePvALocal();
-					
-				} else if (grid.isJ2win()) {
-					setColorsWinningCircles(grid,2);
-					looseGamePvALocal(player1);
-					
-					
-				} else { // We continue the game	
-					playerPlaying.setText("Its Your Turn !");
-					ableAllButtons();
-				}
 			}
 		}
 	}
 
+	public void algoTurn() {
+		// We continue the game	
+		Platform.runLater(()-> {
+			disableAllButtons();
+			playerPlaying.setText("The AI is thinking about a move !");
+		});
+		
+		// Algorithm turn
+		long tempsDebut = System.currentTimeMillis();
+		
+		grid.addCoinGrid(algo.algoMinMax(grid), ValueSquare.P2);
+		
+		long tempsFin = System.currentTimeMillis();
+		long dureeTotaleMillis = tempsFin - tempsDebut;
+        double dureeSecondes = dureeTotaleMillis / 1000.0;
+        long minutes = (long) dureeSecondes / 60;
+        double secondes = dureeSecondes % 60;
+
+        System.out.printf("Algorithme took %d min %.3f sec to find the best move.%n", minutes, secondes);
+		
+		Platform.runLater(()-> {
+			setColorsGrid(grid);
+			if (grid.isGridFull()) {
+				drawGamePvALocal();
+				
+			} else if (grid.isJ2win()) {
+				Platform.runLater(()-> setColorsWinningCircles(grid,2)); 
+
+				looseGamePvALocal(player1);
+				
+				
+			} else { // We continue the game	
+				playerPlaying.setText("Its Your Turn !");
+				Platform.runLater(()-> ableAllButtons());
+			}
+		}); 
+
+
+	}
+	
 	/**
 	 * Method that display a message, set data for a draw and then back to the
 	 * previous scene
