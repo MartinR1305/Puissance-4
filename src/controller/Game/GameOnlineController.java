@@ -103,7 +103,7 @@ public class GameOnlineController extends GameController implements Initializabl
 
 			algo = new Algorithm(level, ValueSquare.P2, ValueSquare.P1, 2, 3, 10000);
 			int columnAlgo = algo.algoMinMax(grid);
-			grid.addCoinGrid(columnAlgo, ValueSquare.P2);
+			grid.addCoinGrid(columnAlgo, ValueSquare.P1);
 
 			// Send the column played to the server
 			clientTCP.getWriter().println(columnAlgo);
