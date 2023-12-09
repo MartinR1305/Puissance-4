@@ -241,10 +241,11 @@ public class GameOnlineController extends GameController implements Initializabl
 
 		if (isAlgoPlaying && !isGameFinished) {
 			// We add the coin
-			grid.addCoinGrid(columnAddCoin, numPlayer);
+			int columnAlgo = algo.algoMinMax(grid);
+			grid.addCoinGrid(columnAlgo, numPlayer);
 
 			// Send the column played to the server
-			clientTCP.getWriter().println(columnAddCoin);
+			clientTCP.getWriter().println(columnAlgo);
 
 			setColorsGrid(grid);
 
