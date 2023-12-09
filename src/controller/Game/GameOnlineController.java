@@ -32,9 +32,9 @@ public class GameOnlineController extends GameController implements Initializabl
 	private Scene scene;
 	private Parent root;
 
-	private boolean isAlgoPlaying;
+	private static boolean isAlgoPlaying;
 	private boolean isPlayerPlaying;
-	private Algorithm algo;
+	private static Algorithm algo;
 
 	private ClientTCP clientTCP;
 	private static boolean areTwoPlayersConnected, isConnected, isPlaying, isGameFinished, isWonTheGame, isDraw;
@@ -112,6 +112,7 @@ public class GameOnlineController extends GameController implements Initializabl
 			isPlaying = false;
 
 		} else {
+			System.out.println("ici");
 			numPlayer = ValueSquare.P2;
 			algo = new Algorithm(level, ValueSquare.P1, ValueSquare.P2, 2, 3, 10000);
 		}
@@ -240,6 +241,8 @@ public class GameOnlineController extends GameController implements Initializabl
 			// We give the turn to the player
 			isPlaying = true;
 		}
+
+		System.out.println("is algo playing ? : " + isAlgoPlaying);
 
 		if (isAlgoPlaying && isPlaying) {
 			// We add the coin
