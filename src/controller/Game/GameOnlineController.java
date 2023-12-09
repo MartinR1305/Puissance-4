@@ -341,7 +341,7 @@ public class GameOnlineController extends GameController implements Initializabl
 							playerPlaying.setText("Your Turn !");
 
 							// We able all buttons in order that the player can play
-							ableAllButtons();
+							enableAllButtons();
 						}
 
 						// If it's not the player's turn
@@ -463,7 +463,7 @@ public class GameOnlineController extends GameController implements Initializabl
 	 * @throws IOException
 	 */
 	public void switchToHomeWithDecoServer(ActionEvent event) throws IOException {
-		// We actualize the boolean
+		// We actualize booleans
 		isConnected = false;
 		areTwoPlayersConnected = false;
 		

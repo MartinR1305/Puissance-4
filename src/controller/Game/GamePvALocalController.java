@@ -46,6 +46,8 @@ public class GamePvALocalController extends GameController {
 
 		else {
 			playerPlaying.setText("The AI is thinking about a move !");
+			
+			// We use Platform.runLater in order that the javaFX interface do not freeze when we need to modify something on it
 			Platform.runLater(()-> {
 				long tempsDebut = System.currentTimeMillis();
 				
@@ -58,14 +60,10 @@ public class GamePvALocalController extends GameController {
 		        double secondes = dureeSecondes % 60;
 
 		        System.out.printf("Algorithme took %d min %.3f sec to find the best move.%n", minutes, secondes);
-				
-				playerPlaying.setText("It's Your Turn !");
-				
+				playerPlaying.setText("It's Your Turn !");	
 				setColorsGrid(grid);
 			});
-
 		}
-
 		setColorsGrid(grid);
 	}
 
@@ -104,16 +102,17 @@ public class GamePvALocalController extends GameController {
 				setColorsWinningCircles(grid,1);
 				winGamePvALocal(player1);
 				
-				
-			} else {  
-				new Thread(()-> algoTurn()).start();
+			} else { 
+				// We continue the game	& We start a thread for the algo's turn
+				new Thread(()-> algorithmTurn()).start();
 				
 			}
 		}
 	}
 
-	public void algoTurn() {
-		// We continue the game	
+	public void algorithmTurn() {
+
+		// We use Platform.runLater in order that the javaFX interface do not freeze when we need to modify something on it
 		Platform.runLater(()-> {
 			disableAllButtons();
 			playerPlaying.setText("The AI is thinking about a move !");
@@ -132,24 +131,26 @@ public class GamePvALocalController extends GameController {
 
         System.out.printf("Algorithme took %d min %.3f sec to find the best move.%n", minutes, secondes);
 		
+		// We use Platform.runLater in order that the javaFX interface do not freeze when we need to modify something on it
 		Platform.runLater(()-> {
 			setColorsGrid(grid);
 			if (grid.isGridFull()) {
 				drawGamePvALocal();
 				
 			} else if (grid.isJ2win()) {
+				// We use Platform.runLater in order that the javaFX interface do not freeze when we need to modify something on it
 				Platform.runLater(()-> setColorsWinningCircles(grid,2)); 
 
 				looseGamePvALocal(player1);
 				
-				
-			} else { // We continue the game	
+			} else { 
+				// We continue the game	
 				playerPlaying.setText("Its Your Turn !");
-				Platform.runLater(()-> ableAllButtons());
+				
+				// We use Platform.runLater in order that the javaFX interface do not freeze when we need to modify something on it
+				Platform.runLater(()-> enableAllButtons());
 			}
 		}); 
-
-
 	}
 	
 	/**

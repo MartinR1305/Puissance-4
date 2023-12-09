@@ -122,7 +122,7 @@ public class Algorithm {
 					}
 				}
 				// For the root we want the index and not the value of the maximum
-				System.out.println("\n" + listTemp + "\n");
+				System.out.println("\n" + listTemp);
 				//System.out.println(threadFinish + " threads used.");
 				return findIndMax(listTemp, grid);
 			}

@@ -103,7 +103,7 @@ public class GameController extends ForAllControllers {
 	/**
 	 * Method that allows to set able all buttons of the game
 	 */
-	public void ableAllButtons() {
+	public void enableAllButtons() {
 		this.C0.setDisable(false);
 		this.C1.setDisable(false);
 		this.C2.setDisable(false);
