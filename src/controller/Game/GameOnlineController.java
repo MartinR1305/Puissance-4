@@ -20,6 +20,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
+import model.Algorithm;
 import model.Grid;
 import model.Player;
 import model.Results;
@@ -30,6 +31,10 @@ public class GameOnlineController extends GameController implements Initializabl
 	private Stage stage;
 	private Scene scene;
 	private Parent root;
+
+	private boolean isAlgoPlaying;
+	private boolean isPlayerPlaying;
+	private Algorithm algo;
 
 	private ClientTCP clientTCP;
 	private static boolean areTwoPlayersConnected, isConnected, isPlaying, isGameFinished, isWonTheGame, isDraw;
@@ -61,11 +66,12 @@ public class GameOnlineController extends GameController implements Initializabl
 	 * @param p1, first player of the game
 	 * @param p2, second player of the game
 	 */
-	public void startGamePvPOnline(Player p) {
+	public void startGamePlayer(Player p) {
 		// We set some attributes
 		player1 = p;
 		player2 = null;
 		grid = new Grid();
+		isPlayerPlaying = true;
 
 		// We put all circles in the matrix
 		matrixCircles = new Circle[][] { { c00, c01, c02, c03, c04, c05 }, { c10, c11, c12, c13, c14, c15 },
@@ -74,7 +80,39 @@ public class GameOnlineController extends GameController implements Initializabl
 
 		setColorsGrid(grid);
 	}
-	
+
+	public void startGameAlgorithm(int level, boolean isStarting) {
+		// We set some attributes
+		player1 = null;
+		player2 = null;
+		grid = new Grid();
+		isPlayerPlaying = false;
+		isAlgoPlaying = true;
+		disableAllButtons();
+
+		// We put all circles in the matrix
+		matrixCircles = new Circle[][] { { c00, c01, c02, c03, c04, c05 }, { c10, c11, c12, c13, c14, c15 },
+				{ c20, c21, c22, c23, c24, c25 }, { c30, c31, c32, c33, c34, c35 }, { c40, c41, c42, c43, c44, c45 },
+				{ c50, c51, c52, c53, c54, c55 }, { c60, c61, c62, c63, c64, c65 } };
+
+		setColorsGrid(grid);
+
+		if (isStarting) {
+			numPlayer = ValueSquare.P1;
+			isPlaying = true;
+
+			algo = new Algorithm(level, ValueSquare.P2, ValueSquare.P1, 2, 3, 10000);
+			grid.addCoinGrid(algo.algoMinMax(grid), ValueSquare.P2);
+
+			setColorsGrid(grid);
+			isPlaying = false;
+
+		} else {
+			numPlayer = ValueSquare.P2;
+			algo = new Algorithm(level, ValueSquare.P1, ValueSquare.P2, 2, 3, 10000);
+		}
+	}
+
 	/**
 	 * Setter of clientTCP -> use for associating application and ClientTCP
 	 * 
@@ -109,6 +147,99 @@ public class GameOnlineController extends GameController implements Initializabl
 		// We check if the column clicked is not full
 		if (!grid.getGrid().get(columnAddCoin).isColumnFull()) {
 
+			// We add the coin
+			grid.addCoinGrid(algo.algoMinMax(grid), numPlayer);
+
+			// Send the column played to the server
+			clientTCP.getWriter().println(columnAddCoin);
+
+			setColorsGrid(grid);
+
+			// If the player is P1
+			if (numPlayer.equals(ValueSquare.P1)) {
+
+				// We check if the grid is full
+				if (grid.isGridFull()) {
+					// We configure the controller for a tie game
+					isGameFinished = true;
+					isDraw = true;
+				}
+
+				// If the player won the game
+				else if (grid.isJ1win()) {
+					// We configure the controller for a winning game
+					setColorsWinningCircles(grid, 1);
+					isGameFinished = true;
+					isWonTheGame = true;
+				}
+			}
+
+			// If the player is P2
+			else if (numPlayer.equals(ValueSquare.P2)) {
+
+				// We check if the grid is full
+				if (grid.isGridFull()) {
+					// We configure the controller for a tie game
+					isGameFinished = true;
+					isDraw = true;
+				}
+
+				// If the player won the game
+				else if (grid.isJ2win()) {
+					// We configure the controller for a winning game
+					setColorsWinningCircles(grid, 2);
+					isGameFinished = true;
+					isWonTheGame = true;
+				}
+			}
+			// We give the turn to the other player
+			isPlaying = false;
+		}
+	}
+
+	/**
+	 * Method that allows to add a coin in the game for other player
+	 * 
+	 * @param nbColumn
+	 */
+	public void otherPlayerPlayed(String nbColumn) {
+
+		// Allocation of attributes
+		C0 = new Button();
+		C1 = new Button();
+		C2 = new Button();
+		C3 = new Button();
+		C4 = new Button();
+		C5 = new Button();
+		C6 = new Button();
+		gameFinish = new Label();
+		playerPlaying = new Label();
+
+		// We configure the updating of the label turn player
+		Main.getClientTCP().getGameController().updateIsPlaying(playerPlaying);
+
+		System.out.println(numPlayer);
+
+		// If the other player is P1
+		if (numPlayer.equals(ValueSquare.P1)) {
+
+			addCoinAndCheckGrid(Integer.valueOf(nbColumn), ValueSquare.P2);
+		}
+
+		// If the other player is P2
+		else if (numPlayer.equals(ValueSquare.P2)) {
+
+			addCoinAndCheckGrid(Integer.valueOf(nbColumn), ValueSquare.P1);
+		}
+
+		setColorsGrid(grid);
+
+		if (!isGameFinished) {
+			// We give the turn to the player
+			isPlaying = true;
+		}
+
+		if (isAlgoPlaying && !isGameFinished) {
 			// We add the coin
 			grid.addCoinGrid(columnAddCoin, numPlayer);
 
@@ -158,85 +289,34 @@ public class GameOnlineController extends GameController implements Initializabl
 					winGamePvPOnline();
 				}
 			}
-			// We give the turn to the other player
-			isPlaying = false;
 		}
 	}
 
-	/**
-	 * Method that allows to add a coin in the game for other player
-	 * 
-	 * @param nbColumn
-	 */
-	public void otherPlayerPlayed(String nbColumn) {
+	public void addCoinAndCheckGrid(int column, ValueSquare valueSquare) {
+		// We add the coin
+		grid.addCoinGrid(column, valueSquare);
 
-		// Allocation of attributes
-		C0 = new Button();
-		C1 = new Button();
-		C2 = new Button();
-		C3 = new Button();
-		C4 = new Button();
-		C5 = new Button();
-		C6 = new Button();
-		gameFinish = new Label();
-		playerPlaying = new Label();
+		// We check if the grid is full
+		if (grid.isGridFull()) {
+			// We configure the controller for a tie game
+			isGameFinished = true;
+			isDraw = true;
 
-		// We configure the updating of the label turn player
-		Main.getClientTCP().getGameController().updateIsPlaying(playerPlaying);
-
-		// If the other player is P1
-		if (numPlayer.equals(ValueSquare.P1)) {
-
-			// We add the coin
-			grid.addCoinGrid(Integer.valueOf(nbColumn), ValueSquare.P2);
-
-			// We check if the grid is full
-			if (grid.isGridFull()) {
-				// We configure the controller for a tie game
-				isGameFinished = true;
-				isDraw = true;
+			if (isPlayerPlaying) {
 				drawGamePvPOnline();
-			}
-
-			// We check if the other player won the game
-			else if (grid.isJ2win()) {
-				// We configure the controller for a defeat game
-				setColorsWinningCircles(grid, 2);
-				isGameFinished = true;
-				isWonTheGame = false;
-				defeatGamePvPOnline();
 			}
 		}
 
-		// If the other player is P2
-		else if (numPlayer.equals(ValueSquare.P2)) {
+		// We check if the other player won the game
+		else if (grid.isJ2win()) {
+			// We configure the controller for a defeat game
+			setColorsWinningCircles(grid, 2);
+			isGameFinished = true;
+			isWonTheGame = false;
 
-			// We add the coin
-			grid.addCoinGrid(Integer.valueOf(nbColumn), ValueSquare.P1);
-
-			// We check if the grid is full
-			if (grid.isGridFull()) {
-				// We configure the controller for a tie game
-				isGameFinished = true;
-				isDraw = true;
-				drawGamePvPOnline();
-			}
-
-			// We check if the other player won the game
-			else if (grid.isJ1win()) {
-				// We configure the controller for a defeat game
-				setColorsWinningCircles(grid, 1);
-				isGameFinished = true;
-				isWonTheGame = false;
+			if (isPlayerPlaying) {
 				defeatGamePvPOnline();
 			}
-		}
-
-		setColorsGrid(grid);
-
-		if (!isGameFinished) {
-			// We give the turn to the player
-			isPlaying = true;
 		}
 	}
 
@@ -281,8 +361,6 @@ public class GameOnlineController extends GameController implements Initializabl
 		// We serialize
 		Serialization.serializePlayer(Main.getPlayersData().getValue());
 	}
-
-
 
 	/**
 	 * Method that allows to actualize the boolean for know if two players are
@@ -341,7 +419,9 @@ public class GameOnlineController extends GameController implements Initializabl
 							playerPlaying.setText("Your Turn !");
 
 							// We able all buttons in order that the player can play
-							enableAllButtons();
+							if (isPlayerPlaying) {
+								enableAllButtons();
+							}
 						}
 
 						// If it's not the player's turn
@@ -466,7 +546,7 @@ public class GameOnlineController extends GameController implements Initializabl
 		// We actualize booleans
 		isConnected = false;
 		areTwoPlayersConnected = false;
-		
+
 		// We disconnect the client from the server
 		clientTCP.changeIP_Port("", "0");
 

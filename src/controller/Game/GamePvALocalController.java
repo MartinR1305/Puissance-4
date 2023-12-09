@@ -105,7 +105,6 @@ public class GamePvALocalController extends GameController {
 			} else { 
 				// We continue the game	& We start a thread for the algo's turn
 				new Thread(()-> algorithmTurn()).start();
-				
 			}
 		}
 	}
