@@ -314,7 +314,7 @@ public class GameOnlineController extends GameController implements Initializabl
 
 		if (valueSquare.equals(ValueSquare.P1)) {
 			// We check if the other player won the game
-			if (grid.isJ2win()) {
+			if (grid.isJ1win()) {
 				// We configure the controller for a defeat game
 				setColorsWinningCircles(grid, 1);
 				isGameFinished = true;
@@ -326,7 +326,7 @@ public class GameOnlineController extends GameController implements Initializabl
 			}
 		} else {
 			// We check if the other player won the game
-			if (grid.isJ1win()) {
+			if (grid.isJ2win()) {
 				// We configure the controller for a defeat game
 				setColorsWinningCircles(grid, 2);
 				isGameFinished = true;
