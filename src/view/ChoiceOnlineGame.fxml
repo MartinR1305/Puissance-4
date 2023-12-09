@@ -7,12 +7,10 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToggleButton?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" stylesheets="@../../ressources/css/styles.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Game.ChoiceOnlineGameController">
    <children>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="517.0" layoutX="-1.0" stroke="BLACK" strokeType="INSIDE" width="825.0" />
       <Button fx:id="back" layoutX="712.0" layoutY="451.0" mnemonicParsing="false" onAction="#switchToHome" text="BACK">
          <font>
             <Font name="Verdana" size="18.0" />

@@ -152,7 +152,7 @@ public class GameOnlineController extends GameController implements Initializabl
 		if (!grid.getGrid().get(columnAddCoin).isColumnFull()) {
 
 			// We add the coin
-			grid.addCoinGrid(algo.algoMinMax(grid), numPlayer);
+			grid.addCoinGrid(columnAddCoin, numPlayer);
 
 			// Send the column played to the server
 			clientTCP.getWriter().println(columnAddCoin);
@@ -241,7 +241,7 @@ public class GameOnlineController extends GameController implements Initializabl
 			isPlaying = true;
 		}
 
-		if (isAlgoPlaying && !isGameFinished) {
+		if (isAlgoPlaying && isPlaying) {
 			// We add the coin
 			int columnAlgo = algo.algoMinMax(grid);
 			grid.addCoinGrid(columnAlgo, numPlayer);
@@ -292,6 +292,8 @@ public class GameOnlineController extends GameController implements Initializabl
 					winGamePvPOnline();
 				}
 			}
+			// We give the turn to the other algorithm
+			isPlaying = false;
 		}
 	}
 
