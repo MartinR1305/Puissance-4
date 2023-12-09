@@ -102,7 +102,11 @@ public class GameOnlineController extends GameController implements Initializabl
 			isPlaying = true;
 
 			algo = new Algorithm(level, ValueSquare.P2, ValueSquare.P1, 2, 3, 10000);
-			grid.addCoinGrid(algo.algoMinMax(grid), ValueSquare.P2);
+			int columnAlgo = algo.algoMinMax(grid);
+			grid.addCoinGrid(columnAlgo, ValueSquare.P2);
+			
+			// Send the column played to the server
+			clientTCP.getWriter().println(columnAlgo);
 
 			setColorsGrid(grid);
 			isPlaying = false;
@@ -222,13 +226,11 @@ public class GameOnlineController extends GameController implements Initializabl
 
 		// If the other player is P1
 		if (numPlayer.equals(ValueSquare.P1)) {
-
 			addCoinAndCheckGrid(Integer.valueOf(nbColumn), ValueSquare.P2);
 		}
 
 		// If the other player is P2
 		else if (numPlayer.equals(ValueSquare.P2)) {
-
 			addCoinAndCheckGrid(Integer.valueOf(nbColumn), ValueSquare.P1);
 		}
 
