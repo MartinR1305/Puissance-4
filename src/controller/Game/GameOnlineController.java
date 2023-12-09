@@ -168,6 +168,7 @@ public class GameOnlineController extends GameController implements Initializabl
 					// We configure the controller for a tie game
 					isGameFinished = true;
 					isDraw = true;
+					drawGamePvPOnline();
 				}
 
 				// If the player won the game
@@ -176,6 +177,7 @@ public class GameOnlineController extends GameController implements Initializabl
 					setColorsWinningCircles(grid, 1);
 					isGameFinished = true;
 					isWonTheGame = true;
+					winGamePvPOnline();
 				}
 			}
 
@@ -187,6 +189,7 @@ public class GameOnlineController extends GameController implements Initializabl
 					// We configure the controller for a tie game
 					isGameFinished = true;
 					isDraw = true;
+					drawGamePvPOnline();
 				}
 
 				// If the player won the game
@@ -195,6 +198,7 @@ public class GameOnlineController extends GameController implements Initializabl
 					setColorsWinningCircles(grid, 2);
 					isGameFinished = true;
 					isWonTheGame = true;
+					winGamePvPOnline();
 				}
 			}
 			// We give the turn to the other player
@@ -262,7 +266,6 @@ public class GameOnlineController extends GameController implements Initializabl
 					// We configure the controller for a tie game
 					isGameFinished = true;
 					isDraw = true;
-					drawGamePvPOnline();
 				}
 
 				// If the player won the game
@@ -271,7 +274,6 @@ public class GameOnlineController extends GameController implements Initializabl
 					setColorsWinningCircles(grid, 1);
 					isGameFinished = true;
 					isWonTheGame = true;
-					winGamePvPOnline();
 				}
 			}
 
@@ -283,7 +285,6 @@ public class GameOnlineController extends GameController implements Initializabl
 					// We configure the controller for a tie game
 					isGameFinished = true;
 					isDraw = true;
-					drawGamePvPOnline();
 				}
 
 				// If the player won the game
@@ -292,7 +293,6 @@ public class GameOnlineController extends GameController implements Initializabl
 					setColorsWinningCircles(grid, 2);
 					isGameFinished = true;
 					isWonTheGame = true;
-					winGamePvPOnline();
 				}
 			}
 			// We give the turn to the other algorithm
