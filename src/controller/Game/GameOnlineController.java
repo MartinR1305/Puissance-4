@@ -104,7 +104,7 @@ public class GameOnlineController extends GameController implements Initializabl
 			algo = new Algorithm(level, ValueSquare.P2, ValueSquare.P1, 2, 3, 10000);
 			int columnAlgo = algo.algoMinMax(grid);
 			grid.addCoinGrid(columnAlgo, ValueSquare.P2);
-			
+
 			// Send the column played to the server
 			clientTCP.getWriter().println(columnAlgo);
 
@@ -312,15 +312,29 @@ public class GameOnlineController extends GameController implements Initializabl
 			}
 		}
 
-		// We check if the other player won the game
-		else if (grid.isJ2win()) {
-			// We configure the controller for a defeat game
-			setColorsWinningCircles(grid, 2);
-			isGameFinished = true;
-			isWonTheGame = false;
+		if (valueSquare.equals(ValueSquare.P1)) {
+			// We check if the other player won the game
+			if (grid.isJ2win()) {
+				// We configure the controller for a defeat game
+				setColorsWinningCircles(grid, 1);
+				isGameFinished = true;
+				isWonTheGame = false;
 
-			if (isPlayerPlaying) {
-				defeatGamePvPOnline();
+				if (isPlayerPlaying) {
+					defeatGamePvPOnline();
+				}
+			}
+		} else {
+			// We check if the other player won the game
+			if (grid.isJ1win()) {
+				// We configure the controller for a defeat game
+				setColorsWinningCircles(grid, 2);
+				isGameFinished = true;
+				isWonTheGame = false;
+
+				if (isPlayerPlaying) {
+					defeatGamePvPOnline();
+				}
 			}
 		}
 	}
