@@ -31,15 +31,14 @@ public class GameOnlineController extends GameController implements Initializabl
 	private Stage stage;
 	private Scene scene;
 	private Parent root;
+	private boolean isPlayerPlaying;
 
 	private static boolean isAlgoPlaying;
-	private boolean isPlayerPlaying;
 	private static Algorithm algo;
+	private static ValueSquare numPlayer;
 
 	private ClientTCP clientTCP;
 	private static boolean areTwoPlayersConnected, isConnected, isPlaying, isGameFinished, isWonTheGame, isDraw;
-
-	private static ValueSquare numPlayer;
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
@@ -47,7 +46,7 @@ public class GameOnlineController extends GameController implements Initializabl
 		// We actualize the client attribute with the one of the main
 		setClientTCP(Main.getClientTCP());
 
-		// Initialization of attributes
+		// Initialization of booleans
 		areTwoPlayersConnected = true;
 		isConnected = true;
 		isGameFinished = false;
@@ -59,19 +58,28 @@ public class GameOnlineController extends GameController implements Initializabl
 		this.updateFinishLabel(playerPlaying, gameFinish);
 		this.updateIsPlaying(playerPlaying);
 	}
+	
+	/**
+	 * Setter of clientTCP
+	 * 
+	 * @param clientTCP
+	 */
+	public void setClientTCP(ClientTCP clientTCP) {
+		this.clientTCP = clientTCP;
+	}
 
 	/**
-	 * Method that allows to start a PvP Local game
+	 * Method that allows to start a game with a player playing
 	 * 
-	 * @param p1, first player of the game
-	 * @param p2, second player of the game
+	 * @param p, player of the game
 	 */
 	public void startGamePlayer(Player p) {
-		// We set some attributes
+		// Initialization of attributes
 		player1 = p;
 		player2 = null;
 		grid = new Grid();
 		isPlayerPlaying = true;
+		isAlgoPlaying = false;
 
 		// We put all circles in the matrix
 		matrixCircles = new Circle[][] { { c00, c01, c02, c03, c04, c05 }, { c10, c11, c12, c13, c14, c15 },
@@ -81,13 +89,22 @@ public class GameOnlineController extends GameController implements Initializabl
 		setColorsGrid(grid);
 	}
 
+	/**
+	 * Method that allows to start a game with a algorithm playing
+	 * 
+	 * @param level
+	 * @param isStarting
+	 */
 	public void startGameAlgorithm(int level, boolean isStarting) {
-		// We set some attributes
+		// Initialization of attributes
 		player1 = null;
 		player2 = null;
 		grid = new Grid();
 		isPlayerPlaying = false;
 		isAlgoPlaying = true;
+
+		// A algorithm will play so the player can not add a coin so we disable all
+		// buttons
 		disableAllButtons();
 
 		// We put all circles in the matrix
@@ -97,34 +114,30 @@ public class GameOnlineController extends GameController implements Initializabl
 
 		setColorsGrid(grid);
 
+		// If the algorithm starts the game
 		if (isStarting) {
+			// Initialization of others attributes
 			numPlayer = ValueSquare.P1;
+			algo = new Algorithm(level, ValueSquare.P2, ValueSquare.P1, 2, 3, 10000);
+
 			isPlaying = true;
 
-			algo = new Algorithm(level, ValueSquare.P2, ValueSquare.P1, 2, 3, 10000);
+			// Algorithm is searching the best column to play
 			int columnAlgo = algo.algoMinMax(grid);
 			grid.addCoinGrid(columnAlgo, ValueSquare.P1);
+
+			isPlaying = false;
 
 			// Send the column played to the server
 			clientTCP.getWriter().println(columnAlgo);
 
 			setColorsGrid(grid);
-			isPlaying = false;
 
 		} else {
-			System.out.println("ici");
+			// Initialization of others attributes
 			numPlayer = ValueSquare.P2;
 			algo = new Algorithm(level, ValueSquare.P1, ValueSquare.P2, 2, 3, 10000);
 		}
-	}
-
-	/**
-	 * Setter of clientTCP -> use for associating application and ClientTCP
-	 * 
-	 * @param clientTCP
-	 */
-	public void setClientTCP(ClientTCP clientTCP) {
-		this.clientTCP = clientTCP;
 	}
 
 	/**
@@ -162,45 +175,15 @@ public class GameOnlineController extends GameController implements Initializabl
 
 			// If the player is P1
 			if (numPlayer.equals(ValueSquare.P1)) {
-
-				// We check if the grid is full
-				if (grid.isGridFull()) {
-					// We configure the controller for a tie game
-					isGameFinished = true;
-					isDraw = true;
-					drawGamePvPOnline();
-				}
-
-				// If the player won the game
-				else if (grid.isJ1win()) {
-					// We configure the controller for a winning game
-					setColorsWinningCircles(grid, 1);
-					isGameFinished = true;
-					isWonTheGame = true;
-					winGamePvPOnline();
-				}
+				checkingWinGame(1);
 			}
 
 			// If the player is P2
 			else if (numPlayer.equals(ValueSquare.P2)) {
-
-				// We check if the grid is full
-				if (grid.isGridFull()) {
-					// We configure the controller for a tie game
-					isGameFinished = true;
-					isDraw = true;
-					drawGamePvPOnline();
-				}
-
-				// If the player won the game
-				else if (grid.isJ2win()) {
-					// We configure the controller for a winning game
-					setColorsWinningCircles(grid, 2);
-					isGameFinished = true;
-					isWonTheGame = true;
-					winGamePvPOnline();
-				}
+				checkingWinGame(2);
 			}
+			checkingDrawGame();
+			
 			// We give the turn to the other player
 			isPlaying = false;
 		}
@@ -231,22 +214,23 @@ public class GameOnlineController extends GameController implements Initializabl
 
 		// If the other player is P1
 		if (numPlayer.equals(ValueSquare.P1)) {
-			addCoinAndCheckGrid(Integer.valueOf(nbColumn), ValueSquare.P2);
+			grid.addCoinGrid(Integer.valueOf(nbColumn), ValueSquare.P2);
+			checkingDefeatGame(2);
 		}
 
 		// If the other player is P2
 		else if (numPlayer.equals(ValueSquare.P2)) {
-			addCoinAndCheckGrid(Integer.valueOf(nbColumn), ValueSquare.P1);
+			grid.addCoinGrid(Integer.valueOf(nbColumn), ValueSquare.P1);
+			checkingDefeatGame(1);
 		}
-
+		
+		checkingDrawGame();
 		setColorsGrid(grid);
 
 		if (!isGameFinished) {
 			// We give the turn to the player
 			isPlaying = true;
 		}
-
-		System.out.println("is algo playing ? : " + isAlgoPlaying);
 
 		if (isAlgoPlaying && isPlaying) {
 			// We add the coin
@@ -260,85 +244,18 @@ public class GameOnlineController extends GameController implements Initializabl
 
 			// If the player is P1
 			if (numPlayer.equals(ValueSquare.P1)) {
-
-				// We check if the grid is full
-				if (grid.isGridFull()) {
-					// We configure the controller for a tie game
-					isGameFinished = true;
-					isDraw = true;
-				}
-
-				// If the player won the game
-				else if (grid.isJ1win()) {
-					// We configure the controller for a winning game
-					setColorsWinningCircles(grid, 1);
-					isGameFinished = true;
-					isWonTheGame = true;
-				}
+				checkingWinGame(1);
 			}
 
 			// If the player is P2
 			else if (numPlayer.equals(ValueSquare.P2)) {
 
-				// We check if the grid is full
-				if (grid.isGridFull()) {
-					// We configure the controller for a tie game
-					isGameFinished = true;
-					isDraw = true;
-				}
-
-				// If the player won the game
-				else if (grid.isJ2win()) {
-					// We configure the controller for a winning game
-					setColorsWinningCircles(grid, 2);
-					isGameFinished = true;
-					isWonTheGame = true;
-				}
+				checkingWinGame(2);
 			}
+			checkingDrawGame();
+			
 			// We give the turn to the other algorithm
 			isPlaying = false;
-		}
-	}
-
-	public void addCoinAndCheckGrid(int column, ValueSquare valueSquare) {
-		// We add the coin
-		grid.addCoinGrid(column, valueSquare);
-
-		// We check if the grid is full
-		if (grid.isGridFull()) {
-			// We configure the controller for a tie game
-			isGameFinished = true;
-			isDraw = true;
-
-			if (isPlayerPlaying) {
-				drawGamePvPOnline();
-			}
-		}
-
-		if (valueSquare.equals(ValueSquare.P1)) {
-			// We check if the other player won the game
-			if (grid.isJ1win()) {
-				// We configure the controller for a defeat game
-				setColorsWinningCircles(grid, 1);
-				isGameFinished = true;
-				isWonTheGame = false;
-
-				if (isPlayerPlaying) {
-					defeatGamePvPOnline();
-				}
-			}
-		} else {
-			// We check if the other player won the game
-			if (grid.isJ2win()) {
-				// We configure the controller for a defeat game
-				setColorsWinningCircles(grid, 2);
-				isGameFinished = true;
-				isWonTheGame = false;
-
-				if (isPlayerPlaying) {
-					defeatGamePvPOnline();
-				}
-			}
 		}
 	}
 
@@ -348,7 +265,7 @@ public class GameOnlineController extends GameController implements Initializabl
 	 * @param playerWin,   player who won the game
 	 * @param playerLoose, player who lost the game
 	 */
-	public void winGamePvPOnline() {
+	public void winGameOnline() {
 		super.disableAllButtons();
 
 		// Add the draw on players's data
@@ -361,7 +278,7 @@ public class GameOnlineController extends GameController implements Initializabl
 	/**
 	 * Method that display a message, set data for a draw
 	 */
-	public void drawGamePvPOnline() {
+	public void drawGameOnline() {
 		super.disableAllButtons();
 
 		// Add the draw on players's data
@@ -374,7 +291,7 @@ public class GameOnlineController extends GameController implements Initializabl
 	/**
 	 * Method that display a message, set data for a defeat
 	 */
-	public void defeatGamePvPOnline() {
+	public void defeatGameOnline() {
 		super.disableAllButtons();
 
 		// Add the draw on players's data
@@ -393,11 +310,8 @@ public class GameOnlineController extends GameController implements Initializabl
 	public void actualize2PlayersBoolean(Boolean is2ndClientConnected) {
 		if (is2ndClientConnected.equals(true)) {
 			areTwoPlayersConnected = true;
-		}
-
-		else if (is2ndClientConnected.equals(false)) {
+		} else if (is2ndClientConnected.equals(false)) {
 			areTwoPlayersConnected = false;
-
 			// We disconnect the application from the server via give him a null socket
 			clientTCP.changeIP_Port("", "0");
 		}
@@ -410,14 +324,11 @@ public class GameOnlineController extends GameController implements Initializabl
 	 * @param state
 	 */
 	public void actualizePlayerStarting(Boolean isPlayerPlaying) {
-
 		// The player will start the game
 		if (isPlayerPlaying.equals(true)) {
 			isPlaying = true;
 			numPlayer = ValueSquare.P1;
-		}
-		// The player won't start the game
-		else if (isPlayerPlaying.equals(false)) {
+		} else {
 			isPlaying = false;
 			numPlayer = ValueSquare.P2;
 		}
@@ -432,7 +343,7 @@ public class GameOnlineController extends GameController implements Initializabl
 			// We do the thread until the game is finished
 			while (!isGameFinished) {
 				try {
-					Thread.sleep(500);
+					Thread.sleep(100);
 					Platform.runLater(() -> {
 
 						// We check if it's the player's turn
@@ -581,5 +492,86 @@ public class GameOnlineController extends GameController implements Initializabl
 		stage.setScene(scene);
 		stage.show();
 		setCenterStage(stage);
+	}
+
+	/**
+	 * Method that allows to check if the player won the game or not and set up it if it's the case
+	 * 
+	 * @param playerToCheck
+	 */
+	public void checkingWinGame(int playerToCheck) {
+		if (playerToCheck == 1) {
+			if (grid.isJ1win()) {
+				// We configure the controller for a winning game
+				setColorsWinningCircles(grid, playerToCheck);
+				isGameFinished = true;
+				isWonTheGame = true;
+				
+				if (isPlayerPlaying) {
+					winGameOnline();
+				}
+			}
+		} else {
+			if (grid.isJ2win()) {
+				// We configure the controller for a winning game
+				setColorsWinningCircles(grid, playerToCheck);
+				isGameFinished = true;
+				isWonTheGame = true;
+				
+				if (isPlayerPlaying) {
+					winGameOnline();
+				}
+			}
+		}
+	}
+	
+	/**
+	 * Method that allows to check if it's a draw or not and set up it if it's the case
+	 *
+	 */
+	public void checkingDrawGame() {
+		// We check if the grid is full
+		if (grid.isGridFull()) {
+			// We configure the controller for a tie game
+			isGameFinished = true;
+			isDraw = true;
+			
+			if (isPlayerPlaying) {
+				drawGameOnline();
+			}
+		}
+	}
+	
+	/**
+	 * Method that allows to check if the player lost the game or not and set up it if it's the case
+	 * 
+	 * @param playerToCheck
+	 */
+	public void checkingDefeatGame(int playerToCheck) {
+		if (playerToCheck == 1) {
+			// We check if the other player won the game
+			if (grid.isJ1win()) {
+				// We configure the controller for a defeat game
+				setColorsWinningCircles(grid, 1);
+				isGameFinished = true;
+				isWonTheGame = false;
+
+				if (isPlayerPlaying) {
+					defeatGameOnline();
+				}
+			}
+		} else {
+			// We check if the other player won the game
+			if (grid.isJ2win()) {
+				// We configure the controller for a defeat game
+				setColorsWinningCircles(grid, 2);
+				isGameFinished = true;
+				isWonTheGame = false;
+
+				if (isPlayerPlaying) {
+					defeatGameOnline();
+				}
+			}
+		}
 	}
 }

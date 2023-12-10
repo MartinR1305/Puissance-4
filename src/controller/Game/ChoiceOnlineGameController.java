@@ -303,9 +303,7 @@ public class ChoiceOnlineGameController extends HomeController implements Initia
 								
 								if (isPlayerRBSelected) {
 									gameControllerPvPOnlineController.startGamePlayer(listPlayer.getValue());
-								}
-
-								else if (isAlgoRBSelected) {
+								} else if (isAlgoRBSelected) {
 									gameControllerPvPOnlineController.startGameAlgorithm(algoLvl.getValue(), !isStarting.isSelected());
 								}
 								
