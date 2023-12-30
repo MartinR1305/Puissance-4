@@ -12,8 +12,6 @@ public class Algorithm {
 	int alpha1;
 	int alpha2;
 	int alpha3;
-	
-	private int threadFinish;
 
 	/**
 	 * Constructor
@@ -56,7 +54,6 @@ public class Algorithm {
 	 * @return
 	 */
 	public int algoMinMax(Grid grid) {
-		threadFinish = 0;
 
 		// We check if the other wins with a next move
 		for (int indexColumn = 0; indexColumn < 7; indexColumn++) {
@@ -110,7 +107,6 @@ public class Algorithm {
 					});
 					listThreadsMax.add(thread);
 					thread.start();
-					threadFinish++;
 				}
 
 				// We wait that all threads end
@@ -123,7 +119,6 @@ public class Algorithm {
 				}
 				// For the root we want the index and not the value of the maximum
 				//System.out.println("\n" + listTemp);
-				//System.out.println(threadFinish + " threads used.");
 				return findIndMax(listTemp, grid);
 			}
 
