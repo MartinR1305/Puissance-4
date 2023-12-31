@@ -289,7 +289,7 @@ public class Algorithm {
 
 	public void calculateValueNode(Grid grid, List<Integer> listTemp, int index, int currentDepth, boolean isPlayerMax,
 			ValueSquare player) {
-		// We check if the grid is not full
+		// We check if the column is not full
 		if (!grid.getGrid().get(index).isColumnFull()) {
 
 			// We check if the is not winning for a player
