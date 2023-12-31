@@ -54,17 +54,20 @@ public class Algorithm {
 	 * @return
 	 */
 	public int algoMinMax(Grid grid) {
-		System.out.println(playerMax);
-
-		// We check if the other wins with a next move
+		// We check if we have a direct win with a next move
 		for (int indexColumn = 0; indexColumn < 7; indexColumn++) {
 
 			Grid gridTestWin = new Grid(grid);
 			gridTestWin.addCoinGrid(indexColumn, playerMax);
 
-			if (gridTestWin.isJ2win()) {
-				System.out.println("ok");
-				return indexColumn;
+			if (playerMax.equals(ValueSquare.P1)) {
+				if (gridTestWin.isJ1win()) {
+					return indexColumn;
+				}
+			} else {
+				if (gridTestWin.isJ2win()) {
+					return indexColumn;
+				}
 			}
 		}
 
@@ -84,7 +87,8 @@ public class Algorithm {
 
 		// Stop condition : if we have reached the level we wanted
 		if (currentDepth == level) {
-			return grid.evaluateGrid(playerMax,alpha1,alpha2,alpha3) - grid.evaluateGrid(playerMin,alpha1,alpha2,alpha3);
+			return grid.evaluateGrid(playerMax, alpha1, alpha2, alpha3)
+					- grid.evaluateGrid(playerMin, alpha1, alpha2, alpha3);
 		}
 
 		// We will take the maximum of the 7 values
@@ -302,14 +306,16 @@ public class Algorithm {
 
 			// If it is
 			else {
-				listTemp.set(index, grid.evaluateGrid(playerMax,alpha1,alpha2,alpha3) - grid.evaluateGrid(playerMin,alpha1,alpha2,alpha3));
+				listTemp.set(index, grid.evaluateGrid(playerMax, alpha1, alpha2, alpha3)
+						- grid.evaluateGrid(playerMin, alpha1, alpha2, alpha3));
 			}
 		}
 
 		// If the column is full we stop here ( we don't need to call the recursive
 		// method )
 		else {
-			listTemp.set(index, grid.evaluateGrid(playerMax,alpha1,alpha2,alpha3) - grid.evaluateGrid(playerMin,alpha1,alpha2,alpha3));
+			listTemp.set(index, grid.evaluateGrid(playerMax, alpha1, alpha2, alpha3)
+					- grid.evaluateGrid(playerMin, alpha1, alpha2, alpha3));
 		}
 	}
 }
