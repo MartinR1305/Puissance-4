@@ -54,6 +54,7 @@ public class Algorithm {
 	 * @return
 	 */
 	public int algoMinMax(Grid grid) {
+		System.out.println(playerMax);
 
 		// We check if the other wins with a next move
 		for (int indexColumn = 0; indexColumn < 7; indexColumn++) {
@@ -61,7 +62,8 @@ public class Algorithm {
 			Grid gridTestWin = new Grid(grid);
 			gridTestWin.addCoinGrid(indexColumn, playerMax);
 
-			if (gridTestWin.isJ1win()) {
+			if (gridTestWin.isJ2win()) {
+				System.out.println("ok");
 				return indexColumn;
 			}
 		}
@@ -118,7 +120,8 @@ public class Algorithm {
 					}
 				}
 				// For the root we want the index and not the value of the maximum
-				//System.out.println("\n" + listTemp);
+				System.out.println("\n" + listTemp);
+
 				return findIndMax(listTemp, grid);
 			}
 
