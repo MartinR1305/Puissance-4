@@ -352,6 +352,124 @@ public class Grid {
 		// There is no combinations
 		return false;
 	}
+	
+	public int evaluateGrid(ValueSquare playerToEvaluate, int alpha2, int alpha3, int alpha4) {
+		int points = 0;
+
+		// We explore the grid for line / column / diagonal of 4
+		for (int indexLine = 0; indexLine < 6; indexLine++) {
+			for (int indexColumn = 0; indexColumn < 7; indexColumn++) {
+				// Collect different sequences for each position
+				List<Square> lineList = collectLineSequence(indexColumn, indexLine);
+				List<Square> columnList = collectColumnSequence(indexColumn, indexLine);
+				List<Square> diagonalAscList = collectAscendingDiagonalSequence(indexColumn, indexLine);
+				List<Square> diagonalDesList = collectDescendingDiagonalSequence(indexColumn, indexLine);
+
+				// We evaluate the collected sequences and accumulate the points
+				points += evaluateSequence(lineList, playerToEvaluate, alpha2, alpha3, alpha4);
+				points += evaluateSequence(columnList, playerToEvaluate, alpha2, alpha3, alpha4);
+				points += evaluateSequence(diagonalAscList, playerToEvaluate, alpha2, alpha3, alpha4);
+				points += evaluateSequence(diagonalDesList, playerToEvaluate, alpha2, alpha3, alpha4);
+			}
+		}
+
+		return points;
+	}
+
+	// Method to collect a line sequence
+	private List<Square> collectLineSequence(int startColumn, int startLine) {
+		List<Square> lineSequence = new ArrayList<>();
+		if (startColumn < 4) {
+			for (int i = 0; i < 4; i++) {
+				lineSequence.add(this.getGrid().get(startColumn + i).getColumn().get(startLine));
+			}
+		}
+		return lineSequence;
+	}
+
+	// Method to collect a column sequence
+	private List<Square> collectColumnSequence(int startColumn, int startLine) {
+		List<Square> columnSequence = new ArrayList<>();
+		if (startLine < 3) {
+			for (int i = 0; i < 4; i++) {
+				columnSequence.add(this.getGrid().get(startColumn).getColumn().get(startLine + i));
+			}
+		}
+		return columnSequence;
+	}
+
+//	//Method to collect an ascending diagonal sequence
+	private List<Square> collectAscendingDiagonalSequence(int startColumn, int startLine) {
+		List<Square> ascendingDiagonalSequence = new ArrayList<>();
+		if (startColumn < 4 && startLine < 3) {
+			for (int i = 0; i < 4; i++) {
+				Square square = this.getGrid().get(startColumn + i).getColumn().get(startLine + i);
+				ascendingDiagonalSequence.add(square);
+			}
+		}
+		return ascendingDiagonalSequence;
+	}
+
+//	//Method to collect a descending diagonal sequence
+	private List<Square> collectDescendingDiagonalSequence(int startColumn, int startLine) {
+		List<Square> descendingDiagonalSequence = new ArrayList<>();
+		if (startColumn < 4 && startLine > 2) {
+			for (int i = 0; i < 4; i++) {
+				Square square = this.getGrid().get(startColumn + i).getColumn().get(startLine - i);
+				descendingDiagonalSequence.add(square);
+			}
+		}
+		return descendingDiagonalSequence;
+	}
+
+	// Method to evaluate a sequence and return the points
+	private int evaluateSequence(List<Square> sequence, ValueSquare playerToEvaluate, int alpha2, int alpha3, int alpha4) {
+//		long tempsDebut = System.currentTimeMillis();
+		int countP1 = 0;
+		int countP2 = 0;
+		int points = 0;
+
+		ValueSquare otherPlayer = null;
+
+		if (playerToEvaluate == ValueSquare.P2) {
+			otherPlayer = ValueSquare.P1;
+		} else {
+			otherPlayer = ValueSquare.P2;
+		}
+
+		for (Square square : sequence) {
+			if (square.getValue().equals(playerToEvaluate)) {
+				countP1++;
+			} else if (square.getValue().equals(otherPlayer)) {
+				countP2++;
+			}
+		}
+
+		if (countP2 > 0) {
+			points += 0;
+		} else {
+			if (countP1 == 2) {
+				// α2
+				points += alpha2;
+			} else if (countP1 == 3) {
+				// α3
+				points += alpha3;
+			} else if (countP1 == 4) {
+				// α4
+				points += alpha4;
+			}
+		}
+
+//		long tempsFin = System.currentTimeMillis();
+//		long dureeTotaleMillis = tempsFin - tempsDebut;
+//        double dureeSecondes = dureeTotaleMillis / 1000.0;
+//        long minutes = (long) dureeSecondes / 60;
+//        double secondes = dureeSecondes % 60;
+//
+//        System.out.printf("Algorithme took %d min %.3f sec to evaluate the grid.%n", minutes, secondes);
+
+		return points;
+	}
 
 	/**
 	 * Method that allows to get the 4 winning squares
@@ -813,123 +931,7 @@ public class Grid {
 		return null;
 	}
 
-	public int evaluateGrid(ValueSquare playerToEvaluate, int alpha2, int alpha3, int alpha4) {
-		int points = 0;
 
-		// We explore the grid for line / column / diagonal of 4
-		for (int indexLine = 0; indexLine < 6; indexLine++) {
-			for (int indexColumn = 0; indexColumn < 7; indexColumn++) {
-				// Collect different sequences for each position
-				List<Square> lineList = collectLineSequence(indexColumn, indexLine);
-				List<Square> columnList = collectColumnSequence(indexColumn, indexLine);
-				List<Square> diagonalAscList = collectAscendingDiagonalSequence(indexColumn, indexLine);
-				List<Square> diagonalDesList = collectDescendingDiagonalSequence(indexColumn, indexLine);
-
-				// We evaluate the collected sequences and accumulate the points
-				points += evaluateSequence(lineList, playerToEvaluate, alpha2, alpha3, alpha4);
-				points += evaluateSequence(columnList, playerToEvaluate, alpha2, alpha3, alpha4);
-				points += evaluateSequence(diagonalAscList, playerToEvaluate, alpha2, alpha3, alpha4);
-				points += evaluateSequence(diagonalDesList, playerToEvaluate, alpha2, alpha3, alpha4);
-			}
-		}
-
-		return points;
-	}
-
-	// Method to collect a line sequence
-	private List<Square> collectLineSequence(int startColumn, int startLine) {
-		List<Square> lineSequence = new ArrayList<>();
-		if (startColumn < 4) {
-			for (int i = 0; i < 4; i++) {
-				lineSequence.add(this.getGrid().get(startColumn + i).getColumn().get(startLine));
-			}
-		}
-		return lineSequence;
-	}
-
-	// Method to collect a column sequence
-	private List<Square> collectColumnSequence(int startColumn, int startLine) {
-		List<Square> columnSequence = new ArrayList<>();
-		if (startLine < 3) {
-			for (int i = 0; i < 4; i++) {
-				columnSequence.add(this.getGrid().get(startColumn).getColumn().get(startLine + i));
-			}
-		}
-		return columnSequence;
-	}
-
-//	//Method to collect an ascending diagonal sequence
-	private List<Square> collectAscendingDiagonalSequence(int startColumn, int startLine) {
-		List<Square> ascendingDiagonalSequence = new ArrayList<>();
-		if (startColumn < 4 && startLine < 3) {
-			for (int i = 0; i < 4; i++) {
-				Square square = this.getGrid().get(startColumn + i).getColumn().get(startLine + i);
-				ascendingDiagonalSequence.add(square);
-			}
-		}
-		return ascendingDiagonalSequence;
-	}
-
-//	//Method to collect a descending diagonal sequence
-	private List<Square> collectDescendingDiagonalSequence(int startColumn, int startLine) {
-		List<Square> descendingDiagonalSequence = new ArrayList<>();
-		if (startColumn < 4 && startLine > 2) {
-			for (int i = 0; i < 4; i++) {
-				Square square = this.getGrid().get(startColumn + i).getColumn().get(startLine - i);
-				descendingDiagonalSequence.add(square);
-			}
-		}
-		return descendingDiagonalSequence;
-	}
-
-	// Method to evaluate a sequence and return the points
-	private int evaluateSequence(List<Square> sequence, ValueSquare playerToEvaluate, int alpha2, int alpha3, int alpha4) {
-//		long tempsDebut = System.currentTimeMillis();
-		int countP1 = 0;
-		int countP2 = 0;
-		int points = 0;
-
-		ValueSquare otherPlayer = null;
-
-		if (playerToEvaluate == ValueSquare.P2) {
-			otherPlayer = ValueSquare.P1;
-		} else {
-			otherPlayer = ValueSquare.P2;
-		}
-
-		for (Square square : sequence) {
-			if (square.getValue().equals(playerToEvaluate)) {
-				countP1++;
-			} else if (square.getValue().equals(otherPlayer)) {
-				countP2++;
-			}
-		}
-
-		if (countP2 > 0) {
-			points += 0;
-		} else {
-			if (countP1 == 2) {
-				// α2
-				points += alpha2;
-			} else if (countP1 == 3) {
-				// α3
-				points += alpha3;
-			} else if (countP1 == 4) {
-				// α4
-				points += alpha4;
-			}
-		}
-
-//		long tempsFin = System.currentTimeMillis();
-//		long dureeTotaleMillis = tempsFin - tempsDebut;
-//        double dureeSecondes = dureeTotaleMillis / 1000.0;
-//        long minutes = (long) dureeSecondes / 60;
-//        double secondes = dureeSecondes % 60;
-//
-//        System.out.printf("Algorithme took %d min %.3f sec to evaluate the grid.%n", minutes, secondes);
-
-		return points;
-	}
 
 	@Override
 	public String toString() {
