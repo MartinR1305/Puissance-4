@@ -18,6 +18,7 @@ import model.ValueSquare;
 public class GamePvALocalController extends GameController {
 
 	Algorithm algo;
+	private int lvlAlgo;
 
 	/**
 	 * Method that allows to start a PvA Local game
@@ -28,6 +29,7 @@ public class GamePvALocalController extends GameController {
 
 		player1 = p;
 		player2 = null;
+		lvlAlgo = level;
 		algo = new Algorithm(level,ValueSquare.P1,ValueSquare.P2, 2,3,10000);
 		grid = new Grid();
 
@@ -211,5 +213,15 @@ public class GamePvALocalController extends GameController {
 
 		// We serialize
 		Serialization.serializePlayer(Main.getPlayersData().getValue());
+	}
+	
+	/**
+	 * Method that allows players to do an other game with same settings
+	 */
+	public void playAgain() {
+		startGamePvALocal(player1, lvlAlgo);
+		enableAllButtons();
+		gameFinish.setVisible(false);
+		playerPlaying.setVisible(true);
 	}
 }
