@@ -90,5 +90,10 @@
             <Font size="14.0" />
          </font>
       </Button>
+      <Button fx:id="buttonPlayAgain" layoutX="682.0" layoutY="416.0" mnemonicParsing="false" onAction="#playAgain" text="PLAY AGAIN" AnchorPane.rightAnchor="8.0">
+         <font>
+            <Font name="Verdana" size="14.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>

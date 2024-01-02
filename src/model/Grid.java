@@ -555,7 +555,6 @@ public class Grid {
 	}
 
 	private boolean checkColumnWin(ValueSquare player, List<List<Integer>> winningSquares) {
-		System.out.println(winningSquares);
 		int indexColumn = 0;
 		for (Column column : getGrid()) {
 			for (int indexLine = 0; indexLine < 3; indexLine++) {

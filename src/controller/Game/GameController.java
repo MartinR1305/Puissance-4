@@ -31,7 +31,7 @@ public class GameController extends ForAllControllers {
 	protected Label playerPlaying, questionToExit, gameFinish;
 
 	@FXML
-	protected Button yes, no, exit, C0, C1, C2, C3, C4, C5, C6;
+	protected Button yes, no, exit, C0, C1, C2, C3, C4, C5, C6, buttonPlayAgain;
 	
 	@FXML 
 	protected Rectangle rectangleExit;
@@ -48,14 +48,17 @@ public class GameController extends ForAllControllers {
 	public void setColorCircle(Grid grid, Circle circle, int column, int line) {
 		if (grid.getGrid().get(column).getColumn().get(line).getValue().equals(ValueSquare.P1)) {
 			circle.setFill(Color.YELLOW);
+			circle.setStroke(Color.BLACK);
 		}
 
 		else if (grid.getGrid().get(column).getColumn().get(line).getValue().equals(ValueSquare.P2)) {
 			circle.setFill(Color.RED);
+			circle.setStroke(Color.BLACK);
 		}
 
 		else {
 			circle.setFill(Color.web("#2979c9"));
+			circle.setStroke(Color.BLACK);
 		}
 	}
 
@@ -111,11 +114,6 @@ public class GameController extends ForAllControllers {
 		this.C5.setDisable(false);
 		this.C6.setDisable(false);
 	}
-
-	// ----------------------------------------------------------------------------
-	// DISPLAY MESSAGE CONFIRMATION
-	// ----------------------------------------------------------------------------
-	// //
 
 	/**
 	 * Method that allows to display a message + 2 buttons for ask the user if he is

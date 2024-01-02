@@ -13,20 +13,21 @@ import model.Player;
 import model.Results;
 import model.ValueSquare;
 
-public class GamePvPLocalController extends GameController{
-	
+public class GamePvPLocalController extends GameController {
+
 	/**
 	 * Method that allows to start a PvP Local game
+	 * 
 	 * @param p1, first player of the game
 	 * @param p2, second player of the game
 	 */
 	public void startGamePvPLocal(Player p1, Player p2) {
-	
+
 		player1 = p1;
 		player2 = p2;
-		
+
 		grid = new Grid();
-		
+
 		// We put all circles in the matrix
 		matrixCircles = new Circle[][] { { c00, c01, c02, c03, c04, c05 }, { c10, c11, c12, c13, c14, c15 },
 				{ c20, c21, c22, c23, c24, c25 }, { c30, c31, c32, c33, c34, c35 }, { c40, c41, c42, c43, c44, c45 },
@@ -37,16 +38,16 @@ public class GamePvPLocalController extends GameController{
 		turnPlayer = random.nextInt(2) + 1;
 
 		if (turnPlayer == 1) {
-			playerPlaying.setText("It's " + player1.getUserName() + " 's Turn");
+			playerPlaying.setText("It's " + player1.getUserName() + "'s Turn");
 		}
 
 		else {
-			playerPlaying.setText("It's " + player2.getUserName() + " 's Turn");
+			playerPlaying.setText("It's " + player2.getUserName() + "'s Turn");
 		}
 
 		setColorsGrid(grid);
 	}
-	
+
 	/**
 	 * Method for managing the action of clicking on "0" to "6" buttons
 	 * 
@@ -62,7 +63,7 @@ public class GamePvPLocalController extends GameController{
 
 		addCoinGamePvPLocal();
 	}
-	
+
 	/**
 	 * Method that allows to add a coin in the game by a player
 	 */
@@ -79,13 +80,13 @@ public class GamePvPLocalController extends GameController{
 				}
 
 				else if (grid.isJ1win()) {
-					setColorsWinningCircles(grid,1);
+					setColorsWinningCircles(grid, 1);
 					winGamePvPLocal(player1, player2);
 				}
 
 				// We continue the game
 				else {
-					playerPlaying.setText("It's " + player2.getUserName() + " 's Turn");
+					playerPlaying.setText("It's " + player2.getUserName() + "'s Turn");
 					turnPlayer++;
 				}
 			}
@@ -102,57 +103,69 @@ public class GamePvPLocalController extends GameController{
 				}
 
 				else if (grid.isJ2win()) {
-					setColorsWinningCircles(grid,2);
+					setColorsWinningCircles(grid, 2);
 					winGamePvPLocal(player2, player1);
 				}
 
 				// We continue the game
 				else {
-					playerPlaying.setText("It's " + player1.getUserName() + " 's Turn");
+					playerPlaying.setText("It's " + player1.getUserName() + "'s Turn");
 					turnPlayer--;
 				}
 			}
 		}
 	}
-	
-	
+
 	/**
-	 * Method that display a message, set data for a draw and then back to the previous scene
+	 * Method that display a message, set data for a draw and then back to the
+	 * previous scene
 	 */
 	public void drawGamePvPLocal() {
 		super.disableAllButtons();
-		
+
 		// Display message
 		gameFinish.setText("Game is over ! Nobody won ... It is a draw !");
 		gameFinish.setVisible(true);
 		playerPlaying.setVisible(false);
-		
+
 		// Add the draw on players's data
 		player1.addMatch(player2.getUserName(), Results.DRAW, grid.countCoin());
 		player2.addMatch(player1.getUserName(), Results.DRAW, grid.countCoin());
-		
+
 		// We serialize
 		Serialization.serializePlayer(Main.getPlayersData().getValue());
 	}
-	
+
 	/**
-	 * Method that display a message, set data for a victory and then back to the previous scene
-	 * @param playerWin, player who won the game
+	 * Method that display a message, set data for a victory and then back to the
+	 * previous scene
+	 * 
+	 * @param playerWin,   player who won the game
 	 * @param playerLoose, player who lost the game
 	 */
 	public void winGamePvPLocal(Player playerWin, Player playerLoose) {
 		super.disableAllButtons();
-		
+
 		// Display message
 		gameFinish.setText("Game is over .. " + playerWin.getUserName() + " won the game !");
 		gameFinish.setVisible(true);
 		playerPlaying.setVisible(false);
-		
+
 		// Add the draw on players's data
 		playerWin.addMatch(playerLoose.getUserName(), Results.VICTORY, grid.countCoin());
 		playerLoose.addMatch(playerWin.getUserName(), Results.DEFEAT, grid.countCoin());
-		
+
 		// We serialize
 		Serialization.serializePlayer(Main.getPlayersData().getValue());
+	}
+
+	/**
+	 * Method that allows players to do an other game with same settings
+	 */
+	public void playAgain() {
+		startGamePvPLocal(player1, player2);
+		enableAllButtons();
+		gameFinish.setVisible(false);
+		playerPlaying.setVisible(true);
 	}
 }
