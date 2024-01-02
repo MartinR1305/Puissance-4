@@ -11,9 +11,9 @@ public class Algorithm {
 	private int level;
 	private ValueSquare playerMin;
 	private ValueSquare playerMax;
-	int alpha1;
 	int alpha2;
 	int alpha3;
+	int alpha4;
 
 	/**
 	 * Constructor
@@ -22,13 +22,13 @@ public class Algorithm {
 	 * @param playerMin
 	 * @param playerMax
 	 */
-	public Algorithm(int level, ValueSquare playerMin, ValueSquare playerMax, int alpha1, int alpha2, int alpha3) {
+	public Algorithm(int level, ValueSquare playerMin, ValueSquare playerMax, int alpha2, int alpha3, int alpha4) {
 		this.level = level;
 		this.playerMax = playerMax;
 		this.playerMin = playerMin;
-		this.alpha1 = alpha1;
 		this.alpha2 = alpha2;
 		this.alpha3 = alpha3;
+		this.alpha4 = alpha4;
 	}
 
 	/**
@@ -56,7 +56,7 @@ public class Algorithm {
 	 * @return
 	 */
 	public int algoMinMax(Grid grid) {
-		
+		// We do a waiting thread for wait a second before starts the algorithm
 		Thread threadWait = new Thread(new Runnable() {
 			public void run() {
 				try {
@@ -68,6 +68,8 @@ public class Algorithm {
 		});
 		threadWait.setDaemon(true);
 		threadWait.start();
+		
+		// We wait for the thread to finish
 		try {
 			threadWait.join();
 		} catch (InterruptedException e) {
@@ -107,8 +109,8 @@ public class Algorithm {
 
 		// Stop condition : if we have reached the level we wanted
 		if (currentDepth == level) {
-			return grid.evaluateGrid(playerMax, alpha1, alpha2, alpha3)
-					- grid.evaluateGrid(playerMin, alpha1, alpha2, alpha3);
+			return grid.evaluateGrid(playerMax, alpha2, alpha3, alpha4)
+					- grid.evaluateGrid(playerMin, alpha2, alpha3, alpha4);
 		}
 
 		// We will take the maximum of the 7 values
@@ -326,16 +328,16 @@ public class Algorithm {
 
 			// If it is
 			else {
-				listTemp.set(index, grid.evaluateGrid(playerMax, alpha1, alpha2, alpha3)
-						- grid.evaluateGrid(playerMin, alpha1, alpha2, alpha3));
+				listTemp.set(index, grid.evaluateGrid(playerMax, alpha2, alpha3, alpha4)
+						- grid.evaluateGrid(playerMin, alpha2, alpha3, alpha4));
 			}
 		}
 
 		// If the column is full we stop here ( we don't need to call the recursive
 		// method )
 		else {
-			listTemp.set(index, grid.evaluateGrid(playerMax, alpha1, alpha2, alpha3)
-					- grid.evaluateGrid(playerMin, alpha1, alpha2, alpha3));
+			listTemp.set(index, grid.evaluateGrid(playerMax, alpha2, alpha3, alpha4)
+					- grid.evaluateGrid(playerMin, alpha2, alpha3, alpha4));
 		}
 	}
 }
