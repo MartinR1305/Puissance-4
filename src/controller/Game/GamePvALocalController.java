@@ -55,7 +55,7 @@ public class GamePvALocalController extends GameController {
 				
 				long tempsFin = System.currentTimeMillis();
 				long dureeTotaleMillis = tempsFin - tempsDebut;
-		        double dureeSecondes = dureeTotaleMillis / 1000.0;
+		        double dureeSecondes = (dureeTotaleMillis / 1000.0) - 1;
 		        long minutes = (long) dureeSecondes / 60;
 		        double secondes = dureeSecondes % 60;
 
@@ -124,7 +124,7 @@ public class GamePvALocalController extends GameController {
 		
 		long tempsFin = System.currentTimeMillis();
 		long dureeTotaleMillis = tempsFin - tempsDebut;
-        double dureeSecondes = dureeTotaleMillis / 1000.0;
+        double dureeSecondes = (dureeTotaleMillis / 1000.0) - 1;
         long minutes = (long) dureeSecondes / 60;
         double secondes = dureeSecondes % 60;
 
@@ -165,7 +165,7 @@ public class GamePvALocalController extends GameController {
 		playerPlaying.setVisible(false);
 
 		// Add the draw on players's data
-		player1.addMatch(player2.getUserName(), Results.DRAW);
+		player1.addMatch(player2.getUserName(), Results.DRAW, grid.countCoin());
 
 		// We serialize
 		Serialization.serializePlayer(Main.getPlayersData().getValue());
@@ -186,7 +186,7 @@ public class GamePvALocalController extends GameController {
 		playerPlaying.setVisible(false);
 		
 		// Add the draw on players's data
-		playerWin.addMatch("Algorithm", Results.VICTORY);
+		playerWin.addMatch("Algorithm", Results.VICTORY, grid.countCoin());
 
 		// We serialize
 		Serialization.serializePlayer(Main.getPlayersData().getValue());
@@ -207,7 +207,7 @@ public class GamePvALocalController extends GameController {
 		playerPlaying.setVisible(false);
 
 		// Add the draw on players's data
-		playerLoose.addMatch("Algorithm", Results.DEFEAT);
+		playerLoose.addMatch("Algorithm", Results.DEFEAT, grid.countCoin());
 
 		// We serialize
 		Serialization.serializePlayer(Main.getPlayersData().getValue());

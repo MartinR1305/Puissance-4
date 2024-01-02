@@ -269,7 +269,7 @@ public class GameOnlineController extends GameController implements Initializabl
 		super.disableAllButtons();
 
 		// Add the draw on players's data
-		player1.addMatch("Player Online", Results.VICTORY);
+		player1.addMatch("Player Online", Results.VICTORY, grid.countCoin());
 
 		// We serialize
 		Serialization.serializePlayer(Main.getPlayersData().getValue());
@@ -282,7 +282,7 @@ public class GameOnlineController extends GameController implements Initializabl
 		super.disableAllButtons();
 
 		// Add the draw on players's data
-		player1.addMatch("Player Online", Results.DRAW);
+		player1.addMatch("Player Online", Results.DRAW, grid.countCoin());
 
 		// We serialize
 		Serialization.serializePlayer(Main.getPlayersData().getValue());
@@ -295,7 +295,7 @@ public class GameOnlineController extends GameController implements Initializabl
 		super.disableAllButtons();
 
 		// Add the draw on players's data
-		player1.addMatch("Player Online", Results.DEFEAT);
+		player1.addMatch("Player Online", Results.DEFEAT, grid.countCoin());
 
 		// We serialize
 		Serialization.serializePlayer(Main.getPlayersData().getValue());

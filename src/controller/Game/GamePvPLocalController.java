@@ -128,8 +128,8 @@ public class GamePvPLocalController extends GameController{
 		playerPlaying.setVisible(false);
 		
 		// Add the draw on players's data
-		player1.addMatch(player2.getUserName(), Results.DRAW);
-		player2.addMatch(player1.getUserName(), Results.DRAW);
+		player1.addMatch(player2.getUserName(), Results.DRAW, grid.countCoin());
+		player2.addMatch(player1.getUserName(), Results.DRAW, grid.countCoin());
 		
 		// We serialize
 		Serialization.serializePlayer(Main.getPlayersData().getValue());
@@ -149,8 +149,8 @@ public class GamePvPLocalController extends GameController{
 		playerPlaying.setVisible(false);
 		
 		// Add the draw on players's data
-		playerWin.addMatch(playerLoose.getUserName(), Results.VICTORY);
-		playerLoose.addMatch(playerWin.getUserName(), Results.DEFEAT);
+		playerWin.addMatch(playerLoose.getUserName(), Results.VICTORY, grid.countCoin());
+		playerLoose.addMatch(playerWin.getUserName(), Results.DEFEAT, grid.countCoin());
 		
 		// We serialize
 		Serialization.serializePlayer(Main.getPlayersData().getValue());

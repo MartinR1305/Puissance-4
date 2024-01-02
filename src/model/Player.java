@@ -138,11 +138,12 @@ public class Player implements Serializable {
 	/**
 	 * Method that allows to add one victory for the player
 	 */
-	public void addVictory() {
+	public void addVictory(int nbCoins) {
 		this.nbVictory++;
-
+		
+		int ptsWon = 43 - nbCoins;
 		// We actualize the ranked's points
-		setPtsRanked(ptsRanked + 10);
+		setPtsRanked(ptsRanked + ptsWon);
 	}
 
 	/**
@@ -157,11 +158,12 @@ public class Player implements Serializable {
 	/**
 	 * Method that allows to add one defeat for the player
 	 */
-	public void addDefeat() {
+	public void addDefeat(int nbCoins) {
 		this.nbDefeat++;
 
+		int ptsLost = 43 - nbCoins;
 		// We actualize the ranked's points
-		setPtsRanked(ptsRanked - 10);
+		setPtsRanked(ptsRanked - ptsLost);
 	}
 
 	/**
@@ -233,7 +235,7 @@ public class Player implements Serializable {
 	 * @param opponent, the opponent that faced the player during the match
 	 * @param results, the results of the match
 	 */
-	public void addMatch(String opponent, Results results) {
+	public void addMatch(String opponent, Results results, int nbCoins) {
 
 		// Here we add the "challenged player + result" to the match's list of the
 		// player
@@ -244,11 +246,11 @@ public class Player implements Serializable {
 
 		// Here we synchronize his number of defeats / draws / victories
 		if (results.equals(Results.DEFEAT)) {
-			this.addDefeat();
+			this.addDefeat(nbCoins);
 		} else if (results.equals(Results.DRAW)) {
 			this.addDraw();
 		} else if (results.equals(Results.VICTORY)) {
-			this.addVictory();
+			this.addVictory(nbCoins);
 		}
 
 		this.actualizeWinRate();

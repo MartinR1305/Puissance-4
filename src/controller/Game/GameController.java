@@ -82,8 +82,7 @@ public class GameController extends ForAllControllers {
 		List<List<Integer>> winningSquares = new ArrayList<List<Integer>>(4);
 		winningSquares = grid.getWinningSquares(nbPlayer);
 		for(int numSquare = 0 ; numSquare < 4 ; numSquare++){
-			
-			matrixCircles[winningSquares.get(numSquare).get(0)][winningSquares.get(numSquare).get(1)].setFill(Color.GREEN);
+			matrixCircles[winningSquares.get(numSquare).get(0)][winningSquares.get(numSquare).get(1)].setStroke(Color.WHITE);
 		}
 	}
 

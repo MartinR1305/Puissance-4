@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import javafx.application.Platform;
+
 public class Algorithm {
 
 	private int level;
@@ -54,6 +56,24 @@ public class Algorithm {
 	 * @return
 	 */
 	public int algoMinMax(Grid grid) {
+		
+		Thread threadWait = new Thread(new Runnable() {
+			public void run() {
+				try {
+					Thread.sleep(1000);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+			}
+		});
+		threadWait.setDaemon(true);
+		threadWait.start();
+		try {
+			threadWait.join();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		
 		// We check if we have a direct win with a next move
 		for (int indexColumn = 0; indexColumn < 7; indexColumn++) {
 
