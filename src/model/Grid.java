@@ -519,7 +519,6 @@ public class Grid {
 	}
 
 	private boolean checkDiagonalWin(ValueSquare player, List<List<Integer>> winningSquares) {
-		System.out.println("Diagonal UP");
 		// Up Diagonal
 		for (int indexColumn = 0; indexColumn < 4; indexColumn++) {
 			for (int indexLine = 0; indexLine < 3; indexLine++) {
@@ -544,7 +543,6 @@ public class Grid {
 	}
 
 	private boolean checkLineWin(ValueSquare player, List<List<Integer>> winningSquares) {
-		System.out.println("\nLine");
 		for (int indexColumn = 0; indexColumn < 7; indexColumn++) {
 			for (int indexLine = 0; indexLine < 6; indexLine++) {
 				if (checkSequence(player, indexColumn, indexLine, 1, 0, winningSquares)) {
@@ -557,7 +555,6 @@ public class Grid {
 	}
 
 	private boolean checkColumnWin(ValueSquare player, List<List<Integer>> winningSquares) {
-		System.out.println("\nColumn");
 		System.out.println(winningSquares);
 		int indexColumn = 0;
 		for (Column column : getGrid()) {
