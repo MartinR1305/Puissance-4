@@ -13,33 +13,39 @@
             <Font name="Verdana" size="18.0" />
          </font>
       </Button>
-      <ComboBox fx:id="listPlayer1" layoutX="48.0" layoutY="220.0" prefHeight="62.0" prefWidth="262.0" />
-      <ComboBox fx:id="listPlayer2" layoutX="491.0" layoutY="220.0" prefHeight="61.0" prefWidth="262.0" />
+      <ComboBox fx:id="listPlayer1" layoutX="48.0" layoutY="168.0" prefHeight="62.0" prefWidth="262.0" />
+      <ComboBox fx:id="listPlayer2" layoutX="491.0" layoutY="168.0" prefHeight="61.0" prefWidth="262.0" />
       <Button fx:id="play" layoutX="310.0" layoutY="394.0" mnemonicParsing="false" onAction="#switchToGamePvP" prefHeight="62.0" prefWidth="181.0" text="Play">
          <font>
             <Font name="Verdana" size="30.0" />
          </font>
       </Button>
-      <Label fx:id="player1" layoutX="105.0" layoutY="171.0" text="Player 1" textFill="YELLOW">
+      <Label fx:id="player1" layoutX="105.0" layoutY="119.0" text="Player 1" textFill="YELLOW">
          <font>
             <Font name="Verdana Bold" size="32.0" />
          </font></Label>
-      <Label fx:id="player2" layoutX="548.0" layoutY="171.0" text="Player 2" textFill="RED">
+      <Label fx:id="player2" layoutX="548.0" layoutY="119.0" text="Player 2" textFill="RED">
          <font>
             <Font name="Verdana Bold" size="32.0" />
          </font></Label>
-      <Label fx:id="errorMsg" layoutX="226.0" layoutY="466.0" text="! You must select two players !" textFill="RED" visible="false">
+      <Label fx:id="errorMsg" layoutX="252.0" layoutY="466.0" text="You must select all fields !" textFill="RED" visible="false">
          <font>
             <Font name="Verdana Bold Italic" size="20.0" />
          </font></Label>
-      <Label fx:id="errorMsg2" layoutX="177.0" layoutY="466.0" text="! You must select two different players !" textFill="RED" visible="false">
+      <Label fx:id="errorMsg2" layoutX="177.0" layoutY="466.0" text="You must select two different players !" textFill="RED" visible="false">
          <font>
             <Font name="Verdana Bold Italic" size="20.0" />
          </font></Label>
-      <Label fx:id="versus" layoutX="379.0" layoutY="230.0" text="VS" textFill="WHITE">
+      <Label fx:id="versus" layoutX="380.0" layoutY="179.0" text="VS" textFill="WHITE">
          <font>
             <Font name="Verdana Bold Italic" size="32.0" />
          </font>
       </Label>
+      <Label fx:id="timeLimite" layoutX="348.0" layoutY="267.0" text="Time's Limit : " textFill="WHITE">
+         <font>
+            <Font name="Verdana Bold" size="14.0" />
+         </font>
+      </Label>
+      <ComboBox fx:id="timeLimiteChoice" layoutX="328.0" layoutY="292.0" prefHeight="35.0" prefWidth="148.0" />
    </children>
 </AnchorPane>

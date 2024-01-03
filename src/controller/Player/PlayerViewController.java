@@ -38,7 +38,7 @@ public class PlayerViewController extends ForAllControllers {
 		// We set data of the player selected
 		firstName.setText(p.getFirstName());
 		lastName.setText(p.getLastName());
-		userName.setText(p.getUserName());
+		userName.setText(p.getUserName() + "'s profile");
 		age.setText(Integer.toString(p.getAge()));
 		
 		// We create a format in order to have only 2 significant figures
@@ -56,9 +56,9 @@ public class PlayerViewController extends ForAllControllers {
 		listMatch.setItems(FXCollections.observableArrayList(listMatchsReverse));
 
 		// We set data for the pie
-        PieChart.Data slice1 = new PieChart.Data("Victories", p.getNbVictory());
-        PieChart.Data slice2 = new PieChart.Data("Draws", p.getNbDraw());
-        PieChart.Data slice3 = new PieChart.Data("Defeats", p.getNbDefeat());
+        PieChart.Data slice1 = new PieChart.Data("Victories = " + p.getNbVictory(), p.getNbVictory());
+        PieChart.Data slice2 = new PieChart.Data("Draws = " + p.getNbDraw(), p.getNbDraw());
+        PieChart.Data slice3 = new PieChart.Data("Defeats = " + p.getNbDefeat(), p.getNbDefeat());
         pieData.getData().addAll(slice1, slice2, slice3);
         pieData.setLabelsVisible(false);
 	}

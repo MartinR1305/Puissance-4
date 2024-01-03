@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import controller.ForAllControllers;
 import javafx.event.ActionEvent;
@@ -26,18 +28,22 @@ public class ChoicePlayersPvPController extends ForAllControllers implements Ini
     private Parent root;
     
     @FXML
-    Label player1, player2, errorMsg, errorMsg2, versus;
+    Label player1, player2, errorMsg, errorMsg2, versus, timeLimite;
     
     @FXML
     Button back, play;
     
     @FXML
     ComboBox<Player> listPlayer1, listPlayer2;
+    
+    @FXML 
+    ComboBox<String> timeLimiteChoice;
 
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
         setComboBoxWithPlayers(listPlayer1);
         setComboBoxWithPlayers(listPlayer2);
+        setComboBoxWithTimeLimits(timeLimiteChoice);
     }
     
     
@@ -47,7 +53,7 @@ public class ChoicePlayersPvPController extends ForAllControllers implements Ini
      * @throws IOException
      */
     public void switchToGamePvP(ActionEvent event) throws IOException {
-        if(listPlayer1.getValue() == null || listPlayer2.getValue() == null) {
+        if(listPlayer1.getValue() == null || listPlayer2.getValue() == null || timeLimiteChoice.getValue() == null) {
             displayMessage(errorMsg);
         }
         
@@ -60,7 +66,23 @@ public class ChoicePlayersPvPController extends ForAllControllers implements Ini
                     getClass().getResource(".." + File.separator + ".." + File.separator + "view" + File.separator + "GamePvPLocal.fxml"));
             root = loader.load();
             GamePvPLocalController gamePvPLocalController = loader.getController();
-            gamePvPLocalController.startGamePvPLocal(listPlayer1.getValue(), listPlayer2.getValue());
+            
+            int timeLimit = 0;
+            if(timeLimiteChoice.getValue() == "No Limits") {
+            	timeLimit = -1;
+            } else {
+                Pattern pattern = Pattern.compile("\\b(\\d+)\\b");
+                Matcher matcher = pattern.matcher(timeLimiteChoice.getValue());
+
+                if (matcher.find()) {
+                    String numberString = matcher.group(1);
+                    timeLimit = Integer.parseInt(numberString);
+                } else {
+                    System.out.println("ERROR");
+                }
+            }
+            
+            gamePvPLocalController.startGamePvPLocal(listPlayer1.getValue(), listPlayer2.getValue(), timeLimit);
             stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             scene = new Scene(root);
             stage.setScene(scene);

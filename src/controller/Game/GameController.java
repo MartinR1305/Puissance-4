@@ -18,7 +18,8 @@ public class GameController extends ForAllControllers {
 
 	protected static Player player1, player2;
 	protected static Grid grid;
-	protected int turnPlayer, columnAddCoin;
+	protected static int turnPlayer;
+	protected static int columnAddCoin;
 
 	@FXML
 	protected static Circle[][] matrixCircles;
@@ -28,13 +29,15 @@ public class GameController extends ForAllControllers {
 			c34, c35, c40, c41, c42, c43, c44, c45, c50, c51, c52, c53, c54, c55, c60, c61, c62, c63, c64, c65;
 
 	@FXML
-	protected Label playerPlaying, questionToExit, gameFinish;
+	protected Label playerPlaying, questionToExit, gameFinish, time, remaining;
+	@FXML
+	protected Label valueTime;
 
 	@FXML
 	protected Button yes, no, exit, C0, C1, C2, C3, C4, C5, C6, buttonPlayAgain;
 	
 	@FXML 
-	protected Rectangle rectangleExit;
+	protected Rectangle rectangleExit, rectangleTime;
 
 	/**
 	 * Method that allows to set the colors for a case

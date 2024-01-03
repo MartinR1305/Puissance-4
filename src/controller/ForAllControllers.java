@@ -276,4 +276,49 @@ public class ForAllControllers {
             }
         });
     }
+	
+	public void setComboBoxWithTimeLimits(ComboBox<String> comboBoxLevel) {
+        ObservableList<String> timeLimits = FXCollections.observableArrayList();
+
+        timeLimits.add("No Limits");
+        timeLimits.add("10 Seconds");
+        timeLimits.add("20 Seconds");
+        timeLimits.add("30 Seconds");
+        timeLimits.add("45 Seconds");
+        timeLimits.add("60 Seconds");
+        
+
+        // Set the drop-down menu
+        comboBoxLevel.setCellFactory(param -> new ListCell<String>() {
+            @Override
+            protected void updateItem(String timeLimit, boolean empty) {
+                super.updateItem(timeLimit, empty);
+
+                if (empty || timeLimit == null) {
+                    setText(null);
+                } else {
+                    setText(timeLimit.toString());
+                }
+            }
+        });
+
+        comboBoxLevel.setItems(timeLimits);
+
+        // We set display of level once selected
+        comboBoxLevel.setConverter(new StringConverter<String>() {
+            @Override
+            public String toString(String timeLimit) {
+                if (timeLimit == null) {
+                    return null;
+                } else {
+                    return timeLimit.toString();
+                }
+            }
+
+            @Override
+            public String fromString(String string) {
+                return null;
+            }
+        });
+    }
 }

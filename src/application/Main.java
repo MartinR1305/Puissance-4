@@ -80,6 +80,7 @@ public class Main extends Application {
 			Parent root = FXMLLoader
 					.load(getClass().getResource(".." + File.separator + "view" + File.separator + "PreHome.fxml"));
 			Scene scene1 = new Scene(root);
+			primaryStage.setResizable(false);
 			primaryStage.setScene(scene1);
 			primaryStage.centerOnScreen();
 

@@ -1,19 +1,38 @@
 package controller.Game;
 
+import java.net.URL;
 import java.util.Random;
+import java.util.ResourceBundle;
 
 import Serialization.Serialization;
 import application.Main;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.shape.Circle;
+import javafx.util.Duration;
 import model.Grid;
 import model.Player;
 import model.Results;
 import model.ValueSquare;
 
-public class GamePvPLocalController extends GameController {
+public class GamePvPLocalController extends GameController implements Initializable {
+
+	private int timeLimit;
+	private static Timeline timeline;
+
+	@Override
+	public void initialize(URL arg0, ResourceBundle arg1) {
+		if (timeLimit != -1) {
+			timeline = new Timeline();
+			timeline.setCycleCount(Timeline.INDEFINITE);
+		}
+	}
 
 	/**
 	 * Method that allows to start a PvP Local game
@@ -21,11 +40,11 @@ public class GamePvPLocalController extends GameController {
 	 * @param p1, first player of the game
 	 * @param p2, second player of the game
 	 */
-	public void startGamePvPLocal(Player p1, Player p2) {
+	public void startGamePvPLocal(Player p1, Player p2, int timeLimit) {
 
 		player1 = p1;
 		player2 = p2;
-
+		this.timeLimit = timeLimit;
 		grid = new Grid();
 
 		// We put all circles in the matrix
@@ -46,6 +65,13 @@ public class GamePvPLocalController extends GameController {
 		}
 
 		setColorsGrid(grid);
+
+		if (timeLimit != -1) {
+			timeline.stop();
+			startCountdown(valueTime, timeLimit);
+		} else {
+			hideCount();
+		}
 	}
 
 	/**
@@ -61,18 +87,18 @@ public class GamePvPLocalController extends GameController {
 		// Update the columnAddCoin variable according to the button text
 		columnAddCoin = Integer.parseInt(buttonText);
 
-		addCoinGamePvPLocal();
+		addCoinGamePvPLocal(columnAddCoin);
 	}
 
 	/**
 	 * Method that allows to add a coin in the game by a player
 	 */
-	public void addCoinGamePvPLocal() {
+	public void addCoinGamePvPLocal(int columnToAdd) {
 
 		// If the player 1 played
 		if (turnPlayer == 1) {
-			if (!grid.getGrid().get(columnAddCoin).isColumnFull()) {
-				grid.addCoinGrid(columnAddCoin, ValueSquare.P1);
+			if (!grid.getGrid().get(columnToAdd).isColumnFull()) {
+				grid.addCoinGrid(columnToAdd, ValueSquare.P1);
 				setColorsGrid(grid);
 
 				if (grid.isGridFull()) {
@@ -88,14 +114,19 @@ public class GamePvPLocalController extends GameController {
 				else {
 					playerPlaying.setText("It's " + player2.getUserName() + "'s Turn");
 					turnPlayer++;
+
+					if (timeLimit != -1) {
+						timeline.stop();
+						startCountdown(valueTime, timeLimit);
+					}
 				}
 			}
 		}
 
 		// If the player 2 played
 		else {
-			if (!grid.getGrid().get(columnAddCoin).isColumnFull()) {
-				grid.addCoinGrid(columnAddCoin, ValueSquare.P2);
+			if (!grid.getGrid().get(columnToAdd).isColumnFull()) {
+				grid.addCoinGrid(columnToAdd, ValueSquare.P2);
 				setColorsGrid(grid);
 
 				if (grid.isGridFull()) {
@@ -111,6 +142,11 @@ public class GamePvPLocalController extends GameController {
 				else {
 					playerPlaying.setText("It's " + player1.getUserName() + "'s Turn");
 					turnPlayer--;
+
+					if (timeLimit != -1) {
+						timeline.stop();
+						startCountdown(valueTime, timeLimit);
+					}
 				}
 			}
 		}
@@ -163,9 +199,71 @@ public class GamePvPLocalController extends GameController {
 	 * Method that allows players to do an other game with same settings
 	 */
 	public void playAgain() {
-		startGamePvPLocal(player1, player2);
+		startGamePvPLocal(player1, player2, timeLimit);
 		enableAllButtons();
 		gameFinish.setVisible(false);
 		playerPlaying.setVisible(true);
+	}
+
+	/**
+	 * Method that allows to start a count down for a player's turn
+	 * 
+	 * @param label
+	 * @param timeLimit
+	 */
+	public void startCountdown(Label label, int timeLimit) {
+		// Using an array to store the value of seconds effectively final
+		final int[] seconds = { timeLimit };
+
+		// Clear previous key frames
+		timeline.getKeyFrames().clear();
+
+		// Creating a key frame that will trigger every second
+		KeyFrame keyFrame = new KeyFrame(Duration.seconds(1), new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				// Update the label text with the current value of seconds
+				label.setText(Integer.toString(seconds[0]) + " s");
+
+				// Decrement seconds
+				seconds[0]--;
+
+				// Check if the count down is complete
+				if (seconds[0] == 0) {
+					// Stop the time line when the count down is complete
+					timeline.stop();
+
+					// We check that's the column is not full
+					do {
+						if (timeLimit != 1) {
+							Random random = new Random();
+							columnAddCoin = random.nextInt(6);
+						}
+					} while (grid.getGrid().get(columnAddCoin).isColumnFull());
+
+					addCoinGamePvPLocal(columnAddCoin);
+				}
+
+				else if (seconds[0] > 5) {
+					label.setStyle("-fx-text-fill: white");
+				}
+
+				else if (seconds[0] < 5) {
+					label.setStyle("-fx-text-fill: red");
+				}
+			}
+		});
+		timeline.getKeyFrames().add(keyFrame);
+		timeline.play();
+	}
+
+	/**
+	 * Method that allows to hide all things of the count down
+	 */
+	public void hideCount() {
+		time.setVisible(false);
+		remaining.setVisible(false);
+		rectangleTime.setVisible(false);
+		valueTime.setVisible(false);
 	}
 }

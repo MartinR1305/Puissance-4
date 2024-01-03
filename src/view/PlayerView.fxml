@@ -11,7 +11,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" stylesheets="@../../ressources/css/styles.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Player.PlayerViewController">
    <children>
-      <Label fx:id="firstName" layoutX="192.0" layoutY="90.0" text="Label" textFill="WHITE">
+      <Label fx:id="firstName" layoutX="191.0" layoutY="78.0" text="Label" textFill="WHITE">
          <font>
             <Font name="Verdana" size="18.0" />
          </font></Label>
@@ -20,46 +20,36 @@
             <Font name="Verdana" size="18.0" />
          </font>
       </Button>
-      <Label fx:id="lastName" layoutX="192.0" layoutY="130.0" text="Label" textFill="WHITE">
+      <Label fx:id="lastName" layoutX="192.0" layoutY="104.0" text="Label" textFill="WHITE" AnchorPane.topAnchor="108.0">
          <font>
             <Font name="Verdana" size="18.0" />
          </font></Label>
-      <Label fx:id="userName" layoutX="184.0" layoutY="167.0" text="Label" textFill="WHITE">
+      <Label fx:id="userName" layoutX="1.0" layoutY="14.0" prefHeight="23.0" prefWidth="800.0" textFill="WHITE">
+         <font>
+            <Font name="Verdana Bold" size="36.0" />
+         </font></Label>
+      <Label fx:id="age" layoutX="118.0" layoutY="122.0" text="Label" textFill="WHITE" AnchorPane.topAnchor="138.0">
          <font>
             <Font name="Verdana" size="18.0" />
          </font></Label>
-      <Label fx:id="age" layoutX="126.0" layoutY="205.0" text="Label" textFill="WHITE">
-         <font>
-            <Font name="Verdana" size="18.0" />
-         </font></Label>
-      <Label layoutX="62.0" layoutY="90.0" text="First Name : " textFill="YELLOW">
+      <Label layoutX="61.0" layoutY="78.0" prefHeight="23.0" prefWidth="137.0" text="First Name : " textFill="YELLOW" AnchorPane.leftAnchor="63.0" AnchorPane.rightAnchor="600.0" AnchorPane.topAnchor="78.0">
          <font>
             <Font name="Verdana Bold" size="18.0" />
          </font>
       </Label>
-      <Label layoutX="62.0" layoutY="130.0" text="Last Name : " textFill="YELLOW">
+      <Label layoutX="63.0" layoutY="100.0" text="Last Name : " textFill="YELLOW" AnchorPane.leftAnchor="63.0" AnchorPane.topAnchor="108.0">
          <font>
             <Font name="Verdana Bold" size="18.0" />
          </font>
       </Label>
-      <Label layoutX="331.0" layoutY="32.0" text="Player Profile" textFill="WHITE">
-         <font>
-            <Font name="System Bold" size="24.0" />
-         </font>
-      </Label>
-      <Label layoutX="62.0" layoutY="167.0" text="Username : " textFill="YELLOW">
+      <Label layoutX="63.0" layoutY="136.0" text="Age : " textFill="YELLOW" AnchorPane.leftAnchor="63.0" AnchorPane.topAnchor="138.0">
          <font>
             <Font name="Verdana Bold" size="18.0" />
          </font>
       </Label>
-      <Label layoutX="63.0" layoutY="205.0" text="Age : " textFill="YELLOW">
-         <font>
-            <Font name="Verdana Bold" size="18.0" />
-         </font>
-      </Label>
-      <ScrollPane layoutX="418.0" layoutY="78.0" prefHeight="374.0" prefWidth="370.0">
+      <ScrollPane layoutX="417.0" layoutY="78.0" prefHeight="351.0" prefWidth="371.0">
          <content>
-            <TableView fx:id="listMatch" prefHeight="372.0" prefWidth="369.0">
+            <TableView fx:id="listMatch" prefHeight="349.0" prefWidth="369.0">
               <columns>
                 <TableColumn fx:id="results" prefWidth="75.0" text="Results" />
                 <TableColumn fx:id="opponent" prefWidth="75.0" text="Opponent" />
@@ -70,13 +60,13 @@
             </TableView>
          </content>
       </ScrollPane>
-      <PieChart fx:id="pieData" layoutX="11.0" layoutY="265.0" prefHeight="226.0" prefWidth="392.0" />
-      <Label layoutX="62.0" layoutY="239.0" text="Win Rate : " textFill="YELLOW">
+      <PieChart fx:id="pieData" layoutX="11.0" layoutY="203.0" prefHeight="226.0" prefWidth="392.0" />
+      <Label layoutX="62.0" layoutY="170.0" text="Win Rate : " textFill="YELLOW" AnchorPane.leftAnchor="63.0" AnchorPane.topAnchor="168.0">
          <font>
             <Font name="Verdana Bold" size="18.0" />
          </font>
       </Label>
-      <Label fx:id="winRate" layoutX="183.0" layoutY="239.0" text="Label" textFill="WHITE">
+      <Label fx:id="winRate" layoutX="174.0" layoutY="144.0" text="Label" textFill="WHITE" AnchorPane.topAnchor="168.0">
          <font>
             <Font name="Verdana" size="18.0" />
          </font>
