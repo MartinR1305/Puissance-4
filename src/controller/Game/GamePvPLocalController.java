@@ -1,5 +1,7 @@
 package controller.Game;
 
+import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.util.Random;
 import java.util.ResourceBundle;
@@ -11,10 +13,15 @@ import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.shape.Circle;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 import model.Grid;
 import model.Player;
@@ -25,6 +32,10 @@ public class GamePvPLocalController extends GameController implements Initializa
 
 	private int timeLimit;
 	private static Timeline timeline;
+	
+	private Stage stage;
+	private Scene scene;
+	private Parent root;
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
@@ -70,7 +81,7 @@ public class GamePvPLocalController extends GameController implements Initializa
 			timeline.stop();
 			startCountdown(valueTime, timeLimit);
 		} else {
-			hideCount();
+			hideCount(true);
 		}
 	}
 
@@ -256,14 +267,23 @@ public class GamePvPLocalController extends GameController implements Initializa
 		timeline.getKeyFrames().add(keyFrame);
 		timeline.play();
 	}
-
+	
 	/**
-	 * Method that allows to hide all things of the count down
+	 * Method that allows to switch the scene to the Home after stop the timer
+	 * 
+	 * @param event
+	 * @throws IOException
 	 */
-	public void hideCount() {
-		time.setVisible(false);
-		remaining.setVisible(false);
-		rectangleTime.setVisible(false);
-		valueTime.setVisible(false);
+	public void switchToHomeBis(ActionEvent event) throws IOException {
+		timeline.stop();
+		FXMLLoader loader = new FXMLLoader(
+				getClass().getResource(".." + File.separator + ".." + File.separator + "view" + File.separator + "Home.fxml"));
+		
+		root = loader.load();
+		stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+		scene = new Scene(root);
+		stage.setScene(scene);
+		stage.show();
+		setCenterStage(stage);
 	}
 }

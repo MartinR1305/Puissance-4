@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import controller.ForAllControllers;
 import javafx.event.ActionEvent;
@@ -26,7 +28,7 @@ public class ChoicePlayerPvAController extends ForAllControllers implements Init
 	private Parent root;
 
 	@FXML
-	Label playerChoice, errorMsg, labelAlgoLvl;
+	Label playerChoice, errorMsg, labelAlgoLvl, timeLimite;
 
 	@FXML
 	Button back, play;
@@ -36,11 +38,15 @@ public class ChoicePlayerPvAController extends ForAllControllers implements Init
 	
 	@FXML
 	ComboBox<Integer> listLevel;
+	
+	@FXML
+	ComboBox<String> timeLimiteChoice;
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		setComboBoxWithPlayers(listPlayer);
 		setComboBoxWithLevels(listLevel);
+		setComboBoxWithTimeLimits(timeLimiteChoice);
 	}
 
 	/**
@@ -60,7 +66,23 @@ public class ChoicePlayerPvAController extends ForAllControllers implements Init
 			root = loader.load();
 			
 			GamePvALocalController gamePvALocalController = loader.getController();
-			gamePvALocalController.startGamePvALocal(listPlayer.getValue(), listLevel.getValue());
+			
+            int timeLimit = 0;
+            if(timeLimiteChoice.getValue() == "No Limits") {
+            	timeLimit = -1;
+            } else {
+                Pattern pattern = Pattern.compile("\\b(\\d+)\\b");
+                Matcher matcher = pattern.matcher(timeLimiteChoice.getValue());
+
+                if (matcher.find()) {
+                    String numberString = matcher.group(1);
+                    timeLimit = Integer.parseInt(numberString);
+                } else {
+                    System.out.println("ERROR");
+                }
+            }
+            
+			gamePvALocalController.startGamePvALocal(listPlayer.getValue(), listLevel.getValue(), timeLimit);
 			
 			stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 			scene = new Scene(root);

@@ -95,5 +95,21 @@
             <Font name="Verdana" size="14.0" />
          </font>
       </Button>
+      <Rectangle fx:id="rectangleTime" arcHeight="5.0" arcWidth="5.0" fill="#236197" height="107.0" layoutX="686.0" layoutY="38.0" stroke="BLACK" strokeType="INSIDE" width="104.0" />
+      <Label fx:id="time" layoutX="721.0" layoutY="41.0" text="Time" textFill="WHITE">
+         <font>
+            <Font name="Verdana" size="14.0" />
+         </font>
+      </Label>
+      <Label fx:id="remaining" layoutX="703.0" layoutY="60.0" text="Remaining" textFill="WHITE">
+         <font>
+            <Font name="Verdana" size="14.0" />
+         </font>
+      </Label>
+      <Label fx:id="valueTime" layoutX="696.0" layoutY="87.0" textFill="WHITE">
+         <font>
+            <Font name="Verdana Bold" size="36.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

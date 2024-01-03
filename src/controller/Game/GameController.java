@@ -148,4 +148,15 @@ public class GameController extends ForAllControllers {
 		
 		rectangleExit.setVisible(false);
 	}
+	
+
+	/**
+	 * Method that allows to hide all things of the count down
+	 */
+	public void hideCount(boolean hide) {
+		time.setVisible(!hide);
+		remaining.setVisible(!hide);
+		rectangleTime.setVisible(!hide);
+		valueTime.setVisible(!hide);
+	}
 }
