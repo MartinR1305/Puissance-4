@@ -240,13 +240,13 @@ public class GamePvPLocalController extends GameController implements Initializa
 				seconds[0]--;
 
 				// Check if the count down is complete
-				if (seconds[0] == 0) {
+				if (seconds[0] == -1) {
 					// Stop the time line when the count down is complete
 					timeline.stop();
 
 					// We check that's the column is not full
 					do {
-						if (timeLimit != 1) {
+						if (timeLimit != -1) {
 							Random random = new Random();
 							columnAddCoin = random.nextInt(6);
 						}
