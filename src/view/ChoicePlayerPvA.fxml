@@ -13,32 +13,32 @@
             <Font name="Verdana" size="18.0" />
          </font>
       </Button>
-      <Button fx:id="play" layoutX="425.0" layoutY="385.0" mnemonicParsing="false" onAction="#switchToGamePvA" prefHeight="67.0" prefWidth="114.0" text="Play">
+      <Button fx:id="play" layoutX="343.0" layoutY="418.0" mnemonicParsing="false" onAction="#switchToGamePvA" prefHeight="67.0" prefWidth="114.0" text="Play">
          <font>
             <Font name="Verdana" size="30.0" />
          </font></Button>
-      <Label fx:id="playerChoice" layoutX="343.0" layoutY="54.0" text="Player" textFill="RED">
+      <Label fx:id="playerChoice" layoutX="343.0" layoutY="34.0" text="Player" textFill="RED">
          <font>
             <Font name="Verdana Bold" size="32.0" />
          </font>
       </Label>
-      <ComboBox fx:id="listPlayer" layoutX="262.0" layoutY="101.0" prefHeight="50.0" prefWidth="277.0" />
+      <ComboBox fx:id="listPlayer" layoutX="262.0" layoutY="81.0" prefHeight="50.0" prefWidth="277.0" />
       <Label fx:id="errorMsg" layoutX="247.0" layoutY="345.0" text="! You must select a player !" textFill="RED" visible="false">
          <font>
             <Font name="Verdana Bold Italic" size="20.0" />
          </font>
       </Label>
-      <Label fx:id="labelAlgoLvl" layoutX="248.0" layoutY="201.0" text="Algorithm's level" textFill="YELLOW">
+      <Label fx:id="labelAlgoLvl" layoutX="243.0" layoutY="181.0" text="Algorithm's Level" textFill="YELLOW">
          <font>
             <Font name="Verdana Bold" size="32.0" />
          </font>
       </Label>
-      <ComboBox fx:id="listLevel" layoutX="351.0" layoutY="252.0" prefHeight="67.0" prefWidth="99.0" />
-      <Label fx:id="timeLimite" layoutX="194.0" layoutY="393.0" text="Time's Limit : " textFill="WHITE">
+      <ComboBox fx:id="listLevel" layoutX="360.0" layoutY="230.0" prefHeight="50.0" prefWidth="80.0" />
+      <Label fx:id="timeLimite" layoutX="346.0" layoutY="328.0" text="Time's Limit : " textFill="WHITE">
          <font>
             <Font name="Verdana Bold" size="14.0" />
          </font>
       </Label>
-      <ComboBox fx:id="timeLimiteChoice" layoutX="174.0" layoutY="418.0" prefHeight="35.0" prefWidth="148.0" />
+      <ComboBox fx:id="timeLimiteChoice" layoutX="326.0" layoutY="353.0" prefHeight="35.0" prefWidth="148.0" />
    </children>
 </AnchorPane>
