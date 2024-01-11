@@ -93,7 +93,7 @@ public class GamePvALocalController extends GameController implements Initializa
 			Platform.runLater(() -> {
 				long tempsDebut = System.currentTimeMillis();
 
-				grid.addCoinGrid(algo.algoMinMax(grid), ValueSquare.P2);
+				grid.addCoinGrid(algo.algoMinMax(grid, true, true), ValueSquare.P2);
 
 				long tempsFin = System.currentTimeMillis();
 				long dureeTotaleMillis = tempsFin - tempsDebut;
@@ -169,7 +169,7 @@ public class GamePvALocalController extends GameController implements Initializa
 		// Algorithm turn
 		long tempsDebut = System.currentTimeMillis();
 
-		grid.addCoinGrid(algo.algoMinMax(grid), ValueSquare.P2);
+		grid.addCoinGrid(algo.algoMinMax(grid, true, true), ValueSquare.P2);
 
 		long tempsFin = System.currentTimeMillis();
 		long dureeTotaleMillis = tempsFin - tempsDebut;

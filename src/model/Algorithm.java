@@ -55,25 +55,28 @@ public class Algorithm {
 	 * @param grid
 	 * @return
 	 */
-	public int algoMinMax(Grid grid) {
-		// We do a waiting thread for wait a second before starts the algorithm
-		Thread threadWait = new Thread(new Runnable() {
-			public void run() {
-				try {
-					Thread.sleep(1000);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
+	public int algoMinMax(Grid grid, boolean isWaitOneSec, boolean isDisplayArray) {
+
+		if (isWaitOneSec) {
+			// We do a waiting thread for wait a second before starts the algorithm
+			Thread threadWait = new Thread(new Runnable() {
+				public void run() {
+					try {
+						Thread.sleep(1000);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
 				}
+			});
+			threadWait.setDaemon(true);
+			threadWait.start();
+
+			// We wait for the thread to finish
+			try {
+				threadWait.join();
+			} catch (InterruptedException e) {
+				e.printStackTrace();
 			}
-		});
-		threadWait.setDaemon(true);
-		threadWait.start();
-		
-		// We wait for the thread to finish
-		try {
-			threadWait.join();
-		} catch (InterruptedException e) {
-			e.printStackTrace();
 		}
 		
 		// We check if we have a direct win with a next move
@@ -94,7 +97,7 @@ public class Algorithm {
 		}
 
 		// We call the recursive method
-		return recursiveMinMax(grid, 0, true);
+		return recursiveMinMax(grid, 0, true, isDisplayArray);
 	}
 
 	/**
@@ -105,7 +108,7 @@ public class Algorithm {
 	 * @param estJoueurMax
 	 * @return
 	 */
-	private int recursiveMinMax(Grid grid, int currentDepth, boolean isPlayerMax) {
+	private int recursiveMinMax(Grid grid, int currentDepth, boolean isPlayerMax, boolean isDisplayArray) {
 
 		// Stop condition : if we have reached the level we wanted
 		if (currentDepth == level) {
@@ -130,7 +133,7 @@ public class Algorithm {
 					// We calculate the value of each node with a thread
 					Thread thread = new Thread(new Runnable() {
 						public void run() {
-							calculateValueNode(grid, listTemp, indexThread, currentDepth, isPlayerMax, playerMax);
+							calculateValueNode(grid, listTemp, indexThread, currentDepth, isPlayerMax, playerMax, isDisplayArray);
 						}
 					});
 					listThreadsMax.add(thread);
@@ -146,8 +149,10 @@ public class Algorithm {
 					}
 				}
 				// For the root we want the index and not the value of the maximum
-				System.out.println("\n" + listTemp);
-
+				
+				if(isDisplayArray) {
+					System.out.println("\n" + listTemp);
+				}
 				return findIndMax(listTemp, grid);
 			}
 
@@ -157,7 +162,7 @@ public class Algorithm {
 
 				// We calculate the value of each node
 				for (int indexColumn = 0; indexColumn < 7; indexColumn++) {
-					calculateValueNode(grid, listTemp, indexColumn, currentDepth, isPlayerMax, playerMax);
+					calculateValueNode(grid, listTemp, indexColumn, currentDepth, isPlayerMax, playerMax, isDisplayArray);
 				}
 
 				// For leafs and nodes we want the maximum value
@@ -172,7 +177,7 @@ public class Algorithm {
 
 			// We calculate the value of each node
 			for (int indexColumn = 0; indexColumn < 7; indexColumn++) {
-				calculateValueNode(grid, listTemp, indexColumn, currentDepth, isPlayerMax, playerMin);
+				calculateValueNode(grid, listTemp, indexColumn, currentDepth, isPlayerMax, playerMin, isDisplayArray);
 			}
 
 			// For leafs and nodes we want the minimum value ( There will be no root for
@@ -310,7 +315,7 @@ public class Algorithm {
 	}
 
 	public void calculateValueNode(Grid grid, List<Integer> listTemp, int index, int currentDepth, boolean isPlayerMax,
-			ValueSquare player) {
+			ValueSquare player, boolean isDisplayArray) {
 		// We check if the column is not full
 		if (!grid.getGrid().get(index).isColumnFull()) {
 
@@ -323,7 +328,7 @@ public class Algorithm {
 				newGrid.addCoinGrid(index, player);
 
 				// We add the good value by calling the the recursive method
-				listTemp.set(index, recursiveMinMax(newGrid, currentDepth + 1, !isPlayerMax));
+				listTemp.set(index, recursiveMinMax(newGrid, currentDepth + 1, !isPlayerMax, isDisplayArray));
 			}
 
 			// If it is

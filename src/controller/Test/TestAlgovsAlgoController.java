@@ -53,7 +53,7 @@ public class TestAlgovsAlgoController extends ForAllControllers implements Initi
 		while (!isGameFinished) {
 			// We check that the grid is not full
 			if (!grid.isGridFull()) {
-				grid.addCoinGrid(algorithm1.algoMinMax(grid), ValueSquare.P1);
+				grid.addCoinGrid(algorithm1.algoMinMax(grid, false, false), ValueSquare.P1);
 				// System.out.println(grid.toString());
 
 				// If J1 won
@@ -63,7 +63,7 @@ public class TestAlgovsAlgoController extends ForAllControllers implements Initi
 				}
 				// We check that the grid is not full
 				else if (!grid.isGridFull()) {
-					grid.addCoinGrid(algorithm2.algoMinMax(grid), ValueSquare.P2);
+					grid.addCoinGrid(algorithm2.algoMinMax(grid, false, false), ValueSquare.P2);
 					// System.out.println(grid.toString());
 
 					// If J2 won
@@ -86,7 +86,7 @@ public class TestAlgovsAlgoController extends ForAllControllers implements Initi
 		// A rendre plus propre
 		for (int i = 0 ; i < results.size(); i++) {
 			int alpha = i + 3;
-			System.out.println("With the alpha value : " + alpha + " algorith won " + results.get(i) + " games.");
+			System.out.println("With a α3 value of : " + alpha + " - Algorith won " + results.get(i) + " games.");
 		}
 	}
 
@@ -107,19 +107,19 @@ public class TestAlgovsAlgoController extends ForAllControllers implements Initi
 				
 				// Adding a victory for the winner | Match 1 vs 2 
 				if(resultGame1v2 == 1) {
-					System.out.println(alpha3A + " vs " + alpha3B + " : " + alpha3A);
+					System.out.println(alpha3A + " vs " + alpha3B + " : Winner is " + alpha3A);
 					listNbVictories.set(alpha3A - 3, listNbVictories.get(alpha3A - 3) + 1);
 				} else if (resultGame1v2 == -1) {
-					System.out.println(alpha3A + " vs " + alpha3B + " : " + alpha3B);
+					System.out.println(alpha3A + " vs " + alpha3B + " : Winner is " + alpha3B);
 					listNbVictories.set(alpha3B - 3, listNbVictories.get(alpha3B - 3) + 1);
 				}
 				
 				// Adding a victory for the winner | Match 2 vs 1 
 				if(resultGame2v1 == -1) {
-					System.out.println(alpha3B + " vs " + alpha3A + " : " + alpha3A);
+					System.out.println(alpha3B + " vs " + alpha3A + " : Winner is " + alpha3A);
 					listNbVictories.set(alpha3A - 3, listNbVictories.get(alpha3A - 3) + 1);
 				} else if (resultGame2v1 == 1) {
-					System.out.println(alpha3B + " vs " + alpha3A + " : " + alpha3B);
+					System.out.println(alpha3B + " vs " + alpha3A + " : Winner is " + alpha3B);
 					listNbVictories.set(alpha3B - 3, listNbVictories.get(alpha3B - 3) + 1);
 				}
 			}

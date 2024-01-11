@@ -123,7 +123,7 @@ public class GameOnlineController extends GameController implements Initializabl
 			isPlaying = true;
 
 			// Algorithm is searching the best column to play
-			int columnAlgo = algo.algoMinMax(grid);
+			int columnAlgo = algo.algoMinMax(grid, true, true);
 			grid.addCoinGrid(columnAlgo, ValueSquare.P1);
 
 			isPlaying = false;
@@ -234,7 +234,7 @@ public class GameOnlineController extends GameController implements Initializabl
 
 		if (isAlgoPlaying && isPlaying) {
 			// We add the coin
-			int columnAlgo = algo.algoMinMax(grid);
+			int columnAlgo = algo.algoMinMax(grid, true, true);
 			grid.addCoinGrid(columnAlgo, numPlayer);
 
 			// Send the column played to the server
