@@ -52,10 +52,6 @@ public class Main extends Application {
 				IOError.printStackTrace();
 			}
 		}).start();
-		
-		
-		Grid gridTest = new Grid();
-		gridTest.addCoinGrid(0, ValueSquare.P1);
 	}
 
 	/**
@@ -105,7 +101,7 @@ public class Main extends Application {
 	/**
 	 * Getter for the client of the application
 	 * 
-	 * @return
+	 * @return clientTCP : clientTCP of the application
 	 */
 	public static ClientTCP getClientTCP() {
 		return clientTCP;
@@ -114,7 +110,7 @@ public class Main extends Application {
 	/**
 	 * Getter for the player's list
 	 * 
-	 * @return
+	 * @return playersData : List of Data's players 
 	 */
 	public static ObservableValue<List<Player>> getPlayersData() {
 		return playersData;

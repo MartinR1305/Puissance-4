@@ -35,12 +35,13 @@ public class ClientTCP implements AutoCloseable {
 	/**
 	 * Default Constructor for a ClientTCP
 	 * 
-	 * @param IP
-	 * @param port
-	 * @param clientController
+	 * @param IP               : IP's address of the server
+	 * @param port             : Port of the server
+	 * @param clientController : The controller for the client
 	 * @throws IOException
 	 */
-	public ClientTCP(String IP, int port, ChoiceOnlineGameController connectController, GameOnlineController gameController) throws IOException {
+	public ClientTCP(String IP, int port, ChoiceOnlineGameController connectController,
+			GameOnlineController gameController) throws IOException {
 		this.isConnectedToServer = false;
 		this.is2ndClientConnected = false;
 		this.isClientOpened = true;
@@ -62,7 +63,7 @@ public class ClientTCP implements AutoCloseable {
 	/**
 	 * Getter for the client's number
 	 * 
-	 * @return
+	 * @return numClient : The client's number
 	 */
 	public int getNumClient() {
 		return this.numClient;
@@ -71,25 +72,25 @@ public class ClientTCP implements AutoCloseable {
 	/**
 	 * Getter for the client's IP
 	 * 
-	 * @return
+	 * @return IP : The client's IP
 	 */
 	public String getIP() {
 		return this.IP;
 	}
 
 	/**
-	 * Getter for the client's IP
+	 * Getter for the client's port
 	 * 
-	 * @return
+	 * @return port : The client's port
 	 */
 	public int getPort() {
 		return this.port;
 	}
-	
+
 	/**
 	 * Getter for the writer
 	 * 
-	 * @return
+	 * @return writer : The writer
 	 */
 	public PrintWriter getWriter() {
 		return writer;
@@ -98,7 +99,7 @@ public class ClientTCP implements AutoCloseable {
 	/**
 	 * Setter for the boolean isClientOpened
 	 * 
-	 * @param isClientOpened
+	 * @param isClientOpened : The new value of isClientOpened
 	 */
 	public void setClientOpened(boolean isClientOpened) {
 		this.isClientOpened = isClientOpened;
@@ -121,12 +122,12 @@ public class ClientTCP implements AutoCloseable {
 				isConnectedToServer = true;
 				System.out.println("Connected to the server !");
 				connectController.actualizeState("Connected");
-				
+
 				// Creation of writer and reader
 				this.writer = new PrintWriter(this.clientSocket.getOutputStream(), true);
 				this.reader = new BufferedReader(new InputStreamReader(this.clientSocket.getInputStream()));
 
-				// Get Message of server 
+				// Get Message of server
 				while (isConnectedToServer && isClientOpened) {
 					receiveMessage();
 				}
@@ -136,8 +137,8 @@ public class ClientTCP implements AutoCloseable {
 			if (this.clientSocket == null) {
 				if (isClientOpened) {
 					System.err.println("Server not open !");
-					
-					// We  try a reconnection
+
+					// We try a reconnection
 					reconnect();
 				}
 			} else {
@@ -165,7 +166,7 @@ public class ClientTCP implements AutoCloseable {
 							if (!isConnectedToServer || isClientOpened) {
 								try {
 									// Retry the connection
-									connectToServer(); 
+									connectToServer();
 								} catch (IOException IOE) {
 									IOE.printStackTrace();
 								}
@@ -239,47 +240,46 @@ public class ClientTCP implements AutoCloseable {
 				}
 
 			}
-			
+
 			// We are looking if the message is type of "N + integer"
 			Pattern pattern = Pattern.compile("N(\\d+)");
 			Matcher matcher = pattern.matcher(finalMessage);
-			
+
 			// Message for client's number assignment
 			if (matcher.find()) {
 				String integerPart = matcher.group(1);
 				numClient = Integer.parseInt(integerPart) - 1;
 				System.out.println("The player has the number : " + numClient);
 			}
-			
+
 			// Message that says two players are connected to the server
 			else if (finalMessage.equals("2 Players Connected")) {
 				is2ndClientConnected = true;
 				connectController.actualize2PlayersBoolean(is2ndClientConnected);
 			}
-			
+
 			// Message that says two players are connected to the server
 			else if (finalMessage.equals("Other Player Left")) {
 				is2ndClientConnected = false;
 				gameController.actualize2PlayersBoolean(is2ndClientConnected);
 			}
-			
+
 			// Message that says the player will start the game
 			else if (finalMessage.equals("You Start")) {
 				isPlayerStarts = true;
 				gameController.actualizePlayerStarting(isPlayerStarts);
 			}
-			
+
 			// Message that says the player will not start the game
 			else if (finalMessage.equals("Opponent Will Start")) {
 				isPlayerStarts = false;
 				gameController.actualizePlayerStarting(isPlayerStarts);
 			}
-			
+
 			// Message that says the other player had play
 			else if (finalMessage.matches("\\d+")) {
 				gameController.otherPlayerPlayed(finalMessage);
 			}
-			
 
 		} catch (IOException IOE) {
 			IOE.printStackTrace();
@@ -300,7 +300,7 @@ public class ClientTCP implements AutoCloseable {
 		// Actualization of attributes
 		this.IP = IP;
 		this.port = Integer.parseInt(Port);
-		
+
 		isReconnectedToServerInProgress = true;
 
 		// Stop A potential Thread
