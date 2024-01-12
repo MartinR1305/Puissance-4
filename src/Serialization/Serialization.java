@@ -10,7 +10,11 @@ import model.Player;
 
 public class Serialization {
 
-	// Method that allows to save data from players
+	/**
+	 * Method that serialize the data in a file
+	 * 
+	 * @param listJoueur : The list of players that we will serialize
+	 */
 	public static void serializePlayer(List<Player> listJoueur) {
 
 		try {
@@ -25,10 +29,13 @@ public class Serialization {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
 	}
 
-	// Method that allows to update data for players
+	/**
+	 * Method that serialize the data in a file
+	 * 
+	 * @return listJoueur : The list of players that we will deserialize
+	 */
 	public static List<Player> deserializePlayer() {
 
 		try {
@@ -46,7 +53,6 @@ public class Serialization {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
 		return null;
 	}
 }
