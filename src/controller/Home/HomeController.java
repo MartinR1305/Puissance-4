@@ -14,7 +14,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
-public class HomeController extends ForAllControllers{
+public class HomeController extends ForAllControllers {
 
 	@FXML
 	Label home;
@@ -27,66 +27,74 @@ public class HomeController extends ForAllControllers{
 	private Parent root;
 
 	/**
-     * Controller that allows to switch the scene to the choice of players for a local PvP game
-     * @param event
-     * @throws IOException
-     */
-    public void switchToChoicePlayersPvP(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(
-                getClass().getResource(".." + File.separator + ".." + File.separator + "view" + File.separator + "ChoicePlayersPvP.fxml"));
-        root = loader.load();
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
-        setCenterStage(stage);
-    }
-    
+	 * Controller that allows to switch the scene to the choice of players for a
+	 * local PvP game
+	 * 
+	 * @param event : The event that will activate the action
+	 * @throws IOException
+	 */
+	public void switchToChoicePlayersPvP(ActionEvent event) throws IOException {
+		FXMLLoader loader = new FXMLLoader(getClass().getResource(
+				".." + File.separator + ".." + File.separator + "view" + File.separator + "ChoicePlayersPvP.fxml"));
+		root = loader.load();
+		stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+		scene = new Scene(root);
+		stage.setScene(scene);
+		stage.show();
+		setCenterStage(stage);
+	}
+
 	/**
-     * Controller that allows to switch the scene to the choice of player for a local PvA game
-     * @param event
-     * @throws IOException
-     */
-    public void switchToChoicePlayersPvA(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(
-                getClass().getResource(".." + File.separator + ".." + File.separator + "view" + File.separator + "ChoicePlayerPvA.fxml"));
-        root = loader.load();
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
-        setCenterStage(stage);
-    }
-    
+	 * Controller that allows to switch the scene to the choice of player for a
+	 * local PvA game
+	 * 
+	 * @param event : The event that will activate the action
+	 * @throws IOException
+	 */
+	public void switchToChoicePlayersPvA(ActionEvent event) throws IOException {
+		FXMLLoader loader = new FXMLLoader(getClass().getResource(
+				".." + File.separator + ".." + File.separator + "view" + File.separator + "ChoicePlayerPvA.fxml"));
+		root = loader.load();
+		stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+		scene = new Scene(root);
+		stage.setScene(scene);
+		stage.show();
+		setCenterStage(stage);
+	}
+
 	/**
-     * Controller that allows to switch the scene to the choice of PvP or AvA game in TCP
-     * @param event
-     * @throws IOException
-     */
-    public void switchToChoiceOnline(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(
-                getClass().getResource(".." + File.separator + ".." + File.separator + "view" + File.separator + "ChoiceOnlineGame.fxml"));
-        root = loader.load();
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
-        setCenterStage(stage);
-    }
-    
+	 * Controller that allows to switch the scene to the choice of PvP or AvA game
+	 * in TCP
+	 * 
+	 * @param event : The event that will activate the action
+	 * @throws IOException
+	 */
+	public void switchToChoiceOnline(ActionEvent event) throws IOException {
+		FXMLLoader loader = new FXMLLoader(getClass().getResource(
+				".." + File.separator + ".." + File.separator + "view" + File.separator + "ChoiceOnlineGame.fxml"));
+		root = loader.load();
+		stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+		scene = new Scene(root);
+		stage.setScene(scene);
+		stage.show();
+		setCenterStage(stage);
+	}
+
 	/**
-     * Controller that allows to switch the scene to the tests for algorithms vs algorithms
-     * @param event
-     * @throws IOException
-     */
-    public void switchToTestAlgos(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(
-                getClass().getResource(".." + File.separator + ".." + File.separator + "view" + File.separator + "testAlgovsAlgo.fxml"));
-        root = loader.load();
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
-        setCenterStage(stage);
-    }
+	 * Controller that allows to switch the scene to the tests for algorithms vs
+	 * algorithms
+	 * 
+	 * @param event : The event that will activate the action
+	 * @throws IOException
+	 */
+	public void switchToTestAlgos(ActionEvent event) throws IOException {
+		FXMLLoader loader = new FXMLLoader(getClass().getResource(
+				".." + File.separator + ".." + File.separator + "view" + File.separator + "testAlgovsAlgo.fxml"));
+		root = loader.load();
+		stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+		scene = new Scene(root);
+		stage.setScene(scene);
+		stage.show();
+		setCenterStage(stage);
+	}
 }

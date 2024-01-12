@@ -52,10 +52,13 @@ public class ChoiceOnlineGameController extends HomeController implements Initia
 
 	@FXML
 	private RadioButton playerRB, algoRB;
-	
+
 	@FXML
 	private ToggleButton isStarting;
 
+	/**
+	 * Method that will be called when the FXML file is opened
+	 */
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// We actualize the client attribute with the one of the main
@@ -82,7 +85,7 @@ public class ChoiceOnlineGameController extends HomeController implements Initia
 	/**
 	 * Setter of clientTCP -> use for associating application and ClientTCP
 	 * 
-	 * @param clientTCP
+	 * @param clientTCP : The new clientTCP
 	 */
 	public void setClientTCP(ClientTCP clientTCP) {
 		this.clientTCP = clientTCP;
@@ -127,12 +130,18 @@ public class ChoiceOnlineGameController extends HomeController implements Initia
 		}
 	}
 
+	/**
+	 * Method that allows to disconnect the clientTCP from the server
+	 */
 	public void disconnectFromServer() {
 		isPlayerRBSelected = false;
 		isAlgoRBSelected = false;
 		clientTCP.changeIP_Port("", "0");
 	}
 
+	/**
+	 * Method to change the choice for the type of game to player
+	 */
 	public void changeToPlayerChoice() {
 		if (playerRB.isSelected() && algoRB.isSelected()) {
 			// We select the algorithm choice and not select the player choice
@@ -150,7 +159,7 @@ public class ChoiceOnlineGameController extends HomeController implements Initia
 			chooseAlgoLvl.setDisable(true);
 			algoLvl.setVisible(false);
 			algoLvl.setDisable(true);
-			
+
 			// We hide the choice for determinate if the player will start the game
 			isStarting.setVisible(false);
 			isStarting.setDisable(true);
@@ -165,6 +174,9 @@ public class ChoiceOnlineGameController extends HomeController implements Initia
 		playerRB.setSelected(true);
 	}
 
+	/**
+	 * Method to change the choice for the type of game to algorithm
+	 */
 	public void changeToAlgoChoice() {
 
 		if (playerRB.isSelected() && algoRB.isSelected()) {
@@ -177,7 +189,7 @@ public class ChoiceOnlineGameController extends HomeController implements Initia
 			chooseAlgoLvl.setDisable(false);
 			algoLvl.setVisible(true);
 			algoLvl.setDisable(false);
-			
+
 			// We display the choice for determinate if the player will start the game
 			isStarting.setVisible(true);
 			isStarting.setDisable(false);
@@ -202,7 +214,7 @@ public class ChoiceOnlineGameController extends HomeController implements Initia
 	 * Method that allows to actualize the state of the connection between the
 	 * client and the server
 	 * 
-	 * @param state
+	 * @param state : The new state
 	 */
 	public void actualizeState(String state) {
 		if (state.equals("Connected")) {
@@ -218,7 +230,7 @@ public class ChoiceOnlineGameController extends HomeController implements Initia
 	 * Method that allows to actualize the boolean in order to know if two players
 	 * are connected or not
 	 * 
-	 * @param state
+	 * @param areTwoClientsConnected : The new value of areTwoClientsConnected
 	 */
 	public void actualize2PlayersBoolean(Boolean areTwoClientsConnected) {
 		if (areTwoClientsConnected.equals(true)) {
@@ -229,9 +241,12 @@ public class ChoiceOnlineGameController extends HomeController implements Initia
 			areTwoPlayersConnected = false;
 		}
 	}
-	
+
+	/**
+	 * Method that allows to update the button "isStarting"
+	 */
 	public void updateToggleButton() {
-		if(isStarting.isSelected()) {
+		if (isStarting.isSelected()) {
 			isStarting.setText("NO");
 			isStarting.setStyle("-fx-text-fill: red;");
 		} else {
@@ -300,13 +315,14 @@ public class ChoiceOnlineGameController extends HomeController implements Initia
 							try {
 								root = loader.load();
 								GameOnlineController gameControllerPvPOnlineController = loader.getController();
-								
+
 								if (isPlayerRBSelected) {
 									gameControllerPvPOnlineController.startGamePlayer(listPlayer.getValue());
 								} else if (isAlgoRBSelected) {
-									gameControllerPvPOnlineController.startGameAlgorithm(algoLvl.getValue(), !isStarting.isSelected());
+									gameControllerPvPOnlineController.startGameAlgorithm(algoLvl.getValue(),
+											!isStarting.isSelected());
 								}
-								
+
 							} catch (IOException e) {
 								e.printStackTrace();
 							}

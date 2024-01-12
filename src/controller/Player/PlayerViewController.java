@@ -33,6 +33,11 @@ public class PlayerViewController extends ForAllControllers {
 	@FXML
 	private TableColumn<List<String>, String> results, opponent;
 	
+	/**
+	 * Method allows to display information of a player on the page
+	 * 
+	 * @param p : Player that we want to see information
+	 */
 	public void viewPlayer(Player p) {
 		
 		// We set data of the player selected

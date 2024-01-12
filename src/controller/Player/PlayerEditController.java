@@ -39,7 +39,7 @@ public class PlayerEditController extends ForAllControllers{
 
     /**
      * Method that edits the information of a player.
-     * @param p The player to edit.
+     * @param p : The player to edit.
      */
     public void editPlayer(Player player) {
     	playerToEdit = player;
@@ -101,7 +101,4 @@ public class PlayerEditController extends ForAllControllers{
             switchToFileWithDelay("PlayerSettings.fxml", successMsg);
         }
     }
-
-
-
 }

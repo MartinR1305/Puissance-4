@@ -32,11 +32,14 @@ public class GamePvPLocalController extends GameController implements Initializa
 
 	private int timeLimit;
 	private static Timeline timeline;
-	
+
 	private Stage stage;
 	private Scene scene;
 	private Parent root;
 
+	/**
+	 * Method that will be called when the FXML file is opened
+	 */
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		if (timeLimit != -1) {
@@ -48,8 +51,9 @@ public class GamePvPLocalController extends GameController implements Initializa
 	/**
 	 * Method that allows to start a PvP Local game
 	 * 
-	 * @param p1, first player of the game
-	 * @param p2, second player of the game
+	 * @param p1        : First player of the game
+	 * @param p2        : Second player of the game
+	 * @param timeLimit : Time limit of the game
 	 */
 	public void startGamePvPLocal(Player p1, Player p2, int timeLimit) {
 
@@ -88,7 +92,7 @@ public class GamePvPLocalController extends GameController implements Initializa
 	/**
 	 * Method for managing the action of clicking on "0" to "6" buttons
 	 * 
-	 * @param event
+	 * @param event : The event that will activate the action
 	 */
 	@FXML
 	private void indexColumnSetWithButton(ActionEvent event) {
@@ -103,6 +107,8 @@ public class GamePvPLocalController extends GameController implements Initializa
 
 	/**
 	 * Method that allows to add a coin in the game by a player
+	 * 
+	 * @param columnToAdd : Index of the column where we want to add a coin
 	 */
 	public void addCoinGamePvPLocal(int columnToAdd) {
 
@@ -187,8 +193,8 @@ public class GamePvPLocalController extends GameController implements Initializa
 	 * Method that display a message, set data for a victory and then back to the
 	 * previous scene
 	 * 
-	 * @param playerWin,   player who won the game
-	 * @param playerLoose, player who lost the game
+	 * @param playerWin   : Player who won the game
+	 * @param playerLoose : Player who lost the game
 	 */
 	public void winGamePvPLocal(Player playerWin, Player playerLoose) {
 		super.disableAllButtons();
@@ -219,8 +225,8 @@ public class GamePvPLocalController extends GameController implements Initializa
 	/**
 	 * Method that allows to start a count down for a player's turn
 	 * 
-	 * @param label
-	 * @param timeLimit
+	 * @param label     : Label for the count down
+	 * @param timeLimit : Time limit of the game
 	 */
 	public void startCountdown(Label label, int timeLimit) {
 		// Using an array to store the value of seconds effectively final
@@ -267,18 +273,18 @@ public class GamePvPLocalController extends GameController implements Initializa
 		timeline.getKeyFrames().add(keyFrame);
 		timeline.play();
 	}
-	
+
 	/**
 	 * Method that allows to switch the scene to the Home after stop the timer
 	 * 
-	 * @param event
+	 * @param event : The event that will activate the action
 	 * @throws IOException
 	 */
 	public void switchToHomeBis(ActionEvent event) throws IOException {
 		timeline.stop();
-		FXMLLoader loader = new FXMLLoader(
-				getClass().getResource(".." + File.separator + ".." + File.separator + "view" + File.separator + "Home.fxml"));
-		
+		FXMLLoader loader = new FXMLLoader(getClass()
+				.getResource(".." + File.separator + ".." + File.separator + "view" + File.separator + "Home.fxml"));
+
 		root = loader.load();
 		stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		scene = new Scene(root);

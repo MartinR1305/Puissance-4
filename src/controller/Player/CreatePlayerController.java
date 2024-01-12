@@ -21,7 +21,6 @@ public class CreatePlayerController extends ForAllControllers {
 	private TextField lastName, firstName, userName, age;
 
 	/**
-	 * 
 	 * Method that allows to create a player by filling in the fields
 	 */
 	public void CreatePlayer() {
@@ -62,7 +61,7 @@ public class CreatePlayerController extends ForAllControllers {
 	/**
 	 * Method that allows to know if there are number(s) in a String
 	 * 
-	 * @param string
+	 * @param string : The string that we want to look
 	 * @return
 	 */
 	public boolean isNbIn(String string) {
@@ -74,7 +73,6 @@ public class CreatePlayerController extends ForAllControllers {
 				return true;
 			}
 		}
-
 		return false;
 	}
 }

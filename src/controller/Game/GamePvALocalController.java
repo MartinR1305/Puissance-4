@@ -41,6 +41,9 @@ public class GamePvALocalController extends GameController implements Initializa
 	private Scene scene;
 	private Parent root;
 
+	/**
+	 * Method that will be called when the FXML file is opened
+	 */
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		if (timeLimit != -1) {
@@ -52,7 +55,9 @@ public class GamePvALocalController extends GameController implements Initializa
 	/**
 	 * Method that allows to start a PvA Local game
 	 * 
-	 * @param p1, player of the game
+	 * @param p1 : Player of the game
+	 * @param level : Level of the algorithm
+	 * @param timeLimit : Time limit of the game
 	 */
 	public void startGamePvALocal(Player p, int level, int timeLimit) {
 
@@ -115,7 +120,7 @@ public class GamePvALocalController extends GameController implements Initializa
 	/**
 	 * Method for managing the action of clicking on "0" to "6" buttons
 	 * 
-	 * @param event
+	 * @param event : The event that will activate the action
 	 */
 	@FXML
 	private void indexColumnSetWithButton(ActionEvent event) {
@@ -131,6 +136,8 @@ public class GamePvALocalController extends GameController implements Initializa
 
 	/**
 	 * Method that allows to add a coin in the game by a player
+	 * 
+	 * @param columnToAdd : Index of the column where we want to add a coin
 	 */
 	public void addCoinGamePvALocal(int columnToAdd) {
 
@@ -154,6 +161,9 @@ public class GamePvALocalController extends GameController implements Initializa
 		}
 	}
 
+	/**
+	 * Method to do a turn for the algorithm
+	 */
 	public void algorithmTurn() {
 
 		// We use Platform.runLater in order that the javaFX interface do not freeze
@@ -231,7 +241,7 @@ public class GamePvALocalController extends GameController implements Initializa
 	 * Method that display a message, set data for a victory and then back to the
 	 * previous scene
 	 * 
-	 * @param playerWin, player who won the game
+	 * @param playerWin : Player who won the game
 	 */
 	public void winGamePvALocal(Player playerWin) {
 		disableAllButtons();
@@ -252,7 +262,7 @@ public class GamePvALocalController extends GameController implements Initializa
 	 * Method that display a message, set data for a defeat and then back to the
 	 * previous scene
 	 * 
-	 * @param playerLoose, player who the lost the game
+	 * @param playerLoose : Player who the lost the game
 	 */
 	public void looseGamePvALocal(Player playerLoose) {
 		disableAllButtons();
@@ -282,8 +292,8 @@ public class GamePvALocalController extends GameController implements Initializa
 	/**
 	 * Method that allows to start a count down for a player's turn
 	 * 
-	 * @param label
-	 * @param timeLimit
+	 * @param label     : Label of the count down
+	 * @param timeLimit : Time limit for the game
 	 */
 	public void startCountdown(Label label, int timeLimit) {
 		// Using an array to store the value of seconds effectively final
@@ -335,7 +345,7 @@ public class GamePvALocalController extends GameController implements Initializa
 	/**
 	 * Method that allows to switch the scene to the Home after stop the timer
 	 * 
-	 * @param event
+	 * @param event : The event that will activate the action
 	 * @throws IOException
 	 */
 	public void switchToHomeBis(ActionEvent event) throws IOException {

@@ -24,6 +24,9 @@ public class PreHomeController extends ForAllControllers implements Initializabl
     @FXML
     private Label connect, four, labelClickToPlay, saadMartin;
 
+    /**
+     * Method that will be called when the FXML file is opened
+     */
     @Override
     public void initialize(java.net.URL arg0, ResourceBundle arg1) {
         

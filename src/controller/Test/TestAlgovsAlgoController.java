@@ -34,6 +34,9 @@ public class TestAlgovsAlgoController extends ForAllControllers implements Initi
 	int valueDraws;
 	int valueVictoriesA2;
 
+	/**
+	 * Method that will be called when the FXML file is opened
+	 */
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		nbVictoriesA1.setText("0");
@@ -44,6 +47,13 @@ public class TestAlgovsAlgoController extends ForAllControllers implements Initi
 		valueLvLA2.setText("4");
 	}
 	
+	/**
+	 * Method that allows to do a game between two algorithms and to get to results
+	 * 
+	 * @param algo1 : Algorithm who will start the game
+	 * @param algo2 : Algorithm who won't start the game 
+	 * @return value : 1 if the player 1 won, -1 if the player 2 won and 0 if it's a draw
+	 */
 	public int getResultGame(Algorithm algo1, Algorithm algo2) {
 		// We initialize a new grid
 		grid = new Grid();
@@ -79,17 +89,12 @@ public class TestAlgovsAlgoController extends ForAllControllers implements Initi
 		}
 		return 0;
 	}
-	
-	public void displayResults() {
-		List<Integer> results = getAllResults();
-		
-		// A rendre plus propre
-		for (int i = 0 ; i < results.size(); i++) {
-			int alpha = i + 3;
-			System.out.println("With a α3 value of : " + alpha + " - Algorith won " + results.get(i) + " games.");
-		}
-	}
 
+	/**
+	 * Method that allows to simulate games 10 algorithms for our tests
+	 * 
+	 * @return listNbVictories : List of integers for each algorithm that says how many games it won
+	 */
 	public List<Integer> getAllResults() {
 		int nbAlgo = 10; 
 
@@ -126,7 +131,22 @@ public class TestAlgovsAlgoController extends ForAllControllers implements Initi
 		}
 		return listNbVictories;
 	}
+	
+	/**
+	 * Method that allows to display results of the games test
+	 */
+	public void displayResults() {
+		List<Integer> results = getAllResults();
 
+		for (int i = 0 ; i < results.size(); i++) {
+			int alpha = i + 3;
+			System.out.println("With a α3 value of : " + alpha + " - Algorith won " + results.get(i) + " games.");
+		}
+	}
+
+	/**
+	 * Method that allows to know results from games between two algorithms
+	 */
 	public void getResult() {
 
 		valueVictoriesA1 = 0;
@@ -182,7 +202,6 @@ public class TestAlgovsAlgoController extends ForAllControllers implements Initi
 							valueDraws++;
 						}
 					}
-
 					nbVictoriesA1.setText(String.valueOf(valueVictoriesA1));
 					nbVictoriesA2.setText(String.valueOf(valueVictoriesA2));
 					nbDraws.setText(String.valueOf(valueDraws));

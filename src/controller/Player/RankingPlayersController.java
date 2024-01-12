@@ -31,6 +31,9 @@ public class RankingPlayersController extends ForAllControllers implements Initi
 	@FXML
 	private TableColumn<Player, String> winRate;
 
+	/**
+	 * Method that will be called when the FXML file is opened
+	 */
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 
@@ -59,8 +62,8 @@ public class RankingPlayersController extends ForAllControllers implements Initi
 	 * Method that allows to know the rank of the player who depends of his ranked's
 	 * points
 	 * 
-	 * @param player, the player that we want to know the rank
-	 * @return the rank of the player
+	 * @param player : The player that we want to know the rank
+	 * @return rank : The rank of the player
 	 */
 	public int getRank(Player player) {
 
@@ -74,7 +77,6 @@ public class RankingPlayersController extends ForAllControllers implements Initi
 				rank++;
 			}
 		}
-
 		return rank;
 	}
 }

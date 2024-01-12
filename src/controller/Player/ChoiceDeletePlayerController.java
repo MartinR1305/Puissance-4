@@ -25,6 +25,9 @@ public class ChoiceDeletePlayerController extends ForAllControllers implements I
 	@FXML
 	ComboBox<Player> playersList;
 
+	/**
+	 * Method that will be called when the FXML file is opened
+	 */
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 

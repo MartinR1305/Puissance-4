@@ -35,13 +35,16 @@ public class ChoicePlayerPvAController extends ForAllControllers implements Init
 
 	@FXML
 	ComboBox<Player> listPlayer;
-	
+
 	@FXML
 	ComboBox<Integer> listLevel;
-	
+
 	@FXML
 	ComboBox<String> timeLimiteChoice;
 
+	/**
+	 * Method that will be called when the FXML file is opened
+	 */
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		setComboBoxWithPlayers(listPlayer);
@@ -52,7 +55,7 @@ public class ChoicePlayerPvAController extends ForAllControllers implements Init
 	/**
 	 * Method that allows to switch to a PvA game
 	 * 
-	 * @param event
+	 * @param event : The event that will activate the action
 	 * @throws IOException
 	 */
 	public void switchToGamePvA(ActionEvent event) throws IOException {
@@ -64,26 +67,26 @@ public class ChoicePlayerPvAController extends ForAllControllers implements Init
 			FXMLLoader loader = new FXMLLoader(getClass().getResource(
 					".." + File.separator + ".." + File.separator + "view" + File.separator + "GamePvALocal.fxml"));
 			root = loader.load();
-			
-			GamePvALocalController gamePvALocalController = loader.getController();
-			
-            int timeLimit = 0;
-            if(timeLimiteChoice.getValue() == "No Limits") {
-            	timeLimit = -1;
-            } else {
-                Pattern pattern = Pattern.compile("\\b(\\d+)\\b");
-                Matcher matcher = pattern.matcher(timeLimiteChoice.getValue());
 
-                if (matcher.find()) {
-                    String numberString = matcher.group(1);
-                    timeLimit = Integer.parseInt(numberString);
-                } else {
-                    System.out.println("ERROR");
-                }
-            }
-            
+			GamePvALocalController gamePvALocalController = loader.getController();
+
+			int timeLimit = 0;
+			if (timeLimiteChoice.getValue() == "No Limits") {
+				timeLimit = -1;
+			} else {
+				Pattern pattern = Pattern.compile("\\b(\\d+)\\b");
+				Matcher matcher = pattern.matcher(timeLimiteChoice.getValue());
+
+				if (matcher.find()) {
+					String numberString = matcher.group(1);
+					timeLimit = Integer.parseInt(numberString);
+				} else {
+					System.out.println("ERROR");
+				}
+			}
+
 			gamePvALocalController.startGamePvALocal(listPlayer.getValue(), listLevel.getValue(), timeLimit);
-			
+
 			stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 			scene = new Scene(root);
 			stage.setScene(scene);

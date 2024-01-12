@@ -25,8 +25,9 @@ public class GameController extends ForAllControllers {
 	protected static Circle[][] matrixCircles;
 
 	@FXML
-	protected Circle c00, c01, c02, c03, c04, c05, c10, c11, c12, c13, c14, c15, c20, c21, c22, c23, c24, c25, c30, c31, c32, c33,
-			c34, c35, c40, c41, c42, c43, c44, c45, c50, c51, c52, c53, c54, c55, c60, c61, c62, c63, c64, c65;
+	protected Circle c00, c01, c02, c03, c04, c05, c10, c11, c12, c13, c14, c15, c20, c21, c22, c23, c24, c25, c30, c31,
+			c32, c33, c34, c35, c40, c41, c42, c43, c44, c45, c50, c51, c52, c53, c54, c55, c60, c61, c62, c63, c64,
+			c65;
 
 	@FXML
 	protected Label playerPlaying, questionToExit, gameFinish, time, remaining;
@@ -35,18 +36,18 @@ public class GameController extends ForAllControllers {
 
 	@FXML
 	protected Button yes, no, exit, C0, C1, C2, C3, C4, C5, C6, buttonPlayAgain;
-	
-	@FXML 
+
+	@FXML
 	protected Rectangle rectangleExit, rectangleTime;
 
 	/**
 	 * Method that allows to set the colors for a case
 	 * 
-	 * @param grid,   the grid where the square is
-	 * @param circle, the circle that the color will change according to the value
-	 *                of the square
-	 * @param column, column where the square is
-	 * @param line,   line where the square is
+	 * @param grid   : the grid where the square is
+	 * @param circle : the circle that the color will change according to the value
+	 *               of the square
+	 * @param column : column where the square is
+	 * @param line   : line where the square is
 	 */
 	public void setColorCircle(Grid grid, Circle circle, int column, int line) {
 		if (grid.getGrid().get(column).getColumn().get(line).getValue().equals(ValueSquare.P1)) {
@@ -69,7 +70,7 @@ public class GameController extends ForAllControllers {
 	 * Method that allows to set the colors for all the grid, we will call this
 	 * method after all coin added
 	 * 
-	 * @param grid
+	 * @param grid : The grid that we want to actualize the colors of
 	 */
 	public void setColorsGrid(Grid grid) {
 		for (int i = 0; i < 7; i++) {
@@ -82,13 +83,15 @@ public class GameController extends ForAllControllers {
 	/**
 	 * Method that allows to change the color for the 4 winning squares
 	 * 
-	 * @param nbPlayer
+	 * @param grid     : The grid where we will set the colors of the four circles
+	 * @param nbPlayer : Player that won the game
 	 */
 	public void setColorsWinningCircles(Grid grid, int nbPlayer) {
 		List<List<Integer>> winningSquares = new ArrayList<List<Integer>>(4);
 		winningSquares = grid.getWinningSquares(nbPlayer);
-		for(int numSquare = 0 ; numSquare < 4 ; numSquare++){
-			matrixCircles[winningSquares.get(numSquare).get(0)][winningSquares.get(numSquare).get(1)].setStroke(Color.WHITE);
+		for (int numSquare = 0; numSquare < 4; numSquare++) {
+			matrixCircles[winningSquares.get(numSquare).get(0)][winningSquares.get(numSquare).get(1)]
+					.setStroke(Color.WHITE);
 		}
 	}
 
@@ -130,7 +133,7 @@ public class GameController extends ForAllControllers {
 
 		no.setVisible(true);
 		no.setDisable(false);
-		
+
 		rectangleExit.setVisible(true);
 	}
 
@@ -145,13 +148,14 @@ public class GameController extends ForAllControllers {
 
 		no.setVisible(false);
 		no.setDisable(true);
-		
+
 		rectangleExit.setVisible(false);
 	}
-	
 
 	/**
 	 * Method that allows to hide all things of the count down
+	 * 
+	 * @param hide : If we want to hide or display
 	 */
 	public void hideCount(boolean hide) {
 		time.setVisible(!hide);

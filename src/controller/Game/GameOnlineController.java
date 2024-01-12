@@ -40,6 +40,9 @@ public class GameOnlineController extends GameController implements Initializabl
 	private ClientTCP clientTCP;
 	private static boolean areTwoPlayersConnected, isConnected, isPlaying, isGameFinished, isWonTheGame, isDraw;
 
+	/**
+	 * Method that will be called when the FXML file is opened
+	 */
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 
@@ -58,11 +61,11 @@ public class GameOnlineController extends GameController implements Initializabl
 		this.updateFinishLabel(playerPlaying, gameFinish);
 		this.updateIsPlaying(playerPlaying);
 	}
-	
+
 	/**
 	 * Setter of clientTCP
 	 * 
-	 * @param clientTCP
+	 * @param clientTCP : The new value for the clientTCP
 	 */
 	public void setClientTCP(ClientTCP clientTCP) {
 		this.clientTCP = clientTCP;
@@ -71,7 +74,7 @@ public class GameOnlineController extends GameController implements Initializabl
 	/**
 	 * Method that allows to start a game with a player playing
 	 * 
-	 * @param p, player of the game
+	 * @param p : Player of the game
 	 */
 	public void startGamePlayer(Player p) {
 		// Initialization of attributes
@@ -92,8 +95,8 @@ public class GameOnlineController extends GameController implements Initializabl
 	/**
 	 * Method that allows to start a game with a algorithm playing
 	 * 
-	 * @param level
-	 * @param isStarting
+	 * @param level      : Level of the algorithm
+	 * @param isStarting : If the algorithm starts or no the game
 	 */
 	public void startGameAlgorithm(int level, boolean isStarting) {
 		// Initialization of attributes
@@ -143,7 +146,7 @@ public class GameOnlineController extends GameController implements Initializabl
 	/**
 	 * Method for managing the action of clicking on "0" to "6" buttons
 	 * 
-	 * @param event
+	 * @param event : The event that will activate the action
 	 */
 	@FXML
 	private void indexColumnSetWithButton(ActionEvent event) {
@@ -183,7 +186,7 @@ public class GameOnlineController extends GameController implements Initializabl
 				checkingWinGame(2);
 			}
 			checkingDrawGame();
-			
+
 			// We give the turn to the other player
 			isPlaying = false;
 		}
@@ -192,7 +195,7 @@ public class GameOnlineController extends GameController implements Initializabl
 	/**
 	 * Method that allows to add a coin in the game for other player
 	 * 
-	 * @param nbColumn
+	 * @param nbColumn : The column where the other player played
 	 */
 	public void otherPlayerPlayed(String nbColumn) {
 
@@ -221,7 +224,7 @@ public class GameOnlineController extends GameController implements Initializabl
 			grid.addCoinGrid(Integer.valueOf(nbColumn), ValueSquare.P1);
 			checkingDefeatGame(1);
 		}
-		
+
 		checkingDrawGame();
 		setColorsGrid(grid);
 
@@ -251,7 +254,7 @@ public class GameOnlineController extends GameController implements Initializabl
 				checkingWinGame(2);
 			}
 			checkingDrawGame();
-			
+
 			// We give the turn to the other algorithm
 			isPlaying = false;
 		}
@@ -260,8 +263,8 @@ public class GameOnlineController extends GameController implements Initializabl
 	/**
 	 * Method that display a message, set data for a victory
 	 * 
-	 * @param playerWin,   player who won the game
-	 * @param playerLoose, player who lost the game
+	 * @param playerWin   : Player who won the game
+	 * @param playerLoose : Player who lost the game
 	 */
 	public void winGameOnline() {
 		super.disableAllButtons();
@@ -303,7 +306,7 @@ public class GameOnlineController extends GameController implements Initializabl
 	 * Method that allows to actualize the boolean for know if two players are
 	 * connected or not
 	 * 
-	 * @param state
+	 * @param is2ndClientConnected : The new value of is2ndClientConnected
 	 */
 	public void actualize2PlayersBoolean(Boolean is2ndClientConnected) {
 		if (is2ndClientConnected.equals(true)) {
@@ -319,7 +322,7 @@ public class GameOnlineController extends GameController implements Initializabl
 	 * Method that allows to actualize the boolean for know if the player starts and
 	 * assign the number of player
 	 * 
-	 * @param state
+	 * @param isPlayerPlaying : The new value of isPlayerPlaying
 	 */
 	public void actualizePlayerStarting(Boolean isPlayerPlaying) {
 		// The player will start the game
@@ -334,6 +337,8 @@ public class GameOnlineController extends GameController implements Initializabl
 
 	/**
 	 * Method that allows to update the label for know if the player's turn
+	 * 
+	 * @param playerPlaying : Label that we want to update
 	 */
 	public void updateIsPlaying(Label playerPlaying) {
 		Thread thread = new Thread(() -> {
@@ -375,6 +380,9 @@ public class GameOnlineController extends GameController implements Initializabl
 
 	/**
 	 * Method that allows to update the labels at the end of the game
+	 * 
+	 * @param playerPlaying : Label for the player playing
+	 * @param gameFinish    : Label for the finish text
 	 */
 	public void updateFinishLabel(Label playerPlaying, Label gameFinish) {
 		Thread thread = new Thread(() -> {
@@ -470,7 +478,7 @@ public class GameOnlineController extends GameController implements Initializabl
 	 * Method that allows to switch the scene to the Home with the disconnection
 	 * between the player and the server
 	 * 
-	 * @param event
+	 * @param event : The event that will activate the action
 	 * @throws IOException
 	 */
 	public void switchToHomeWithDecoServer(ActionEvent event) throws IOException {
@@ -493,9 +501,10 @@ public class GameOnlineController extends GameController implements Initializabl
 	}
 
 	/**
-	 * Method that allows to check if the player won the game or not and set up it if it's the case
+	 * Method that allows to check if the player won the game or not and set up it
+	 * if it's the case
 	 * 
-	 * @param playerToCheck
+	 * @param playerToCheck : Player that we want to check if he won the game
 	 */
 	public void checkingWinGame(int playerToCheck) {
 		if (playerToCheck == 1) {
@@ -504,7 +513,7 @@ public class GameOnlineController extends GameController implements Initializabl
 				setColorsWinningCircles(grid, playerToCheck);
 				isGameFinished = true;
 				isWonTheGame = true;
-				
+
 				if (isPlayerPlaying) {
 					winGameOnline();
 				}
@@ -515,16 +524,17 @@ public class GameOnlineController extends GameController implements Initializabl
 				setColorsWinningCircles(grid, playerToCheck);
 				isGameFinished = true;
 				isWonTheGame = true;
-				
+
 				if (isPlayerPlaying) {
 					winGameOnline();
 				}
 			}
 		}
 	}
-	
+
 	/**
-	 * Method that allows to check if it's a draw or not and set up it if it's the case
+	 * Method that allows to check if it's a draw or not and set up it if it's the
+	 * case
 	 *
 	 */
 	public void checkingDrawGame() {
@@ -533,17 +543,18 @@ public class GameOnlineController extends GameController implements Initializabl
 			// We configure the controller for a tie game
 			isGameFinished = true;
 			isDraw = true;
-			
+
 			if (isPlayerPlaying) {
 				drawGameOnline();
 			}
 		}
 	}
-	
+
 	/**
-	 * Method that allows to check if the player lost the game or not and set up it if it's the case
+	 * Method that allows to check if the player lost the game or not and set up it
+	 * if it's the case
 	 * 
-	 * @param playerToCheck
+	 * @param playerToCheck : Player that we want to check if he lost the game
 	 */
 	public void checkingDefeatGame(int playerToCheck) {
 		if (playerToCheck == 1) {

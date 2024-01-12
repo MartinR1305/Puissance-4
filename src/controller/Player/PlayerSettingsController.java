@@ -29,7 +29,7 @@ public class PlayerSettingsController extends ForAllControllers {
 	/**
 	 * Controller that allows to switch the scene for create a player
 	 * 
-	 * @param event
+	 * @param event : The event that will activate the action 
 	 * @throws IOException
 	 */
 	public void switchToCreatePlayer(ActionEvent event) throws IOException {
@@ -46,7 +46,7 @@ public class PlayerSettingsController extends ForAllControllers {
 	/**
 	 * Controller that allows to switch the scene for see the players ranking
 	 * 
-	 * @param event
+	 * @param event : The event that will activate the action
 	 * @throws IOException
 	 */
 	public void switchToViewRanking(ActionEvent event) throws IOException {
@@ -65,7 +65,7 @@ public class PlayerSettingsController extends ForAllControllers {
 	/**
 	 * Controller that allows to switch the scene for delete a player
 	 * 
-	 * @param event
+	 * @param event : The event that will activate the action
 	 * @throws IOException
 	 */
 	public void switchToChoiceDeletePlayer(ActionEvent event) throws IOException {

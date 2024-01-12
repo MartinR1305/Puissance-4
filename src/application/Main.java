@@ -37,9 +37,9 @@ public class Main extends Application {
 		// We create the client that we will use in the application
 		clientController = new ChoiceOnlineGameController();
 		gameController = new GameOnlineController();
-		
+
 		clientTCP = new ClientTCP("", 0, clientController, gameController);
-		
+
 		clientController.setClientTCP(clientTCP);
 		gameController.setClientTCP(clientTCP);
 
@@ -110,7 +110,7 @@ public class Main extends Application {
 	/**
 	 * Getter for the player's list
 	 * 
-	 * @return playersData : List of Data's players 
+	 * @return playersData : List of Data's players
 	 */
 	public static ObservableValue<List<Player>> getPlayersData() {
 		return playersData;

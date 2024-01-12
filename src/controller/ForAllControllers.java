@@ -29,12 +29,12 @@ public class ForAllControllers {
 	private Stage stage;
 	private Scene scene;
 	private Parent root;
-	
+
 	/**
 	 * Method that allows to display a message with a thread and to hide if after 3
 	 * seconds
 	 * 
-	 * @param label, the label that we want to display
+	 * @param label : The label that we want to display
 	 */
 	public void displayMessage(Label label) {
 		// Create a new thread to manage the wait
@@ -61,12 +61,12 @@ public class ForAllControllers {
 	/**
 	 * Controller that allows to switch the scene for view a player
 	 * 
-	 * @param event
+	 * @param event : The event that will activate the action
 	 * @throws IOException
 	 */
 	public void switchToChoiceViewPlayer(ActionEvent event) throws IOException {
-		FXMLLoader loader = new FXMLLoader(
-				getClass().getResource(".." + File.separator + ".." + File.separator + "view" + File.separator + "ChoicePlayerView.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource(
+				".." + File.separator + ".." + File.separator + "view" + File.separator + "ChoicePlayerView.fxml"));
 		root = loader.load();
 		stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		scene = new Scene(root);
@@ -78,12 +78,12 @@ public class ForAllControllers {
 	/**
 	 * Controller that allows to switch the scene for edit a player
 	 * 
-	 * @param event
+	 * @param event : The event that will activate the action
 	 * @throws IOException
 	 */
 	public void switchToChoiceEditPlayer(ActionEvent event) throws IOException {
-		FXMLLoader loader = new FXMLLoader(
-				getClass().getResource(".." + File.separator + ".." + File.separator + "view" + File.separator + "ChoicePlayerEdit.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource(
+				".." + File.separator + ".." + File.separator + "view" + File.separator + "ChoicePlayerEdit.fxml"));
 		root = loader.load();
 		stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		scene = new Scene(root);
@@ -95,13 +95,13 @@ public class ForAllControllers {
 	/**
 	 * Method that allows to switch the scene to the Home
 	 * 
-	 * @param event
+	 * @param event : The event that will activate the action
 	 * @throws IOException
 	 */
 	public void switchToHome(ActionEvent event) throws IOException {
-		FXMLLoader loader = new FXMLLoader(
-				getClass().getResource(".." + File.separator + ".." + File.separator + "view" + File.separator + "Home.fxml"));
-		
+		FXMLLoader loader = new FXMLLoader(getClass()
+				.getResource(".." + File.separator + ".." + File.separator + "view" + File.separator + "Home.fxml"));
+
 		root = loader.load();
 		stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		scene = new Scene(root);
@@ -113,12 +113,12 @@ public class ForAllControllers {
 	/**
 	 * Method that allows to switch the scene to the Player Settings
 	 * 
-	 * @param event
+	 * @param event : The event that will activate the action
 	 * @throws IOException
 	 */
 	public void switchToPlayerSettings(ActionEvent event) throws IOException {
-		FXMLLoader loader = new FXMLLoader(
-				getClass().getResource(".." + File.separator + ".." + File.separator + "view" + File.separator + "PlayerSettings.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource(
+				".." + File.separator + ".." + File.separator + "view" + File.separator + "PlayerSettings.fxml"));
 		root = loader.load();
 		stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		scene = new Scene(root);
@@ -130,8 +130,8 @@ public class ForAllControllers {
 	/**
 	 * Method that allows to switch the scene to nameFile after 5s
 	 * 
-	 * @param nameFile, file where we want to go
-	 * @param labelOnPage, label on the page we currently are
+	 * @param nameFile    : File where we want to go
+	 * @param labelOnPage : Label on the page we currently are
 	 */
 	public void switchToFileWithDelay(String nameFile, Label labelOnPage) {
 		Thread thread = new Thread(() -> {
@@ -139,8 +139,8 @@ public class ForAllControllers {
 				Thread.sleep(5000);
 				Platform.runLater(() -> {
 					try {
-						FXMLLoader loader = new FXMLLoader(
-								getClass().getResource(".." + File.separator + ".." + File.separator + "view" + File.separator + nameFile));
+						FXMLLoader loader = new FXMLLoader(getClass().getResource(
+								".." + File.separator + ".." + File.separator + "view" + File.separator + nameFile));
 						Parent root = loader.load();
 						Stage stage = (Stage) labelOnPage.getScene().getWindow();
 						Scene scene = new Scene(root);
@@ -159,10 +159,10 @@ public class ForAllControllers {
 	}
 
 	/**
-	 * Method that allows to know if a String can be a integer
+	 * Method that allows to know if the String is a integer
 	 * 
-	 * @param str, the string that we want to check if it's a integer or not
-	 * @return 1 if the string is a integer, 0 otherwise
+	 * @param str : The string that we want to check if it's a integer or not
+	 * @return boolean : Answer if the String is a integer
 	 */
 	public boolean isInteger(String str) {
 		try {
@@ -172,21 +172,22 @@ public class ForAllControllers {
 			return false;
 		}
 	}
-	
+
 	/**
 	 * Method that allows to set the stage on the center of the screen
-	 * @param stage
+	 * 
+	 * @param stage : The current stage
 	 */
 	public void setCenterStage(Stage stage) {
-        Rectangle2D screenBounds = Screen.getPrimary().getVisualBounds();
-        stage.setX((screenBounds.getWidth() - stage.getWidth()) / 2);
-        stage.setY((screenBounds.getHeight() - stage.getHeight()) / 2);
+		Rectangle2D screenBounds = Screen.getPrimary().getVisualBounds();
+		stage.setX((screenBounds.getWidth() - stage.getWidth()) / 2);
+		stage.setY((screenBounds.getHeight() - stage.getHeight()) / 2);
 	}
-	
+
 	/**
 	 * Method that allows to set a combo box with the list of all the players
 	 * 
-	 * @param comboBoxJoueur, the box that we want to set with all the players
+	 * @param comboBoxJoueur : The ComboBox that we want to set with all the players
 	 */
 	public void setComboBoxWithPlayers(ComboBox<Player> comboBoxJoueur) {
 		List<Player> listJoueurs = Main.getPlayersData().getValue();
@@ -206,7 +207,8 @@ public class ForAllControllers {
 				if (empty || joueur == null) {
 					setText(null);
 				} else {
-					setText(joueur.getFirstName() + " '" + joueur.getUserName().toUpperCase() + "' " + joueur.getLastName());
+					setText(joueur.getFirstName() + " '" + joueur.getUserName().toUpperCase() + "' "
+							+ joueur.getLastName());
 				}
 			}
 		});
@@ -220,7 +222,8 @@ public class ForAllControllers {
 				if (joueur == null) {
 					return null;
 				} else {
-					return joueur.getFirstName() + " '" + joueur.getUserName().toUpperCase() + "' " + joueur.getLastName();
+					return joueur.getFirstName() + " '" + joueur.getUserName().toUpperCase() + "' "
+							+ joueur.getLastName();
 				}
 			}
 
@@ -230,95 +233,94 @@ public class ForAllControllers {
 			}
 		});
 	}
-	
+
 	/**
 	 * Method that allows to set a combo box with the list of levels
 	 * 
-	 * @param comboBoxLevel
+	 * @param comboBoxLevel : The ComboBox that we want to set with all the levels
 	 */
 	public void setComboBoxWithLevels(ComboBox<Integer> comboBoxLevel) {
-        ObservableList<Integer> levelList = FXCollections.observableArrayList();
+		ObservableList<Integer> levelList = FXCollections.observableArrayList();
 
-        for (int i = 2; i < 12; i++) {
-        	levelList.add(i);
-        }
+		for (int i = 2; i < 12; i++) {
+			levelList.add(i);
+		}
 
-        // Set the drop-down menu
-        comboBoxLevel.setCellFactory(param -> new ListCell<Integer>() {
-            @Override
-            protected void updateItem(Integer level, boolean empty) {
-                super.updateItem(level, empty);
+		// Set the drop-down menu
+		comboBoxLevel.setCellFactory(param -> new ListCell<Integer>() {
+			@Override
+			protected void updateItem(Integer level, boolean empty) {
+				super.updateItem(level, empty);
 
-                if (empty || level == null) {
-                    setText(null);
-                } else {
-                    setText(level.toString());
-                }
-            }
-        });
+				if (empty || level == null) {
+					setText(null);
+				} else {
+					setText(level.toString());
+				}
+			}
+		});
 
-        comboBoxLevel.setItems(levelList);
+		comboBoxLevel.setItems(levelList);
 
-        // We set display of level once selected
-        comboBoxLevel.setConverter(new StringConverter<Integer>() {
-            @Override
-            public String toString(Integer level) {
-                if (level == null) {
-                    return null;
-                } else {
-                    return level.toString();
-                }
-            }
+		// We set display of level once selected
+		comboBoxLevel.setConverter(new StringConverter<Integer>() {
+			@Override
+			public String toString(Integer level) {
+				if (level == null) {
+					return null;
+				} else {
+					return level.toString();
+				}
+			}
 
-            @Override
-            public Integer fromString(String string) {
-                return null;
-            }
-        });
-    }
-	
+			@Override
+			public Integer fromString(String string) {
+				return null;
+			}
+		});
+	}
+
 	public void setComboBoxWithTimeLimits(ComboBox<String> comboBoxLevel) {
-        ObservableList<String> timeLimits = FXCollections.observableArrayList();
+		ObservableList<String> timeLimits = FXCollections.observableArrayList();
 
-        timeLimits.add("No Limits");
-        timeLimits.add("10 Seconds");
-        timeLimits.add("20 Seconds");
-        timeLimits.add("30 Seconds");
-        timeLimits.add("45 Seconds");
-        timeLimits.add("60 Seconds");
-        
+		timeLimits.add("No Limits");
+		timeLimits.add("10 Seconds");
+		timeLimits.add("20 Seconds");
+		timeLimits.add("30 Seconds");
+		timeLimits.add("45 Seconds");
+		timeLimits.add("60 Seconds");
 
-        // Set the drop-down menu
-        comboBoxLevel.setCellFactory(param -> new ListCell<String>() {
-            @Override
-            protected void updateItem(String timeLimit, boolean empty) {
-                super.updateItem(timeLimit, empty);
+		// Set the drop-down menu
+		comboBoxLevel.setCellFactory(param -> new ListCell<String>() {
+			@Override
+			protected void updateItem(String timeLimit, boolean empty) {
+				super.updateItem(timeLimit, empty);
 
-                if (empty || timeLimit == null) {
-                    setText(null);
-                } else {
-                    setText(timeLimit.toString());
-                }
-            }
-        });
+				if (empty || timeLimit == null) {
+					setText(null);
+				} else {
+					setText(timeLimit.toString());
+				}
+			}
+		});
 
-        comboBoxLevel.setItems(timeLimits);
+		comboBoxLevel.setItems(timeLimits);
 
-        // We set display of level once selected
-        comboBoxLevel.setConverter(new StringConverter<String>() {
-            @Override
-            public String toString(String timeLimit) {
-                if (timeLimit == null) {
-                    return null;
-                } else {
-                    return timeLimit.toString();
-                }
-            }
+		// We set display of level once selected
+		comboBoxLevel.setConverter(new StringConverter<String>() {
+			@Override
+			public String toString(String timeLimit) {
+				if (timeLimit == null) {
+					return null;
+				} else {
+					return timeLimit.toString();
+				}
+			}
 
-            @Override
-            public String fromString(String string) {
-                return null;
-            }
-        });
-    }
+			@Override
+			public String fromString(String string) {
+				return null;
+			}
+		});
+	}
 }

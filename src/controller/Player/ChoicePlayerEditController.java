@@ -37,6 +37,21 @@ public class ChoicePlayerEditController extends ForAllControllers implements Ini
 	@FXML
 	private ComboBox<Player> listPlayer;
 
+	/**
+	 * Method that will be called when the FXML file is opened
+	 */
+	@Override
+	public void initialize(URL arg0, ResourceBundle arg1) {
+		setComboBoxWithPlayers(listPlayer);
+
+	}
+	
+	/**
+	 * Method that allows to switch to the page for edit a player
+	 * 
+	 * @param event : The event that will activate the action
+	 * @throws IOException
+	 */
 	@FXML
 	void switchToEditPlayer(ActionEvent event) throws IOException {
 		if (listPlayer.getValue() == null) {
@@ -55,11 +70,4 @@ public class ChoicePlayerEditController extends ForAllControllers implements Ini
 			setCenterStage(stage);
 		}
 	}
-
-	@Override
-	public void initialize(URL arg0, ResourceBundle arg1) {
-		setComboBoxWithPlayers(listPlayer);
-
-	}
-
 }

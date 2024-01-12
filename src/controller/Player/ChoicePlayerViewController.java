@@ -34,12 +34,21 @@ public class ChoicePlayerViewController extends ForAllControllers implements Ini
 	@FXML
 	ComboBox<Player> listPlayer;
 
+	/**
+	 * Method that will be called when the FXML file is opened
+	 */
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 
 		setComboBoxWithPlayers(listPlayer);
 	}
 
+	/**
+	 * Method that allows to switch to the page for view a player
+	 * 
+	 * @param event : The event that will activate the action
+	 * @throws IOException
+	 */
 	public void switchToViewPlayer(ActionEvent event) throws IOException {
 		if (listPlayer.getValue() == null) {
 			displayMessage(errorMsg);
