@@ -210,8 +210,6 @@ public class GameOnlineController extends GameController implements Initializabl
 		// We configure the updating of the label turn player
 		Main.getClientTCP().getGameController().updateIsPlaying(playerPlaying);
 
-		System.out.println(numPlayer);
-
 		// If the other player is P1
 		if (numPlayer.equals(ValueSquare.P1)) {
 			grid.addCoinGrid(Integer.valueOf(nbColumn), ValueSquare.P2);

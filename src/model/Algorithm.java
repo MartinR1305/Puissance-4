@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import javafx.application.Platform;
-
 public class Algorithm {
 
 	private int level;
@@ -18,9 +16,12 @@ public class Algorithm {
 	/**
 	 * Constructor
 	 * 
-	 * @param level
-	 * @param playerMin
-	 * @param playerMax
+	 * @param level : The depth / level of the algorithm
+	 * @param playerMin :  The opponent player
+	 * @param playerMax : The player who is playing
+	 * @param alpha2 : The second coefficient for the evaluation
+	 * @param alpha3 : The third coefficient for the evaluation
+	 * @param alpha4 : The fourth coefficient for the evaluation
 	 */
 	public Algorithm(int level, ValueSquare playerMin, ValueSquare playerMax, int alpha2, int alpha3, int alpha4) {
 		this.level = level;
@@ -34,7 +35,7 @@ public class Algorithm {
 	/**
 	 * Setter for the level
 	 * 
-	 * @param level
+	 * @param level : The new level of the algorithm
 	 */
 	public void setLvl(int level) {
 		this.level = level;
@@ -43,7 +44,7 @@ public class Algorithm {
 	/**
 	 * Getter for the level
 	 * 
-	 * @return
+	 * @return level : The current level of the algorithm
 	 */
 	public int getLvl() {
 		return this.level;
@@ -52,8 +53,8 @@ public class Algorithm {
 	/**
 	 * Method that allows to apply the MinMax algorithm for a grid
 	 * 
-	 * @param grid
-	 * @return
+	 * @param grid : The grid where we will calculate the best column to play for the player
+	 * @return index : The best index column for the grid for the player
 	 */
 	public int algoMinMax(Grid grid, boolean isWaitOneSec, boolean isDisplayArray) {
 
@@ -103,10 +104,11 @@ public class Algorithm {
 	/**
 	 * Recursive method for the MinMax algorithm for a grid
 	 * 
-	 * @param grid
-	 * @param profondeur
-	 * @param estJoueurMax
-	 * @return
+	 * @param grid : The grid where we will calculate the best column to play for the player
+	 * @param currentDepth : The current depth where the algorithm is 
+	 * @param isPlayerMax : For know if the exploration is for the player playing or the opponent
+	 * @param isDisplayArray : If we want to display the array of values for the 7 columns at the end of the algorithm
+	 * @return The best index column for the grid for the player
 	 */
 	private int recursiveMinMax(Grid grid, int currentDepth, boolean isPlayerMax, boolean isDisplayArray) {
 
@@ -187,10 +189,10 @@ public class Algorithm {
 	}
 
 	/**
-	 * Method that allows to obtain the max of a list
+	 * Method that allows to obtain the maximum of a list
 	 * 
-	 * @param list
-	 * @return
+	 * @param list : The list where we want to know the maximum
+	 * @return max : The max of the list
 	 */
 	public int findMax(List<Integer> list) {
 
@@ -211,10 +213,10 @@ public class Algorithm {
 	}
 
 	/**
-	 * Method that allows to obtain the min of a list
+	 * Method that allows to obtain the minimum of a list
 	 * 
-	 * @param list
-	 * @return
+	 * @param list : The list where we want to know the minimum
+	 * @return min : The minimum of the list
 	 */
 	public int findMin(List<Integer> list) {
 
@@ -237,9 +239,9 @@ public class Algorithm {
 	/**
 	 * Method that allows to obtain the index of the maximum value
 	 * 
-	 * @param list
-	 * @param grid
-	 * @return
+	 * @param list :  The list where we want to know the maximum
+	 * @param grid : The grid where we will check if a column is playable or not
+	 * @return index : The index of the maximum value from the list
 	 */
 	public int findIndMax(List<Integer> list, Grid grid) {
 
@@ -262,7 +264,7 @@ public class Algorithm {
 		List<Integer> listIndiceMax = new ArrayList<>();
 		boolean isSeveralMax = false;
 		int max = tempList.get(0);
-		int indice = 0;
+		int index = 0;
 		listIndiceMax.add(0);
 
 		for (int indexColumn = 1; indexColumn < tempList.size(); indexColumn++) {
@@ -271,7 +273,7 @@ public class Algorithm {
 			if (tempList.get(indexColumn) > max) {
 				// We actualize the max and the index
 				max = tempList.get(indexColumn);
-				indice = indexColumn;
+				index = indexColumn;
 
 				// Then we actualize the list and the boolean
 				isSeveralMax = false;
@@ -310,10 +312,21 @@ public class Algorithm {
 
 		// If there are not
 		else {
-			return indice;
+			return index;
 		}
 	}
 
+	/**
+	 * Method that allows to calculate the value for a node if it's a leaf or to call the recursive to obtain this value
+	 * 
+	 * @param grid : The grid where we search the value
+	 * @param listTemp : The temporary list of values
+	 * @param index : Index where we add the coin
+	 * @param currentDepth : The current depth where we are in the exploration
+	 * @param isPlayerMax : For know if the exploration is for the player playing or the opponent 
+	 * @param player : For add the good coin in the grid
+	 * @param isDisplayArray : If we want to display the array of values for the 7 columns at the end of the algorithm 
+	 */
 	public void calculateValueNode(Grid grid, List<Integer> listTemp, int index, int currentDepth, boolean isPlayerMax,
 			ValueSquare player, boolean isDisplayArray) {
 		// We check if the column is not full
