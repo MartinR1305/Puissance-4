@@ -21,10 +21,10 @@ public class Player implements Serializable {
 	/**
 	 * Constructor
 	 * 
-	 * @param userName
-	 * @param lastName
-	 * @param firstName
-	 * @param age
+	 * @param userName : The user name of the player 
+	 * @param lastName : The last name of the player 
+	 * @param firstName : The first name of the player 
+	 * @param age : The age of the player 
 	 */
 	public Player(String userName, String lastName, String firstName, int age) {
 		identifier = UUID.randomUUID();
@@ -48,7 +48,7 @@ public class Player implements Serializable {
 	/**
 	 * Getter for the identifier
 	 * 
-	 * @return the identifier of the player
+	 * @return identifier : The identifier of the player
 	 */
 	public UUID getIdentifier() {
 		return identifier;
@@ -57,7 +57,7 @@ public class Player implements Serializable {
 	/**
 	 * Setter for the user name
 	 * 
-	 * @return the user name of the player
+	 * @return userName : The user name of the player
 	 */
 	public String getUserName() {
 		return userName;
@@ -66,7 +66,7 @@ public class Player implements Serializable {
 	/**
 	 * Setter for the user name
 	 * 
-	 * @param userName, the new user name of the player
+	 * @param userName : The new user name of the player
 	 */
 	public void setUserName(String userName) {
 		this.userName = userName;
@@ -75,7 +75,7 @@ public class Player implements Serializable {
 	/**
 	 * Getter for the last name
 	 * 
-	 * @return the last name of the player
+	 * @return lastName : The last name of the player
 	 */
 	public String getLastName() {
 		return lastName;
@@ -84,7 +84,7 @@ public class Player implements Serializable {
 	/**
 	 * Setter for the last name
 	 * 
-	 * @param lastName, the new last name of the player
+	 * @param lastName : The new last name of the player
 	 */
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
@@ -93,7 +93,7 @@ public class Player implements Serializable {
 	/**
 	 * Getter for the first name
 	 * 
-	 * @return the first name of the player
+	 * @return firstName : The first name of the player
 	 */
 	public String getFirstName() {
 		return firstName;
@@ -102,7 +102,7 @@ public class Player implements Serializable {
 	/**
 	 * Setter for the first name
 	 * 
-	 * @param firstName, the new first name of the player
+	 * @param firstName : the new first name of the player
 	 */
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
@@ -111,7 +111,7 @@ public class Player implements Serializable {
 	/**
 	 * Getter for the age
 	 * 
-	 * @return the age of the player
+	 * @return age : The age of the player
 	 */
 	public int getAge() {
 		return age;
@@ -120,7 +120,7 @@ public class Player implements Serializable {
 	/**
 	 * Setter for the age
 	 * 
-	 * @param age, the new age of the player
+	 * @param age : The new age of the player
 	 */
 	public void setAge(int age) {
 		this.age = age;
@@ -129,7 +129,7 @@ public class Player implements Serializable {
 	/**
 	 * Getter for the number of victories
 	 * 
-	 * @return the number of victories of the player
+	 * @return nbVictory : The number of victories of the player
 	 */
 	public int getNbVictory() {
 		return nbVictory;
@@ -149,7 +149,7 @@ public class Player implements Serializable {
 	/**
 	 * Getter for the number of defeats
 	 * 
-	 * @return the number of defeats of the player
+	 * @return nbDefeat : The number of defeats of the player
 	 */
 	public int getNbDefeat() {
 		return nbDefeat;
@@ -169,7 +169,7 @@ public class Player implements Serializable {
 	/**
 	 * Getter for the number of draws
 	 * 
-	 * @return the number of draws of the player
+	 * @return nbDraw : The number of draws of the player
 	 */
 	public int getNbDraw() {
 		return nbDraw;
@@ -184,7 +184,7 @@ public class Player implements Serializable {
 
 	/**
 	 * Getter for the win rate
-	 * @return the win rate of the player
+	 * @return winRate : The win rate of the player
 	 */
 	public double getWinRate() {
 		return winRate;
@@ -199,7 +199,7 @@ public class Player implements Serializable {
 
 	/**
 	 * Getter for the ranked's points
-	 * @return the ranked's points of the player
+	 * @return ptsRanked : The ranked's points of the player
 	 */
 	public int getPtsRanked() {
 		return ptsRanked;
@@ -208,7 +208,7 @@ public class Player implements Serializable {
 	/**
 	 * Setter for the ranked's points
 	 * 
-	 * @param ptsRanked, new ranked's points of the player
+	 * @param ptsRanked : New ranked's points of the player
 	 */
 	public void setPtsRanked(int ptsRanked) {
 
@@ -223,7 +223,7 @@ public class Player implements Serializable {
 	}
 
 	/** Getter for the matchs's list
-	 * @return the matchs's list of the player
+	 * @return listMatchs : The matchs's list of the player
 	 */
 	public List<List<String>> getListMatchs() {
 		return listMatchs;
@@ -232,8 +232,9 @@ public class Player implements Serializable {
 	/**
 	 * Method that allows to add a match to a player with the result associate
 	 * 
-	 * @param opponent, the opponent that faced the player during the match
-	 * @param results, the results of the match
+	 * @param opponent : The opponent that faced the player during the match
+	 * @param results : The results of the match
+	 * @param nbCoins : Coins' number of the grid
 	 */
 	public void addMatch(String opponent, Results results, int nbCoins) {
 
@@ -256,6 +257,9 @@ public class Player implements Serializable {
 		this.actualizeWinRate();
 	}
 
+	/**
+	 * Method that allows to display information of the player
+	 */
 	@Override
 	public String toString() {
 		return "UserName = " + userName + ", LastName = " + lastName + ", FirstName = " + firstName + ", Age = " + age

@@ -13,16 +13,15 @@ public class Square {
 	/**
 	 * Constructor that creates a new Square with a specified value.
 	 * 
-	 * @param originalSquare The square to be copied
+	 * @param valueSquare : The square to be copied
 	 */
 	public Square(ValueSquare valueSquare) {
 	    this.value = valueSquare;
 	}
 
-
 	/**
 	 * Getter for the value
-	 * @return the value of the square
+	 * @return value : The value of the square
 	 */
 	public ValueSquare getValue() {
 		return value;
@@ -30,12 +29,15 @@ public class Square {
 	
 	/**
 	 * Setter for the value
-	 * @param value, the new value for the square 
+	 * @param value : The new value for the square 
 	 */
 	public void setValue(ValueSquare value) {
 		this.value = value;
 	}
 
+	/**
+	 * Method that allows to display the information of the square
+	 */
 	@Override
 	public String toString() {
 		return "[ " + value + " ]";

@@ -9,8 +9,6 @@ public class Column {
 
 	/**
 	 * Constructor
-	 * 
-	 * @param column
 	 */
 	public Column() {
 
@@ -24,9 +22,9 @@ public class Column {
 	}
 
 	/**
-	 * Constructor that creates a new column by copying an existing column.
+	 * Constructor that creates a new column by copying an existing column
 	 *
-	 * @param originalColumn The column to be copied
+	 * @param column : The column that we copy for the new column
 	 */
 	public Column(Column column) {
 		this.column = new ArrayList<>();
@@ -43,16 +41,16 @@ public class Column {
 	/**
 	 * Getter for column
 	 * 
-	 * @return the list column
+	 * @return list : The list of the square of the column
 	 */
 	public List<Square> getColumn() {
 		return column;
 	}
 
 	/**
-	 * Method searching the first empty square of the column
+	 * Method who searches the first empty square of the column
 	 * 
-	 * @return int
+	 * @return index : The first empty square of the column
 	 */
 	public int calculateFirstEmptySquare() {
 		for (int i = 0; i < column.size(); i++) {
@@ -67,7 +65,7 @@ public class Column {
 	/**
 	 * Method that add a coin in the first square that is not empty
 	 * 
-	 * @param coin
+	 * @param coin : The coin that we add to the column
 	 */
 	public void addCoinColumn(ValueSquare coin) {
 		if (!this.isColumnFull() && !coin.equals(ValueSquare.EMPTY)) {
@@ -78,7 +76,7 @@ public class Column {
 	/**
 	 * Method telling if the column is empty or not
 	 * 
-	 * @return boolean
+	 * @return boolean : The answer of if the column is empty or not
 	 */
 	public boolean isColumnEmpty() {
 
@@ -93,7 +91,7 @@ public class Column {
 	/**
 	 * Method telling if the column is full or not
 	 * 
-	 * @return boolean
+	 * @return boolean : The answer of if the column is full or not
 	 */
 	public boolean isColumnFull() {
 
@@ -106,9 +104,9 @@ public class Column {
 	}
 
 	/**
-	 * Method return if player 1 wins the game in the column
+	 * Method telling if player 1 wins with the column
 	 * 
-	 * @return boolean
+	 * @return boolean : The answer of if the player 1 won 
 	 */
 	public boolean isColumnWinJ1() {
 
@@ -134,9 +132,9 @@ public class Column {
 	}
 
 	/**
-	 * Method return if player 2 wins the game in the column
+	 * Method telling if player 1 wins with the column
 	 * 
-	 * @return boolean
+	 * @return boolean : The answer of if the player 2 won 
 	 */
 	public boolean isColumnWinJ2() {
 		int countConsecutive = 0;
@@ -159,6 +157,9 @@ public class Column {
 		return false;
 	}
 
+	/**
+	 * Method that allows to display the information of the column
+	 */
 	@Override
 	public String toString() {
 		StringBuilder result = new StringBuilder();
@@ -170,5 +171,4 @@ public class Column {
 
 		return result.toString();
 	}
-
 }

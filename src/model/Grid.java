@@ -9,8 +9,6 @@ public class Grid {
 
 	/**
 	 * Constructor
-	 * 
-	 * @param grid
 	 */
 	public Grid() {
 		grid = new ArrayList<Column>(7);
@@ -24,7 +22,7 @@ public class Grid {
 	/**
 	 * Constructor that creates a new Grid by copying another Grid
 	 * 
-	 * @param grid to be copied
+	 * @param grid : The grid that we copy
 	 */
 	public Grid(Grid grid) {
 		this.grid = new ArrayList<>();
@@ -35,9 +33,9 @@ public class Grid {
 	}
 
 	/**
-	 * Getter for the grid list
+	 * Getter for the grid's list
 	 * 
-	 * @return
+	 * @return list : The list of columns of the grid
 	 */
 	public List<Column> getGrid() {
 		return grid;
@@ -46,8 +44,8 @@ public class Grid {
 	/**
 	 * Method that add a coin in the first square that is not empty in the column
 	 * 
-	 * @param indColumn, index of the column where we want to add the coin
-	 * @param coin,      coin that we want to add to the column
+	 * @param indColumn : Index of the column where we want to add the coin
+	 * @param coin      : Coin that we want to add to the column
 	 */
 	public void addCoinGrid(int indColumn, ValueSquare coin) {
 		this.getGrid().get(indColumn).addCoinColumn(coin);
@@ -56,7 +54,7 @@ public class Grid {
 	/**
 	 * Method returning if the grid is empty
 	 * 
-	 * @return boolean
+	 * @return boolean : Answer of it is empty or not
 	 */
 	public boolean isGridEmpty() {
 
@@ -73,7 +71,7 @@ public class Grid {
 	/**
 	 * Method returning if the grid is full
 	 * 
-	 * @return boolean
+	 * @return boolean : Answer of if it is full or not
 	 */
 	public boolean isGridFull() {
 
@@ -90,7 +88,7 @@ public class Grid {
 	/**
 	 * Method returning if the player 1 is winning the game in a line
 	 * 
-	 * @return boolean
+	 * @return boolean : Answer of if the player 1 won the game with a line
 	 */
 	public boolean isLineJ1win() {
 
@@ -132,9 +130,9 @@ public class Grid {
 	}
 
 	/**
-	 * Method returning if the player 2 is winning the game in a line
+	 * Method returning if the player 2 won the game in a line
 	 * 
-	 * @return boolean
+	 * @return boolean : Answer of if the player 2 won the game with a line
 	 */
 	public boolean isLineJ2win() {
 
@@ -176,9 +174,9 @@ public class Grid {
 	}
 
 	/**
-	 * Method returning if the player 1 is winning the game in a diagonal
+	 * Method returning if the player 1 won the game in a diagonal
 	 * 
-	 * @return boolean
+	 * @return boolean : Answer of if the player 1 won the game with a diagonal
 	 */
 	public boolean isDiagJ1win() {
 
@@ -237,9 +235,9 @@ public class Grid {
 	}
 
 	/**
-	 * Method returning if the player 2 is winning the game in a diagonal
+	 * Method returning if the player 2 won the game in a diagonal
 	 * 
-	 * @return boolean
+	 * @return boolean : Answer of if the player 2 won the game with a diagonal
 	 */
 	public boolean isDiagJ2win() {
 
@@ -298,9 +296,9 @@ public class Grid {
 	}
 
 	/**
-	 * Method returning if the player 1 wins the game
+	 * Method returning if the player 1 won the game
 	 * 
-	 * @return boolean
+	 * @return boolean : Answer of if the player 1 won the game
 	 */
 	public boolean isJ1win() {
 
@@ -326,9 +324,9 @@ public class Grid {
 	}
 
 	/**
-	 * Method returning if the player 2 wins the game
+	 * Method returning if the player 2 won the game
 	 * 
-	 * @return boolean
+	 * @return boolean : Answer of if the player 2 won the game
 	 */
 	public boolean isJ2win() {
 
@@ -353,6 +351,11 @@ public class Grid {
 		return false;
 	}
 
+	/**
+	 * Method that calculates the number of coin from the grid
+	 * 
+	 * @return number : The number of coin from the grid
+	 */
 	public int countCoin() {
 		int number = 0;
 
@@ -367,6 +370,15 @@ public class Grid {
 		return number;
 	}
 
+	/**
+	 * Method that allows to evaluate a grid
+	 * 
+	 * @param playerToEvaluate : The player that we need to calculate the value
+	 * @param alpha2           : The second coefficient
+	 * @param alpha3           : The third coefficient
+	 * @param alpha4           : The fourth coefficient
+	 * @return points : The value of the grid
+	 */
 	public int evaluateGrid(ValueSquare playerToEvaluate, int alpha2, int alpha3, int alpha4) {
 		int points = 0;
 
@@ -390,7 +402,13 @@ public class Grid {
 		return points;
 	}
 
-	// Method to collect a line sequence
+	/**
+	 * Method to collect a line sequence
+	 * 
+	 * @param startColumn : Index of the starting column
+	 * @param startLine   : Index of the starting line
+	 * @return lineSequence : List of the squares for the line
+	 */
 	private List<Square> collectLineSequence(int startColumn, int startLine) {
 		List<Square> lineSequence = new ArrayList<>();
 		if (startColumn < 4) {
@@ -401,7 +419,13 @@ public class Grid {
 		return lineSequence;
 	}
 
-	// Method to collect a column sequence
+	/**
+	 * Method to collect a column sequence
+	 * 
+	 * @param startColumn : Index of the starting column
+	 * @param startLine   : Index of the starting line
+	 * @return columnSequence : List of the squares for the column
+	 */
 	private List<Square> collectColumnSequence(int startColumn, int startLine) {
 		List<Square> columnSequence = new ArrayList<>();
 		if (startLine < 3) {
@@ -412,7 +436,14 @@ public class Grid {
 		return columnSequence;
 	}
 
-//	//Method to collect an ascending diagonal sequence
+	/**
+	 * Method to collect an ascending diagonal sequence
+	 * 
+	 * @param startColumn : Index of the starting column
+	 * @param startLine   : Index of the starting line
+	 * @return ascendingDiagonalSequence : List of the squares for the ascending
+	 *         diagonal
+	 */
 	private List<Square> collectAscendingDiagonalSequence(int startColumn, int startLine) {
 		List<Square> ascendingDiagonalSequence = new ArrayList<>();
 		if (startColumn < 4 && startLine < 3) {
@@ -424,7 +455,14 @@ public class Grid {
 		return ascendingDiagonalSequence;
 	}
 
-//	//Method to collect a descending diagonal sequence
+	/**
+	 * Method to collect a descending diagonal sequence
+	 * 
+	 * @param startColumn : Index of the starting column
+	 * @param startLine   : Index of the starting line
+	 * @return descendingDiagonalSequence : List of the squares for the descending
+	 *         diagonal
+	 */
 	private List<Square> collectDescendingDiagonalSequence(int startColumn, int startLine) {
 		List<Square> descendingDiagonalSequence = new ArrayList<>();
 		if (startColumn < 4 && startLine > 2) {
@@ -436,10 +474,18 @@ public class Grid {
 		return descendingDiagonalSequence;
 	}
 
-	// Method to evaluate a sequence and return the points
+	/**
+	 * Method to evaluate a sequence and return the points
+	 * 
+	 * @param sequence         : Sequence that we will evaluate
+	 * @param playerToEvaluate : The player that we will evaluate
+	 * @param alpha2           : The second coefficient
+	 * @param alpha3           : The third coefficient
+	 * @param alpha4           : The fourth coefficient
+	 * @return points : The value of the sequence
+	 */
 	private int evaluateSequence(List<Square> sequence, ValueSquare playerToEvaluate, int alpha2, int alpha3,
 			int alpha4) {
-//		long tempsDebut = System.currentTimeMillis();
 		int countP1 = 0;
 		int countP2 = 0;
 		int points = 0;
@@ -474,23 +520,14 @@ public class Grid {
 				points += alpha4;
 			}
 		}
-
-//		long tempsFin = System.currentTimeMillis();
-//		long dureeTotaleMillis = tempsFin - tempsDebut;
-//        double dureeSecondes = dureeTotaleMillis / 1000.0;
-//        long minutes = (long) dureeSecondes / 60;
-//        double secondes = dureeSecondes % 60;
-//
-//        System.out.printf("Algorithme took %d min %.3f sec to evaluate the grid.%n", minutes, secondes);
-
 		return points;
 	}
 
 	/**
 	 * Method that allows to get the 4 winning squares
 	 *
-	 * @param nbPlayer
-	 * @return
+	 * @param nbPlayer : The player who won the game
+	 * @return list : List of the four circles
 	 */
 	public List<List<Integer>> getWinningSquares(int nbPlayer) {
 		List<List<Integer>> winningSquares = new ArrayList<List<Integer>>(4);
@@ -518,6 +555,13 @@ public class Grid {
 		return null;
 	}
 
+	/**
+	 * Method that check if the player won with a diagonal
+	 * 
+	 * @param player         : The player that we check if he won
+	 * @param winningSquares : List where we will put the fourth circles
+	 * @return boolean : Answer if the player won with a diagonal
+	 */
 	private boolean checkDiagonalWin(ValueSquare player, List<List<Integer>> winningSquares) {
 		// Up Diagonal
 		for (int indexColumn = 0; indexColumn < 4; indexColumn++) {
@@ -542,6 +586,13 @@ public class Grid {
 
 	}
 
+	/**
+	 * Method that check if the player won with a line
+	 * 
+	 * @param player         : The player that we check if he won
+	 * @param winningSquares : List where we will put the fourth circles
+	 * @return boolean : Answer if the player won with a line
+	 */
 	private boolean checkLineWin(ValueSquare player, List<List<Integer>> winningSquares) {
 		for (int indexColumn = 0; indexColumn < 7; indexColumn++) {
 			for (int indexLine = 0; indexLine < 6; indexLine++) {
@@ -554,6 +605,13 @@ public class Grid {
 		return false;
 	}
 
+	/**
+	 * Method that check if the player won with a column
+	 * 
+	 * @param player         : The player that we check if he won
+	 * @param winningSquares : List where we will put the fourth circles
+	 * @return boolean : Answer if the player won with a column
+	 */
 	private boolean checkColumnWin(ValueSquare player, List<List<Integer>> winningSquares) {
 		int indexColumn = 0;
 		for (Column column : getGrid()) {
@@ -568,6 +626,17 @@ public class Grid {
 		return false;
 	}
 
+	/**
+	 * Method that check if the player won with this sequence
+	 * 
+	 * @param player          : The player that we check if he won
+	 * @param startColumn     : Index of the starting column
+	 * @param startLine       : Index of the starting line
+	 * @param columnIncrement : Increment for the next square for the column
+	 * @param lineIncrement   : Increment for the next square for the line
+	 * @param winningSquares  : List where we will put the fourth circles
+	 * @return boolean : Answer if the player won with this sequence
+	 */
 	private boolean checkSequence(ValueSquare player, int startColumn, int startLine, int columnIncrement,
 			int lineIncrement, List<List<Integer>> winningSquares) {
 		for (int i = 0; i < 4; i++) {
@@ -585,12 +654,20 @@ public class Grid {
 		return true;
 	}
 
+	/**
+	 * Method that clear the circles for the list winningSquares
+	 * 
+	 * @param winningSquares : The list that we want to clear the cases
+	 */
 	public void clearingSequence(List<List<Integer>> winningSquares) {
 		for (int i = 0; i < 4; i++) {
 			winningSquares.get(i).clear();
 		}
 	}
 
+	/**
+	 * Method that allows to display the information of the grid
+	 */
 	@Override
 	public String toString() {
 		StringBuilder result = new StringBuilder();
