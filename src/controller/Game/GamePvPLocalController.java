@@ -187,6 +187,8 @@ public class GamePvPLocalController extends GameController implements Initializa
 
 		// We serialize
 		Serialization.serializePlayer(Main.getPlayersData().getValue());
+		
+		stopCountDown();
 	}
 
 	/**
@@ -210,6 +212,8 @@ public class GamePvPLocalController extends GameController implements Initializa
 
 		// We serialize
 		Serialization.serializePlayer(Main.getPlayersData().getValue());
+		
+		stopCountDown();
 	}
 
 	/**
@@ -272,6 +276,13 @@ public class GamePvPLocalController extends GameController implements Initializa
 		});
 		timeline.getKeyFrames().add(keyFrame);
 		timeline.play();
+	}
+	
+	/**
+	 * Method that stops the count down
+	 */
+	public void stopCountDown() {
+		timeline.stop();
 	}
 
 	/**
