@@ -55,8 +55,8 @@ public class GamePvALocalController extends GameController implements Initializa
 	/**
 	 * Method that allows to start a PvA Local game
 	 * 
-	 * @param p1 : Player of the game
-	 * @param level : Level of the algorithm
+	 * @param p1        : Player of the game
+	 * @param level     : Level of the algorithm
 	 * @param timeLimit : Time limit of the game
 	 */
 	public void startGamePvALocal(Player p, int level, int timeLimit) {
@@ -74,15 +74,14 @@ public class GamePvALocalController extends GameController implements Initializa
 				{ c50, c51, c52, c53, c54, c55 }, { c60, c61, c62, c63, c64, c65 } };
 
 		// We choose randomly the player who will start the game
-		Random random = new Random();
-		turnPlayer = random.nextInt(2) + 1;
-
+		// Random random = new Random();
+		// turnPlayer = random.nextInt(2) + 1;
+		turnPlayer = 2;
 		if (turnPlayer == 1) {
 			playerPlaying.setText("It's Your Turn !");
 
 			if (timeLimit != -1) {
 				hideCount(false);
-				timeline.stop();
 				startCountdown(valueTime, timeLimit);
 			} else {
 				hideCount(true);
@@ -108,9 +107,12 @@ public class GamePvALocalController extends GameController implements Initializa
 
 				System.out.printf("Algorithme took %d min %.3f sec to find the best move.%n", minutes, secondes);
 				playerPlaying.setText("It's Your Turn !");
-
-				hideCount(false);
-				startCountdown(valueTime, timeLimit);
+				
+				if (timeLimit != -1) {
+					hideCount(false);
+					startCountdown(valueTime, timeLimit);
+				}
+				
 				setColorsGrid(grid);
 			});
 		}
@@ -178,7 +180,7 @@ public class GamePvALocalController extends GameController implements Initializa
 
 		// Algorithm turn
 		long tempsDebut = System.currentTimeMillis();
-
+		System.out.println("1");
 		grid.addCoinGrid(algo.algoMinMax(grid, true, true), ValueSquare.P2);
 
 		long tempsFin = System.currentTimeMillis();
@@ -235,7 +237,7 @@ public class GamePvALocalController extends GameController implements Initializa
 
 		// We serialize
 		Serialization.serializePlayer(Main.getPlayersData().getValue());
-		
+
 		stopCountDown();
 	}
 
@@ -258,7 +260,7 @@ public class GamePvALocalController extends GameController implements Initializa
 
 		// We serialize
 		Serialization.serializePlayer(Main.getPlayersData().getValue());
-		
+
 		stopCountDown();
 	}
 
@@ -281,7 +283,7 @@ public class GamePvALocalController extends GameController implements Initializa
 
 		// We serialize
 		Serialization.serializePlayer(Main.getPlayersData().getValue());
-		
+
 		stopCountDown();
 	}
 
@@ -325,7 +327,7 @@ public class GamePvALocalController extends GameController implements Initializa
 
 					// We check that's the column is not full
 					do {
-						if (timeLimit != 1) {
+						if (timeLimit != -1) {
 							Random random = new Random();
 							columnAddCoin = random.nextInt(6);
 						}
@@ -347,7 +349,7 @@ public class GamePvALocalController extends GameController implements Initializa
 		timeline.getKeyFrames().add(keyFrame);
 		timeline.play();
 	}
-	
+
 	/**
 	 * Method that stops the count down
 	 */
