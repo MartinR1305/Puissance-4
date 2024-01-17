@@ -74,9 +74,9 @@ public class GamePvALocalController extends GameController implements Initializa
 				{ c50, c51, c52, c53, c54, c55 }, { c60, c61, c62, c63, c64, c65 } };
 
 		// We choose randomly the player who will start the game
-		// Random random = new Random();
-		// turnPlayer = random.nextInt(2) + 1;
-		turnPlayer = 2;
+		 Random random = new Random();
+		 turnPlayer = random.nextInt(2) + 1;
+
 		if (turnPlayer == 1) {
 			playerPlaying.setText("It's Your Turn !");
 
